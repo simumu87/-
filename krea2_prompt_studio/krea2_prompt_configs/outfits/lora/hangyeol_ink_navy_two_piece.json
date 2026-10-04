@@ -10,7 +10,8 @@
   "source_doc": "한결_정체성.md §3-D/§3-E (1004)",
   "applies_to": {
     "locations": [
-      "해변"
+      "해변",
+      "인피니티 풀"
     ],
     "note_ko": "프레임이 허리 위·가슴 위면 보이는 부분만 적는다(normal_waist_en / normal_top_en, 상세 문장은 depth 칸)."
   },
