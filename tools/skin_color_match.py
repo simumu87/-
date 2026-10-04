@@ -6,6 +6,7 @@
 폴더:  python tools/skin_color_match.py --ref 기준.webp --src-dir 사진폴더 --out-dir 결과폴더
 필요:  pip install pillow numpy
 방식:  피부 픽셀(YCbCr 범위)만 골라 LAB 색공간에서 평균(밝기 L, 색 a·b)을 기준 사진에 맞춘다. 마스크 가장자리는 부드럽게 섞는다.
+       --exposure 를 주면 사진 전체 밝기(L 평균)도 기준에 맞춘다 (톤이 아니라 노출이 어두워졌을 때).
 """
 import argparse
 from pathlib import Path
@@ -44,7 +45,7 @@ def skin_mask(img):
     return np.asarray(mask, dtype=np.float32) / 255.0
 
 
-def match(ref_path, src_path, strength=1.0):
+def match(ref_path, src_path, strength=1.0, exposure=False):
     ref, src = Image.open(ref_path).convert("RGB"), Image.open(src_path).convert("RGB")
     rm, sm = skin_mask(ref), skin_mask(src)
     if (rm > 0.5).sum() < 500 or (sm > 0.5).sum() < 500:
@@ -53,6 +54,9 @@ def match(ref_path, src_path, strength=1.0):
     rmean, smean = rl[rm > 0.5].mean(0), sl[sm > 0.5].mean(0)
     shift = (rmean - smean) * strength
     out = sl + shift * sm[..., None]
+    if exposure:                      # 사진 전체 밝기(L 평균)를 기준 사진에 맞춘다 — 배경·머리·수영복 포함
+        gain = rl[..., 0].mean() / max(sl[..., 0].mean(), 1e-6)
+        out[..., 0] = np.clip(out[..., 0] * (1 + (gain - 1) * strength), 0, 100)
     result = Image.fromarray(lab_to_srgb(out).astype(np.uint8))
     return result, rmean, smean, rmean - smean
 
@@ -65,6 +69,7 @@ def main():
     ap.add_argument("--src-dir")
     ap.add_argument("--out-dir")
     ap.add_argument("--strength", type=float, default=1.0, help="0~1 (1=기준 평균에 완전히 맞춤)")
+    ap.add_argument("--exposure", action="store_true", help="피부톤뿐 아니라 사진 전체 밝기도 기준에 맞춤 (사진이 전체적으로 어두워졌을 때)")
     a = ap.parse_args()
     jobs = []
     if a.src_dir:
@@ -76,7 +81,7 @@ def main():
     else:
         raise SystemExit("--src 와 --out, 또는 --src-dir 가 필요해요")
     for src, out in jobs:
-        img, rmean, smean, delta = match(a.ref, src, a.strength)
+        img, rmean, smean, delta = match(a.ref, src, a.strength, a.exposure)
         img.save(out)
         print(f"{src.name}: 피부 LAB 평균 {np.round(smean, 1)} → 기준 {np.round(rmean, 1)} (보정 ΔL={delta[0]:+.1f}, Δa={delta[1]:+.1f}, Δb={delta[2]:+.1f}) → {out}")
 
