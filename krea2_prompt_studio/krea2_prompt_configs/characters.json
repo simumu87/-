@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Nayoon",
+    "trigger": "nayoon",
+    "identity": "a clearly adult Korean woman",
+    "eye_color": "dark amber-reddish eyes",
+    "hair_color": "dark brown hair with a subtle wine-brown undertone",
+    "hair": "long dark brown hair with natural strands",
+    "body_build": "slim natural adult build",
+    "height_cm": 168,
+    "skin_detail": "natural skin texture",
+    "distinctive_feature": "a small beauty mark beneath the right eye",
+    "identity_accessories": [
+      "black choker",
+      "thin delicate gold chain necklace"
+    ],
+    "notes": "Starter profile for the Nayoon character LoRA. Character identity stays fixed; scene, pose, clothing and lighting can vary."
+  }
+]

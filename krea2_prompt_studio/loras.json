@@ -1,0 +1,106 @@
+[
+  {
+    "name": "아라",
+    "trigger": "ara",
+    "identity": "early-20s East Asian woman, a single adult with amber eyes and a slightly sharp eye shape, a slender face with a small straight nose and thin lips, dark brown wavy hair with honey-brown highlights pulled into a half-up ponytail tied with a white fabric measuring tape whose ruler markings are visible, heavy see-through bangs and stray wisps, one stud and two small hoops on her right ear, two thin rings of different sizes on her left ear",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "female"
+  },
+  {
+    "name": "노바",
+    "trigger": "novasaebyeol",
+    "identity": "a young adult Korean woman in her mid-20s with deep grey eyes slightly downturned but sharp, silver-white shoulder-length hair with darker roots and one electric-blue streak on the left side of her face, a small beauty mark just under her right eye, small stud earrings, athletically toned build",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "female"
+  },
+  {
+    "name": "나윤",
+    "trigger": "nayoon",
+    "identity": "She is a young Korean woman with a softly rounded oval face, deep amber-brown eyes with a reddish undertone, a small beauty mark just below her right eye, a straight slender nose, and a slim athletic build with a narrow waist.Hairstyle: dark reddish-brown hair swept smoothly back from her forehead with no visible parting, the upper half gathered into a large, clearly visible knot high on the crown, while only the lower half falls loose in soft wavy strands past her shoulders, with subtle wine-red strands catching the light; a few loose strands frame her face. A small stud earring in her ear.",
+    "gender": "female",
+    "default_clothing": "",
+    "notes": ""
+  },
+  {
+    "name": "여름",
+    "trigger": "yeoreum",
+    "identity": "a Korean woman in her mid-20s, with a slim oval face, a defined jawline, a straight nose, and expressive eyebrows. Her eyes are warm brown, sharp and almond-shaped with slightly downturned outer corners, and a small mole sits just beneath one eye. Her long wavy hair has dark navy-black roots fading into deep wine-red ends, worn half-up with loose flyaway strands framing her face.",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "female"
+  },
+  {
+    "name": "다예",
+    "trigger": "daye",
+    "identity": "a single adult Korean woman in her mid-20s with dark brown eyes that fold into crescents when she smiles, a round soft face with gentle cheekbones and a friendly look, dark brown hair falling below the shoulders tied up in a loose messy half-up bun with her bangs swept up to show her forehead, a pair of clear non-prescription glasses pushed up and resting on top of her forehead, several faded loose hair ties stacked on one wrist, soft average build with a slightly soft figure,",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "female"
+  },
+  {
+    "name": "단희",
+    "trigger": "danhee",
+    "identity": "a single adult Korean woman in her early 30s with dark reddish-brown eyes and slightly upturned eye shape that look sharp when neutral, almost no makeup, dark cherry-brown hair just past the shoulders loosely tied back in one low tail with wisps falling out and no bangs, side-swept hair, a thin neck with clearly visible collarbones, a small narrow-shouldered slim frame with thin arms and long slender fingers, slightly rounded posture, a black hair tie on her left wrist, a thin red thread tied around her left index finger",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "female"
+  },
+  {
+    "name": "아라오빠",
+    "trigger": "aroppa",
+    "identity": "adult Korean man, tousled black wavy short hair, soft smile looking straight at the camera, broad shoulders, muscular athletic build, developed chest, defined abs, strong arms and thick legs,",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "단희오빠",
+    "trigger": "adult Korean man, wavy tousled brown hair with reddish-brown highlights swept up and to the side, calm deep-set dark eyes with a steady direct gaze, straight nose bridge, defined jawline, clean-shaven composed face, lean muscular athletic build with broad shoulders and a narrow waist, defined chest and abs,",
+    "identity": "an adult person",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "다예오빠",
+    "trigger": "dyoppa",
+    "identity": "dyoppa, adult Korean man, short wavy dark brown hair, front view facing the camera, slight smile, broad shoulders, well-developed chest, defined abs, muscular arms, strong thighs and calves, athletic build,",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "단희오빠",
+    "trigger": "dhoppa",
+    "identity": "adult Korean man, wavy tousled brown hair with reddish-brown highlights swept up and to the side, calm deep-set dark eyes with a steady direct gaze, straight nose bridge, defined jawline, clean-shaven composed face, lean muscular athletic build with broad shoulders and a narrow waist, defined chest and abs,",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "노바오빠",
+    "trigger": "nboppa",
+    "identity": "nboppa, adult Korean man, tousled brown hair, broad shoulders, muscular athletic build, defined chest and abs, strong arms and legs, front-facing full-body standing pose, smiling at the camera, arms relaxed at his sides, chest and abs",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "나윤오빠",
+    "trigger": "nyoppa",
+    "identity": "nyoppa, adult Korean man, short wavy black hair, muscular athletic build, warm smile, defined chest and abs",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "여름오빠",
+    "trigger": "yroppa",
+    "identity": "yroppa, adult Korean man in his late twenties, tousled black hair, broad shoulders, muscular athletic build, defined chest and abs, strong arms and legs, arms",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  }
+]
