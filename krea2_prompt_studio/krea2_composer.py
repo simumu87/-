@@ -198,6 +198,8 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     level = (1 if detailed else 0) if reinforce is None else int(reinforce)
     if level not in (0, 1, 2):
         raise SystemExit("강화 횟수는 0, 1, 2 중에서 골라주세요.")
+    # a LoRA person's expression is easily overridden by the LoRA's own habit: on automatic, always restate it once
+    expr_level = max(level, 1) if reinforce is None else level
     rng = random.Random(seed)
     lora = k.lora_profile_for_trigger(trigger)
     if not lora:
@@ -239,15 +241,17 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     person.append(sentence(f"{subj.capitalize()} {mo['pose_en']}"))
     person.append(sentence(f"{subj.capitalize()} is {f(exp['main_en'])}"))      # expression gets its own sentence
     person.append(sentence(cap(f(mo["moment_en"]))))
-    if level >= 1:
+    if expr_level >= 1:
         person.append(sentence(f(exp["echo_en"])))
+    if level >= 1:
         if hair_echo:
             person.append(sentence(hair_echo))
         if outfit and outfit.get("echo_en"):
             person.append(sentence(f(outfit["echo_en"][0])))
-    if level >= 2:
+    if expr_level >= 2:
         if exp.get("echo2_en"):
             person.append(sentence(f(exp["echo2_en"])))
+    if level >= 2:
         if hair_echo2:
             person.append(sentence(hair_echo2))
         if outfit and len(outfit.get("echo_en", [])) > 1:
