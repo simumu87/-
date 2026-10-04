@@ -11,13 +11,17 @@ Rules checked (all English fields are what reaches the prompt):
   - no negation wording in English fields (negative prompting does not work in Krea 2 Turbo;
     state the wanted thing instead). `forbidden_ko` is never emitted, so it is exempt.
   - every lock has at least two wording variants (needed for reinforcement)
+Lists (outfits/lists/*.json) are checked too: every referenced outfit id must exist and the
+trigger must be registered in loras.json.
 """
 import json
 import re
 import sys
 from pathlib import Path
 
-OUTFIT_DIR = Path(__file__).resolve().parent.parent / "krea2_prompt_configs" / "outfits"
+CONFIG_DIR = Path(__file__).resolve().parent.parent / "krea2_prompt_configs"
+OUTFIT_DIR = CONFIG_DIR / "outfits" / "lora"      # 로라의상 (공용의상은 본체 공용 풀)
+LIST_DIR = CONFIG_DIR / "outfits" / "lists"       # 캐릭터(LoRA)별 의상 목록
 HANGUL = re.compile(r"[가-힣]")
 NEGATION = re.compile(r"\b(no|not|never|without|avoid|don't|doesn't|isn't|aren't|neither|nor|none)\b", re.I)
 REQUIRED = ["schema", "id", "name_ko", "name_en", "category", "color", "material", "parts", "locks"]
@@ -85,6 +89,20 @@ def render(data, detailed):
     return " ".join(lines)
 
 
+def validate_list(data, known_ids, triggers):
+    problems = []
+    if data.get("schema") != "krea2-outfit-list/1":
+        problems.append("schema must be krea2-outfit-list/1")
+    if data.get("trigger") not in triggers:
+        problems.append(f"trigger {data.get('trigger')!r} is not registered in loras.json")
+    for oid in data.get("lora_outfits", []):
+        if oid not in known_ids:
+            problems.append(f"unknown outfit id: {oid}")
+    if data.get("default_source", "all") not in ("all", "lora", "common"):
+        problems.append("default_source must be all / lora / common")
+    return problems
+
+
 def main():
     preview = "--preview" in sys.argv
     files = sorted(OUTFIT_DIR.glob("*.json"))
@@ -98,7 +116,19 @@ def main():
         bad += bool(problems)
         if preview and not problems:
             print("\n[보통]\n" + render(data, False) + "\n\n[상세]\n" + render(data, True) + "\n")
-    print(f"{len(files)} file(s), {bad} with problems")
+    ids = {json.loads(f.read_text(encoding="utf-8")).get("id") for f in files}
+    try:
+        triggers = {r.get("trigger") for r in json.loads((CONFIG_DIR / "loras.json").read_text(encoding="utf-8"))}
+    except (OSError, ValueError):
+        triggers = set()
+    lists = sorted(LIST_DIR.glob("*.json"))
+    for path in lists:
+        problems = validate_list(json.loads(path.read_text(encoding="utf-8")), ids, triggers)
+        print(f"{'OK  ' if not problems else 'FAIL'} lists/{path.name}")
+        for p in problems:
+            print("   -", p)
+        bad += bool(problems)
+    print(f"{len(files)} outfit file(s), {len(lists)} list(s), {bad} with problems")
     return 1 if bad else 0
 
 

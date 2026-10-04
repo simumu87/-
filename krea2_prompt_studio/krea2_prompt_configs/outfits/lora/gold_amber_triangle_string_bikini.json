@@ -1,27 +1,46 @@
 {
   "schema": "krea2-outfit/1",
   "id": "gold_amber_triangle_string_bikini",
+  "scope": "lora_outfit",
   "character": "",
   "name_ko": "골드 앰버 트라이앵글 스트링 비키니",
   "name_en": "gold amber triangle string bikini",
   "category": "swimwear",
   "source_doc": "QWEN2.1용 의상 레퍼런스 디자인 시트 - GOLD AMBER TRIANGLE STRING BIKINI",
-
   "applies_to": {
-    "locations": ["해변"],
-    "wanted_locations": ["수영장", "리조트 풀사이드"],
-    "seasons": ["여름"],
-    "activities": ["해변 산책", "여행 중 휴식", "창가에서 쉬기"],
+    "locations": [
+      "해변"
+    ],
+    "wanted_locations": [
+      "수영장",
+      "리조트 풀사이드"
+    ],
+    "seasons": [
+      "여름"
+    ],
+    "activities": [
+      "해변 산책",
+      "여행 중 휴식",
+      "창가에서 쉬기"
+    ],
     "note_ko": "수영복이라 해변 계열 장소에서만 고른다. 수영장 장소는 아직 본체에 없어 wanted_locations에 적어둔다."
   },
-
   "color": {
-    "primary":  {"ko": "골드 앰버", "en": "warm deep gold-amber", "hint_ko": "노란 레몬 골드도 주황 오렌지도 아닌 깊은 황금색"},
-    "hardware": {"ko": "골드 메탈", "en": "gold metal"},
-    "choker":   {"ko": "딥 블랙", "en": "deep black"},
+    "primary": {
+      "ko": "골드 앰버",
+      "en": "warm deep gold-amber",
+      "hint_ko": "노란 레몬 골드도 주황 오렌지도 아닌 깊은 황금색"
+    },
+    "hardware": {
+      "ko": "골드 메탈",
+      "en": "gold metal"
+    },
+    "choker": {
+      "ko": "딥 블랙",
+      "en": "deep black"
+    },
     "shade_en": "the gold-amber deepens slightly in shadow but stays a rich gold"
   },
-
   "material": {
     "ko": "신축성 있는 수영복용 라이크라/스판덱스 원단",
     "en": "thin stretchy lycra-spandex swimwear fabric",
@@ -29,7 +48,6 @@
     "finish_en": "a soft satin sheen with broad silky gold highlights on the curves",
     "behavior_en": "the fine fabric follows the body's curves with natural micro-wrinkles and gentle tension folds around the cup center, the ring and the side ties"
   },
-
   "parts": {
     "top": {
       "ko": "트라이앵글 스트링 상의",
@@ -53,7 +71,6 @@
       ]
     }
   },
-
   "accessories": {
     "signature": [
       {
@@ -64,40 +81,123 @@
         "keep_with_outfit": true
       }
     ],
-    "default_include_ko": ["블랙 초커 1개", "작은 골드 중앙 링 1개"],
-    "default_exclude_ko": ["발찌", "허리체인", "추가 목걸이", "대형 펜던트", "장식 체인", "버클 장식", "로고 장식", "패턴 장식", "불필요한 금속 참"]
+    "default_include_ko": [
+      "블랙 초커 1개",
+      "작은 골드 중앙 링 1개"
+    ],
+    "default_exclude_ko": [
+      "발찌",
+      "허리체인",
+      "추가 목걸이",
+      "대형 펜던트",
+      "장식 체인",
+      "버클 장식",
+      "로고 장식",
+      "패턴 장식",
+      "불필요한 금속 참"
+    ]
   },
-
   "locks": [
-    {"id": "top_triangle", "group": "top", "priority": 1,
-     "ko": "상의는 트라이앵글 컵",
-     "en": ["a triangle-cup bikini top", "two triangular cups forming the top", "the top is built from triangle cups"]},
-    {"id": "center_ring", "group": "top", "priority": 1,
-     "ko": "컵 중앙의 작은 골드 원형 링",
-     "en": ["a small round gold ring at the center of the top", "a tiny gold circle joining the cups at the chest", "a small simple gold ring connecting the two cups"]},
-    {"id": "thin_straps", "group": "top", "priority": 2,
-     "ko": "목 스트랩과 등 타이는 매우 가는 스트링",
-     "en": ["very thin string straps and a thin string tie across the back", "hair-thin strings for the halter and the back tie", "slim, fine strings forming the neck and back ties"]},
-    {"id": "bottom_lowrise", "group": "bottom", "priority": 1,
-     "ko": "하의는 로우라이즈",
-     "en": ["a low-rise bottom sitting below the navel", "the waistline of the bottom rests low, under the navel", "low-slung bikini bottom"]},
-    {"id": "bottom_highleg", "group": "bottom", "priority": 1,
-     "ko": "하의는 하이레그",
-     "en": ["high-leg cut rising high over the upper thighs", "leg lines that sweep high across the thighs", "a high-cut leg opening"]},
-    {"id": "side_ties", "group": "bottom", "priority": 1,
-     "ko": "양쪽 골반에 얇은 사이드 타이",
-     "en": ["thin string ties knotted at both hips", "a slim string tie at each hip with long hanging ends", "side ties with small knots and trailing string ends"]},
-    {"id": "single_color", "group": "color", "priority": 1,
-     "ko": "전체가 골드 앰버 단일 색",
-     "en": ["one single warm gold-amber color across the whole bikini", "the entire bikini in a uniform gold-amber tone", "solid gold-amber from top to bottom"]},
-    {"id": "satin_finish", "group": "material", "priority": 2,
-     "ko": "부드러운 새틴 광택",
-     "en": ["a soft satin sheen", "gentle silky highlights, like satin", "a smooth satin-like gloss"]},
-    {"id": "choker", "group": "accessory", "priority": 1,
-     "ko": "얇은 딥 블랙 초커",
-     "en": ["a thin deep-black choker around the neck", "a slim black choker band at the throat", "a simple black choker encircling the neck"]}
+    {
+      "id": "top_triangle",
+      "group": "top",
+      "priority": 1,
+      "ko": "상의는 트라이앵글 컵",
+      "en": [
+        "a triangle-cup bikini top",
+        "two triangular cups forming the top",
+        "the top is built from triangle cups"
+      ]
+    },
+    {
+      "id": "center_ring",
+      "group": "top",
+      "priority": 1,
+      "ko": "컵 중앙의 작은 골드 원형 링",
+      "en": [
+        "a small round gold ring at the center of the top",
+        "a tiny gold circle joining the cups at the chest",
+        "a small simple gold ring connecting the two cups"
+      ]
+    },
+    {
+      "id": "thin_straps",
+      "group": "top",
+      "priority": 2,
+      "ko": "목 스트랩과 등 타이는 매우 가는 스트링",
+      "en": [
+        "very thin string straps and a thin string tie across the back",
+        "hair-thin strings for the halter and the back tie",
+        "slim, fine strings forming the neck and back ties"
+      ]
+    },
+    {
+      "id": "bottom_lowrise",
+      "group": "bottom",
+      "priority": 1,
+      "ko": "하의는 로우라이즈",
+      "en": [
+        "a low-rise bottom sitting below the navel",
+        "the waistline of the bottom rests low, under the navel",
+        "low-slung bikini bottom"
+      ]
+    },
+    {
+      "id": "bottom_highleg",
+      "group": "bottom",
+      "priority": 1,
+      "ko": "하의는 하이레그",
+      "en": [
+        "high-leg cut rising high over the upper thighs",
+        "leg lines that sweep high across the thighs",
+        "a high-cut leg opening"
+      ]
+    },
+    {
+      "id": "side_ties",
+      "group": "bottom",
+      "priority": 1,
+      "ko": "양쪽 골반에 얇은 사이드 타이",
+      "en": [
+        "thin string ties knotted at both hips",
+        "a slim string tie at each hip with long hanging ends",
+        "side ties with small knots and trailing string ends"
+      ]
+    },
+    {
+      "id": "single_color",
+      "group": "color",
+      "priority": 1,
+      "ko": "전체가 골드 앰버 단일 색",
+      "en": [
+        "one single warm gold-amber color across the whole bikini",
+        "the entire bikini in a uniform gold-amber tone",
+        "solid gold-amber from top to bottom"
+      ]
+    },
+    {
+      "id": "satin_finish",
+      "group": "material",
+      "priority": 2,
+      "ko": "부드러운 새틴 광택",
+      "en": [
+        "a soft satin sheen",
+        "gentle silky highlights, like satin",
+        "a smooth satin-like gloss"
+      ]
+    },
+    {
+      "id": "choker",
+      "group": "accessory",
+      "priority": 1,
+      "ko": "얇은 딥 블랙 초커",
+      "en": [
+        "a thin deep-black choker around the neck",
+        "a slim black choker band at the throat",
+        "a simple black choker encircling the neck"
+      ]
+    }
   ],
-
   "forbidden_ko": [
     "비키니를 검정색 또는 다른 단색으로 변경",
     "골드 앰버를 강한 노란색 또는 오렌지/브라운으로 이동",
@@ -112,7 +212,6 @@
     "초커를 골드/다른 색, 체인, 리본, 대형 장식으로 변경",
     "불필요한 귀걸이, 팔찌, 발찌, 허리체인 추가"
   ],
-
   "render_notes_ko": [
     "forbidden_ko는 프롬프트에 출력하지 않는다. 오버라이드/충돌 검사와 사람이 읽는 규칙 용도다.",
     "locks의 en 변형은 같은 사실을 다른 표현으로 쓴 것이다. 상세 모드의 강화 때 서로 다른 변형을 고른다.",
