@@ -2785,6 +2785,62 @@ def final_prompt(scene: SceneProfile, person_a: PersonSlot, person_b: Optional[P
 
 
 # ---------------------------------------------------------------------------
+# Translation / option pools kept in files (krea2_prompt_configs/pools/*.json)
+# ---------------------------------------------------------------------------
+POOLS_DIR = CONFIG_DIR / "pools"
+POOL_LABELS_KO = {
+    "THEMES": "테마", "RELATIONSHIPS": "관계", "INTERACTIONS": "상호작용", "ACTIVITIES": "활동",
+    "TIME_OF_DAY": "시간대", "WEATHER": "날씨", "MOODS": "분위기", "REALISM": "사실감",
+    "SKIN_FINISH": "피부 질감", "CAMERA_FRAMING": "프레이밍", "VIEWPOINTS": "시점", "COMPOSITIONS": "구도",
+    "DEPTHS": "심도(환경)", "DEPTH_OF_FIELD": "심도", "LIGHT_SOURCES": "광원", "STYLE_LIBRARY": "스타일",
+    "KOREAN_GLOSSARY": "기본 용어집", "PALETTES": "색 조화", "COLORS": "색상", "CLOTHING_COLORS": "의상 색상",
+    "CLOTHING_STATES": "의상 상태", "FOOTWEAR": "신발", "ACCESSORIES": "액세서리", "FURNITURE": "가구",
+    "DECOR": "장식", "PRACTICAL": "생활 소품",
+}
+
+
+def apply_pool_files() -> None:
+    """Replace each pool's content with its JSON file (in place, so every reference keeps working).
+
+    Item format: {"한글 이름": {"en": "english phrase", "desc_ko": "한글 설명"}} (a plain string also works).
+    A missing or broken file leaves the built-in defaults untouched.
+    """
+    for name in POOL_LABELS_KO:
+        path = POOLS_DIR / f"{name.lower()}.json"
+        target = globals().get(name)
+        if not path.exists() or not isinstance(target, dict):
+            continue
+        try:
+            items = json.loads(path.read_text(encoding="utf-8"))["items"]
+            loaded = {str(ko): (v["en"] if isinstance(v, dict) else str(v)) for ko, v in items.items()}
+        except (OSError, ValueError, KeyError, TypeError):
+            warning(f"번역풀 파일을 읽지 못해 기본값을 씁니다: {path.name}")
+            continue
+        if loaded:
+            target.clear()
+            target.update(loaded)
+
+
+def export_pool_files(force: bool = False) -> List[str]:
+    """Write the built-in pools to krea2_prompt_configs/pools/ (existing files are kept unless force=True)."""
+    POOLS_DIR.mkdir(parents=True, exist_ok=True)
+    written = []
+    for name, label in POOL_LABELS_KO.items():
+        path = POOLS_DIR / f"{name.lower()}.json"
+        data = globals().get(name)
+        if not isinstance(data, dict) or (path.exists() and not force):
+            continue
+        payload = {"schema": "krea2-pool/1", "pool": name, "label_ko": label,
+                   "items": {ko: {"en": en, "desc_ko": ""} for ko, en in data.items()}}
+        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        written.append(path.name)
+    return written
+
+
+apply_pool_files()
+
+
+# ---------------------------------------------------------------------------
 # Korean natural-language parser
 # ---------------------------------------------------------------------------
 PARSER_TERMS = {

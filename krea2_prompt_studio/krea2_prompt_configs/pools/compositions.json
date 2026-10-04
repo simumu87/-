@@ -1,0 +1,35 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "COMPOSITIONS",
+  "label_ko": "구도",
+  "items": {
+    "중앙": {
+      "en": "balanced centered composition",
+      "desc_ko": ""
+    },
+    "삼분할": {
+      "en": "balanced rule-of-thirds composition",
+      "desc_ko": ""
+    },
+    "대각선": {
+      "en": "subtle diagonal composition following natural gesture",
+      "desc_ko": ""
+    },
+    "여백": {
+      "en": "clean composition with intentional negative space",
+      "desc_ko": ""
+    },
+    "레이어": {
+      "en": "layered foreground, midground and background composition",
+      "desc_ko": ""
+    },
+    "대칭": {
+      "en": "controlled symmetrical composition when supported by the architecture",
+      "desc_ko": ""
+    },
+    "스냅샷": {
+      "en": "natural candid snapshot composition with believable timing",
+      "desc_ko": ""
+    }
+  }
+}

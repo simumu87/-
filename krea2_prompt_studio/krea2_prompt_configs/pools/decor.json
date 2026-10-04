@@ -1,0 +1,219 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "DECOR",
+  "label_ko": "장식",
+  "items": {
+    "framed artwork": {
+      "en": "framed wall artwork",
+      "desc_ko": ""
+    },
+    "ceramic vase": {
+      "en": "a small ceramic vase",
+      "desc_ko": ""
+    },
+    "bookshelf": {
+      "en": "a shelf of books",
+      "desc_ko": ""
+    },
+    "leafy houseplant": {
+      "en": "a leafy houseplant",
+      "desc_ko": ""
+    },
+    "textured throw blanket": {
+      "en": "a folded textured throw blanket",
+      "desc_ko": ""
+    },
+    "herb pots": {
+      "en": "small herb pots",
+      "desc_ko": ""
+    },
+    "ceramic bowls": {
+      "en": "ceramic bowls",
+      "desc_ko": ""
+    },
+    "wooden cutting board": {
+      "en": "a wooden cutting board",
+      "desc_ko": ""
+    },
+    "small framed print": {
+      "en": "a small framed print",
+      "desc_ko": ""
+    },
+    "framed botanical print": {
+      "en": "a framed botanical print",
+      "desc_ko": ""
+    },
+    "small lamp": {
+      "en": "a small table lamp",
+      "desc_ko": ""
+    },
+    "books": {
+      "en": "a small stack of books",
+      "desc_ko": ""
+    },
+    "ceramic tray": {
+      "en": "a ceramic tray",
+      "desc_ko": ""
+    },
+    "desk plant": {
+      "en": "a small desk plant",
+      "desc_ko": ""
+    },
+    "cork board": {
+      "en": "a practical cork board",
+      "desc_ko": ""
+    },
+    "small sculpture": {
+      "en": "a small decorative sculpture",
+      "desc_ko": ""
+    },
+    "menu board": {
+      "en": "a cafe menu board",
+      "desc_ko": ""
+    },
+    "hanging plants": {
+      "en": "hanging plants",
+      "desc_ko": ""
+    },
+    "ceramic cups": {
+      "en": "a small arrangement of ceramic cups",
+      "desc_ko": ""
+    },
+    "local art prints": {
+      "en": "local art prints",
+      "desc_ko": ""
+    },
+    "small table lamps": {
+      "en": "small table lamps",
+      "desc_ko": ""
+    },
+    "book displays": {
+      "en": "curated book displays",
+      "desc_ko": ""
+    },
+    "small plants": {
+      "en": "small potted plants",
+      "desc_ko": ""
+    },
+    "recommendation cards": {
+      "en": "handwritten book recommendation cards",
+      "desc_ko": ""
+    },
+    "framed paintings": {
+      "en": "framed paintings",
+      "desc_ko": ""
+    },
+    "large sculpture": {
+      "en": "a large gallery sculpture",
+      "desc_ko": ""
+    },
+    "wall labels": {
+      "en": "museum wall labels",
+      "desc_ko": ""
+    },
+    "museum signage": {
+      "en": "minimal museum signage",
+      "desc_ko": ""
+    },
+    "quiet-study signs": {
+      "en": "quiet-study signs",
+      "desc_ko": ""
+    },
+    "potted plants": {
+      "en": "potted plants",
+      "desc_ko": ""
+    },
+    "planters": {
+      "en": "street planters",
+      "desc_ko": ""
+    },
+    "street signs": {
+      "en": "clear street signs",
+      "desc_ko": ""
+    },
+    "posters": {
+      "en": "layered but controlled storefront posters",
+      "desc_ko": ""
+    },
+    "storefront displays": {
+      "en": "tasteful storefront displays",
+      "desc_ko": ""
+    },
+    "flower beds": {
+      "en": "seasonal flower beds",
+      "desc_ko": ""
+    },
+    "ornamental trees": {
+      "en": "ornamental trees",
+      "desc_ko": ""
+    },
+    "public sculpture": {
+      "en": "a small public sculpture",
+      "desc_ko": ""
+    },
+    "driftwood": {
+      "en": "driftwood pieces",
+      "desc_ko": ""
+    },
+    "shells": {
+      "en": "small shells",
+      "desc_ko": ""
+    },
+    "simple beach sign": {
+      "en": "a simple beach sign",
+      "desc_ko": ""
+    },
+    "direction signs": {
+      "en": "station direction signs",
+      "desc_ko": ""
+    },
+    "wildflowers": {
+      "en": "small wildflowers",
+      "desc_ko": ""
+    },
+    "mossy stones": {
+      "en": "mossy stones",
+      "desc_ko": ""
+    },
+    "large vase arrangement": {
+      "en": "a large vase arrangement",
+      "desc_ko": ""
+    },
+    "abstract artwork": {
+      "en": "abstract lobby artwork",
+      "desc_ko": ""
+    },
+    "sculptural lighting": {
+      "en": "sculptural lobby lighting",
+      "desc_ko": ""
+    },
+    "abstract print": {
+      "en": "an abstract print",
+      "desc_ko": ""
+    },
+    "tea tray": {
+      "en": "a small tea tray",
+      "desc_ko": ""
+    },
+    "decorative cushion": {
+      "en": "a decorative cushion",
+      "desc_ko": ""
+    },
+    "digital departure board": {
+      "en": "a digital departure board",
+      "desc_ko": ""
+    },
+    "wayfinding graphics": {
+      "en": "clean wayfinding graphics",
+      "desc_ko": ""
+    },
+    "stacked books": {
+      "en": "stacked books",
+      "desc_ko": ""
+    },
+    "art prints": {
+      "en": "small art prints",
+      "desc_ko": ""
+    }
+  }
+}

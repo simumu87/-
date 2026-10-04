@@ -1,0 +1,35 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "RELATIONSHIPS",
+  "label_ko": "관계",
+  "items": {
+    "혼자": {
+      "en": "a single adult subject",
+      "desc_ko": ""
+    },
+    "친구": {
+      "en": "two adult friends",
+      "desc_ko": ""
+    },
+    "연인": {
+      "en": "two adult romantic partners",
+      "desc_ko": ""
+    },
+    "부부": {
+      "en": "two married adult partners",
+      "desc_ko": ""
+    },
+    "동료": {
+      "en": "two adult colleagues",
+      "desc_ko": ""
+    },
+    "여행 동행": {
+      "en": "two adult travel companions",
+      "desc_ko": ""
+    },
+    "스터디 메이트": {
+      "en": "two adult study partners",
+      "desc_ko": ""
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "CAMERA_FRAMING",
+  "label_ko": "프레이밍",
+  "items": {
+    "전신": {
+      "en": "full-body composition with the subject fully visible from head to feet",
+      "desc_ko": ""
+    },
+    "3/4 전신": {
+      "en": "three-quarter full-body composition showing the subject from head to below the knees with environmental context",
+      "desc_ko": ""
+    },
+    "무릎 위": {
+      "en": "medium-long portrait framing from head to around the knees",
+      "desc_ko": ""
+    },
+    "허벅지 위": {
+      "en": "medium framing from head to upper thighs",
+      "desc_ko": ""
+    },
+    "허리 위": {
+      "en": "waist-up portrait framing",
+      "desc_ko": ""
+    },
+    "가슴 위": {
+      "en": "chest-up portrait framing",
+      "desc_ko": ""
+    },
+    "클로즈업": {
+      "en": "close portrait framing focused on the face and upper shoulders",
+      "desc_ko": ""
+    },
+    "환경 중심": {
+      "en": "environmental portrait framing with the subject clearly visible within the surrounding space",
+      "desc_ko": ""
+    },
+    "와이드 씬": {
+      "en": "wide scene composition with generous environmental context",
+      "desc_ko": ""
+    }
+  }
+}

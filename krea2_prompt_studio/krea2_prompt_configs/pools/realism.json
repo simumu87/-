@@ -1,0 +1,27 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "REALISM",
+  "label_ko": "사실감",
+  "items": {
+    "포토리얼": {
+      "en": "natural photorealistic rendering with credible human proportions and realistic surface detail",
+      "desc_ko": ""
+    },
+    "에디토리얼": {
+      "en": "realistic editorial photography with controlled composition and refined styling",
+      "desc_ko": ""
+    },
+    "다큐멘터리": {
+      "en": "documentary-style realism with authentic environmental detail",
+      "desc_ko": ""
+    },
+    "시네마틱": {
+      "en": "cinematic realism with natural depth, grounded color and believable lighting",
+      "desc_ko": ""
+    },
+    "라이프스타일": {
+      "en": "high-end lifestyle photography with realistic textures and natural candid detail",
+      "desc_ko": ""
+    }
+  }
+}

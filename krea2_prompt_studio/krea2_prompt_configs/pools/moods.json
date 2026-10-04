@@ -1,0 +1,51 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "MOODS",
+  "label_ko": "분위기",
+  "items": {
+    "편안함": {
+      "en": "calm and comfortable",
+      "desc_ko": ""
+    },
+    "따뜻함": {
+      "en": "warm and welcoming",
+      "desc_ko": ""
+    },
+    "낭만적": {
+      "en": "quietly romantic",
+      "desc_ko": ""
+    },
+    "발랄함": {
+      "en": "playful and cheerful",
+      "desc_ko": ""
+    },
+    "집중": {
+      "en": "focused and attentive",
+      "desc_ko": ""
+    },
+    "차분함": {
+      "en": "peaceful and composed",
+      "desc_ko": ""
+    },
+    "활기참": {
+      "en": "lively and energetic",
+      "desc_ko": ""
+    },
+    "향수어림": {
+      "en": "slightly nostalgic",
+      "desc_ko": ""
+    },
+    "아늑함": {
+      "en": "cozy and intimate in an everyday sense",
+      "desc_ko": ""
+    },
+    "세련됨": {
+      "en": "refined and contemporary",
+      "desc_ko": ""
+    },
+    "여유로움": {
+      "en": "unhurried and relaxed",
+      "desc_ko": ""
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "CLOTHING_STATES",
+  "label_ko": "의상 상태",
+  "items": {
+    "깔끔함": {
+      "en": "clean and freshly maintained",
+      "desc_ko": ""
+    },
+    "자연스러움": {
+      "en": "naturally worn with subtle everyday creasing",
+      "desc_ko": ""
+    },
+    "살짝 구김": {
+      "en": "lightly rumpled with believable soft folds",
+      "desc_ko": ""
+    },
+    "잘 다려짐": {
+      "en": "freshly pressed with crisp construction lines",
+      "desc_ko": ""
+    },
+    "활동 후": {
+      "en": "slightly lived-in after normal daily activity",
+      "desc_ko": ""
+    },
+    "빈티지": {
+      "en": "gently worn with subtle age-related texture",
+      "desc_ko": ""
+    }
+  }
+}

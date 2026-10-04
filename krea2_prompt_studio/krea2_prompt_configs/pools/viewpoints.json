@@ -1,0 +1,35 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "VIEWPOINTS",
+  "label_ko": "시점",
+  "items": {
+    "눈높이": {
+      "en": "eye-level viewpoint",
+      "desc_ko": ""
+    },
+    "약간 위": {
+      "en": "slightly elevated viewpoint",
+      "desc_ko": ""
+    },
+    "약간 아래": {
+      "en": "slightly low viewpoint",
+      "desc_ko": ""
+    },
+    "정면": {
+      "en": "straight-on viewpoint",
+      "desc_ko": ""
+    },
+    "사선": {
+      "en": "three-quarter viewpoint",
+      "desc_ko": ""
+    },
+    "옆면": {
+      "en": "side viewpoint",
+      "desc_ko": ""
+    },
+    "뒤쪽 사선": {
+      "en": "rear three-quarter viewpoint with natural subject orientation",
+      "desc_ko": ""
+    }
+  }
+}

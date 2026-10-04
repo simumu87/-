@@ -1,0 +1,39 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "STYLE_LIBRARY",
+  "label_ko": "스타일",
+  "items": {
+    "자연광 라이프스타일": {
+      "en": "natural-light lifestyle photography with restrained color grading",
+      "desc_ko": ""
+    },
+    "시네마틱": {
+      "en": "cinematic lifestyle photography with grounded color and realistic depth",
+      "desc_ko": ""
+    },
+    "매거진": {
+      "en": "refined magazine editorial photography with sophisticated visual balance",
+      "desc_ko": ""
+    },
+    "다큐멘터리": {
+      "en": "authentic documentary photography with candid timing and believable environmental detail",
+      "desc_ko": ""
+    },
+    "미니멀": {
+      "en": "clean minimalist photography with controlled visual hierarchy",
+      "desc_ko": ""
+    },
+    "필름 룩": {
+      "en": "subtle contemporary film-like photography with natural grain and gentle tonal rolloff",
+      "desc_ko": ""
+    },
+    "스트리트 스냅": {
+      "en": "natural street photography with candid timing and documentary realism",
+      "desc_ko": ""
+    },
+    "여행 화보": {
+      "en": "polished travel editorial photography with authentic environmental context",
+      "desc_ko": ""
+    }
+  }
+}

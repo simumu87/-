@@ -1,0 +1,55 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "LIGHT_SOURCES",
+  "label_ko": "광원",
+  "items": {
+    "창문 자연광": {
+      "en": "large window light",
+      "desc_ko": ""
+    },
+    "부드러운 북향광": {
+      "en": "soft diffuse north-facing daylight",
+      "desc_ko": ""
+    },
+    "오후 햇빛": {
+      "en": "warm late-afternoon sunlight",
+      "desc_ko": ""
+    },
+    "골든아워": {
+      "en": "low-angle golden-hour sunlight",
+      "desc_ko": ""
+    },
+    "맑은 정오": {
+      "en": "clean midday daylight",
+      "desc_ko": ""
+    },
+    "카페 펜던트": {
+      "en": "warm cafe pendant lighting",
+      "desc_ko": ""
+    },
+    "천장 확산광": {
+      "en": "diffuse overhead ambient lighting",
+      "desc_ko": ""
+    },
+    "스탠드 램프": {
+      "en": "a warm practical floor lamp",
+      "desc_ko": ""
+    },
+    "벽 스콘스": {
+      "en": "soft wall-sconce lighting",
+      "desc_ko": ""
+    },
+    "도시 야간광": {
+      "en": "mixed city street light filtering through the windows",
+      "desc_ko": ""
+    },
+    "비 오는 날 확산광": {
+      "en": "soft overcast daylight filtered through a rainy sky",
+      "desc_ko": ""
+    },
+    "갤러리 조명": {
+      "en": "controlled museum track lighting",
+      "desc_ko": ""
+    }
+  }
+}

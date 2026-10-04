@@ -39,9 +39,26 @@ def hair_checks():
     return problems
 
 
+def pool_checks():
+    """Pool files must reload to the exact in-code defaults and cover every pool."""
+    import json
+    problems = []
+    for name in k.POOL_LABELS_KO:
+        path = k.POOLS_DIR / f"{name.lower()}.json"
+        if not path.exists():
+            problems.append((0, 0, f"pool file missing: {path.name}"))
+            continue
+        items = json.loads(path.read_text(encoding="utf-8"))["items"]
+        if {ko: v["en"] for ko, v in items.items()} != getattr(k, name):
+            problems.append((0, 0, f"pool file differs from loaded pool: {name}"))
+        if any(re.search(r"[가-힣]", v["en"]) for v in items.values()):
+            problems.append((0, 0, f"Hangul inside an English value: {name}"))
+    return problems
+
+
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks()
+    problems = hair_checks() + pool_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

@@ -1,0 +1,87 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "COLORS",
+  "label_ko": "색상",
+  "items": {
+    "화이트": {
+      "en": "clean white",
+      "desc_ko": ""
+    },
+    "아이보리": {
+      "en": "soft ivory",
+      "desc_ko": ""
+    },
+    "베이지": {
+      "en": "warm beige",
+      "desc_ko": ""
+    },
+    "토프": {
+      "en": "muted taupe",
+      "desc_ko": ""
+    },
+    "연회색": {
+      "en": "light gray",
+      "desc_ko": ""
+    },
+    "차콜": {
+      "en": "deep charcoal gray",
+      "desc_ko": ""
+    },
+    "블랙": {
+      "en": "black",
+      "desc_ko": ""
+    },
+    "네이비": {
+      "en": "deep navy",
+      "desc_ko": ""
+    },
+    "하늘색": {
+      "en": "pale blue",
+      "desc_ko": ""
+    },
+    "코발트 블루": {
+      "en": "cobalt blue",
+      "desc_ko": ""
+    },
+    "세이지": {
+      "en": "muted sage green",
+      "desc_ko": ""
+    },
+    "올리브": {
+      "en": "soft olive green",
+      "desc_ko": ""
+    },
+    "브라운": {
+      "en": "warm brown",
+      "desc_ko": ""
+    },
+    "테라코타": {
+      "en": "muted terracotta",
+      "desc_ko": ""
+    },
+    "버건디": {
+      "en": "deep burgundy",
+      "desc_ko": ""
+    },
+    "핑크": {
+      "en": "soft pink",
+      "desc_ko": ""
+    },
+    "라일락": {
+      "en": "muted lilac",
+      "desc_ko": ""
+    },
+    "노랑": {
+      "en": "soft golden yellow",
+      "desc_ko": ""
+    },
+    "오렌지": {
+      "en": "muted orange",
+      "desc_ko": ""
+    },
+    "데님 블루": {
+      "en": "classic denim blue",
+      "desc_ko": ""
+    }
+  }
+}

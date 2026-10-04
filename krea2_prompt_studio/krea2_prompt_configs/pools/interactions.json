@@ -1,0 +1,79 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "INTERACTIONS",
+  "label_ko": "상호작용",
+  "items": {
+    "없음": {
+      "en": "no direct interaction, with natural personal space between the subjects",
+      "desc_ko": ""
+    },
+    "손잡기": {
+      "en": "holding hands naturally with relaxed fingers",
+      "desc_ko": ""
+    },
+    "팔짱": {
+      "en": "walking or standing arm in arm",
+      "desc_ko": ""
+    },
+    "가벼운 포옹": {
+      "en": "sharing a warm natural hug",
+      "desc_ko": ""
+    },
+    "어깨에 기대기": {
+      "en": "one person resting their head lightly on the other's shoulder",
+      "desc_ko": ""
+    },
+    "나란히 걷기": {
+      "en": "walking side by side at a natural pace",
+      "desc_ko": ""
+    },
+    "마주 앉아 대화": {
+      "en": "sitting across from each other and talking casually",
+      "desc_ko": ""
+    },
+    "나란히 앉아 대화": {
+      "en": "sitting side by side and talking comfortably",
+      "desc_ko": ""
+    },
+    "함께 사진 보기": {
+      "en": "looking together at a phone or printed photograph",
+      "desc_ko": ""
+    },
+    "함께 책 보기": {
+      "en": "looking together at an open book",
+      "desc_ko": ""
+    },
+    "커피 건네기": {
+      "en": "one person handing a coffee cup to the other",
+      "desc_ko": ""
+    },
+    "선물 건네기": {
+      "en": "one person handing a small wrapped gift to the other",
+      "desc_ko": ""
+    },
+    "하이파이브": {
+      "en": "sharing a casual high-five",
+      "desc_ko": ""
+    },
+    "장난스럽게 웃기": {
+      "en": "sharing a playful laugh",
+      "desc_ko": ""
+    },
+    "함께 요리하기": {
+      "en": "preparing food together at a kitchen counter",
+      "desc_ko": ""
+    },
+    "함께 쇼핑하기": {
+      "en": "browsing items together while shopping",
+      "desc_ko": ""
+    },
+    "함께 전시 관람": {
+      "en": "standing together while viewing an artwork",
+      "desc_ko": ""
+    },
+    "함께 음악 듣기": {
+      "en": "listening to music together with relaxed posture",
+      "desc_ko": ""
+    }
+  }
+}
