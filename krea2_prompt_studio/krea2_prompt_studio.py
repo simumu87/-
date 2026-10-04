@@ -196,6 +196,7 @@ class PersonSlot:
     gaze: str = "looking toward the scene focus"
     hair: str = "natural hairstyle with realistic individual strands"
     clothing: Optional[ClothingProfile] = None
+    clothing_extra: Optional[ClothingProfile] = None
     body_state: BodyState = field(default_factory=BodyState)
     height_cm: Optional[int] = None
     props: List[str] = field(default_factory=list)
@@ -308,6 +309,9 @@ class SceneProfile:
     issues: List[ConsistencyIssue] = field(default_factory=list)
     auto_values: Dict[str, Any] = field(default_factory=dict)
     user_values: Dict[str, Any] = field(default_factory=dict)
+    weather_visible: bool = True        # false: an indoor spot without a window, the weather is not described
+    clothing_extra_a: Optional[ClothingProfile] = None    # the second garment (top for a bottom, bottom for a top)
+    clothing_extra_b: Optional[ClothingProfile] = None
 
 
 @dataclass
@@ -1914,7 +1918,8 @@ def normalize_activity_key(value: str) -> str:
     return aliases.get(value, value if value in ACTIVITIES else "대화하기")
 
 
-def resolve_lighting(rng: random.Random, location_key: str, time_key: str, weather_key: str, c: Dict[str, ConstraintSetting]) -> LightingProfile:
+def resolve_lighting(rng: random.Random, location_key: str, time_key: str, weather_key: str, c: Dict[str, ConstraintSetting],
+                     window_view: bool = False) -> LightingProfile:
     source_req = get_value(c, "light_source")
     source = LIGHT_SOURCES.get(source_req, source_req if source_req in LIGHT_SOURCES.values() else "")
     if not source:
@@ -1934,6 +1939,8 @@ def resolve_lighting(rng: random.Random, location_key: str, time_key: str, weath
         else:
             if night:
                 source = LIGHT_SOURCES[rules.night_source(False, location_key, rng)]
+            elif window_view and weather_key in {"비", "폭우", "눈", "안개", "흐림"}:
+                source = LIGHT_SOURCES["비 오는 날 확산광"]       # overcast light coming in through the window
             elif time_key == "저녁":
                 source = choose(rng, [LIGHT_SOURCES["스탠드 램프"], LIGHT_SOURCES["벽 스콘스"], LIGHT_SOURCES["천장 확산광"], LIGHT_SOURCES["창문 자연광"]])
             else:
@@ -2189,7 +2196,9 @@ def build_scene(seed: Optional[int] = None, constraints: Optional[Dict[str, Cons
     realism = REALISM.get(realism_req, choose(rng, list(REALISM.values())))
 
     env = resolve_environment(location, rng, c)
-    light = resolve_lighting(rng, location, time_key, weather_key, c)
+    outdoor_place = bool(LOCATIONS[location].get("outdoor"))
+    weather_visible = scene_rules().weather_visible(outdoor_place, env.sublocation)
+    light = resolve_lighting(rng, location, time_key, weather_key, c, window_view=weather_visible and not outdoor_place)
     camera = resolve_camera(rng, c, people, pose_a)
     def _clothing_for(slot: str) -> ClothingProfile:
         pick = resolve_clothing(rng, slot, c)
@@ -2203,8 +2212,29 @@ def build_scene(seed: Optional[int] = None, constraints: Optional[Dict[str, Cons
             pick = resolve_clothing(rng, slot, c)
         return pick
 
+    def _companion_for(slot: str, main: ClothingProfile) -> Optional[ClothingProfile]:
+        """A top gets a bottom and a bottom gets a top, so nothing is left for the model to invent."""
+        rules_ = scene_rules()
+        pool = rules_.companion_pool(main.garment_key)
+        if not pool or get_value(c, f"garment_{slot}") not in {"", "auto"} and rules_.garment_slot(main.garment_key) == "dress":
+            return None
+        out_door = bool(LOCATIONS[location].get("outdoor"))
+        keys = [x for x in pool if x in GARMENTS and rules_.clothing_ok(x, "", location, weather_key, out_door)]
+        if not keys:
+            return None
+        trial = dict(c)
+        trial[f"garment_{slot}"] = constraint(choose(rng, keys), "fixed", 95, "auto")
+        trial[f"material_{slot}"] = constraint("auto", "auto", 50, "auto")      # fabric must fit the companion garment
+        trial[f"fit_{slot}"] = constraint("auto", "auto", 50, "auto")
+        try:
+            return resolve_clothing(rng, slot, trial)
+        except Exception:
+            return None
+
     clothing_a = _clothing_for("A")
     clothing_b = _clothing_for("B") if people == 2 else None
+    extra_a = _companion_for("A", clothing_a)
+    extra_b = _companion_for("B", clothing_b) if clothing_b else None
 
     props = []
     if get_value(c, "prop_A") not in {"", "auto"}:
@@ -2249,6 +2279,9 @@ def build_scene(seed: Optional[int] = None, constraints: Optional[Dict[str, Cons
         left_right_basis=get_value(c, "left_right_basis", "subject perspective"),
         source_text_kr=source_text_kr,
         constraints=c,
+        weather_visible=weather_visible,
+        clothing_extra_a=extra_a,
+        clothing_extra_b=extra_b,
     )
     _record_resolved(scene, "theme", theme, theme_source)
     _record_resolved(scene, "people", people, "user" if get_value(c, "people") not in {"", "auto"} else "auto")
@@ -2534,6 +2567,7 @@ def resolve_person(rng: random.Random, scene: SceneProfile, slot: str, source_pe
         gaze=gaze,
         hair=hair if hair == lora_hair and hair else local_translate(hair),
         clothing=clothing,
+        clothing_extra=scene.clothing_extra_a if slot == "A" else scene.clothing_extra_b,
         body_state=BodyState(
             left_arm=pose.get("left_arm", "relaxed"),
             right_arm=pose.get("right_arm", "relaxed"),
@@ -2698,7 +2732,8 @@ def prompt_option_coverage(scene: SceneProfile, person_a: PersonSlot, person_b: 
     add("location", scene.environment.location_en)
     add("sublocation", scene.environment.sublocation)
     add("time", scene.time_en)
-    add("weather", scene.weather_en)
+    if getattr(scene, "weather_visible", True):
+        add("weather", re.sub(r"\s+outside$", "", scene.weather_en))
     add("mood", scene.mood_en)
     add("light_source", scene.lighting.source)
     add("light_quality", scene.lighting.quality)
@@ -2717,11 +2752,10 @@ def prompt_option_coverage(scene: SceneProfile, person_a: PersonSlot, person_b: 
         add(f"person_{name}_pose", person.pose_en)
         add(f"person_{name}_expression", person.expression)
         add(f"person_{name}_gaze", person.gaze)
-        if person.clothing:
-            cl = person.clothing
-            add(f"person_{name}_garment", strip := re.sub(r"^(an?)\s+", "", cl.garment_en))
-            add(f"person_{name}_color", cl.color)
-            add(f"person_{name}_material", cl.fabric.material)
+        for idx, cl in enumerate(pr.shown_garments(scene, person)):          # only what the framing shows
+            add(f"person_{name}_garment{idx}", re.sub(r"^(an?)\s+", "", cl.garment_en))
+            add(f"person_{name}_color{idx}", cl.color)
+            add(f"person_{name}_material{idx}", cl.fabric.material)
     lower = clean_text(prompt).lower()
     missing = [name for name, frag in checks if frag.lower() not in lower]
     return {"total": len(checks), "passed": len(checks) - len(missing), "missing": missing}

@@ -152,31 +152,68 @@ def generic_identity(person, second: bool = False) -> str:
     return text
 
 
-def render_clothing(person, ref: Dict[str, str], detailed: bool) -> str:
-    cl = person.clothing
-    if cl is None:
-        return ""
+def framing_key(scene) -> str:
+    """The Korean framing key of the scene's camera (to know how much of the body is in the frame)."""
+    st = _studio()
+    for key, text in st.CAMERA_FRAMING.items():
+        if text == scene.camera.framing:
+            return key
+    return "전신"
+
+
+def _garment_phrase(cl, detailed: bool) -> str:
     garment = plain(cl.garment_en)
     color = plain(cl.color)
     if re.match(r"^(an?)\s", garment, flags=re.I):
         item = f"{article(color)} {color} {strip_article(garment)}"
     else:
         item = f"{color} {garment}"
-    fit = plain(cl.fit)
-    material = plain(cl.fabric.material)
-    text = f"{ref['S']} {ref['wear']} {item}, {fit}, in {material}"
+    text = f"{item}, {plain(cl.fit)}, in {plain(cl.fabric.material)}"
     texture = plain(cl.fabric.texture)
     if texture:
         text += f" with a {texture}"
-    extras = [plain(x) for x in (cl.footwear, cl.accessory) if x]
+    return text
+
+
+def shown_garments(scene, person) -> list:
+    """The garments the framing can show, upper body first."""
+    cl = person.clothing
+    if cl is None:
+        return []
+    rules = _studio().scene_rules()
+    depth = rules.depth_of(framing_key(scene)) if scene is not None else 6
+    garments = [g for g in (cl, getattr(person, "clothing_extra", None)) if g is not None]
+    shown = [g for g in garments if rules.slot_visible(rules.garment_slot(g.garment_key), depth)] or [cl]
+    order = {"top": 0, "dress": 0, "bottom": 1}
+    return sorted(shown, key=lambda g: order.get(rules.garment_slot(g.garment_key), 0))
+
+
+def render_clothing(person, ref: Dict[str, str], detailed: bool, scene=None) -> str:
+    """The outfit, limited to what the framing can show (top, bottom, shoes, accessories)."""
+    cl = person.clothing
+    if cl is None:
+        return ""
+    st = _studio()
+    rules = st.scene_rules()
+    depth = rules.depth_of(framing_key(scene)) if scene is not None else 6
+    shown = shown_garments(scene, person)
+    phrases = [_garment_phrase(g, detailed) for g in shown]
+    text = f"{ref['S']} {ref['wear']} {phrases[0]}" + (f", paired with {phrases[1]}" if len(phrases) > 1 else "")
+    extras = []
+    if rules.slot_visible("footwear", depth) and cl.footwear:
+        extras.append(plain(cl.footwear))
+    acc_key = next((k_ for k_, v_ in st.ACCESSORIES.items() if v_ == cl.accessory), "")
+    if cl.accessory and (not acc_key or rules.accessory_visible(acc_key, depth)):
+        extras.append(plain(cl.accessory))
     if extras:
         text += f", along with {join_list(extras)}"
     out = [sentence(text)]
     if detailed:
-        fab = cl.fabric
-        out.append(sentence(f"The {material} is {plain(fab.construction)}, with {plain(fab.density)} density and a {plain(fab.drape)}"))
-        if cl.details:
-            out.append(sentence(f"Details include {plain(cl.details)}"))
+        for g in shown:
+            fab = g.fabric
+            out.append(sentence(f"The {plain(fab.material)} is {plain(fab.construction)}, with {plain(fab.density)} density and a {plain(fab.drape)}"))
+            if g.details:
+                out.append(sentence(f"Details include {plain(g.details)}"))
         if cl.state:
             out.append(sentence(f"The clothes look {plain(cl.state)}"))
     return " ".join(out)
@@ -220,7 +257,7 @@ def render_person(scene, person, lora: Optional[Dict[str, Any]], detailed: bool 
         out.append(sentence(plain(identity)))
 
     # outfit
-    out.append(render_clothing(person, ref, detailed))
+    out.append(render_clothing(person, ref, detailed, scene))
     sig = (lora or {}).get("signature_accessories", [])
     if sig:
         out.append(sentence(f"{ref['S']} also {ref['wear']} " + join_list([a if "neck" in a or "choker" not in a else f"{a} around {ref['p']} neck" for a in sig])))
@@ -260,6 +297,10 @@ def render_person(scene, person, lora: Optional[Dict[str, Any]], detailed: bool 
 # ---------------------------------------------------------------------------
 # scene
 # ---------------------------------------------------------------------------
+def env_outdoor(scene) -> bool:
+    return bool(_studio().LOCATIONS[scene.location_key].get("outdoor"))
+
+
 def render_scene(scene, detailed: bool = False, regional: bool = False) -> str:
     """Setting, time, light, camera and style as prose. `regional` keeps it free of pronouns."""
     st = _studio()
@@ -267,22 +308,27 @@ def render_scene(scene, detailed: bool = False, regional: bool = False) -> str:
     who = "the subjects" if scene.people == 2 else ("the subject" if regional else "the subject")
     out: List[str] = []
 
-    things = [plain(x) for x in (env.furniture[:2] + env.decor[:1]) if x]
-    if detailed:
-        things = [plain(x) for x in (env.furniture[:3] + env.decor[:2]) if x]
+    depth = st.scene_rules().depth_of(framing_key(scene))
+    close = depth <= 1                      # chest-up / close-up: the background is only a soft impression
+    count = (1, 1) if close else ((3, 2) if detailed else (2, 1))
+    things = [plain(x) for x in (env.furniture[:count[0]] + env.decor[:count[1]]) if x][: (1 if close else 6)]
     place = f"{cap(plain(env.location_en))}, {plain(env.sublocation)}"
     if things:
         place += f", with {join_list(things)}"
     out.append(sentence(place))
-    floor = plain(env.floor) if env.floor and env.floor.lower() != "realistic flooring" else ""
-    walls = plain(env.walls) if env.walls else ""
+    floor = plain(env.floor) if env.floor and env.floor.lower() != "realistic flooring" and depth >= 5 else ""
+    walls = plain(env.walls) if env.walls and not close else ""
     if floor and walls:
         out.append(sentence(f"The floor is {floor}, and the walls are {walls}"))
     elif floor or walls:
         out.append(sentence(f"The {'floor is ' + floor if floor else 'walls are ' + walls}"))
-    if scene.props:
+    if scene.props and not close:
         out.append(sentence(f"Nearby are {join_list([plain(x) for x in scene.props[:3 if not detailed else 4]])}"))
-    out.append(sentence(f"It is {scene.time_en}, with {scene.weather_en}; the mood is {scene.mood_en}"))
+    if getattr(scene, "weather_visible", True):
+        weather = scene.weather_en if env_outdoor(scene) else re.sub(r"\s+outside$", "", scene.weather_en) + " outside the window"
+        out.append(sentence(f"It is {scene.time_en}, with {weather}; the mood is {scene.mood_en}"))
+    else:
+        out.append(sentence(f"It is {scene.time_en}; the mood is {scene.mood_en}"))
     if detailed and env.palette:
         out.append(sentence(f"The colors are a {plain(env.palette)}"))
 

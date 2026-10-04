@@ -181,9 +181,40 @@ def consistency_checks():
     return [] if scene_consistency.main(120, quiet=True) == 0 else [(0, 0, "scene contradictions found (run tests/scene_consistency.py)")]
 
 
+def visibility_checks():
+    """Write only what the frame can show; a top always comes with a bottom (or a dress)."""
+    problems = []
+    import krea2_prose as pr
+    rules = k.scene_rules()
+    for seed in range(1, 61):
+        for framing in ("전신", "허리 위", "클로즈업"):
+            c = k.defaults()
+            k.set_constraint_value(c, "people", "1")
+            k.set_constraint_value(c, "framing", framing)
+            try:
+                sc = k.build_scene(seed, c, None, None, "", False)
+                text = k.generate_one(k.GenerationOptions(seed=seed), c, seed=seed).combined_prompt.lower()
+            except Exception as exc:  # noqa: BLE001
+                problems.append((seed, 1, f"visibility run failed ({framing}): {exc!r}"))
+                continue
+            main_g = sc.clothing_a
+            slot = rules.garment_slot(main_g.garment_key)
+            if slot in ("top", "bottom") and sc.clothing_extra_a is None:
+                problems.append((seed, 1, "top/bottom outfit without its companion garment"))
+            foot = k.pr_plain(main_g.footwear).lower() if hasattr(k, "pr_plain") else main_g.footwear.lower()
+            if framing != "전신" and foot and foot in text:
+                problems.append((seed, 1, f"footwear written although the frame ({framing}) cannot show it"))
+            if framing == "전신" and sc.clothing_extra_a is not None:
+                for g in (main_g, sc.clothing_extra_a):
+                    if pr.plain(g.color).lower() not in text:
+                        problems.append((seed, 1, "full-body prompt misses one of the two garments"))
+                        break
+    return problems
+
+
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + desc_checks() + engine_prose_checks() + consistency_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

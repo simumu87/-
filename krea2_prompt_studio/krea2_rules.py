@@ -77,6 +77,31 @@ DEFAULT_RULES: Dict[str, Any] = {
         "outdoor_night_source": "달빛",
         "city_night_source": "도시 야간광",
     },
+    # weather can only be seen outdoors, or indoors when the spot is at a window / glass front
+    "weather": {
+        "window_words": ["window", "storefront", "glass", "frontage", "facade", "display"],
+        "hidden_indoors": ["비", "폭우", "눈", "안개", "흐림", "구름 조금", "바람"],
+    },
+    # how far down the body each framing shows: 0 face, 1 chest, 2 waist, 3 thighs, 4 knees, 5 below the knees, 6 feet
+    "visibility": {
+        "framing_depth": {"전신": 6, "3/4 전신": 5, "무릎 위": 4, "허벅지 위": 3, "허리 위": 2, "가슴 위": 1, "클로즈업": 0,
+                          "환경 중심": 6, "와이드 씬": 6},
+        "garment_slot": {
+            "top": ["반팔 티셔츠", "셔츠", "블라우스", "니트 스웨터", "가디건", "블레이저", "트렌치코트", "울 코트",
+                    "데님 재킷", "오버셔츠", "폴로 셔츠", "운동복 상의", "후드 집업"],
+            "bottom": ["플리츠 스커트", "A라인 스커트", "슬랙스", "청바지", "코듀로이 팬츠", "반바지", "조거 팬츠",
+                       "운동용 레깅스"],
+            "dress": ["미디 드레스", "가벼운 원피스", "파자마"],
+        },
+        "slot_min_depth": {"top": 0, "dress": 0, "bottom": 3, "footwear": 6},
+        "accessory_min_depth": {"시계": 2, "반지": 2, "가죽 가방": 2, "캔버스 토트백": 2, "백팩": 2, "스카프": 1,
+                                "목걸이": 1, "안경": 0, "선글라스": 0, "작은 귀걸이": 0, "모자": 0, "비니": 0,
+                                "헤어밴드": 0},
+        "companion_tops": ["반팔 티셔츠", "셔츠", "블라우스", "니트 스웨터", "폴로 셔츠", "가디건"],
+        "companion_bottoms": ["슬랙스", "청바지", "A라인 스커트", "플리츠 스커트", "코듀로이 팬츠", "반바지"],
+        "sport_companion_tops": ["운동복 상의", "반팔 티셔츠", "후드 집업"],
+        "sport_companion_bottoms": ["운동용 레깅스", "조거 팬츠", "반바지"],
+    },
     "clothing": {
         "warm_garments": ["울 코트", "트렌치코트", "니트 스웨터", "블레이저", "데님 재킷"],
         "light_garments": ["반바지", "반팔 티셔츠", "가벼운 원피스"],
@@ -167,6 +192,39 @@ class Rules:
         if not outdoor:
             return rng.choice(light["indoor_night_sources"])
         return light["city_night_source"] if location_key in light["city_locations"] else light["outdoor_night_source"]
+
+    # --- weather ----------------------------------------------------------------------------
+    def weather_visible(self, outdoor: bool, sublocation: str) -> bool:
+        if outdoor:
+            return True
+        text = (sublocation or "").lower()
+        return any(w in text for w in self.data["weather"]["window_words"])
+
+    # --- visibility by framing ------------------------------------------------------------
+    def depth_of(self, framing_key: str) -> int:
+        return int(self.data["visibility"]["framing_depth"].get(framing_key, 6))
+
+    def garment_slot(self, garment_key: str) -> str:
+        for slot, items in self.data["visibility"]["garment_slot"].items():
+            if garment_key in items:
+                return slot
+        return "top"
+
+    def slot_visible(self, slot: str, depth: int) -> bool:
+        return depth >= self.data["visibility"]["slot_min_depth"].get(slot, 0)
+
+    def accessory_visible(self, accessory_key: str, depth: int) -> bool:
+        return depth >= self.data["visibility"]["accessory_min_depth"].get(accessory_key, 0)
+
+    def companion_pool(self, garment_key: str) -> List[str]:
+        v = self.data["visibility"]
+        slot = self.garment_slot(garment_key)
+        sport = garment_key in self.data["clothing"]["sport_garments"]
+        if slot == "bottom":
+            return v["sport_companion_tops"] if sport else v["companion_tops"]
+        if slot == "top":
+            return v["sport_companion_bottoms"] if sport else v["companion_bottoms"]
+        return []
 
     # --- clothing ---------------------------------------------------------------------------
     def clothing_ok(self, garment_key: str, footwear_key: str, location_key: str, weather_key: str, outdoor: bool) -> bool:
