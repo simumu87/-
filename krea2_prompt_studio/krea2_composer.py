@@ -203,15 +203,18 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
 
     # ---- scene prompt
     water, ground, far = rng.choice(pack["water_en"]), rng.choice(pack["ground_en"]), rng.choice(pack["far_en"])
-    scene = [
-        sentence(f"{pack['setting_en']} at {tm['time_en']}, {tm['sky_en']}, with {water} and {ground}"),
-        sentence(f"{fs(tm['sun_en']).capitalize()}, and {tm['glitter_en']}"),
-        sentence(f"{tm['shadow_en'].capitalize()}, with {far}"),
-        sentence(fs(pack["camera"][framing])),
-        sentence(pack["style_en"]),
-    ]
-    scene_text = " ".join(scene)
-    combined = f"{person_text} {scene_text}"
+
+    def build_scene_text(fx) -> str:
+        return " ".join([
+            sentence(f"{pack['setting_en']} at {tm['time_en']}, {tm['sky_en']}, with {water} and {ground}"),
+            sentence(f"{fx(tm['sun_en']).capitalize()}, and {tm['glitter_en']}"),
+            sentence(f"{fx(tm['shadow_en']).capitalize()}, with {far}"),
+            sentence(fx(pack["camera"][framing])),
+            sentence(pack["style_en"]),
+        ])
+
+    scene_text = build_scene_text(fs)          # stands alone (regional use): "the woman"
+    combined = f"{person_text} {build_scene_text(f)}"   # one person, one prompt: "her" keeps the thread
     return {"person": person_text, "scene": scene_text, "combined": combined,
             "problems": lint(combined), "words": len(combined.split())}
 
@@ -255,22 +258,26 @@ def main() -> int:
     ap.add_argument("--trigger", default="nayoon")
     ap.add_argument("--outfit", default="gold_amber_triangle_string_bikini")
     ap.add_argument("--seed", type=int, default=11)
-    ap.add_argument("--split", action="store_true", help="v11: person prompt + scene prompt")
+    ap.add_argument("--parts", action="store_true", help="show person and scene prompts separately (for regional use)")
     ap.add_argument("--expression", default="환한 미소")
     ap.add_argument("--framing", default="전신")
     ap.add_argument("--time", default="해질녘")
     ap.add_argument("--hair", default="", help="override the LoRA hair (replaces it entirely)")
+    ap.add_argument("--old", action="store_true", help="the first engine-based prototype (sample A)")
     args = ap.parse_args()
-    if args.split:
-        r = compose_split(args.trigger, args.outfit, time_key=args.time, framing=args.framing,
-                          expression=args.expression, hair_override=args.hair, seed=args.seed)
+    if args.old:
+        result = build_sample(args.trigger, args.outfit, args.seed)
+        print(result["prompt"])
+        print(f"\n[{result['words']} words, seed {result['seed']}, problems: {result['problems'] or 'none'}]")
+        return 1 if result["problems"] else 0
+    r = compose_split(args.trigger, args.outfit, time_key=args.time, framing=args.framing,
+                      expression=args.expression, hair_override=args.hair, seed=args.seed)
+    if args.parts:
         print("[인물 프롬프트]\n" + r["person"] + "\n\n[장면 프롬프트]\n" + r["scene"])
-        print(f"\n[{r['words']} words, problems: {r['problems'] or 'none'}]")
-        return 1 if r["problems"] else 0
-    result = build_sample(args.trigger, args.outfit, args.seed)
-    print(result["prompt"])
-    print(f"\n[{result['words']} words, seed {result['seed']}, problems: {result['problems'] or 'none'}]")
-    return 1 if result["problems"] else 0
+    else:
+        print(r["combined"])           # one person: a single prompt, person first so the LoRA trigger leads
+    print(f"\n[{r['words']} words, problems: {r['problems'] or 'none'}]")
+    return 1 if r["problems"] else 0
 
 
 if __name__ == "__main__":
