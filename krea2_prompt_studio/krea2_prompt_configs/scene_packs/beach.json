@@ -46,5 +46,19 @@
     "전신": "Full-length shot from eye level with a 35mm lens, the frame running from the top of {p} head down to {p} bare feet in the shallow foam, vertical frame, shallow depth of field with the sea softly out of focus",
     "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the sea softly out of focus"
   },
-  "style_en": "natural travel-editorial photography with fine film grain and realistic skin texture"
+  "style_en": "natural travel-editorial photography with fine film grain and realistic skin texture",
+  "detail_en": {
+    "해질녘": [
+      "the wet sand left by each retreating wave mirrors the glowing sky in a thin, bright film",
+      "the foam at the edge of each wave catches the warm light in pale gold",
+      "the sea farther out turns a deep blue with a path of sparkling light running toward the sun"
+    ],
+    "오후": [
+      "the wet sand left by each retreating wave shines like a clear mirror",
+      "the foam at the edge of each wave glows bright white in the sun",
+      "the sea farther out shifts from turquoise to deep blue toward the horizon"
+    ]
+  },
+  "position_en": "{S} is centered in the frame, with the sea spreading out behind {o}",
+  "feet_en": "{P} bare feet and ankles are fully visible in the shallow water"
 }

@@ -45,6 +45,16 @@
     "behavior_en": "the fine fabric follows the body's curves with natural micro-wrinkles and gentle tension folds around the cup center, the ring and the side ties"
   },
   "normal_en": "a gold-amber satin string bikini: triangle halter cups joined by a small round gold ring at the center, hair-thin halter and back ties, and a low-rise, high-leg bottom knotted at both hips with long string ends trailing",
+  "detail_prose_en": [
+    "The top is made of two flexible triangle cups, the thin fabric showing fine tension folds where it follows {p} curves, joined at the center by a small round gold ring",
+    "Very thin string straps rise from the top of each cup to a halter tie behind {p} neck, and a fine string runs under the bust to a small knot at the center of {p} back with its ends hanging loose",
+    "The bottom sits low below {p} navel in a simple triangle panel, the leg openings cut high over the upper thighs in a balanced curve, with a thin string tie knotted at each hip and the long string ends trailing",
+    "The whole bikini is one continuous gold-amber, and the satin fabric catches the light in broad, soft golden highlights that deepen to a rich gold-amber in the shadows"
+  ],
+  "echo_en": [
+    "The small gold ring at the center of the top and the knotted side ties at {p} hips stay clearly visible",
+    "Top and bottom alike keep the same warm gold-amber satin from edge to edge"
+  ],
   "parts": {
     "top": {
       "ko": "트라이앵글 스트링 상의",

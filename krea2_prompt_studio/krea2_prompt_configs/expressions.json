@@ -1,0 +1,26 @@
+{
+  "schema": "krea2-expressions/1",
+  "note_ko": "표정 사전. main_en은 보통/상세 모두, echo_en은 상세에서 같은 표정을 다른 표현으로 한 번 더 말할 때 쓴다. {p}/{P}=her/Her.",
+  "items": {
+    "환한 미소": {
+      "desc_ko": "입꼬리가 올라가고 눈가가 반달처럼 접히는 밝은 미소",
+      "main_en": "looking slightly past the camera with a warm natural smile, {p} eyes softly crinkled into half-moons and {p} lips just parted",
+      "echo_en": "{P} smile reaches {p} eyes, the corners of {p} mouth lifted and a hint of teeth showing"
+    },
+    "은은한 미소": {
+      "desc_ko": "입꼬리만 살짝 올라가는 조용한 미소",
+      "main_en": "looking slightly past the camera with a quiet, gentle smile, the corners of {p} mouth lifted just a little",
+      "echo_en": "{P} expression stays soft and calm, with a faint smile resting on {p} lips"
+    },
+    "무표정": {
+      "desc_ko": "힘을 뺀 차분한 얼굴, 시선은 또렷하게",
+      "main_en": "looking slightly past the camera with a calm, relaxed face, lips softly closed and eyes steady",
+      "echo_en": "{P} face is still and composed, {p} gaze steady and unhurried"
+    },
+    "장난스러운 미소": {
+      "desc_ko": "한쪽 입꼬리가 먼저 올라가는 장난기 있는 미소",
+      "main_en": "looking toward the camera with a playful smile, one corner of {p} mouth lifting first and {p} eyes bright",
+      "echo_en": "{P} eyes sparkle with mischief and {p} smile tilts a little to one side"
+    }
+  }
+}

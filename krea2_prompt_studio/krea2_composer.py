@@ -145,78 +145,125 @@ def compose_normal(scene: "k.SceneProfile", person: "k.PersonSlot", lora: Dict[s
 # ---------------------------------------------------------------------------
 PACK_DIR = k.CONFIG_DIR / "scene_packs"
 PACK_FILES = {"해변": "beach.json"}
+MODES = ("보통", "상세")
 
-# Expressions are described the way the user writes them: gaze + eyes + mouth, not just a name.
-EXPRESSIONS_KO = {
-    "환한 미소": "looking slightly past the camera with a warm natural smile, her eyes softly crinkled into half-moons and her lips just parted",
-    "은은한 미소": "looking slightly past the camera with a quiet, gentle smile, the corners of her mouth lifted just a little",
-    "무표정": "looking slightly past the camera with a calm, relaxed face, lips softly closed and eyes steady",
-    "장난스러운 미소": "looking toward the camera with a playful smile, one corner of her mouth lifting first and her eyes bright",
-}
+
+def _load(path: Path) -> Dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_expressions() -> Dict[str, Any]:
+    return _load(k.CONFIG_DIR / "expressions.json")["items"]
+
+
+def load_hair_presets() -> Dict[str, Any]:
+    return _load(k.CONFIG_DIR / "hair_presets.json")["items"]
 
 
 def load_pack(location_ko: str) -> Dict[str, Any]:
     name = PACK_FILES.get(location_ko)
     if not name:
         raise SystemExit(f"장면 팩이 없는 장소예요: {location_ko} (있는 장소: {', '.join(PACK_FILES)})")
-    return json.loads((PACK_DIR / name).read_text(encoding="utf-8"))
+    return _load(PACK_DIR / name)
 
 
-def _fill(text: str, subj: str, poss: str, obj: str = "") -> str:
-    """{s}/{S} subject, {p}/{P} possessive, {o} object (her / the woman)."""
+def _fill(text: str, subj: str, poss: str, obj: str = "", color: str = "") -> str:
+    """{s}/{S} subject, {p}/{P} possessive, {o} object (her / the woman), {color} hair color."""
     obj = obj or ("her" if poss == "her" else "him" if poss == "his" else "them")
-    return text.format_map({"s": subj, "S": subj.capitalize(), "p": poss, "P": poss.capitalize(), "o": obj})
+    return text.format_map({"s": subj, "S": subj.capitalize(), "p": poss, "P": poss.capitalize(), "o": obj, "color": color})
+
+
+def _join(parts: List[str]) -> str:
+    return parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + ", and " + parts[-1]
 
 
 def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", time_key: str = "해질녘",
                   moment: str = "파도 발목", framing: str = "전신", expression: str = "환한 미소",
-                  hair_override: str = "", seed: int = 0) -> Dict[str, Any]:
+                  hair: str = "", mode: str = "보통", seed: int = 0) -> Dict[str, Any]:
+    """Build the person prompt, the scene prompt and the combined single prompt.
+
+    hair: "" keeps the LoRA hair; a preset name or free text replaces it entirely.
+    mode: 보통 (each fact once, hair override closed off) / 상세 (facts restated in different words).
+    """
     import random
+    if mode not in MODES:
+        raise SystemExit(f"모드는 {' / '.join(MODES)} 중에서 골라주세요.")
+    detailed = mode == "상세"
     rng = random.Random(seed)
     lora = k.lora_profile_for_trigger(trigger)
     if not lora:
         raise SystemExit(f"등록되지 않은 LoRA 트리거예요: {trigger}")
     subj, poss = PRONOUNS.get(lora.get("gender", "female"), ("they", "their"))
+    color = lora.get("hair_color", "")
     outfit = load_outfit(outfit_id) if outfit_id else None
     pack = load_pack(location)
     tm, mo = pack["times"][time_key], pack["moments"][moment]
-    f = lambda t: _fill(t, subj, poss)
-    fs = lambda t: _fill(t, "the woman", "the woman's", "the woman")      # scene prompt stands alone: no dangling "her"
+    exp = load_expressions()[expression]
+    f = lambda t: _fill(t, subj, poss, color=color)
+    fs = lambda t: _fill(t, "the woman", "the woman's", "the woman", color)   # scene prompt that stands alone (regional use)
+    cap = lambda t: t[:1].upper() + t[1:]
 
-    # ---- person prompt: identity(face/body) -> hair -> outfit -> action/expression -> skin
+    # ---------------- person prompt: identity(face/body) -> hair -> outfit -> action/expression -> skin
     person = [f"{lora['trigger']}, {identity_to_prose(lora.get('identity', ''), lora['trigger'], subj)}".rstrip(".") + "."]
-    if hair_override:
+    hair_echo = ""
+    if hair:
+        presets = load_hair_presets()
         person.append(f"Only {poss} face and body follow the {lora['trigger']} reference; {poss} hairstyle is set separately here.")
-        person.append(sentence(k.clean_text(hair_override)))
+        if hair in presets:
+            h = presets[hair]
+            person.append(sentence(f(h["main_en"]) + "; " + f(h["closing_en"])))
+            hair_echo = f(h["echo_en"])
+        else:
+            person.append(sentence(k.clean_text(hair)))
     elif lora.get("hair"):
         person.append(sentence(f"{subj.capitalize()} has {k.clean_text(lora['hair'])}"))
-    wear = [outfit["normal_en"]] if outfit else []
-    for acc in lora.get("signature_accessories", []):
-        wear.append(acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")
-    if wear:
-        listing = wear[0] if len(wear) == 1 else ", ".join(wear[:-1]) + ", and " + wear[-1]
-        person.append(sentence(f"{subj.capitalize()} wears {listing}"))
+
+    if outfit:
+        wear = [outfit["normal_en"]]
+        for acc in lora.get("signature_accessories", []):
+            wear.append(acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")
+        person.append(sentence(f"{subj.capitalize()} wears {_join(wear)}"))
+        if detailed:
+            person.extend(sentence(f(t)) for t in outfit.get("detail_prose_en", []))
     person.append(sentence(f(pack["skin_en"])))
-    person.append(sentence(f"{subj.capitalize()} {mo['pose_en']}, {EXPRESSIONS_KO[expression].replace('her ', poss + ' ')}; {f(mo['moment_en'])}"))
+    person.append(sentence(f"{subj.capitalize()} {mo['pose_en']}, {f(exp['main_en'])}; {f(mo['moment_en'])}"))
+    if detailed:
+        person.append(sentence(f(exp["echo_en"])))
+        if outfit:
+            person.extend(sentence(f(t)) for t in outfit.get("echo_en", []))
+        if hair_echo:
+            person.append(sentence(hair_echo))
     person.append(sentence(f"{poss.capitalize()} skin shows fine pores and soft vellus hair with a natural sheen, no smoothing and no retouching"))
     person_text = " ".join(person)
 
-    # ---- scene prompt
-    water, ground, far = rng.choice(pack["water_en"]), rng.choice(pack["ground_en"]), rng.choice(pack["far_en"])
+    # ---------------- scene prompt
+    waters, grounds, fars = list(pack["water_en"]), list(pack["ground_en"]), list(pack["far_en"])
+    rng.shuffle(waters), rng.shuffle(grounds), rng.shuffle(fars)
 
     def build_scene_text(fx) -> str:
-        return " ".join([
-            sentence(f"{pack['setting_en']} at {tm['time_en']}, {tm['sky_en']}, with {water} and {ground}"),
-            sentence(f"{fx(tm['sun_en']).capitalize()}, and {tm['glitter_en']}"),
-            sentence(f"{fx(tm['shadow_en']).capitalize()}, with {far}"),
-            sentence(fx(pack["camera"][framing])),
-            sentence(pack["style_en"]),
-        ])
+        out = [sentence(f"{pack['setting_en']} at {tm['time_en']}, {tm['sky_en']}, with {waters[0]} and {grounds[0]}")]
+        if detailed:
+            out.append(sentence(f"Farther along, {waters[1]}, with {grounds[1]}"))
+        out.append(sentence(f"{cap(fx(tm['sun_en']))}, and {tm['glitter_en']}"))
+        if detailed:
+            out.append(sentence(cap(_join(pack["detail_en"][time_key]))))
+        out.append(sentence(f"{cap(fx(tm['shadow_en']))}, with {_join(fars[:2] if detailed else fars[:1])}"))
+        if detailed:
+            out.append(sentence(fx(pack["position_en"])))
+            out.append(sentence(fx(pack["feet_en"])))
+        out.append(sentence(fx(pack["camera"][framing])))
+        out.append(sentence(pack["style_en"]))
+        return " ".join(out)
 
-    scene_text = build_scene_text(fs)          # stands alone (regional use): "the woman"
-    combined = f"{person_text} {build_scene_text(f)}"   # one person, one prompt: "her" keeps the thread
-    return {"person": person_text, "scene": scene_text, "combined": combined,
-            "problems": lint(combined), "words": len(combined.split())}
+    scene_text = build_scene_text(fs)                          # regional use: "the woman"
+    combined = f"{person_text} {build_scene_text(f)}"          # one person, one prompt: "her" keeps the thread
+    problems = lint(combined)
+    if hair and lora.get("hair"):                               # the replaced LoRA hair must be gone entirely
+        old = k.clean_text(lora["hair"]).lower()
+        if old[:40] in combined.lower() or "knot high on the crown" in combined.lower() and "knot" not in hair.lower():
+            problems.append("LoRA hair text survived a hair override")
+    return {"person": person_text, "scene": scene_text, "combined": combined, "problems": problems,
+            "words": len(combined.split())}
 
 
 def lint(text: str) -> List[str]:
@@ -262,7 +309,8 @@ def main() -> int:
     ap.add_argument("--expression", default="환한 미소")
     ap.add_argument("--framing", default="전신")
     ap.add_argument("--time", default="해질녘")
-    ap.add_argument("--hair", default="", help="override the LoRA hair (replaces it entirely)")
+    ap.add_argument("--hair", default="", help="override the LoRA hair: a preset name or free text (replaces it entirely)")
+    ap.add_argument("--mode", default="보통", choices=MODES)
     ap.add_argument("--old", action="store_true", help="the first engine-based prototype (sample A)")
     args = ap.parse_args()
     if args.old:
@@ -271,7 +319,7 @@ def main() -> int:
         print(f"\n[{result['words']} words, seed {result['seed']}, problems: {result['problems'] or 'none'}]")
         return 1 if result["problems"] else 0
     r = compose_split(args.trigger, args.outfit, time_key=args.time, framing=args.framing,
-                      expression=args.expression, hair_override=args.hair, seed=args.seed)
+                      expression=args.expression, hair=args.hair, mode=args.mode, seed=args.seed)
     if args.parts:
         print("[인물 프롬프트]\n" + r["person"] + "\n\n[장면 프롬프트]\n" + r["scene"])
     else:

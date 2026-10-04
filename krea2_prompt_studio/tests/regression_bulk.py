@@ -56,9 +56,35 @@ def pool_checks():
     return problems
 
 
+def composer_checks():
+    """v11 composer: both modes, every hair preset, every expression, both times - no problems, trigger first."""
+    import krea2_composer as c
+    problems = []
+    for mode in c.MODES:
+        for hair in [""] + list(c.load_hair_presets()) + ["free text hair: a tidy side braid over her left shoulder"]:
+            for expression in c.load_expressions():
+                for time_key in ("해질녘", "오후"):
+                    r = c.compose_split("nayoon", "gold_amber_triangle_string_bikini", time_key=time_key,
+                                        expression=expression, hair=hair, mode=mode)
+                    tag = (mode, hair[:12], expression, time_key)
+                    for pr in r["problems"]:
+                        problems.append((0, 0, f"composer {tag}: {pr}"))
+                    if not r["combined"].startswith("nayoon, "):
+                        problems.append((0, 0, f"composer {tag}: trigger is not first"))
+                    if "the woman" in r["combined"]:
+                        problems.append((0, 0, f"composer {tag}: 'the woman' leaked into the combined prompt"))
+                    if "{" in r["combined"] or "}" in r["combined"]:
+                        problems.append((0, 0, f"composer {tag}: unfilled placeholder"))
+                    if hair in c.load_hair_presets() and "Hairstyle" in r["combined"]:
+                        problems.append((0, 0, f"composer {tag}: label in prompt"))
+                    if "the woman" not in r["scene"]:
+                        problems.append((0, 0, f"composer {tag}: regional scene prompt should say 'the woman'"))
+    return problems
+
+
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks()
+    problems = hair_checks() + pool_checks() + composer_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()
