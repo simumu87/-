@@ -159,6 +159,41 @@ def pose2p_checks():
     return problems
 
 
+def pose1p_checks():
+    """1-person pose library x every framing: only what the frame shows, one gaze, extent sentence present."""
+    import krea2_pose1p as lib
+    problems = [(0, 1, f"pose1p library: {x}") for x in lib.validate()]
+    legs = re.compile(r"\b(knees?|legs?|shins?|feet|foot|heel|toes)\b", re.I)
+    rules = k.scene_rules()
+    for pose_key in lib.load_poses():
+        for framing in k.CAMERA_FRAMING:
+            depth = rules.depth_of(framing)
+            c = k.defaults()
+            k.set_constraint_value(c, "people", "1")
+            k.set_constraint_value(c, "pose", pose_key)
+            k.set_constraint_value(c, "framing", framing)
+            for seed in (1, 2, 3):
+                try:
+                    r = k.generate_one(k.GenerationOptions(seed=seed), c, seed=seed)
+                except Exception as exc:  # noqa: BLE001
+                    problems.append((seed, 1, f"pose1p {pose_key}/{framing}: generation failed {exc!r}"))
+                    continue
+                if k.build_scene(seed, c, None, None, "", False).pose_a.get("pose_key") != pose_key:
+                    continue                                    # the rules swapped the pose for this activity
+                text = r.combined_prompt
+                m = re.search(r"[^.]*\b(?:is|are) (?:standing|sitting|walking|kneeling|running|riding|holding|performing)\b[^.]*\.", text)
+                body = m.group(0) if m else ""
+                if depth < 5 and legs.search(body):
+                    problems.append((seed, 1, f"pose1p {pose_key}/{framing}: leg/foot words but the frame ends above the knees"))
+                if depth < 6 and re.search(r"\b(feet|foot|heel|toes)\b", body, re.I):
+                    problems.append((seed, 1, f"pose1p {pose_key}/{framing}: feet written but not visible"))
+                if "frame" not in text or ("taking up" not in text and "filling" not in text and "fills the frame" not in text and "frame ends" not in text):
+                    problems.append((seed, 1, f"pose1p {pose_key}/{framing}: no extent sentence"))
+                if re.search(r"\b(left|right) (hand|arm|foot|leg|shoulder|knee)\b", text):
+                    problems.append((seed, 1, f"pose1p {pose_key}/{framing}: left/right limb wording"))
+    return problems
+
+
 def desc_checks():
     """Every option shown in a menu must carry a Korean description."""
     problems = []
@@ -285,7 +320,7 @@ def visibility_checks():
 
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

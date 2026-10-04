@@ -344,8 +344,10 @@ def render_scene(scene, detailed: bool = False, regional: bool = False) -> str:
     intensity = light.intensity if "contrast" in light.intensity else f"{light.intensity} intensity"
     out.append(sentence(f"Lit by {plain(light.source)} {direction}, the light is {light.quality} with {intensity}"))
 
-    out.append(sentence(f"{cap(plain(cam.framing))}, {cam.lens}mm lens, {plain(cam.viewpoint)}, {plain(cam.composition)}, "
-                        f"{plain(cam.depth_of_field)}"))
+    import krea2_pose1p as lib1
+    extent = lib1.extent_text(framing_key(scene), "the two subjects" if scene.people == 2 else "the subject")
+    out.append(sentence(f"{cap(plain(cam.framing))}, " + (f"{extent}, " if extent else "") +
+                        f"{cam.lens}mm lens, {plain(cam.viewpoint)}, {plain(cam.composition)}, {plain(cam.depth_of_field)}"))
     style = st._style_line(scene)
     out.append(sentence(style))
     if detailed:
@@ -356,6 +358,18 @@ def render_scene(scene, detailed: bool = False, regional: bool = False) -> str:
 # ---------------------------------------------------------------------------
 # whole prompt
 # ---------------------------------------------------------------------------
+def _library_pose_1p(scene, person, lora):
+    """One person: the body comes from the 1-person pose library, limited to what the framing shows."""
+    import dataclasses
+    import krea2_pose1p as lib
+    key = (scene.pose_a or {}).get("pose_key", "")
+    if key not in lib.load_poses():
+        return person
+    rules = _studio().scene_rules()
+    text, gaze = lib.person_text(key, pronouns(person, lora, 1), rules.depth_of(framing_key(scene)))
+    return dataclasses.replace(person, pose_en=text, gaze=gaze or person.gaze)      # a pose without its own gaze keeps the engine gaze
+
+
 def _library_poses(scene, person_a, person_b, lora_for):
     """Two people with a library interaction: both bodies come from the 2-person pose library (A left, B right)."""
     import dataclasses
@@ -392,6 +406,8 @@ def render(scene, person_a, person_b=None, detailed: bool = False, reinforce: Op
     shared = ""
     if person_b is not None:
         person_a, person_b, shared = _library_poses(scene, person_a, person_b, lora_for)
+    else:
+        person_a = _library_pose_1p(scene, person_a, lora_for(person_a))
     a = render_person(scene, person_a, lora_for(person_a), detailed, reinforce, override("A", person_a))
     b = render_person(scene, person_b, lora_for(person_b), detailed, reinforce, override("B", person_b), second=True) if person_b else ""
     regional_scene = render_scene(scene, detailed, regional=True)

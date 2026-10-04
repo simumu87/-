@@ -1,0 +1,94 @@
+{
+  "schema": "krea2-pose-1p/1",
+  "note_ko": "1인 포즈 라이브러리. 키는 BASE_POSES 이름. 팔다리는 관절 순서(body → arms → legs → feet → head)로 한 번씩만. 좌우 대신 one/other, 상대는 없음. legs(무릎·정강이)는 3/4 전신 이하(depth>=5)에서, feet는 전신(depth>=6)에서만 쓰인다. gaze가 있으면 그 포즈가 시선을 고정하고 엔진 시선 문장은 빠진다. 기준 문서: docs/1인포즈_작성기준.md",
+  "items": {
+    "편안하게 서기": {
+      "desc_ko": "어깨 힘을 뺀 기본 선 자세",
+      "parts": {"body": "standing upright with {p} shoulders relaxed", "arms": "{p} arms hang loosely at {p} sides", "legs": "{p} weight is even over both legs", "feet": "{p} feet are about hip width apart", "head": "{p} head is level"}
+    },
+    "한쪽 다리에 기대 서기": {
+      "desc_ko": "한쪽 다리에 체중을 싣고 골반이 살짝 기움",
+      "parts": {"body": "standing with {p} weight on one leg and {p} hip shifted slightly to that side", "arms": "one hand rests in {p} pocket while {p} other arm hangs relaxed", "legs": "{p} other knee is softly bent", "feet": "{p} free foot rests lightly on its toes", "head": "{p} head tilts a little"}
+    },
+    "벽에 기대 서기": {
+      "desc_ko": "어깨와 등 윗부분을 벽에 가볍게 기댐",
+      "parts": {"body": "standing with {p} shoulder and upper back resting lightly against the wall", "arms": "{p} arms are loosely folded in front of {p} chest", "legs": "{p} weight rests on one leg", "feet": "{p} feet are a little apart, one slightly forward", "head": "{p} head tilts back toward the wall"}
+    },
+    "난간에 기대기": {
+      "desc_ko": "난간 옆에 서서 한 팔뚝을 난간에 얹음",
+      "parts": {"body": "standing beside a railing with {p} body angled slightly toward it", "arms": "one forearm rests on the railing while {p} other hand hangs relaxed", "legs": "{p} weight is on the leg farther from the railing", "feet": "{p} feet are a little apart", "head": "{p} head is level"}
+    },
+    "걷기": {
+      "desc_ko": "걸음 중간의 한 장면",
+      "parts": {"body": "walking mid-stride with {p} torso upright", "arms": "{p} arms swing loosely, one forward and one back", "legs": "{p} front knee lifts slightly while the back leg pushes off", "feet": "{p} back heel lifts off the ground", "head": "{p} head is level and faces forward"}
+    },
+    "천천히 걷기": {
+      "desc_ko": "여유로운 보폭으로 천천히 걷는 장면",
+      "parts": {"body": "walking at an easy pace with {p} torso upright", "arms": "{p} arms swing gently at {p} sides", "legs": "{p} steps are short and relaxed", "feet": "{p} front heel touches down first", "head": "{p} head is level and faces forward"}
+    },
+    "벤치에 앉기": {
+      "desc_ko": "벤치에 등을 펴고 앉아 손을 허벅지에 올림",
+      "parts": {"body": "sitting upright on a bench with {p} back straight", "arms": "{p} hands rest on {p} thighs", "legs": "{p} knees are together", "feet": "{p} feet rest flat on the ground", "head": "{p} head is level"}
+    },
+    "소파에 편하게 앉기": {
+      "desc_ko": "소파에 기대앉아 어깨 힘을 뺌",
+      "parts": {"body": "sitting back comfortably into the sofa with {p} shoulders relaxed", "arms": "one arm rests along the armrest while {p} other hand lies in {p} lap", "legs": "{p} legs are folded to one side", "feet": "{p} feet are tucked in beside {o}", "head": "{p} head rests lightly against the backrest"}
+    },
+    "의자에 앉아 읽기": {
+      "desc_ko": "의자에 앉아 책을 펼쳐 들고 읽음",
+      "parts": {"body": "sitting in a chair with {p} back against the backrest", "arms": "{p} hands hold an open book at chest height", "legs": "{p} knees are bent and together", "feet": "{p} feet rest flat on the floor", "head": "{p} head is bent slightly toward the page", "gaze": "{p} eyes are on the page"}
+    },
+    "책상에 앉아 공부하기": {
+      "desc_ko": "책상 앞에서 몸을 살짝 숙이고 펜을 든 채 공부함",
+      "parts": {"body": "sitting at a desk leaning slightly forward", "arms": "{p} forearms rest on the desk, one hand holding a pen over an open notebook", "legs": "{p} knees are under the desk", "feet": "{p} feet rest flat on the floor", "head": "{p} head is bent toward the notebook", "gaze": "{p} eyes are on the notebook"}
+    },
+    "바닥에 앉기": {
+      "desc_ko": "바닥에 허리를 펴고 앉아 손을 무릎에 올림",
+      "parts": {"body": "sitting on the floor with {p} back straight", "arms": "{p} hands rest on {p} knees", "legs": "{p} knees are bent", "feet": "{p} feet are drawn in toward {o}", "head": "{p} head is level"}
+    },
+    "무릎 꿇고 앉기": {
+      "desc_ko": "무릎을 꿇고 엉덩이를 발뒤꿈치 위에 올려 곧게 앉음",
+      "parts": {"body": "kneeling upright with {p} hips resting on {p} heels", "arms": "{p} hands rest on {p} thighs", "legs": "{p} knees are together on the floor", "feet": "{p} shins and the tops of {p} feet are flat on the floor", "head": "{p} head is level"}
+    },
+    "바닥에 다리를 뻗고 앉기": {
+      "desc_ko": "바닥에 앉아 두 다리를 앞으로 쭉 뻗음",
+      "parts": {"body": "sitting on the floor with {p} back upright", "arms": "{p} hands rest on the floor beside {p} hips", "legs": "{p} legs are stretched straight out in front", "feet": "{p} feet are relaxed with the toes pointing up", "head": "{p} head is level"}
+    },
+    "다리를 꼬고 앉기": {
+      "desc_ko": "한 다리를 다른 다리 위로 꼬고 편하게 앉음",
+      "parts": {"body": "sitting back comfortably", "arms": "{p} hands rest on {p} lap", "legs": "one leg is crossed over the other at the knee", "feet": "{p} upper foot hangs relaxed", "head": "{p} head is level"}
+    },
+    "창가에 서기": {
+      "desc_ko": "창 가까이에 서서 한 손을 창틀에 얹고 밖을 봄",
+      "parts": {"body": "standing near a window with {p} body angled toward it", "arms": "one hand rests on the window frame while {p} other arm hangs relaxed", "legs": "{p} weight is even over both legs", "feet": "{p} feet are about hip width apart", "head": "{p} head turns toward the window", "gaze": "{p} eyes look out through the window"}
+    },
+    "창가에 앉기": {
+      "desc_ko": "창턱 근처에 편하게 앉아 한 손을 창턱에 올림",
+      "parts": {"body": "sitting comfortably near the window sill", "arms": "one hand rests on the sill while {p} other hand lies in {p} lap", "legs": "{p} knees are drawn up a little", "feet": "{p} feet rest on the edge of the seat", "head": "{p} head turns slightly toward the window"}
+    },
+    "가볍게 스트레칭": {
+      "desc_ko": "두 팔을 머리 위로 올려 깍지 끼고 곧게 서서 스트레칭",
+      "parts": {"body": "standing tall in a simple stretch", "arms": "{p} arms are raised overhead with {p} fingers interlaced", "legs": "{p} legs are straight", "feet": "{p} feet are hip width apart", "head": "{p} chin lifts slightly"}
+    },
+    "요가 자세": {
+      "desc_ko": "한 다리로 서서 합장하는 나무 자세",
+      "parts": {"body": "standing in a balanced yoga pose with {p} spine long", "arms": "{p} palms are pressed together at {p} chest", "legs": "{p} weight is on one straight leg while the other knee turns outward", "feet": "{p} raised foot rests against the inside of the standing leg", "head": "{p} head is level"}
+    },
+    "달리기 동작": {
+      "desc_ko": "가볍게 달리는 중간 동작",
+      "parts": {"body": "running lightly with {p} torso leaning slightly forward", "arms": "{p} elbows are bent and {p} arms swing opposite to {p} legs", "legs": "{p} front knee lifts while the back leg extends behind", "feet": "{p} back foot pushes off the ground", "head": "{p} head faces forward"}
+    },
+    "자전거 타기": {
+      "desc_ko": "핸들을 잡고 몸을 살짝 숙여 페달을 밟음",
+      "parts": {"body": "riding a bicycle with {p} torso leaning slightly forward", "arms": "{p} hands grip the handlebars", "legs": "{p} knees pump alternately", "feet": "{p} feet rest on the pedals", "head": "{p} head faces ahead", "gaze": "{p} eyes look ahead along the road"}
+    },
+    "기타 연주": {
+      "desc_ko": "어쿠스틱 기타를 허벅지에 올리고 앉아 연주",
+      "parts": {"body": "sitting upright with an acoustic guitar resting on {p} thigh", "arms": "{p} fretting hand holds the neck while {p} other hand strums over the sound hole", "legs": "{p} knees are bent with the guitar on the upper leg", "feet": "{p} feet rest flat on the floor", "head": "{p} head is angled slightly toward the strings", "gaze": "{p} eyes are on the strings"}
+    },
+    "피아노 연주": {
+      "desc_ko": "피아노 의자에 곧게 앉아 건반 위에 손을 올림",
+      "parts": {"body": "sitting upright on a piano bench", "arms": "{p} hands rest on the keys with the fingers curved", "legs": "{p} knees are under the keyboard", "feet": "{p} feet rest near the pedals", "head": "{p} head is angled toward the keys", "gaze": "{p} eyes are on the keys"}
+    }
+  }
+}
