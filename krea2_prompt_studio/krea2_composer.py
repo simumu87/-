@@ -229,11 +229,13 @@ def _join(parts: List[str]) -> str:
 def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", time_key: str = "해질녘",
                   moment: str = "파도 발목", framing: str = "전신", expression: str = "환한 미소",
                   hair: str = "", mode: str = "보통", reinforce: Optional[int] = None, seed: int = 0,
-                  common_outfit: bool = False) -> Dict[str, Any]:
+                  common_outfit: bool = False, reference: bool = False) -> Dict[str, Any]:
     """Build the person prompt, the scene prompt and the combined single prompt.
 
     hair: "" keeps the LoRA hair; a preset name or free text replaces it entirely.
     mode: how much the scene and outfit are described. 보통 (concise) / 상세 (outfit parts, more place detail).
+    reference: True when an attached reference photo carries the face and body. The identity sentence, the skin
+        sentence and every restatement are left out, because a longer prompt makes the model drift from the photo.
     reinforce: how many times key facts (expression, hair override, outfit essentials) are restated in
         different words: 0 none / 1 once more / 2 twice more. None = automatic (보통 -> 0, 상세 -> 1).
     """
@@ -246,6 +248,8 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         raise SystemExit("강화 횟수는 0, 1, 2 중에서 골라주세요.")
     # a LoRA person's expression is easily overridden by the LoRA's own habit: on automatic, always restate it once
     expr_level = max(level, 1) if reinforce is None else level
+    if reference:
+        level = expr_level = 0
     rng = random.Random(seed)
     lora = k.lora_profile_for_trigger(trigger)
     if not lora:
@@ -266,7 +270,10 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     cap = lambda t: t[:1].upper() + t[1:]
 
     # ---------------- person prompt: identity(face/body) -> hair -> outfit -> action/expression -> skin
-    person = [f"{lora['trigger']}, {identity_to_prose(lora.get('identity', ''), lora['trigger'], subj)}".rstrip(".") + "."]
+    if reference:
+        person = ["The same woman as in the attached reference photo."]
+    else:
+        person = [f"{lora['trigger']}, {identity_to_prose(lora.get('identity', ''), lora['trigger'], subj)}".rstrip(".") + "."]
     hair_echo = hair_echo2 = ""
     if hair:
         presets = load_hair_presets()
@@ -278,7 +285,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
             hair_echo2 = f(h.get("echo2_en", ""))
         else:
             person.append(sentence(k.clean_text(hair)))
-    elif lora.get("hair"):
+    elif lora.get("hair") and not reference:
         person.append(sentence(f"{subj.capitalize()} has {k.clean_text(lora['hair'])}"))
 
     if not outfit and common_outfit:
@@ -312,7 +319,8 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
             person.append(sentence(hair_echo2))
         if outfit and len(outfit.get("echo_en", [])) > 1:
             person.append(sentence(f(outfit["echo_en"][1])))
-    person.append(sentence(f"{poss.capitalize()} skin shows fine pores and soft vellus hair, matte, with no smoothing and no retouching"))
+    if not reference:
+        person.append(sentence(f"{poss.capitalize()} skin shows fine pores and soft vellus hair, matte, with no smoothing and no retouching"))
     person_text = " ".join(person)
 
     # ---------------- scene prompt

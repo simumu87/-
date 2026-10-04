@@ -3828,10 +3828,13 @@ def composer_mode() -> None:
                                  default={None: "자동", 0: "없음", 1: "1회", 2: "2회"}.get(saved.get("reinforce"), "자동"),
                                  descs=option_descriptions("REINFORCE"))
     reinforce = {"자동": None, "없음": 0, "1회": 1, "2회": 2}[reinforce_pick]
+    reference = menu_choose("레퍼런스 사진 모드", ["끔", "켬"], default="끔",
+                            descs={"끔": "LoRA가 얼굴·체형을 잡는 보통 프롬프트 (identity 문장 포함)",
+                                   "켬": "레퍼런스 사진이 얼굴·체형을 잡음 — identity·피부·반복 문장을 빼고 짧게 씀 (단어가 많으면 레퍼런스를 덜 따르기 때문)"}) == "켬"
 
     result = comp.compose_split(trigger, outfit_id, location=location, time_key=time_key, moment=moment,
                                 framing=framing, expression=expression, hair=hair, mode=mode,
-                                reinforce=reinforce, seed=random.randrange(1, 2**32), common_outfit=common)
+                                reinforce=reinforce, seed=random.randrange(1, 2**32), common_outfit=common, reference=reference)
     print_header(f"결과 ({result['words']}단어 · 묘사 {mode} · 강화 {result['reinforce']}회)")
     print(result["combined"])
     if result["problems"]:

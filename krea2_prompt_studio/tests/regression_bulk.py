@@ -348,6 +348,16 @@ def hangyeol_checks():
                                 out.append((0, 1, f"hangyeol footwear in a frame without feet {tag}"))
                             if depth <= 1 and lower.search(wear) and "swimsuit" not in oid:
                                 out.append((0, 1, f"hangyeol lower garment in a chest-up frame {tag}"))
+    # reference mode: no identity / skin sentence, and clearly shorter than the normal prompt
+    base = dict(location="은행나무 길", time_key="오후", moment="천천히 걷기", framing="전신", mode="보통", seed=3, common_outfit=False)
+    full = c.compose_split("hangyeol", "hangyeol_autumn_cream_knit_sage_pleated", **base)
+    ref = c.compose_split("hangyeol", "hangyeol_autumn_cream_knit_sage_pleated", reference=True, **base)
+    if re.search(r"hangyeol|oval face|vellus|gold wire-frame", ref["combined"]):
+        out.append((0, 1, "reference mode still writes identity/skin text"))
+    if ref["words"] >= full["words"] - 40:
+        out.append((0, 1, f"reference mode is not shorter ({ref['words']} vs {full['words']})"))
+    if ref["problems"]:
+        out.append((0, 1, f"reference mode problems: {ref['problems'][:2]}"))
     return out
 
 
