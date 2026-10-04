@@ -97,5 +97,13 @@
     "default_clothing": "",
     "notes": "",
     "gender": "male"
+  },
+  {
+    "name": "한결",
+    "trigger": "hangyeol",
+    "identity": "a young Korean woman in her late twenties with a soft oval face, straight defined eyebrows, a small straight nose, deep brown eyes with a faint olive tint, fair natural skin, short chin-length bob hair with wispy bangs parted in the center, and round gold wire-frame glasses",
+    "default_clothing": "",
+    "notes": "로라 학습 전 임시 등록 [1004]. 머리색 단어는 일부러 안 적음(캡션과 같은 방침). 체형 문장은 프레임에 따라 달라 identity에서 뺐고 트리거에 맡긴다.",
+    "gender": "female"
   }
 ]
