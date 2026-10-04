@@ -327,6 +327,8 @@ class GenerationOptions:
     constraints: Dict[str, ConstraintSetting] = field(default_factory=dict)
     strict_consistency: bool = False
     preview_before_prompt: bool = True
+    detail: str = field(default_factory=lambda: str(load_json(SETTINGS_FILE, {}).get("prompt_detail", "보통")))
+    reinforce: Optional[int] = field(default_factory=lambda: load_json(SETTINGS_FILE, {}).get("reinforce"))
 
 
 @dataclass
@@ -2609,7 +2611,15 @@ def _sentence(text: str) -> str:
     return value
 
 
-def compose_prompt(scene: SceneProfile, person_a: PersonSlot, person_b: Optional[PersonSlot]) -> str:
+def compose_prompt(scene: SceneProfile, person_a: PersonSlot, person_b: Optional[PersonSlot],
+                   detailed: bool = False, reinforce: Optional[int] = None) -> str:
+    """v11: one flowing prompt that reads like a person wrote it (see krea2_prose.py)."""
+    import krea2_prose
+    return krea2_prose.render(scene, person_a, person_b, detailed, reinforce)["combined"]
+
+
+def compose_prompt_legacy(scene: SceneProfile, person_a: PersonSlot, person_b: Optional[PersonSlot]) -> str:
+    # v10 spec-sheet format, kept only for reference / rollback.
     # Put the primary LoRA token/identity at the beginning of the prompt for reliable character anchoring.
     parts = [
         person_prompt(person_a, scene.left_right_basis),
@@ -2644,96 +2654,48 @@ def compose_prompt(scene: SceneProfile, person_a: PersonSlot, person_b: Optional
 # Final prompt linter
 # ---------------------------------------------------------------------------
 def prompt_option_coverage(scene: SceneProfile, person_a: PersonSlot, person_b: Optional[PersonSlot], prompt: str) -> Dict[str, Any]:
-    """Verify that resolved options actually survive into the final prompt."""
+    """Verify that the key resolved options survive into the prose prompt (filler wording is ignored)."""
+    import krea2_prose as pr
     checks: List[Tuple[str, str]] = []
 
     def add(name: str, fragment: str) -> None:
-        fragment = clean_text(str(fragment))
+        fragment = clean_text(pr.plain(str(fragment)))
         if fragment:
             checks.append((name, fragment))
 
-    add("theme", scene.theme_en)
-    add("relationship", scene.relationship_en)
-    add("activity", scene.activity_en)
-    if scene.people == 2:
+    if scene.people == 1:
+        add("activity", scene.activity_en)
+    else:
+        add("activity", scene.activity_en)
         add("interaction", scene.interaction_en)
+    add("location", scene.environment.location_en)
+    add("sublocation", scene.environment.sublocation)
     add("time", scene.time_en)
     add("weather", scene.weather_en)
     add("mood", scene.mood_en)
-    add("location", scene.environment.location_en)
-    add("sublocation", scene.environment.sublocation)
-    add("environment_density", scene.environment.density)
-    add("environment_state", scene.environment.state)
-    add("palette", scene.environment.palette)
-    add("surface_response", scene.environment.surface_response)
+    add("light_source", scene.lighting.source)
+    add("light_quality", scene.lighting.quality)
+    add("light_intensity", scene.lighting.intensity)
+    add("lens", f"{scene.camera.lens}mm")
+    add("framing", scene.camera.framing)
+    add("viewpoint", scene.camera.viewpoint)
+    add("composition", scene.camera.composition)
+    add("depth_of_field", scene.camera.depth_of_field)
+    add("style", _style_line(scene))
     for name, person in (("A", person_a), ("B", person_b)):
         if not person:
             continue
-        add(f"person_{name}_trigger", person.lora_trigger)
-        add(f"person_{name}_identity", _identity_prompt_fragment(person.identity, person.lora_trigger))
+        if person.lora_trigger:
+            add(f"person_{name}_trigger", person.lora_trigger)
         add(f"person_{name}_pose", person.pose_en)
         add(f"person_{name}_expression", person.expression)
         add(f"person_{name}_gaze", person.gaze)
-        if person.hair:
-            add(f"person_{name}_hair", person.hair)
-        if person.eye_color:
-            add(f"person_{name}_eyes", person.eye_color)
-        if person.body_build:
-            add(f"person_{name}_build", person.body_build)
-        if person.skin_detail:
-            add(f"person_{name}_skin", person.skin_detail)
-        if person.distinctive_feature:
-            add(f"person_{name}_feature", person.distinctive_feature)
-        if person.height_cm:
-            add(f"person_{name}_height", f"{person.height_cm} cm")
         if person.clothing:
             cl = person.clothing
-            add(f"person_{name}_garment", re.sub(r"^(an?)\s+", "", cl.garment_en))
-            add(f"person_{name}_fit", cl.fit)
+            add(f"person_{name}_garment", strip := re.sub(r"^(an?)\s+", "", cl.garment_en))
             add(f"person_{name}_color", cl.color)
             add(f"person_{name}_material", cl.fabric.material)
-            add(f"person_{name}_fabric_fiber", cl.fabric.fiber)
-            add(f"person_{name}_fabric_construction", cl.fabric.construction)
-            add(f"person_{name}_fabric_density", cl.fabric.density)
-            add(f"person_{name}_fabric_opacity", cl.fabric.opacity)
-            add(f"person_{name}_fabric_thickness", cl.fabric.thickness)
-            add(f"person_{name}_fabric_weight", cl.fabric.weight)
-            add(f"person_{name}_fabric_texture", cl.fabric.texture)
-            add(f"person_{name}_fabric_sheen", cl.fabric.sheen)
-            add(f"person_{name}_fabric_stretch", cl.fabric.stretch)
-            add(f"person_{name}_fabric_stiffness", cl.fabric.stiffness)
-            add(f"person_{name}_fabric_drape", cl.fabric.drape)
-            add(f"person_{name}_fabric_surface", cl.fabric.surface_response)
-            add(f"person_{name}_clothing_detail", cl.details)
-            add(f"person_{name}_footwear", cl.footwear)
-            add(f"person_{name}_accessory", cl.accessory)
-            add(f"person_{name}_state", cl.state)
-            add(f"person_{name}_fold_behavior", cl.fold_behavior)
-
-    add("light_source", scene.lighting.source)
-    add("light_direction", scene.lighting.direction)
-    add("light_quality", scene.lighting.quality)
-    add("light_intensity", scene.lighting.intensity)
-    add("color_temperature", scene.lighting.color_temperature)
-    add("ambient", scene.lighting.ambient)
-    add("bounce", scene.lighting.bounce)
-    add("shadow", scene.lighting.shadow)
-    add("practical_lighting", scene.lighting.practical)
-    add("lens", f"{scene.camera.lens}mm")
-    add("viewpoint", scene.camera.viewpoint)
-    add("framing", scene.camera.framing)
-    add("composition", scene.camera.composition)
-    add("depth_of_field", scene.camera.depth_of_field)
-    add("camera_distance", scene.camera.camera_distance)
-    add("perspective_rule", scene.camera.perspective_rule)
-    add("realism", scene.realism)
-    add("style", _style_line(scene))
-    add("skin_finish", SKIN_FINISH.get(get_value(scene.constraints, "skin_finish"), get_value(scene.constraints, "skin_finish")))
-    if scene.props:
-        for idx, prop in enumerate(scene.props, 1):
-            add(f"scene_prop_{idx}", prop)
-
-    lower = prompt.lower()
+    lower = clean_text(prompt).lower()
     missing = [name for name, frag in checks if frag.lower() not in lower]
     return {"total": len(checks), "passed": len(checks) - len(missing), "missing": missing}
 
@@ -2766,8 +2728,10 @@ def lint_prompt(prompt: str, scene: Optional[SceneProfile] = None) -> List[str]:
             errors.append(label)
     if re.search(r"[가-힣]", prompt):
         errors.append("Korean characters leaked into final prompt")
-    if "subject scale lock is enabled" not in lower:
-        errors.append("subject scale lock statement missing")
+    if re.search(r"\b(?:Hairstyle|Expression|Gaze|Walls|Floor|Lighting|Camera|Appearance|Furniture|Decor)\s*:", prompt):
+        errors.append("field label in prompt")
+    if re.search(r"scale lock|keep all (?:foreground|the)|maintain coherent", lower):
+        errors.append("model-facing instruction in prompt")
     if scene:
         if scene.people == 1 and any(word in lower for word in ("two adult", "two people", "secondary subject")):
             errors.append("single-subject scene contains two-person wording")
@@ -2776,8 +2740,9 @@ def lint_prompt(prompt: str, scene: Optional[SceneProfile] = None) -> List[str]:
     return list(dict.fromkeys(errors))
 
 
-def final_prompt(scene: SceneProfile, person_a: PersonSlot, person_b: Optional[PersonSlot], strict: bool = True) -> str:
-    prompt = compose_prompt(scene, person_a, person_b)
+def final_prompt(scene: SceneProfile, person_a: PersonSlot, person_b: Optional[PersonSlot], strict: bool = True,
+                 detailed: bool = False, reinforce: Optional[int] = None) -> str:
+    prompt = compose_prompt(scene, person_a, person_b, detailed, reinforce)
     errors = lint_prompt(prompt, scene)
     if errors and strict:
         raise ValueError("Prompt validation failed: " + "; ".join(errors))
@@ -2995,7 +2960,6 @@ def scene_preview(scene: SceneProfile) -> str:
         f"A 원단 물성: 밀도={scene.clothing_a.fabric.density}, 섬유={scene.clothing_a.fabric.fiber_fineness}, 투명도={scene.clothing_a.fabric.opacity}, 두께={scene.clothing_a.fabric.thickness}",
         f"공간 밀도: {scene.environment.density} / 생활감: {scene.environment.state}",
         f"프레이밍: {scene.camera.framing} / 렌즈: {scene.camera.lens}mm / 관점: {scene.camera.viewpoint}",
-        "스케일 잠금: 인물 실제 크기 유지 + 환경 실제 크기 유지",
         f"검사 이슈: {len(scene.issues)}건",
     ]
     for issue in scene.issues[:10]:
@@ -3051,7 +3015,10 @@ def generate_one(options: GenerationOptions, constraints: Optional[Dict[str, Con
     rng = random.Random(actual_seed + 17)
     pa = resolve_person(rng, scene, "A", options.person_a)
     pb = resolve_person(rng, scene, "B", options.person_b) if scene.people == 2 else None
-    prompt = final_prompt(scene, pa, pb, strict=True)
+    detailed = options.detail == "상세"
+    import krea2_prose
+    parts = krea2_prose.render(scene, pa, pb, detailed, options.reinforce)
+    prompt = final_prompt(scene, pa, pb, strict=True, detailed=detailed, reinforce=options.reinforce)
     coverage = prompt_option_coverage(scene, pa, pb, prompt)
     if coverage["missing"]:
         raise ValueError("Prompt option coverage failed: " + ", ".join(coverage["missing"]))
@@ -3062,9 +3029,9 @@ def generate_one(options: GenerationOptions, constraints: Optional[Dict[str, Con
         seed=actual_seed,
         mode=options.mode,
         lora_mode=options.lora_mode,
-        global_prompt=prompt,
-        person_a_prompt=person_prompt(pa, scene.left_right_basis),
-        person_b_prompt=person_prompt(pb, scene.left_right_basis) if pb else "",
+        global_prompt=parts["scene"],
+        person_a_prompt=parts["person_a"],
+        person_b_prompt=parts["person_b"],
         combined_prompt=prompt,
         metadata={**_prompt_metadata(scene, options, actual_seed), "option_coverage": coverage, "prompt_syntax_errors": prompt_syntax_errors(prompt)},
         tags=[scene.theme_key, scene.activity_key, scene.location_key, scene.mood_key],
@@ -3610,11 +3577,19 @@ def settings_mode() -> None:
     settings["prompt_language"] = "en"
     settings["translator"] = "embedded_local"
     settings["translator_version"] = TRANSLATOR_VERSION
-    settings["subject_scale_lock"] = True
-    settings["environment_scale_lock"] = True
+    for legacy in ("subject_scale_lock", "environment_scale_lock"):
+        settings.pop(legacy, None)          # v10 model-facing scale sentences no longer exist
+    names = {None: "자동", 0: "없음", 1: "1회", 2: "2회"}
+    reverse = {v: k_ for k_, v in names.items()}
+    settings["prompt_detail"] = menu_choose("묘사 분량 (모든 생성 모드의 기본값)", ["보통", "상세"],
+                                            default=settings.get("prompt_detail", "보통"),
+                                            descs=option_descriptions("COMPOSER_MODE"))
+    pick = menu_choose("강화 횟수 (같은 뜻을 다른 표현으로 반복, 기본값)", list(names.values()),
+                       default=names.get(settings.get("reinforce"), "자동"), descs=option_descriptions("REINFORCE"))
+    settings["reinforce"] = reverse[pick]
     save_json(SETTINGS_FILE, settings)
     print(json.dumps(settings, ensure_ascii=False, indent=2))
-    success("현재 기본 설정을 저장했습니다.")
+    success("현재 기본 설정을 저장했습니다. (다음 생성부터 적용)")
 
 
 def run_self_test(verbose: bool = True) -> bool:
@@ -3650,7 +3625,8 @@ def run_self_test(verbose: bool = True) -> bool:
             c[key] = constraint(val, "fixed", 100, "user")
         rec = generate_one(GenerationOptions(mode="self_test", lora_mode="dual", person_a=PersonSlot("PERSON_A", "novasaebyeol"), person_b=PersonSlot("PERSON_B", "nboppa"), constraints=c), c, 2026100302)
         checks.append(("2인 로맨스 프롬프트", True, rec.prompt_id))
-        checks.append(("클로즈업 실제크기 잠금", "subject scale lock is enabled" in rec.combined_prompt.lower(), "scale rule"))
+        low = rec.combined_prompt.lower()
+        checks.append(("클로즈업 프레이밍 반영", "close portrait framing" in low and "scale lock" not in low, "framing present, no model-facing scale instructions"))
     except Exception as exc:
         checks.append(("2인 로맨스 프롬프트", False, str(exc)))
         ok = False
@@ -3772,8 +3748,12 @@ def composer_mode() -> None:
                                    custom: "원하는 헤어를 영어 문장으로 직접 씀 (LoRA 헤어는 통째로 빠짐)",
                                    **{k_: v.get("desc_ko", "") for k_, v in presets.items()}})
     hair = "" if hair_pick == keep else (ask_text("헤어를 영어 문장으로 입력하세요") if hair_pick == custom else hair_pick)
-    mode = menu_choose("묘사 분량", list(comp.MODES), default="보통", descs=option_descriptions("COMPOSER_MODE"))
-    reinforce_pick = menu_choose("강화 횟수 (같은 뜻을 다른 표현으로 반복)", ["자동", "없음", "1회", "2회"], default="자동",
+    saved = load_json(SETTINGS_FILE, {})
+    saved = saved if isinstance(saved, dict) else {}
+    mode = menu_choose("묘사 분량", list(comp.MODES), default=saved.get("prompt_detail", "보통"),
+                       descs=option_descriptions("COMPOSER_MODE"))
+    reinforce_pick = menu_choose("강화 횟수 (같은 뜻을 다른 표현으로 반복)", ["자동", "없음", "1회", "2회"],
+                                 default={None: "자동", 0: "없음", 1: "1회", 2: "2회"}.get(saved.get("reinforce"), "자동"),
                                  descs=option_descriptions("REINFORCE"))
     reinforce = {"자동": None, "없음": 0, "1회": 1, "2회": 2}[reinforce_pick]
 

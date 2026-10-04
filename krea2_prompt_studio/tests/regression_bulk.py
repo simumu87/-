@@ -127,9 +127,43 @@ def desc_checks():
     return problems
 
 
+def engine_prose_checks():
+    """Menu modes 1-4 (generate_one) must use the v11 prose style."""
+    import krea2_prose  # noqa: F401
+    problems = []
+    for seed in range(1, 41):
+        for people in (1, 2):
+            for detail in ("보통", "상세"):
+                c = k.defaults()
+                k.set_constraint_value(c, "people", str(people))
+                o = k.GenerationOptions(seed=seed, detail=detail)
+                try:
+                    r = k.generate_one(o, c, seed=seed)
+                except Exception as exc:  # noqa: BLE001
+                    problems.append((seed, people, f"engine path failed ({detail}): {exc!r}"))
+                    continue
+                text = r.combined_prompt
+                tag = (seed, people, detail)
+                if re.search(r"\b[A-Z][a-z]+:\s", text):
+                    problems.append((*tag[:2], f"label in engine prompt ({detail})"))
+                if re.search(r"scale lock|Keep all|believable|proportionally sized|human-scale|front-left|front-right", text):
+                    problems.append((*tag[:2], f"legacy wording in engine prompt ({detail})"))
+                if re.search(r"\bThey (is|has|wears)\b|\ba [aeiou]\w|\ban [bcdfghjklmnpqrstvwxyz]\w", text):
+                    problems.append((*tag[:2], f"grammar slip in engine prompt ({detail})"))
+                if people == 2 and not (r.person_a_prompt and r.person_b_prompt and r.global_prompt):
+                    problems.append((*tag[:2], "regional parts missing"))
+    # a LoRA person: trigger first, LoRA hair kept, hair override replaces it
+    o = k.GenerationOptions(seed=3)
+    o.person_a = k.PersonSlot(slot="PERSON_A", lora_trigger="nayoon")
+    text = k.generate_one(o, k.defaults(), seed=3).combined_prompt
+    if not text.startswith("nayoon, ") or "knot high on the crown" not in text:
+        problems.append((3, 1, "LoRA person: trigger/hair missing in engine prompt"))
+    return problems
+
+
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + desc_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + desc_checks() + engine_prose_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()
