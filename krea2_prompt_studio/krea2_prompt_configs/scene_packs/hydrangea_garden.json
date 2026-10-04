@@ -1,0 +1,86 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "수국 정원",
+ "outdoor": true,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. 한결 외출복 사진(1004)을 바탕으로 한 장소. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a quiet garden path in early summer",
+ "feature_en": [
+  "large round white hydrangea blooms on leafy bushes along the left side of the path",
+  "a trimmed green hedge along the right side of the path"
+ ],
+ "ground_en": [
+  "a gravel path edged with a row of small gray stones",
+  "fine gray gravel with a few green leaves"
+ ],
+ "far_en": [
+  "the gravel path curving away between the bushes",
+  "tall green trees far behind the hedge"
+ ],
+ "times": {
+  "오후": {
+   "time_en": "an early-summer afternoon",
+   "sky_en": "a pale blue sky above the hedge",
+   "light_en": "soft warm sunlight comes from the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "soft shadows of the hydrangea leaves lie on the gravel toward the camera's right",
+   "desc_ko": "초여름 오후, 부드러운 따뜻한 햇빛이 카메라 왼쪽에서 비춤",
+   "time_prep": "on"
+  },
+  "이른 오전": {
+   "time_en": "early on a summer morning",
+   "sky_en": "a pale clear sky above the trees",
+   "light_en": "soft cool-white sunlight comes from the camera's left, lighting {p} face and shoulders",
+   "shadow_en": "short soft shadows lie on the gravel toward the camera's right",
+   "desc_ko": "이른 오전, 부드러운 흰빛이 카메라 왼쪽에서 비춤"
+  }
+ },
+ "moments": {
+  "머리 넘기며 서기": {
+   "pose_en": "stands on the gravel path with {p} weight on one leg and {p} body turned slightly toward the right side of the frame, one hand tucking a strand of hair behind {p} ear",
+   "moment_en": "{s} laughs softly toward the camera",
+   "desc_ko": "한 손으로 머리를 귀 뒤로 넘기며 카메라를 보고 웃음",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위"
+   ]
+  },
+  "옷자락 잡고 서기": {
+   "pose_en": "stands on the gravel path with {p} body turned slightly to one side, one hand holding the hem of {p} outfit softly",
+   "moment_en": "{s} turns {p} head toward the camera with a gentle smile",
+   "desc_ko": "한 손으로 옷자락을 잡고 고개를 카메라 쪽으로",
+   "frames": [
+    "전신",
+    "무릎 위"
+   ]
+  },
+  "천천히 걷기": {
+   "pose_en": "walks slowly along the gravel path toward the camera",
+   "moment_en": "{s} smiles gently and glances toward the camera",
+   "desc_ko": "자갈길을 천천히 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the garden softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the garden softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the garden softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the gravel among a few fallen green leaves",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "오후": [
+   "the hydrangea blooms are round clusters of tiny white petals above dark green leaves",
+   "the gravel is fine and light gray with small stones along its edge",
+   "the hedge is trimmed flat on top and dense green"
+  ],
+  "이른 오전": [
+   "the hydrangea blooms are round clusters of tiny white petals above dark green leaves",
+   "the gravel is fine and light gray with small stones along its edge",
+   "the hedge is trimmed flat on top and dense green"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the path and the hydrangea bushes spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

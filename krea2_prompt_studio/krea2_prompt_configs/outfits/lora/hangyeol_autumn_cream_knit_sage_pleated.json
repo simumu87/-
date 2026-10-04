@@ -1,0 +1,88 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_autumn_cream_knit_sage_pleated",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "크림 니트 + 세이지 플리츠 스커트",
+  "name_en": "cream knit with sage pleated skirt",
+  "desc_ko": "크림 니트 스웨터, 깊은 세이지 그린 플리츠 A라인 미디 스커트, 갈색 벨트·가방, 크림 메리제인",
+  "category": "casual",
+  "source_doc": "한결_정체성.md §3-D/§3-E (1004)",
+  "applies_to": {
+    "locations": [
+      "은행나무 길",
+      "식물원 정원길",
+      "공원",
+      "도시 거리"
+    ],
+    "note_ko": "프레임이 허리 위·가슴 위면 보이는 부분만 적는다(normal_waist_en / normal_top_en, 상세 문장은 depth 칸)."
+  },
+  "color": {
+    "primary": {
+      "ko": "크림 + 깊은 세이지 그린",
+      "en": "cream and deep sage-green"
+    }
+  },
+  "material": {
+    "ko": "고운 니트와 가벼운 플리츠 직물",
+    "en": "fine knit and light pleated fabric",
+    "finish_ko": "",
+    "finish_en": "a soft finish",
+    "behavior_en": "the pleats fall in narrow even folds and move with each step"
+  },
+  "normal_en": "a fitted cream fine-knit sweater with a round neckline, tucked into a deep sage-green pleated A-line midi skirt that widens from the waist and ends at mid-calf, with a thin brown leather belt, cream leather Mary Jane shoes and a small structured brown leather shoulder bag at the right hip",
+  "normal_waist_en": "a fitted cream fine-knit sweater with a round neckline, tucked into a deep sage-green pleated A-line skirt with a thin brown leather belt at the waist",
+  "normal_top_en": "a fitted cream fine-knit sweater with a round neckline",
+  "detail_prose_en": [
+    "The sweater is a soft fine knit with long sleeves, fitted through the body",
+    {
+      "depth": 2,
+      "en": "A thin brown leather belt with a small gold buckle sits at {p} waist"
+    },
+    {
+      "depth": 2,
+      "en": "The deep sage-green skirt falls in narrow, even pleats from the waist"
+    },
+    {
+      "depth": 6,
+      "en": "The cream leather Mary Jane shoes have a thin strap across the instep"
+    }
+  ],
+  "echo_en": [
+    "The sweater is cream, a soft fine knit with a round neckline",
+    "The long sleeves and the round neckline of the sweater stay clearly visible"
+  ],
+  "lit_en": "the cream knit of the sweater",
+  "parts": {
+    "top": {
+      "ko": "크림 니트 스웨터",
+      "en": "a fitted cream fine-knit sweater",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "세이지 플리츠 A라인 미디 스커트",
+      "en": "a deep sage-green pleated A-line midi skirt",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결의 identity 쪽에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "스커트를 일자 원피스형으로 변경(1판 두루마리 실루엣)",
+    "벨트 제거"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "색은 이름으로만 적고 반사·광택 결과는 쓰지 않는다"
+  ],
+  "normal_noshoe_en": "a fitted cream fine-knit sweater with a round neckline, tucked into a deep sage-green pleated A-line midi skirt that widens from the waist, with a thin brown leather belt and a small structured brown leather shoulder bag at the right hip"
+}

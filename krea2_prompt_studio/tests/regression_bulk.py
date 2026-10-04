@@ -5,6 +5,7 @@
 Generates 1-person and 2-person prompts for many seeds and asserts that none of
 the known v10.0.2 defects come back. Run from the package folder (needs Python 3.8+).
 """
+import importlib
 import re
 import sys
 from pathlib import Path
@@ -318,9 +319,41 @@ def visibility_checks():
     return problems
 
 
+def hangyeol_checks():
+    """Hangyeol outfits: every listed outfit x its locations x times x frames x modes composes cleanly,
+    and each outfit only names what the frame can show (shoes only on full-length, belt/skirt only from the waist down)."""
+    out = []
+    c = importlib.import_module("krea2_composer")
+    shoe = re.compile(r"\b(?:shoes?|sandals?|sneakers?)\b", re.I)
+    lower = re.compile(r"\b(?:skirt|belt|pleat\w*|tiered)\b", re.I)
+    rules = k.scene_rules()
+    for oid in c.outfits_for_trigger("hangyeol"):
+        data = c.load_outfit(oid)
+        for loc in data["applies_to"]["locations"]:
+            pack = c.load_pack(loc)
+            for tk in pack["times"]:
+                for mk, mv in pack["moments"].items():
+                    for fr in mv.get("frames", list(pack["camera"])):
+                        if fr not in pack["camera"]:
+                            continue
+                        depth = rules.depth_of(fr)
+                        for mode in ("보통", "상세"):
+                            r = c.compose_split("hangyeol", oid, location=loc, time_key=tk, moment=mk, framing=fr, mode=mode, seed=3, common_outfit=False)
+                            person = r["person"]
+                            tag = (oid, loc, tk, mk, fr, mode)
+                            if r["problems"]:
+                                out.append((0, 1, f"hangyeol compose problems {tag}: {r['problems'][:2]}"))
+                            wear = person.split("She wears", 1)[-1].split(".", 1)[0] if "She wears" in person else ""
+                            if depth < 6 and shoe.search(wear):
+                                out.append((0, 1, f"hangyeol footwear in a frame without feet {tag}"))
+                            if depth <= 1 and lower.search(wear) and "swimsuit" not in oid:
+                                out.append((0, 1, f"hangyeol lower garment in a chest-up frame {tag}"))
+    return out
+
+
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

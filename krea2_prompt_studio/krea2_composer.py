@@ -88,6 +88,36 @@ def lock_en(outfit: Dict[str, Any], lock_id: str, variant: int = 0) -> str:
 # ---------------------------------------------------------------------------
 # outfit -> prose (normal mode)
 # ---------------------------------------------------------------------------
+def _frame_depth(framing: str) -> int:
+    return int(k.scene_rules().depth_of(framing))
+
+
+def outfit_normal_for(outfit: Dict[str, Any], framing: str) -> str:
+    """Outfit sentence that only names what the frame can show.
+    Optional outfit keys: normal_top_en (depth 0-1), normal_waist_en (2-3), normal_noshoe_en (4-5, no footwear); falls back to normal_en."""
+    depth = _frame_depth(framing)
+    if depth <= 1 and outfit.get("normal_top_en"):
+        return outfit["normal_top_en"]
+    if depth <= 3 and outfit.get("normal_waist_en"):
+        return outfit["normal_waist_en"]
+    if depth < 6 and outfit.get("normal_noshoe_en"):     # feet are not in the frame yet
+        return outfit["normal_noshoe_en"]
+    return outfit["normal_en"]
+
+
+def outfit_detail_for(outfit: Dict[str, Any], framing: str) -> List[str]:
+    """detail_prose_en entries are strings (always shown) or {"depth": N, "en": text} (shown only when the frame depth >= N)."""
+    depth = _frame_depth(framing)
+    out: List[str] = []
+    for item in outfit.get("detail_prose_en", []):
+        if isinstance(item, dict):
+            if depth >= int(item.get("depth", 0)):
+                out.append(item["en"])
+        else:
+            out.append(item)
+    return out
+
+
 def outfit_normal(outfit: Dict[str, Any], subj: str) -> str:
     parts, color, mat = outfit["parts"], outfit["color"], outfit["material"]
     ring = lock_en(outfit, "center_ring")
@@ -256,12 +286,12 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         for acc in lora.get("signature_accessories", []):
             person.append(sentence(f"{subj.capitalize()} also wears " + (acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")))
     if outfit:
-        wear = [outfit["normal_en"]]
+        wear = [outfit_normal_for(outfit, framing)]
         for acc in lora.get("signature_accessories", []):
             wear.append(acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")
         person.append(sentence(f"{subj.capitalize()} wears {_join(wear)}"))
         if detailed:
-            person.extend(sentence(f(t)) for t in outfit.get("detail_prose_en", []))
+            person.extend(sentence(f(t)) for t in outfit_detail_for(outfit, framing))
     if pack.get("person_extra_en"):
         person.append(sentence(f(pack["person_extra_en"])))
     person.append(sentence(f"{subj.capitalize()} {f(mo['pose_en'])}"))
@@ -291,6 +321,8 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     grounds = list(tm.get("ground_en", pack["ground_en"]))
     fars = list(tm.get("far_en", pack["far_en"]))
     style_line = tm.get("style_en", pack["style_en"])
+    if lora.get("style_extra_en"):                      # per-character tone (e.g. exposure), kept in loras.json
+        style_line = f"{style_line}, {lora['style_extra_en']}"
     rng.shuffle(waters), rng.shuffle(grounds), rng.shuffle(fars)
 
     def build_scene_text(fx) -> str:
