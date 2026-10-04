@@ -44,7 +44,7 @@ except ImportError:
     translator_list_user = None
 
 APP_NAME = "Krea2 Turbo Prompt Studio"
-APP_VERSION = "10.0.2"
+APP_VERSION = "10.0.3"
 MODEL_NAME = "pornmasterKrea2_v2TurboInt8.safetensors"
 OUTPUT_DIR = Path("generated_krea2_prompts")
 HISTORY_FILE = Path("krea2_prompt_history.jsonl")
@@ -676,6 +676,25 @@ ACTIVITIES = {
     "기념사진": "taking a commemorative photo together",
     "선물 고르기": "choosing a small gift together",
     "쇼핑": "shopping casually",
+    # Activities referenced by the hint / compatibility tables below.
+    "가볍게 운동하기": "doing light recreational exercise",
+    "가볍게 포옹하기": "sharing a warm everyday embrace",
+    "글쓰기": "writing in a notebook at a desk",
+    "기차 타기": "traveling by train",
+    "대화하기": "having an ordinary conversation",
+    "바닷가 산책": "walking along the seaside",
+    "사진 보기": "looking through photographs",
+    "사진 촬영": "taking lifestyle photographs",
+    "선물 주고받기": "exchanging a small gift",
+    "손잡고 걷기": "taking a walk while holding hands",
+    "아침 준비": "going through a morning routine",
+    "악기 연주": "practicing a musical instrument",
+    "업무 보기": "doing focused desk work",
+    "여행 준비": "preparing for a trip",
+    "요가하기": "practicing beginner yoga",
+    "자전거 타기": "riding a bicycle",
+    "함께 요리하기": "cooking together in the kitchen",
+    "호텔 체크인": "arriving at a hotel",
 }
 
 BASE_POSES = {
@@ -705,7 +724,11 @@ BASE_POSES = {
     "손잡고 걷기": {"en": "walking side by side while naturally holding hands", "supports": ["one foot at a time"], "legs": ("transitioning", "transitioning")},
     "나란히 앉기": {"en": "sitting side by side with relaxed posture", "supports": ["hips", "feet"], "legs": ("grounded", "grounded")},
     "포옹하기": {"en": "standing in a natural warm embrace with balanced support", "supports": ["both feet"], "legs": ("grounded", "grounded")},
+    "마주 앉기": {"en": "sitting upright across a table with relaxed shoulders", "supports": ["hips", "feet"], "legs": ("grounded", "grounded")},
 }
+
+# Poses whose wording needs a second person; never used for single-subject scenes.
+PAIR_ONLY_POSES = {"서로 마주 보기", "나란히 앉기", "손잡고 걷기", "포옹하기", "마주 앉기"}
 
 TIME_OF_DAY = {
     "새벽": "early dawn",
@@ -1336,6 +1359,11 @@ def resolve_mapping_value(requested: str, mapping: Dict[str, str], rng: random.R
     return choose(rng, list(mapping.values()))
 
 
+def slot_trigger(c: Dict[str, ConstraintSetting], slot: str) -> str:
+    value = clean_text(get_value(c, f"lora_trigger_{slot}"))
+    return "" if value.lower() in {"auto", "none"} else value
+
+
 def lora_profile_for_trigger(trigger: str) -> Optional[Dict[str, Any]]:
     trigger = clean_text(trigger)
     if not trigger:
@@ -1501,8 +1529,9 @@ def clothing_prompt(c: ClothingProfile) -> str:
         f"{f.fiber_fineness} fibers; {f.opacity} opacity; {f.thickness} thickness; {f.weight} weight; "
         f"{f.texture}; {f.sheen}; {f.stretch}; {f.stiffness} hand; {f.drape}; {f.surface_response}"
     )
+    garment = re.sub(r"^(an?)\s+", "", c.garment_en)
     return (
-        f"{c.color} {re.sub(r'^(an?)\s+', '', c.garment_en)}, {c.fit}, {physical}; {c.details}; "
+        f"{c.color} {garment}, {c.fit}, {physical}; {c.details}; "
         f"{c.fold_behavior}; {c.state}; {c.footwear}; {c.accessory}."
     )
 
@@ -1542,7 +1571,8 @@ def resolve_environment(location_key: str, rng: random.Random, c: Dict[str, Cons
     # the common bug where a table is simultaneously foreground and background.
     foreground = furniture[: max(1, min(2, len(furniture)))]
     midground = [x for x in furniture[max(2, len(foreground)) : max(3, len(furniture))]] + decor[:2]
-    background = decor[2:] + practical
+    midground = midground + practical
+    background = decor[2:]
 
     state_req = get_value(c, "environment_state")
     state_map = {
@@ -1594,25 +1624,33 @@ def resolve_environment(location_key: str, rng: random.Random, c: Dict[str, Cons
 
 
 def build_spatial_layout(env: EnvironmentProfile, rng: random.Random) -> Dict[str, str]:
-    positions = [
-        "near the camera-left edge", "near the camera-right edge", "slightly left of the subject",
-        "slightly right of the subject", "behind the subject at comfortable distance",
-        "along the far wall", "near the main window", "near the entrance or doorway",
-        "beside the main furniture group", "in the far background",
-    ]
+    pools = {
+        "foreground": ["near the camera-left edge", "near the camera-right edge",
+                       "close to the camera on the left", "close to the camera on the right"],
+        "midground": ["slightly left of the subject", "slightly right of the subject",
+                      "beside the main furniture group", "near the main window",
+                      "near the entrance or doorway", "behind the subject at a comfortable distance"],
+        "background": ["along the far wall", "far behind the subject", "in the far corner of the room",
+                       "at the back of the space", "near the far window or doorway"],
+    }
     layout: Dict[str, str] = {}
     used: set[str] = set()
     for layer_name, items in (("foreground", env.foreground), ("midground", env.midground), ("background", env.background)):
         for item in items:
-            candidates = [x for x in positions if x not in used]
-            position = choose(rng, candidates or positions)
+            candidates = [x for x in pools[layer_name] if x not in used]
+            position = choose(rng, candidates or pools[layer_name])
             used.add(position)
-            layout[item] = f"{layer_name} at {position}"
+            layout[item] = f"in the {layer_name}, {position}"
     return layout
 
 
 def environment_prompt(env: EnvironmentProfile) -> str:
-    join = lambda items, default: "; ".join(items) if items else default
+    def join(items: Any, default: str) -> str:
+        if not items:
+            return default
+        if isinstance(items, str):
+            return items
+        return "; ".join(items)
     architectural_openings = []
     if env.windows:
         architectural_openings.append(f"Windows: {join(env.windows, 'appropriate glazing')}")
@@ -1629,7 +1667,7 @@ def environment_prompt(env: EnvironmentProfile) -> str:
         + f"Foreground: {join(env.foreground, 'clear foreground')}. Midground: {join(env.midground, 'open midground')}. "
         + f"Background: {join(env.background, 'quiet background')}. Background density is {env.density}. "
         + f"The space is {env.state}. The color harmony is {env.palette}. Surface response: {env.surface_response}. "
-        + " ".join(env.scale_rules) + ". "
+        + ". ".join(env.scale_rules) + ". "
         + "Spatial placement: " + "; ".join(f"{item}: {place}" for item, place in env.spatial_layout.items()) + "."
     )
 
@@ -1966,7 +2004,7 @@ def _interaction_for_scene(people: int, relation_key: str, activity_key: str, re
     return key, INTERACTIONS[key]
 
 
-def _compatible_pose_for_activity(activity_key: str, location_key: str, rng: random.Random) -> str:
+def _compatible_pose_for_activity(activity_key: str, location_key: str, rng: random.Random, people: int = 2) -> str:
     pool = {
         "커피 마시기": ["벤치에 앉기", "소파에 편하게 앉기", "편안하게 서기"],
         "차 마시기": ["벤치에 앉기", "소파에 편하게 앉기", "나란히 앉기"],
@@ -1986,7 +2024,7 @@ def _compatible_pose_for_activity(activity_key: str, location_key: str, rng: ran
         "피아노 연주": ["피아노 연주"],
         "영화 보기": ["소파에 편하게 앉기"],
         "게임하기": ["소파에 편하게 앉기", "책상에 앉아 공부하기"],
-        "보드게임": ["나란히 앉기", "마주 앉아 대화", "벤치에 앉기"],
+        "보드게임": ["나란히 앉기", "마주 앉기", "벤치에 앉기"],
         "정리하기": ["편안하게 서기", "한쪽 다리에 기대 서기"],
         "식물 돌보기": ["편안하게 서기", "한쪽 다리에 기대 서기"],
         "산책": ["걷기", "천천히 걷기", "편안하게 서기"],
@@ -2009,7 +2047,11 @@ def _compatible_pose_for_activity(activity_key: str, location_key: str, rng: ran
         "선물 고르기": ["편안하게 서기", "나란히 앉기", "벤치에 앉기"],
         "쇼핑": ["걷기", "편안하게 서기"],
     }
-    return choose(rng, pool.get(activity_key, list(BASE_POSES)))
+    candidates = pool.get(activity_key, list(BASE_POSES))
+    if people == 1:
+        solo = [x for x in candidates if x not in PAIR_ONLY_POSES]
+        candidates = solo or ["편안하게 서기", "소파에 편하게 앉기"]
+    return choose(rng, candidates)
 
 
 def _select_activity(rng: random.Random, requested: str, theme_key: str, people: int) -> str:
@@ -2093,7 +2135,7 @@ def build_scene(seed: Optional[int] = None, constraints: Optional[Dict[str, Cons
         people, relationship, activity, get_value(c, "interaction"), rng
     )
 
-    pose_a_key = _compatible_pose_for_activity(activity, location, rng)
+    pose_a_key = _compatible_pose_for_activity(activity, location, rng, people)
     pose_req = get_value(c, "pose")
     if pose_req in BASE_POSES:
         pose_a_key = pose_req
@@ -2389,7 +2431,7 @@ def _identity_for_slot(slot: str, c: Dict[str, ConstraintSetting], person: Optio
     # Explicit manual identity wins; otherwise a registered LoRA profile supplies the fixed identity.
     if person and person.identity and clean_text(person.identity).lower() not in {"adult person", "a single adult person"}:
         return clean_text(person.identity)
-    trigger = person.lora_trigger if person else get_value(c, f"lora_trigger_{slot}")
+    trigger = person.lora_trigger if person else slot_trigger(c, slot)
     profile = lora_profile_for_trigger(trigger)
     if profile:
         identity = clean_text(str(profile.get("identity", "")))
@@ -2407,14 +2449,15 @@ def resolve_person(rng: random.Random, scene: SceneProfile, slot: str, source_pe
     pose = scene.pose_a if slot == "A" else scene.pose_b
     if clothing is None or pose is None:
         raise ValueError(f"Missing resolved data for person {slot}")
-    trigger = source_person.lora_trigger if source_person else get_value(c, f"lora_trigger_{slot}")
+    trigger = source_person.lora_trigger if source_person else slot_trigger(c, slot)
     identity = _identity_for_slot(slot, c, source_person)
     lora_locked = is_lora_identity_locked(trigger, identity)
 
     expr_req = get_value(c, f"expression_{slot}")
     expression = expr_req if expr_req in EXPRESSIONS else choose(rng, EXPRESSIONS)
     gaze_req = get_value(c, f"gaze_{slot}")
-    gaze = gaze_req if gaze_req in GAZES else choose(rng, GAZES)
+    gaze_pool = GAZES if scene.people == 2 else [g for g in GAZES if "other person" not in g]
+    gaze = gaze_req if gaze_req in GAZES else choose(rng, gaze_pool)
 
     # Character identity details from a registered LoRA are fixed. Only explicit user overrides are allowed.
     hair_req = get_value(c, f"hair_{slot}")
@@ -2553,6 +2596,13 @@ def _style_line(scene: SceneProfile) -> str:
     return STYLE_LIBRARY.get(style_req, STYLE_LIBRARY["자연광 라이프스타일"])
 
 
+def _sentence(text: str) -> str:
+    value = clean_text(text)
+    if value and value[-1] not in ".!?":
+        value += "."
+    return value
+
+
 def compose_prompt(scene: SceneProfile, person_a: PersonSlot, person_b: Optional[PersonSlot]) -> str:
     # Put the primary LoRA token/identity at the beginning of the prompt for reliable character anchoring.
     parts = [
@@ -2576,7 +2626,7 @@ def compose_prompt(scene: SceneProfile, person_a: PersonSlot, person_b: Optional
         "Maintain coherent human anatomy, realistic grounding, natural contact shadows, and correct object scale throughout the frame.",
         "Keep all foreground, midground and background elements spatially consistent with one camera and one coherent perspective system.",
     ])
-    prompt = " ".join(clean_text(x) for x in parts if clean_text(x))
+    prompt = " ".join(_sentence(x) for x in parts if clean_text(x))
     prompt = re.sub(r"\s+([,.])", r"\1", prompt)
     prompt = re.sub(r"\.{2,}", ".", prompt)
     prompt = re.sub(r";{2,}", ";", prompt)
