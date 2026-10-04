@@ -18,7 +18,8 @@
   {
     "name": "나윤",
     "trigger": "nayoon",
-    "identity": "She is a young Korean woman with a softly rounded oval face, deep amber-brown eyes with a reddish undertone, a small beauty mark just below her right eye, a straight slender nose, and a slim athletic build with a narrow waist.Hairstyle: dark reddish-brown hair swept smoothly back from her forehead with no visible parting, the upper half gathered into a large, clearly visible knot high on the crown, while only the lower half falls loose in soft wavy strands past her shoulders, with subtle wine-red strands catching the light; a few loose strands frame her face. A small stud earring in her ear.",
+    "identity": "She is a young Korean woman with a softly rounded oval face, deep amber-brown eyes with a reddish undertone, a small beauty mark just below her right eye, a straight slender nose, and a slim athletic build with a narrow waist. A small stud earring in her ear.",
+    "hair": "dark reddish-brown hair swept smoothly back from her forehead with no visible parting, the upper half gathered into a large, clearly visible knot high on the crown, while only the lower half falls loose in soft wavy strands past her shoulders, with subtle wine-red strands catching the light; a few loose strands frame her face.",
     "signature_accessories": ["a thin, simple deep-black choker band"],
     "gender": "female",
     "default_clothing": "",

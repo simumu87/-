@@ -8,8 +8,8 @@
 Rules checked (all English fields are what reaches the prompt):
   - required keys exist, schema is krea2-outfit/1
   - no Hangul inside any English field
-  - no negation wording in English fields (negative prompting does not work in Krea 2 Turbo;
-    state the wanted thing instead). `forbidden_ko` is never emitted, so it is exempt.
+  - negation wording ("no X") is allowed as a closing clause next to a positive description; it is
+    only reported as a note. (A separate negative-prompt field has no effect on Krea 2 Turbo.)
   - every lock has at least two wording variants (needed for reinforcement)
 Lists (outfits/lists/*.json) are checked too: every referenced outfit id must exist and the
 trigger must be registered in loras.json.
@@ -54,7 +54,7 @@ def _flatten(value, path):
             yield from _flatten(item, f"{path}.{key}")
 
 
-def validate(data):
+def validate(data, notes=None):
     problems = []
     for key in REQUIRED:
         if key not in data:
@@ -64,8 +64,8 @@ def validate(data):
     for path, text in english_strings(data):
         if HANGUL.search(text):
             problems.append(f"Hangul in English field {path}: {text[:40]}")
-        if NEGATION.search(text):
-            problems.append(f"negation in English field {path}: {text[:60]}")
+        if NEGATION.search(text) and notes is not None:
+            notes.append(f"closing clause (negation) in {path}: {text[:60]}")
     for lock in data.get("locks", []):
         variants = lock.get("en", [])
         if not isinstance(variants, list) or len(variants) < 2:
@@ -109,8 +109,11 @@ def main():
     bad = 0
     for path in files:
         data = json.loads(path.read_text(encoding="utf-8"))
-        problems = validate(data)
+        notes = []
+        problems = validate(data, notes)
         print(f"{'OK  ' if not problems else 'FAIL'} {path.name}")
+        for n in notes:
+            print("   note:", n)
         for p in problems:
             print("   -", p)
         bad += bool(problems)

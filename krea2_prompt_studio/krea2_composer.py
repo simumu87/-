@@ -123,10 +123,13 @@ def scene_normal(scene: "k.SceneProfile", person: "k.PersonSlot", subj: str, pos
 # compose
 # ---------------------------------------------------------------------------
 def compose_normal(scene: "k.SceneProfile", person: "k.PersonSlot", lora: Dict[str, Any],
-                   outfit: Optional[Dict[str, Any]]) -> str:
+                   outfit: Optional[Dict[str, Any]], hair_override: str = "") -> str:
     subj, poss = PRONOUNS.get(lora.get("gender", "female"), ("they", "their"))
     identity = identity_to_prose(lora.get("identity", ""), lora.get("trigger", ""), subj)
     chunks = [f"{lora['trigger']}, {identity}".rstrip(".") + "."]      # trigger stays exactly as registered
+    hair = k.clean_text(hair_override) or k.clean_text(lora.get("hair", ""))   # override replaces the LoRA hair entirely
+    if hair:
+        chunks.append(sentence(f"{subj} has {hair}"))
     for acc in lora.get("signature_accessories", []):
         chunks.append(sentence(f"{acc} rests around {poss} neck" if "choker" in acc else f"{acc}"))
     if outfit:

@@ -2461,7 +2461,13 @@ def resolve_person(rng: random.Random, scene: SceneProfile, slot: str, source_pe
 
     # Character identity details from a registered LoRA are fixed. Only explicit user overrides are allowed.
     hair_req = get_value(c, f"hair_{slot}")
-    hair = hair_req if hair_req not in {"", "auto"} else ("" if lora_locked else choose(rng, HAIR_STYLES))
+    lora_hair = clean_text(str((lora_profile_for_trigger(trigger) or {}).get("hair", ""))) if lora_locked else ""
+    if hair_req not in {"", "auto"}:
+        hair = hair_req                      # user override replaces the LoRA hair entirely
+    elif lora_hair:
+        hair = lora_hair                     # no override: the registered LoRA hair stays fixed
+    else:
+        hair = "" if lora_locked else choose(rng, HAIR_STYLES)
     build_req = get_value(c, f"body_build_{slot}")
     body_build = build_req if build_req not in {"", "auto"} else ("" if lora_locked else choose(rng, APPEARANCE_BUILDS))
     skin_req = get_value(c, f"skin_detail_{slot}")
@@ -2497,7 +2503,7 @@ def resolve_person(rng: random.Random, scene: SceneProfile, slot: str, source_pe
         pose_en=pose["pose_en"],
         expression=expression,
         gaze=gaze,
-        hair=local_translate(hair),
+        hair=hair if hair == lora_hair and hair else local_translate(hair),
         clothing=clothing,
         body_state=BodyState(
             left_arm=pose.get("left_arm", "relaxed"),
@@ -3584,7 +3590,7 @@ def run_self_test(verbose: bool = True) -> bool:
             pa = resolve_person(random.Random(2026100304 + 17), scene, "A", a)
             locked = (
                 rec.combined_prompt.lower().startswith(trigger.lower() + ",")
-                and pa.eye_color == "" and pa.hair_color == "" and pa.hair == ""
+                and pa.eye_color == "" and pa.hair_color == "" and pa.hair == clean_text(str(fixed_profile.get("hair", "")))
                 and pa.body_build == "" and pa.skin_detail == "" and pa.distinctive_feature == ""
                 and pa.height_cm is None
             )

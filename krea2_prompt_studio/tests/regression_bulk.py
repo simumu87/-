@@ -21,9 +21,27 @@ CHECKS = [
 SOLO_BAD = re.compile(r"other person|another person|each other|two people")
 
 
+def hair_checks():
+    """LoRA hair: kept when no override, fully replaced when overridden."""
+    problems = []
+    for override in ("", "straight blunt bangs over the forehead, hair worn loose past the shoulders"):
+        o = k.GenerationOptions(seed=5)
+        o.person_a = k.PersonSlot(slot="PERSON_A", lora_trigger="nayoon")
+        c = k.defaults()
+        if override:
+            k.set_constraint_value(c, "hair_A", override)
+        text = k.generate_one(o, c, seed=5).combined_prompt
+        has_knot = "knot high on the crown" in text
+        if override and (has_knot or "blunt bangs" not in text):
+            problems.append((0, 1, "hair override did not replace the LoRA hair"))
+        if not override and not has_knot:
+            problems.append((0, 1, "LoRA hair missing when no override"))
+    return problems
+
+
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = []
+    problems = hair_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()
