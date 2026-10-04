@@ -140,6 +140,82 @@ def compose_normal(scene: "k.SceneProfile", person: "k.PersonSlot", lora: Dict[s
     return re.sub(r"\s{2,}", " ", text).strip()
 
 
+# ---------------------------------------------------------------------------
+# v11 split composer: person prompt + scene prompt (the user's own structure)
+# ---------------------------------------------------------------------------
+PACK_DIR = k.CONFIG_DIR / "scene_packs"
+PACK_FILES = {"해변": "beach.json"}
+
+# Expressions are described the way the user writes them: gaze + eyes + mouth, not just a name.
+EXPRESSIONS_KO = {
+    "환한 미소": "looking slightly past the camera with a warm natural smile, her eyes softly crinkled into half-moons and her lips just parted",
+    "은은한 미소": "looking slightly past the camera with a quiet, gentle smile, the corners of her mouth lifted just a little",
+    "무표정": "looking slightly past the camera with a calm, relaxed face, lips softly closed and eyes steady",
+    "장난스러운 미소": "looking toward the camera with a playful smile, one corner of her mouth lifting first and her eyes bright",
+}
+
+
+def load_pack(location_ko: str) -> Dict[str, Any]:
+    name = PACK_FILES.get(location_ko)
+    if not name:
+        raise SystemExit(f"장면 팩이 없는 장소예요: {location_ko} (있는 장소: {', '.join(PACK_FILES)})")
+    return json.loads((PACK_DIR / name).read_text(encoding="utf-8"))
+
+
+def _fill(text: str, subj: str, poss: str, obj: str = "") -> str:
+    """{s}/{S} subject, {p}/{P} possessive, {o} object (her / the woman)."""
+    obj = obj or ("her" if poss == "her" else "him" if poss == "his" else "them")
+    return text.format_map({"s": subj, "S": subj.capitalize(), "p": poss, "P": poss.capitalize(), "o": obj})
+
+
+def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", time_key: str = "해질녘",
+                  moment: str = "파도 발목", framing: str = "전신", expression: str = "환한 미소",
+                  hair_override: str = "", seed: int = 0) -> Dict[str, Any]:
+    import random
+    rng = random.Random(seed)
+    lora = k.lora_profile_for_trigger(trigger)
+    if not lora:
+        raise SystemExit(f"등록되지 않은 LoRA 트리거예요: {trigger}")
+    subj, poss = PRONOUNS.get(lora.get("gender", "female"), ("they", "their"))
+    outfit = load_outfit(outfit_id) if outfit_id else None
+    pack = load_pack(location)
+    tm, mo = pack["times"][time_key], pack["moments"][moment]
+    f = lambda t: _fill(t, subj, poss)
+    fs = lambda t: _fill(t, "the woman", "the woman's", "the woman")      # scene prompt stands alone: no dangling "her"
+
+    # ---- person prompt: identity(face/body) -> hair -> outfit -> action/expression -> skin
+    person = [f"{lora['trigger']}, {identity_to_prose(lora.get('identity', ''), lora['trigger'], subj)}".rstrip(".") + "."]
+    if hair_override:
+        person.append(f"Only {poss} face and body follow the {lora['trigger']} reference; {poss} hairstyle is set separately here.")
+        person.append(sentence(k.clean_text(hair_override)))
+    elif lora.get("hair"):
+        person.append(sentence(f"{subj.capitalize()} has {k.clean_text(lora['hair'])}"))
+    wear = [outfit["normal_en"]] if outfit else []
+    for acc in lora.get("signature_accessories", []):
+        wear.append(acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")
+    if wear:
+        listing = wear[0] if len(wear) == 1 else ", ".join(wear[:-1]) + ", and " + wear[-1]
+        person.append(sentence(f"{subj.capitalize()} wears {listing}"))
+    person.append(sentence(f(pack["skin_en"])))
+    person.append(sentence(f"{subj.capitalize()} {mo['pose_en']}, {EXPRESSIONS_KO[expression].replace('her ', poss + ' ')}; {f(mo['moment_en'])}"))
+    person.append(sentence(f"{poss.capitalize()} skin shows fine pores and soft vellus hair with a natural sheen, no smoothing and no retouching"))
+    person_text = " ".join(person)
+
+    # ---- scene prompt
+    water, ground, far = rng.choice(pack["water_en"]), rng.choice(pack["ground_en"]), rng.choice(pack["far_en"])
+    scene = [
+        sentence(f"{pack['setting_en']} at {tm['time_en']}, {tm['sky_en']}, with {water} and {ground}"),
+        sentence(f"{fs(tm['sun_en']).capitalize()}, and {tm['glitter_en']}"),
+        sentence(f"{tm['shadow_en'].capitalize()}, with {far}"),
+        sentence(fs(pack["camera"][framing])),
+        sentence(pack["style_en"]),
+    ]
+    scene_text = " ".join(scene)
+    combined = f"{person_text} {scene_text}"
+    return {"person": person_text, "scene": scene_text, "combined": combined,
+            "problems": lint(combined), "words": len(combined.split())}
+
+
 def lint(text: str) -> List[str]:
     problems = []
     if re.search(r"[가-힣]", text):
@@ -179,7 +255,18 @@ def main() -> int:
     ap.add_argument("--trigger", default="nayoon")
     ap.add_argument("--outfit", default="gold_amber_triangle_string_bikini")
     ap.add_argument("--seed", type=int, default=11)
+    ap.add_argument("--split", action="store_true", help="v11: person prompt + scene prompt")
+    ap.add_argument("--expression", default="환한 미소")
+    ap.add_argument("--framing", default="전신")
+    ap.add_argument("--time", default="해질녘")
+    ap.add_argument("--hair", default="", help="override the LoRA hair (replaces it entirely)")
     args = ap.parse_args()
+    if args.split:
+        r = compose_split(args.trigger, args.outfit, time_key=args.time, framing=args.framing,
+                          expression=args.expression, hair_override=args.hair, seed=args.seed)
+        print("[인물 프롬프트]\n" + r["person"] + "\n\n[장면 프롬프트]\n" + r["scene"])
+        print(f"\n[{r['words']} words, problems: {r['problems'] or 'none'}]")
+        return 1 if r["problems"] else 0
     result = build_sample(args.trigger, args.outfit, args.seed)
     print(result["prompt"])
     print(f"\n[{result['words']} words, seed {result['seed']}, problems: {result['problems'] or 'none'}]")

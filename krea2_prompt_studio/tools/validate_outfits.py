@@ -24,7 +24,7 @@ OUTFIT_DIR = CONFIG_DIR / "outfits" / "lora"      # 로라의상 (공용의상�
 LIST_DIR = CONFIG_DIR / "outfits" / "lists"       # 캐릭터(LoRA)별 의상 목록
 HANGUL = re.compile(r"[가-힣]")
 NEGATION = re.compile(r"\b(no|not|never|without|avoid|don't|doesn't|isn't|aren't|neither|nor|none)\b", re.I)
-REQUIRED = ["schema", "id", "name_ko", "name_en", "category", "color", "material", "parts", "locks"]
+REQUIRED = ["schema", "id", "name_ko", "name_en", "category", "color", "material", "normal_en", "parts", "locks"]
 
 
 def english_strings(obj, path=""):

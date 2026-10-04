@@ -1,0 +1,50 @@
+{
+  "schema": "krea2-scene-pack/1",
+  "location_ko": "해변",
+  "note_ko": "장소별 문장 재료. 합성기가 시간대·카메라 선택에 맞춰 골라 문장으로 엮는다. {s}/{S}=she/She, {p}=her 같은 인칭 자리표시자를 쓴다.",
+  "setting_en": "a quiet sandy beach with fine pale sand and gentle shallow waves",
+  "water_en": [
+    "small waves rolling in with soft white foam",
+    "the sea rippling in long gentle lines toward the horizon"
+  ],
+  "ground_en": [
+    "wet sand shining like a thin mirror each time a wave slides back",
+    "shells and small bits of driftwood scattered along the waterline"
+  ],
+  "far_en": [
+    "a wooden beach pavilion far down the shore",
+    "a low seawall fading into the haze in the distance"
+  ],
+  "skin_en": "a few droplets of sea water cling to {p} bare skin",
+  "times": {
+    "해질녘": {
+      "time_en": "golden hour just before sunset",
+      "sky_en": "the sun hanging low and orange above a clear horizon",
+      "sun_en": "the low sun sits in front of {o} and to the camera's left, its warm light falling directly on {p} face, shoulders and the satin of the bikini, with a soft golden rim along the edge of {p} hair",
+      "glitter_en": "the sunlight breaks into bright glittering points across the rippling water",
+      "shadow_en": "long soft shadows stretch across the sand toward the camera's right"
+    },
+    "오후": {
+      "time_en": "a bright afternoon",
+      "sky_en": "a high pale-blue sky with a few thin clouds",
+      "sun_en": "the afternoon sun shines from high in front of {o} and to the camera's left, lighting {p} face, shoulders and the satin of the bikini with clear warm highlights",
+      "glitter_en": "the sunlight scatters into sparkling points across the turquoise water",
+      "shadow_en": "short soft shadows pool under {p} on the sand"
+    }
+  },
+  "moments": {
+    "파도 발목": {
+      "pose_en": "walks barefoot along the waterline in a relaxed stride",
+      "moment_en": "a shallow wave slides around {p} ankles and {s} smiles a little wider"
+    },
+    "천천히 걷기": {
+      "pose_en": "walks barefoot along the waterline in a relaxed stride",
+      "moment_en": "{s} glances back toward the camera as the foam fades around {p} feet"
+    }
+  },
+  "camera": {
+    "전신": "Full-length shot from eye level with a 35mm lens, the frame running from the top of {p} head down to {p} bare feet in the shallow foam, vertical frame, shallow depth of field with the sea softly out of focus",
+    "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the sea softly out of focus"
+  },
+  "style_en": "natural travel-editorial photography with fine film grain and realistic skin texture"
+}
