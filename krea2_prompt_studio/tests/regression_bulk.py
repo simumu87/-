@@ -64,6 +64,17 @@ def composer_checks():
         for hair in [""] + list(c.load_hair_presets()) + ["free text hair: a tidy side braid over her left shoulder"]:
             for expression in c.load_expressions():
                 for time_key in ("해질녘", "오후", "밤", "밤(달빛만)", "밤(달빛 역광)", "밤(달빛 측광)"):
+                    counts = []
+                    for lv in (0, 1, 2):
+                        rr = c.compose_split("nayoon", "gold_amber_triangle_string_bikini", time_key=time_key,
+                                             expression=expression, hair=hair, mode=mode, reinforce=lv)
+                        counts.append(rr["words"])
+                        for pr in rr["problems"]:
+                            problems.append((0, 0, f"composer {(mode, hair[:12], expression, time_key, lv)}: {pr}"))
+                        if "{" in rr["combined"] or "}" in rr["combined"]:
+                            problems.append((0, 0, f"composer {(mode, hair[:12], expression, time_key, lv)}: unfilled placeholder"))
+                    if not (counts[0] < counts[1] < counts[2]):
+                        problems.append((0, 0, f"composer {(mode, hair[:12], expression, time_key)}: reinforcement does not add text {counts}"))
                     r = c.compose_split("nayoon", "gold_amber_triangle_string_bikini", time_key=time_key,
                                         expression=expression, hair=hair, mode=mode)
                     tag = (mode, hair[:12], expression, time_key)

@@ -3772,12 +3772,15 @@ def composer_mode() -> None:
                                    custom: "원하는 헤어를 영어 문장으로 직접 씀 (LoRA 헤어는 통째로 빠짐)",
                                    **{k_: v.get("desc_ko", "") for k_, v in presets.items()}})
     hair = "" if hair_pick == keep else (ask_text("헤어를 영어 문장으로 입력하세요") if hair_pick == custom else hair_pick)
-    mode = menu_choose("모드", list(comp.MODES), default="보통", descs=option_descriptions("COMPOSER_MODE"))
+    mode = menu_choose("묘사 분량", list(comp.MODES), default="보통", descs=option_descriptions("COMPOSER_MODE"))
+    reinforce_pick = menu_choose("강화 횟수 (같은 뜻을 다른 표현으로 반복)", ["자동", "없음", "1회", "2회"], default="자동",
+                                 descs=option_descriptions("REINFORCE"))
+    reinforce = {"자동": None, "없음": 0, "1회": 1, "2회": 2}[reinforce_pick]
 
     result = comp.compose_split(trigger, outfit_id, location=location, time_key=time_key, moment=moment,
                                 framing=framing, expression=expression, hair=hair, mode=mode,
-                                seed=random.randrange(1, 2**32))
-    print_header(f"결과 ({result['words']}단어 · {mode} 모드)")
+                                reinforce=reinforce, seed=random.randrange(1, 2**32))
+    print_header(f"결과 ({result['words']}단어 · 묘사 {mode} · 강화 {result['reinforce']}회)")
     print(result["combined"])
     if result["problems"]:
         warning("점검 알림: " + ", ".join(result["problems"]))

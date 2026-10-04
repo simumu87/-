@@ -183,16 +183,21 @@ def _join(parts: List[str]) -> str:
 
 def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", time_key: str = "해질녘",
                   moment: str = "파도 발목", framing: str = "전신", expression: str = "환한 미소",
-                  hair: str = "", mode: str = "보통", seed: int = 0) -> Dict[str, Any]:
+                  hair: str = "", mode: str = "보통", reinforce: Optional[int] = None, seed: int = 0) -> Dict[str, Any]:
     """Build the person prompt, the scene prompt and the combined single prompt.
 
     hair: "" keeps the LoRA hair; a preset name or free text replaces it entirely.
-    mode: 보통 (each fact once, hair override closed off) / 상세 (facts restated in different words).
+    mode: how much the scene and outfit are described. 보통 (concise) / 상세 (outfit parts, more place detail).
+    reinforce: how many times key facts (expression, hair override, outfit essentials) are restated in
+        different words: 0 none / 1 once more / 2 twice more. None = automatic (보통 -> 0, 상세 -> 1).
     """
     import random
     if mode not in MODES:
         raise SystemExit(f"모드는 {' / '.join(MODES)} 중에서 골라주세요.")
     detailed = mode == "상세"
+    level = (1 if detailed else 0) if reinforce is None else int(reinforce)
+    if level not in (0, 1, 2):
+        raise SystemExit("강화 횟수는 0, 1, 2 중에서 골라주세요.")
     rng = random.Random(seed)
     lora = k.lora_profile_for_trigger(trigger)
     if not lora:
@@ -209,7 +214,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
 
     # ---------------- person prompt: identity(face/body) -> hair -> outfit -> action/expression -> skin
     person = [f"{lora['trigger']}, {identity_to_prose(lora.get('identity', ''), lora['trigger'], subj)}".rstrip(".") + "."]
-    hair_echo = ""
+    hair_echo = hair_echo2 = ""
     if hair:
         presets = load_hair_presets()
         person.append(f"Only {poss} face and body follow the {lora['trigger']} reference; {poss} hairstyle is set separately here.")
@@ -217,6 +222,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
             h = presets[hair]
             person.append(sentence(f(h["main_en"]) + "; " + f(h["closing_en"])))
             hair_echo = f(h["echo_en"])
+            hair_echo2 = f(h.get("echo2_en", ""))
         else:
             person.append(sentence(k.clean_text(hair)))
     elif lora.get("hair"):
@@ -233,12 +239,19 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     person.append(sentence(f"{subj.capitalize()} {mo['pose_en']}"))
     person.append(sentence(f"{subj.capitalize()} is {f(exp['main_en'])}"))      # expression gets its own sentence
     person.append(sentence(cap(f(mo["moment_en"]))))
-    if detailed:
+    if level >= 1:
         person.append(sentence(f(exp["echo_en"])))
-        if outfit:
-            person.extend(sentence(f(t)) for t in outfit.get("echo_en", []))
         if hair_echo:
             person.append(sentence(hair_echo))
+        if outfit and outfit.get("echo_en"):
+            person.append(sentence(f(outfit["echo_en"][0])))
+    if level >= 2:
+        if exp.get("echo2_en"):
+            person.append(sentence(f(exp["echo2_en"])))
+        if hair_echo2:
+            person.append(sentence(hair_echo2))
+        if outfit and len(outfit.get("echo_en", [])) > 1:
+            person.append(sentence(f(outfit["echo_en"][1])))
     person.append(sentence(f"{poss.capitalize()} skin shows fine pores and soft vellus hair, matte, with no smoothing and no retouching"))
     person_text = " ".join(person)
 
@@ -273,7 +286,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         if old[:40] in combined.lower() or "knot high on the crown" in combined.lower() and "knot" not in hair.lower():
             problems.append("LoRA hair text survived a hair override")
     return {"person": person_text, "scene": scene_text, "combined": combined, "problems": problems,
-            "words": len(combined.split())}
+            "words": len(combined.split()), "reinforce": level}
 
 
 def lint(text: str) -> List[str]:
@@ -320,7 +333,9 @@ def main() -> int:
     ap.add_argument("--framing", default="전신")
     ap.add_argument("--time", default="해질녘")
     ap.add_argument("--hair", default="", help="override the LoRA hair: a preset name or free text (replaces it entirely)")
-    ap.add_argument("--mode", default="보통", choices=MODES)
+    ap.add_argument("--mode", default="보통", choices=MODES, help="description volume: 보통 / 상세")
+    ap.add_argument("--reinforce", type=int, default=None, choices=(0, 1, 2),
+                    help="how many extra restatements of expression/hair/outfit (default: 보통=0, 상세=1)")
     ap.add_argument("--old", action="store_true", help="the first engine-based prototype (sample A)")
     args = ap.parse_args()
     if args.old:
@@ -329,7 +344,7 @@ def main() -> int:
         print(f"\n[{result['words']} words, seed {result['seed']}, problems: {result['problems'] or 'none'}]")
         return 1 if result["problems"] else 0
     r = compose_split(args.trigger, args.outfit, time_key=args.time, framing=args.framing,
-                      expression=args.expression, hair=args.hair, mode=args.mode, seed=args.seed)
+                      expression=args.expression, hair=args.hair, mode=args.mode, reinforce=args.reinforce, seed=args.seed)
     if args.parts:
         print("[인물 프롬프트]\n" + r["person"] + "\n\n[장면 프롬프트]\n" + r["scene"])
     else:

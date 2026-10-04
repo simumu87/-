@@ -6,19 +6,22 @@
       "desc_ko": "이마를 덮는 앞머리와 어깨 아래로 곧게 내려오는 긴 머리",
       "main_en": "{P} {color} hair falls straight and loose past {p} shoulders, with a full set of soft, straight bangs lying across {p} forehead",
       "closing_en": "nothing is tied up or gathered into a knot, and the bangs cover most of {p} forehead down to just above {p} eyebrows",
-      "echo_en": "The bangs sweep evenly over {p} forehead, and the long {color} hair hangs freely down {p} back and over {p} shoulders"
+      "echo_en": "The bangs sweep evenly over {p} forehead, and the long {color} hair hangs freely down {p} back and over {p} shoulders",
+      "echo2_en": "Straight, soft bangs frame {p} brow while the long {color} hair spills smoothly down {p} back"
     },
     "높은 올림머리 (한 덩어리 매듭)": {
       "desc_ko": "머리 전부를 정수리 위 큰 매듭 하나로 묶은 스타일",
       "main_en": "ALL of {p} {color} hair is pulled straight up and back off {p} face and wound into one very large, tall, unmistakable knot on the very top of {p} head, clearly visible rising above the outline of {p} head",
       "closing_en": "{p} ears, neck and shoulders are completely bare of long hair and nothing falls loose past {p} shoulders, only a few short wisps cling to {p} neck and temples",
-      "echo_en": "Seen from any angle, the single tall knot crowns {p} head while {p} neck and shoulders stay clear"
+      "echo_en": "Seen from any angle, the single tall knot crowns {p} head while {p} neck and shoulders stay clear",
+      "echo2_en": "The whole mass of {color} hair rises into that one tall knot, leaving {p} nape and neck uncovered"
     },
     "낮은 포니테일": {
       "desc_ko": "목덜미 높이에서 하나로 묶은 낮은 포니테일",
       "main_en": "{P} {color} hair is gathered at the nape of {p} neck into one smooth low ponytail that hangs straight down {p} back",
       "closing_en": "{p} forehead and face are fully open and no hair falls loose past {p} shoulders",
-      "echo_en": "The low ponytail rests between {p} shoulder blades, tied neatly at the nape"
+      "echo_en": "The low ponytail rests between {p} shoulder blades, tied neatly at the nape",
+      "echo2_en": "A single smooth ponytail falls from the nape of {p} neck, and {p} face stays open"
     }
   }
 }
