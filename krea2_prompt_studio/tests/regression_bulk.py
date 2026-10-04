@@ -63,7 +63,7 @@ def composer_checks():
     for mode in c.MODES:
         for hair in [""] + list(c.load_hair_presets()) + ["free text hair: a tidy side braid over her left shoulder"]:
             for expression in c.load_expressions():
-                for time_key in ("해질녘", "오후", "밤"):
+                for time_key in ("해질녘", "오후", "밤", "밤(달빛만)"):
                     r = c.compose_split("nayoon", "gold_amber_triangle_string_bikini", time_key=time_key,
                                         expression=expression, hair=hair, mode=mode)
                     tag = (mode, hair[:12], expression, time_key)

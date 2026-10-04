@@ -46,6 +46,22 @@
         "shells and small bits of driftwood scattered along the waterline"
       ],
       "style_en": "natural night photography with fine film grain and realistic skin texture"
+    },
+    "밤(달빛만)": {
+      "time_en": "a clear night",
+      "sky_en": "a deep blue night sky scattered with faint stars above a dark horizon",
+      "sun_en": "a full moon hangs low over the sea in front of {o} and to the camera's left, its soft blue moonlight falling on {p} face, shoulders and the satin of the bikini",
+      "glitter_en": "the moonlight lays a trail of silver sparkles across the dark rippling water",
+      "shadow_en": "soft blue shadows pool on the sand beside {o}",
+      "far_en": [
+        "a dark wooden beach pavilion far down the shore",
+        "a low seawall fading into the dark in the distance"
+      ],
+      "ground_en": [
+        "wet sand shining dark and silvery each time a wave slides back",
+        "shells and small bits of driftwood scattered along the waterline"
+      ],
+      "style_en": "natural night photography with fine film grain and realistic skin texture"
     }
   },
   "moments": {
@@ -75,6 +91,11 @@
       "the sea farther out shifts from turquoise to deep blue toward the horizon"
     ],
     "밤": [
+      "the wet sand left by each retreating wave mirrors the moon in a thin silver film",
+      "the foam at the edge of each wave glows pale blue-white in the moonlight",
+      "the sea farther out fades into deep navy beneath a sky of faint stars"
+    ],
+    "밤(달빛만)": [
       "the wet sand left by each retreating wave mirrors the moon in a thin silver film",
       "the foam at the edge of each wave glows pale blue-white in the moonlight",
       "the sea farther out fades into deep navy beneath a sky of faint stars"
