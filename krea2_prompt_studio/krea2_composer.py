@@ -259,7 +259,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         if detailed:
             out.append(sentence(fx(pack["position_en"])))
             out.append(sentence(fx(pack["feet_en"])))
-        out.append(sentence(fx(pack["camera"][framing])))
+        out.append(sentence(fx(tm.get("camera", pack["camera"])[framing])))
         out.append(sentence(style_line))
         return " ".join(out)
 
