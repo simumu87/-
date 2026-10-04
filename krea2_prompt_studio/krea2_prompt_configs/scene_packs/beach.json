@@ -104,6 +104,27 @@
         "전신": "Full-length shot from eye level with a 35mm lens, the frame running from the top of {p} head down to {p} bare feet in the shallow foam, vertical frame, shallow depth of field with the sea along the left edge of the frame softly out of focus",
         "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the sea along the left edge of the frame softly out of focus"
       }
+    },
+    "밤(달빛 측광·위치만)": {
+      "time_en": "a clear night",
+      "sky_en": "a deep blue night sky scattered with faint stars above a dark horizon",
+      "sun_en": "the sea fills the left side of the frame with a full moon hanging low over the water at the left",
+      "glitter_en": "the moonlight lays a trail of silver sparkles across the dark rippling water",
+      "shadow_en": "a soft blue shadow of {o} stretches across the sand to the right",
+      "far_en": [
+        "a dark wooden beach pavilion far down the shore",
+        "a low seawall fading into the dark in the distance"
+      ],
+      "ground_en": [
+        "wet sand shining dark and silvery each time a wave slides back",
+        "shells and small bits of driftwood scattered along the waterline"
+      ],
+      "style_en": "natural night photography with fine film grain and realistic skin texture",
+      "desc_ko": "측광 배치에서 달 위치만 적고 빛이 어디에 닿는지는 적지 않음 (모델에 맡김)",
+      "camera": {
+        "전신": "Full-length shot from eye level with a 35mm lens, the frame running from the top of {p} head down to {p} bare feet in the shallow foam, vertical frame, shallow depth of field with the sea along the left edge of the frame softly out of focus",
+        "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the sea along the left edge of the frame softly out of focus"
+      }
     }
   },
   "moments": {
@@ -150,6 +171,11 @@
       "the sea farther out fades into deep navy beneath a sky of faint stars"
     ],
     "밤(달빛 측광)": [
+      "the wet sand left by each retreating wave mirrors the moon in a thin silver film",
+      "the foam at the edge of each wave glows pale blue-white in the moonlight",
+      "the sea farther out fades into deep navy beneath a sky of faint stars"
+    ],
+    "밤(달빛 측광·위치만)": [
       "the wet sand left by each retreating wave mirrors the moon in a thin silver film",
       "the foam at the edge of each wave glows pale blue-white in the moonlight",
       "the sea farther out fades into deep navy beneath a sky of faint stars"
