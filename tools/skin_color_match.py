@@ -45,7 +45,7 @@ def skin_mask(img):
     return np.asarray(mask, dtype=np.float32) / 255.0
 
 
-def match(ref_path, src_path, strength=1.0, exposure=False):
+def match(ref_path, src_path, strength=1.0, exposure=False, exposure_strength=None):
     ref, src = Image.open(ref_path).convert("RGB"), Image.open(src_path).convert("RGB")
     rm, sm = skin_mask(ref), skin_mask(src)
     if (rm > 0.5).sum() < 500 or (sm > 0.5).sum() < 500:
@@ -56,7 +56,8 @@ def match(ref_path, src_path, strength=1.0, exposure=False):
     out = sl + shift * sm[..., None]
     if exposure:                      # 사진 전체 밝기(L 평균)를 기준 사진에 맞춘다 — 배경·머리·수영복 포함
         gain = rl[..., 0].mean() / max(sl[..., 0].mean(), 1e-6)
-        out[..., 0] = np.clip(out[..., 0] * (1 + (gain - 1) * strength), 0, 100)
+        es = strength if exposure_strength is None else exposure_strength
+        out[..., 0] = np.clip(out[..., 0] * (1 + (gain - 1) * es), 0, 100)
     result = Image.fromarray(lab_to_srgb(out).astype(np.uint8))
     return result, rmean, smean, rmean - smean
 
@@ -69,6 +70,7 @@ def main():
     ap.add_argument("--src-dir")
     ap.add_argument("--out-dir")
     ap.add_argument("--strength", type=float, default=1.0, help="0~1 (1=기준 평균에 완전히 맞춤)")
+    ap.add_argument("--exposure-strength", type=float, default=None, help="전체 밝기 보정 세기 (기본: --strength와 같음). 피부는 강하게, 밝기는 약하게 따로 줄 때")
     ap.add_argument("--exposure", action="store_true", help="피부톤뿐 아니라 사진 전체 밝기도 기준에 맞춤 (사진이 전체적으로 어두워졌을 때)")
     a = ap.parse_args()
     jobs = []
@@ -81,7 +83,7 @@ def main():
     else:
         raise SystemExit("--src 와 --out, 또는 --src-dir 가 필요해요")
     for src, out in jobs:
-        img, rmean, smean, delta = match(a.ref, src, a.strength, a.exposure)
+        img, rmean, smean, delta = match(a.ref, src, a.strength, a.exposure, a.exposure_strength)
         img.save(out)
         print(f"{src.name}: 피부 LAB 평균 {np.round(smean, 1)} → 기준 {np.round(rmean, 1)} (보정 ΔL={delta[0]:+.1f}, Δa={delta[1]:+.1f}, Δb={delta[2]:+.1f}) → {out}")
 
