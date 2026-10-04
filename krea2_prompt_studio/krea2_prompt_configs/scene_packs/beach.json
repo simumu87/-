@@ -20,14 +20,14 @@
     "해질녘": {
       "time_en": "golden hour just before sunset",
       "sky_en": "the sun hanging low and orange above a clear horizon",
-      "sun_en": "the low sun sits in front of {o} and to the camera's left, its warm light falling directly on {p} face, shoulders and the satin of the bikini, with a soft golden rim along the edge of {p} hair",
+      "sun_en": "the low sun sits in front of {o} and to the camera's left, its warm light falling directly on {p} face, shoulders and the satin of the bikini",
       "glitter_en": "the sunlight breaks into bright glittering points across the rippling water",
       "shadow_en": "long soft shadows stretch across the sand toward the camera's right"
     },
     "오후": {
       "time_en": "a bright afternoon",
       "sky_en": "a high pale-blue sky with a few thin clouds",
-      "sun_en": "the afternoon sun shines from high in front of {o} and to the camera's left, lighting {p} face, shoulders and the satin of the bikini with clear warm highlights",
+      "sun_en": "the afternoon sun shines from high in front of {o} and to the camera's left, lighting {p} face, shoulders and the satin of the bikini",
       "glitter_en": "the sunlight scatters into sparkling points across the turquoise water",
       "shadow_en": "short soft shadows pool under {p} on the sand"
     },
@@ -45,7 +45,7 @@
         "wet sand shining dark and silvery each time a wave slides back",
         "shells and small bits of driftwood scattered along the waterline"
       ],
-      "style_en": "natural night photography with fine film grain, soft highlights and realistic skin texture"
+      "style_en": "natural night photography with fine film grain and realistic skin texture"
     }
   },
   "moments": {

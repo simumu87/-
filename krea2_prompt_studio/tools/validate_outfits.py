@@ -83,7 +83,7 @@ def render(data, detailed):
     lines = [f"She wears {data['name_en']}, made of {m['en']} in {c['primary']['en']} with {m['finish_en']}."]
     lines.append(f"The top is {top['en']}: " + "; ".join(top["detail_en"]) + ".")
     lines.append(f"The bottom is {bottom['en']}: " + "; ".join(bottom["detail_en"]) + ".")
-    lines.append(m["behavior_en"][0].upper() + m["behavior_en"][1:] + ". " + c["shade_en"][0].upper() + c["shade_en"][1:] + ".")
+    lines.append(m["behavior_en"][0].upper() + m["behavior_en"][1:] + ".")
     for acc in data.get("accessories", {}).get("signature", []):
         lines.append(f"Around the neck: {acc['en']}; {acc['detail_en']}.")
     return " ".join(lines)

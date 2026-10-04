@@ -233,7 +233,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
             person.extend(sentence(f(t)) for t in outfit.get("echo_en", []))
         if hair_echo:
             person.append(sentence(hair_echo))
-    person.append(sentence(f"{poss.capitalize()} skin shows fine pores and soft vellus hair with a natural sheen, no smoothing and no retouching"))
+    person.append(sentence(f"{poss.capitalize()} skin shows fine pores and soft vellus hair, matte, with no smoothing and no retouching"))
     person_text = " ".join(person)
 
     # ---------------- scene prompt
