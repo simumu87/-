@@ -207,7 +207,7 @@ def visibility_checks():
             sheer = [g for g in (main_g, sc.clothing_extra_a) if g is not None
                      and g.fabric.key in rules.data["layers"]["sheer_materials"]
                      and rules.slot_visible(rules.garment_slot(g.garment_key), rules.depth_of(framing))]
-            if sheer and "opaque" not in text:
+            if sheer and rules.data["layers"].get("enabled", False) and "opaque" not in text:
                 problems.append((seed, 1, f"sheer garment without an opaque under-layer ({framing})"))
             if framing == "전신" and sc.clothing_extra_a is not None:
                 for g in (main_g, sc.clothing_extra_a):

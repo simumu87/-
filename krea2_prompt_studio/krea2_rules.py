@@ -104,6 +104,7 @@ DEFAULT_RULES: Dict[str, Any] = {
     },
     # sheer fabrics always get an opaque layer underneath, so the model never has to invent what lies beneath
     "layers": {
+        "enabled": False,
         "sheer_materials": ["오간자", "쉬폰", "레이스", "메시"],
         "under_top": ["a fitted opaque camisole in a soft neutral tone", "a plain opaque tank top in a soft neutral tone"],
         "under_dress": ["an opaque matching slip underneath"],
@@ -204,7 +205,7 @@ class Rules:
     def under_layer(self, garment_key: str, fabric_key: str, seed_text: str = "") -> str:
         """An opaque layer under a sheer garment ("" for opaque fabrics). Deterministic for the same garment."""
         layers = self.data["layers"]
-        if fabric_key not in layers["sheer_materials"]:
+        if not layers.get("enabled", False) or fabric_key not in layers["sheer_materials"]:
             return ""
         slot = self.garment_slot(garment_key)
         pool = {"top": layers["under_top"], "dress": layers["under_dress"], "bottom": layers["under_bottom"]}.get(slot, [])

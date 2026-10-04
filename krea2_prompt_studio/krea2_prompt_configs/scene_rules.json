@@ -336,6 +336,7 @@
     ]
   },
   "layers": {
+    "enabled": false,
     "sheer_materials": [
       "오간자",
       "쉬폰",
