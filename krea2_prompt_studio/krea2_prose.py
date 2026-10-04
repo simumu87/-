@@ -162,6 +162,14 @@ def framing_key(scene) -> str:
 
 
 def _garment_phrase(cl, detailed: bool) -> str:
+    phrase = _garment_phrase_plain(cl, detailed)
+    under = _studio().scene_rules().under_layer(cl.garment_key, cl.fabric.key, cl.color)
+    if under:
+        phrase += (f", lined with {under}" if "lining" in under else f", worn over {under}")
+    return phrase
+
+
+def _garment_phrase_plain(cl, detailed: bool) -> str:
     garment = plain(cl.garment_en)
     color = plain(cl.color)
     if re.match(r"^(an?)\s", garment, flags=re.I):

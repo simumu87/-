@@ -102,6 +102,13 @@ DEFAULT_RULES: Dict[str, Any] = {
         "sport_companion_tops": ["운동복 상의", "반팔 티셔츠", "후드 집업"],
         "sport_companion_bottoms": ["운동용 레깅스", "조거 팬츠", "반바지"],
     },
+    # sheer fabrics always get an opaque layer underneath, so the model never has to invent what lies beneath
+    "layers": {
+        "sheer_materials": ["오간자", "쉬폰", "레이스", "메시"],
+        "under_top": ["a fitted opaque camisole in a soft neutral tone", "a plain opaque tank top in a soft neutral tone"],
+        "under_dress": ["an opaque matching slip underneath"],
+        "under_bottom": ["an opaque lining"],
+    },
     "clothing": {
         "warm_garments": ["울 코트", "트렌치코트", "니트 스웨터", "블레이저", "데님 재킷"],
         "light_garments": ["반바지", "반팔 티셔츠", "가벼운 원피스"],
@@ -192,6 +199,18 @@ class Rules:
         if not outdoor:
             return rng.choice(light["indoor_night_sources"])
         return light["city_night_source"] if location_key in light["city_locations"] else light["outdoor_night_source"]
+
+    # --- layers -----------------------------------------------------------------------------
+    def under_layer(self, garment_key: str, fabric_key: str, seed_text: str = "") -> str:
+        """An opaque layer under a sheer garment ("" for opaque fabrics). Deterministic for the same garment."""
+        layers = self.data["layers"]
+        if fabric_key not in layers["sheer_materials"]:
+            return ""
+        slot = self.garment_slot(garment_key)
+        pool = {"top": layers["under_top"], "dress": layers["under_dress"], "bottom": layers["under_bottom"]}.get(slot, [])
+        if not pool:
+            return ""
+        return pool[sum(ord(ch) for ch in (garment_key + seed_text)) % len(pool)]
 
     # --- weather ----------------------------------------------------------------------------
     def weather_visible(self, outdoor: bool, sublocation: str) -> bool:

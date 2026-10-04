@@ -204,6 +204,11 @@ def visibility_checks():
             foot = k.pr_plain(main_g.footwear).lower() if hasattr(k, "pr_plain") else main_g.footwear.lower()
             if framing != "전신" and foot and foot in text:
                 problems.append((seed, 1, f"footwear written although the frame ({framing}) cannot show it"))
+            sheer = [g for g in (main_g, sc.clothing_extra_a) if g is not None
+                     and g.fabric.key in rules.data["layers"]["sheer_materials"]
+                     and rules.slot_visible(rules.garment_slot(g.garment_key), rules.depth_of(framing))]
+            if sheer and "opaque" not in text:
+                problems.append((seed, 1, f"sheer garment without an opaque under-layer ({framing})"))
             if framing == "전신" and sc.clothing_extra_a is not None:
                 for g in (main_g, sc.clothing_extra_a):
                     if pr.plain(g.color).lower() not in text:

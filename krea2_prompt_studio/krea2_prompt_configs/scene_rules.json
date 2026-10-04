@@ -335,6 +335,24 @@
       "반바지"
     ]
   },
+  "layers": {
+    "sheer_materials": [
+      "오간자",
+      "쉬폰",
+      "레이스",
+      "메시"
+    ],
+    "under_top": [
+      "a fitted opaque camisole in a soft neutral tone",
+      "a plain opaque tank top in a soft neutral tone"
+    ],
+    "under_dress": [
+      "an opaque matching slip underneath"
+    ],
+    "under_bottom": [
+      "an opaque lining"
+    ]
+  },
   "clothing": {
     "warm_garments": [
       "울 코트",
