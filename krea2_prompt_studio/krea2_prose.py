@@ -279,7 +279,7 @@ def render_person(scene, person, lora: Optional[Dict[str, Any]], detailed: bool 
         out.append(sentence(f"{ref['S']} {ref['be']} {pose}"))
     expr = plain(person.expression)
     expr = expr if re.match(r"^(an?|the)\s", expr, flags=re.I) else f"{article(expr)} {expr}"
-    out.append(sentence(f"{ref['S']} {ref['have']} {expr}, {plain(person.gaze)}"))
+    out.append(sentence(f"{ref['S']} {ref['have']} {expr}" + (f", {plain(person.gaze)}" if person.gaze else "")))
     if scene.people == 2:
         out.append(sentence(f"{ref['S']} {ref['be']} positioned on the {person.position}"))
     if person.height_cm and (scene.people == 2 or detailed):
@@ -356,6 +356,27 @@ def render_scene(scene, detailed: bool = False, regional: bool = False) -> str:
 # ---------------------------------------------------------------------------
 # whole prompt
 # ---------------------------------------------------------------------------
+def _library_poses(scene, person_a, person_b, lora_for):
+    """Two people with a library interaction: both bodies come from the 2-person pose library (A left, B right)."""
+    import dataclasses
+    import krea2_pose2p as lib
+    key = framing_key(scene)
+    if not lib.fits(scene.interaction_key, key):
+        return person_a, person_b, ""
+    pose = lib.load_poses()[scene.interaction_key]
+    rules = _studio().scene_rules()
+    legs_visible = rules.slot_visible("footwear", rules.depth_of(key))      # legs/feet are written only when the frame shows them
+    ra, rb = pronouns(person_a, lora_for(person_a), 2), pronouns(person_b, lora_for(person_b), 2)
+    ra_p, rb_p = dict(ra), dict(rb)                                       # how each one is named by the partner
+    for who, ref, side in ((ra_p, ra, "left"), (rb_p, rb, "right")):
+        if ref["o"] == "them":                                            # unknown gender: "their" would mean both people
+            who["p"], who["o"] = "the other person's", "the other person"
+    text_a = lib.person_text(pose, "a", ra, rb_p, legs_visible)
+    text_b = lib.person_text(pose, "b", rb, ra_p, legs_visible)
+    return (dataclasses.replace(person_a, pose_en=text_a, gaze=""), dataclasses.replace(person_b, pose_en=text_b, gaze=""),
+            lib._fill(pose["shared_en"], ra, rb_p))
+
+
 def render(scene, person_a, person_b=None, detailed: bool = False, reinforce: Optional[int] = None) -> Dict[str, str]:
     """Returns person_a / person_b / scene (regional use) and the combined prompt."""
     st = _studio()
@@ -368,9 +389,15 @@ def render(scene, person_a, person_b=None, detailed: bool = False, reinforce: Op
         value = st.get_value(c, f"hair_{slot}")
         return value if value not in ("", "auto") and lora_for(person) else ""
 
+    shared = ""
+    if person_b is not None:
+        person_a, person_b, shared = _library_poses(scene, person_a, person_b, lora_for)
     a = render_person(scene, person_a, lora_for(person_a), detailed, reinforce, override("A", person_a))
     b = render_person(scene, person_b, lora_for(person_b), detailed, reinforce, override("B", person_b), second=True) if person_b else ""
     regional_scene = render_scene(scene, detailed, regional=True)
+    if shared:                                       # right after the opening sentence about the place
+        head, _, rest = regional_scene.partition(". ")
+        regional_scene = f"{head}. {sentence(cap(shared))} {rest}".strip()
     parts = [a]
     if person_b:
         parts.append(b)

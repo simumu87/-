@@ -2744,14 +2744,18 @@ def prompt_option_coverage(scene: SceneProfile, person_a: PersonSlot, person_b: 
     add("composition", scene.camera.composition)
     add("depth_of_field", scene.camera.depth_of_field)
     add("style", _style_line(scene))
+    import krea2_pose2p as pose_lib
+    library_pose = scene.people == 2 and pose_lib.fits(scene.interaction_key, pr.framing_key(scene))
     for name, person in (("A", person_a), ("B", person_b)):
         if not person:
             continue
         if person.lora_trigger:
             add(f"person_{name}_trigger", person.lora_trigger)
-        add(f"person_{name}_pose", person.pose_en)
+        if not library_pose:                          # a library pose replaces the engine pose text (checked by the library itself)
+            add(f"person_{name}_pose", person.pose_en)
         add(f"person_{name}_expression", person.expression)
-        add(f"person_{name}_gaze", person.gaze)
+        if not library_pose:
+            add(f"person_{name}_gaze", person.gaze)
         for idx, cl in enumerate(pr.shown_garments(scene, person)):          # only what the framing shows
             add(f"person_{name}_garment{idx}", re.sub(r"^(an?)\s+", "", cl.garment_en))
             add(f"person_{name}_color{idx}", cl.color)

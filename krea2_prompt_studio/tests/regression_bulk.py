@@ -124,6 +124,41 @@ def pack_checks():
     return problems
 
 
+def pose2p_checks():
+    """2-person pose library: both bodies agree on the contact, nothing the frame cannot show, no grammar slips."""
+    import krea2_pose2p as lib
+    problems = [(0, 2, f"pose library: {x}") for x in lib.validate()]
+    feet = re.compile(r"\b(feet|foot|knees?)\b", re.I)
+    for inter, pose in lib.load_poses().items():
+        for framing in ("전신", "무릎 위", "허리 위", "가슴 위", "클로즈업"):
+            for seed in range(1, 25):
+                c = k.defaults()
+                k.set_constraint_value(c, "people", "2")
+                k.set_constraint_value(c, "interaction", inter)
+                k.set_constraint_value(c, "framing", framing)
+                try:
+                    r = k.generate_one(k.GenerationOptions(seed=seed), c, seed=seed)
+                except Exception as exc:  # noqa: BLE001
+                    problems.append((seed, 2, f"pose2p {inter}/{framing}: generation failed {exc!r}"))
+                    continue
+                if k.build_scene(seed, c, None, None, "", False).interaction_key != inter:
+                    continue                                   # the rules replaced the interaction for this activity
+                a, b = r.person_a_prompt, r.person_b_prompt
+                if re.search(r"\bis (stands|sits)\b", a + b):
+                    problems.append((seed, 2, f"pose2p {inter}/{framing}: 'is stands/sits'"))
+                if re.search(r"\b(left|right) (hand|arm|foot|leg|shoulder)\b", a + b):
+                    problems.append((seed, 2, f"pose2p {inter}/{framing}: left/right limb wording"))
+                if framing in pose["frames_ok"]:
+                    for word in pose["contacts"]:
+                        if word not in a or word not in b:
+                            problems.append((seed, 2, f"pose2p {inter}/{framing}: contact '{word}' missing on one side"))
+                    if framing != "전신" and feet.search(a + b) and "feet" in (a + b).lower():
+                        problems.append((seed, 2, f"pose2p {inter}/{framing}: feet written but not visible"))
+                    if a.count("looking") + a.count("gaze") > 1 or b.count("looking") + b.count("gaze") > 1:
+                        problems.append((seed, 2, f"pose2p {inter}/{framing}: two gaze statements"))
+    return problems
+
+
 def desc_checks():
     """Every option shown in a menu must carry a Korean description."""
     problems = []
@@ -250,7 +285,7 @@ def visibility_checks():
 
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

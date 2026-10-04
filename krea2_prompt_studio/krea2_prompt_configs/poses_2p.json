@@ -1,6 +1,6 @@
 {
   "schema": "krea2-pose-2p/1",
-  "note_ko": "2인 포즈 라이브러리. 인물 A는 프레임 왼쪽, B는 오른쪽(리저널 노드 기준). 팔다리는 관절 인형처럼 부위별로 한 번씩만 적고, 좌우 대신 'the arm closest to {po}'(상대와 가까운 쪽)로 적어 좌우 혼동을 없앤다. {s}{S}{p}{P}{o}=본인, {pp}=상대의 소유격(his/her), {po}=상대의 목적격(him/her). 기준 문서: docs/2인포즈_작성기준.md",
+  "note_ko": "2인 포즈 라이브러리. body는 'is' 뒤에 오는 분사(standing/sitting)로 시작, head에 시선까지 적는다(엔진 시선 문장은 대체됨). 인물 A는 프레임 왼쪽, B는 오른쪽(리저널 노드 기준). 팔다리는 관절 인형처럼 부위별로 한 번씩만 적고, 좌우 대신 'the arm closest to {po}'(상대와 가까운 쪽)로 적어 좌우 혼동을 없앤다. {s}{S}{p}{P}{o}=본인, {pp}=상대의 소유격(his/her), {po}=상대의 목적격(him/her). 기준 문서: docs/2인포즈_작성기준.md",
   "items": {
     "손잡기": {
       "desc_ko": "나란히 서서 상대와 가까운 쪽 손을 낮게 맞잡음 (둘 다 서 있고 어깨가 거의 닿는 거리)",
@@ -10,13 +10,13 @@
       "contacts": ["hand"],
       "shared_en": "the two stand close enough that their shoulders nearly touch, holding hands low between them",
       "a": {
-        "body": "stands with {p} body angled slightly toward {po}",
+        "body": "standing with {p} body angled slightly toward {po}",
         "arms": "{p} arm closest to {po} hangs low with {p} fingers loosely holding {pp} hand, and {p} other arm rests relaxed at {p} side",
         "legs": "{p} weight rests on the leg farther from {po}, the other knee slightly bent",
         "head": "{p} head turns toward the camera"
       },
       "b": {
-        "body": "stands with {p} body angled slightly toward {po}",
+        "body": "standing with {p} body angled slightly toward {po}",
         "arms": "{p} arm closest to {po} hangs low with {p} fingers loosely holding {pp} hand, and {p} other hand rests in {p} pocket",
         "legs": "{p} feet are planted about shoulder width apart",
         "head": "{p} gaze rests on the camera"
@@ -30,13 +30,13 @@
       "contacts": ["arm"],
       "shared_en": "the two stand close together arm in arm",
       "a": {
-        "body": "stands upright with {p} body turned slightly toward {po}",
+        "body": "standing upright with {p} body turned slightly toward {po}",
         "arms": "{p} arm closest to {po} is threaded through {pp} arm at the elbow, {p} hand resting lightly on {pp} forearm, and {p} other arm hangs relaxed at {p} side",
         "legs": "{p} feet are close together, a half step from {po}",
         "head": "{p} head turns toward the camera"
       },
       "b": {
-        "body": "stands upright with {p} body turned slightly toward {po}",
+        "body": "standing upright with {p} body turned slightly toward {po}",
         "arms": "{p} arm closest to {po} is bent at the elbow, holding {pp} arm hooked through it, and {p} other arm hangs relaxed at {p} side",
         "legs": "{p} feet are about shoulder width apart",
         "head": "{p} gaze rests on the camera"
@@ -50,13 +50,13 @@
       "contacts": ["back"],
       "shared_en": "the two stand facing each other in a warm, light hug",
       "a": {
-        "body": "stands facing {po}, {p} chest close to {pp}",
+        "body": "standing facing {po}, {p} chest close to {pp}",
         "arms": "{p} arms wrap loosely around {pp} back",
         "legs": "{p} feet are close together between {pp} feet",
         "head": "{p} head tilts onto {pp} shoulder and {p} gaze turns toward the camera"
       },
       "b": {
-        "body": "stands facing {po}, {p} chest close to {pp}",
+        "body": "standing facing {po}, {p} chest close to {pp}",
         "arms": "{p} arms wrap loosely around {pp} back",
         "legs": "{p} feet are planted about shoulder width apart",
         "head": "{p} chin lowers close to {pp} hair and {p} gaze stays on the camera"
@@ -70,13 +70,13 @@
       "contacts": ["shoulder"],
       "shared_en": "the two stand close side by side, one head resting lightly on the other's shoulder",
       "a": {
-        "body": "stands close beside {po} with {p} body angled slightly toward {po}",
+        "body": "standing close beside {po} with {p} body angled slightly toward {po}",
         "arms": "{p} hands are loosely clasped in front of {p} waist",
         "legs": "{p} feet are close together",
         "head": "{p} head rests lightly on {pp} shoulder and {p} gaze turns toward the camera"
       },
       "b": {
-        "body": "stands close beside {po}, {p} shoulder lifted slightly to support {pp} head",
+        "body": "standing close beside {po}, {p} shoulder lifted slightly to support {pp} head",
         "arms": "{p} arms hang relaxed at {p} sides",
         "legs": "{p} feet are about shoulder width apart",
         "head": "{p} cheek tilts toward {pp} hair and {p} gaze stays on the camera"
@@ -90,16 +90,16 @@
       "contacts": [],
       "shared_en": "the two sit side by side, turned slightly toward each other in conversation",
       "a": {
-        "body": "sits with {p} torso turned slightly toward {po}",
+        "body": "sitting with {p} torso turned slightly toward {po}",
         "arms": "{p} hand closest to {po} rests on {p} knee while {p} other hand gestures lightly",
         "legs": "{p} knees angle toward {po}",
-        "head": "{p} head turns toward {po}, {p} mouth relaxed mid-conversation"
+        "head": "{p} head turns toward {po}, {p} attention on the conversation"
       },
       "b": {
-        "body": "sits with {p} torso turned slightly toward {po}",
+        "body": "sitting with {p} torso turned slightly toward {po}",
         "arms": "{p} hand closest to {po} rests on {p} thigh while {p} other hand holds {p} knee",
         "legs": "{p} knees angle toward {po}",
-        "head": "{p} head tilts toward {po}, listening with a small smile"
+        "head": "{p} head tilts toward {po}, listening"
       }
     },
     "마주 앉아 대화": {
@@ -110,13 +110,13 @@
       "contacts": [],
       "shared_en": "the two sit facing each other, talking",
       "a": {
-        "body": "sits upright in three-quarter view, turned toward {po}",
+        "body": "sitting upright in three-quarter view, turned toward {po}",
         "arms": "{p} hands rest loosely in {p} lap",
         "legs": "{p} knees point toward {po}",
         "head": "{p} head turns toward {po}, mid-conversation"
       },
       "b": {
-        "body": "sits upright in three-quarter view, turned toward {po}",
+        "body": "sitting upright in three-quarter view, turned toward {po}",
         "arms": "{p} forearms rest on {p} thighs, {p} hands loosely clasped",
         "legs": "{p} knees point toward {po}",
         "head": "{p} head tilts toward {po}, listening"
