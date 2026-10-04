@@ -230,7 +230,9 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         if detailed:
             person.extend(sentence(f(t)) for t in outfit.get("detail_prose_en", []))
     person.append(sentence(f(pack["skin_en"])))
-    person.append(sentence(f"{subj.capitalize()} {mo['pose_en']}, {f(exp['main_en'])}; {f(mo['moment_en'])}"))
+    person.append(sentence(f"{subj.capitalize()} {mo['pose_en']}"))
+    person.append(sentence(f"{subj.capitalize()} is {f(exp['main_en'])}"))      # expression gets its own sentence
+    person.append(sentence(cap(f(mo["moment_en"]))))
     if detailed:
         person.append(sentence(f(exp["echo_en"])))
         if outfit:
