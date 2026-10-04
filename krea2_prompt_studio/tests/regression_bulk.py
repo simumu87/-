@@ -119,6 +119,20 @@ def desc_checks():
     for key, v in c.load_hair_presets().items():
         if not v.get("desc_ko"):
             problems.append((0, 0, f"no Korean description: hair preset/{key}"))
+    # each expression must name the emotion AND describe it anatomically ("a wide, genuine smile: cheeks rise ...")
+    labels = {"환한 미소": "smile", "은은한 미소": "smile", "수줍은 미소": "smile", "장난스러운 미소": "smirk",
+              "메롱": "tongue", "놀람": "surprised", "윙크": "wink", "무표정": "neutral"}
+    for key, v in c.load_expressions().items():
+        main = v.get("main_en", "")
+        want = labels.get(key)
+        if want and want not in main.lower():
+            problems.append((0, 0, f"expression {key}: emotion label '{want}' missing in main_en"))
+        if ":" not in main and key in labels:
+            problems.append((0, 0, f"expression {key}: no 'label: anatomy' structure in main_en"))
+        if re.search(r"narrow|squint|half-clos", " ".join(str(x) for x in v.values()), re.I):
+            problems.append((0, 0, f"expression {key}: eye-narrowing wording"))
+        if key in labels and len(main.split()) < 18:
+            problems.append((0, 0, f"expression {key}: anatomy description too short"))
     pack = c.load_pack("해변")
     for sect in ("times", "moments"):
         for key, v in pack[sect].items():
