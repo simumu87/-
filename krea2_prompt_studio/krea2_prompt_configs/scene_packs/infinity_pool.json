@@ -59,6 +59,14 @@
    "frames": [
     "전신"
    ]
+  },
+  "물속에서 가장자리에 기대기": {
+   "pose_en": "stands waist-deep in the pool with {p} back against the far edge and {p} elbows resting on the stone behind {o}",
+   "moment_en": "{s} tilts {p} head toward the camera as a few water droplets run down {p} shoulders",
+   "desc_ko": "허리까지 물에 들어가 풀 가장자리에 팔꿈치를 걸치고 기대어 카메라를 봄",
+   "frames": [
+    "허리 위"
+   ]
   }
  },
  "camera": {
