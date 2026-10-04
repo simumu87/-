@@ -837,6 +837,7 @@ LIGHT_SOURCES = {
     "도시 야간광": "mixed city street light filtering through the windows",
     "비 오는 날 확산광": "soft overcast daylight filtered through a rainy sky",
     "갤러리 조명": "controlled museum track lighting",
+    "달빛": "soft blue moonlight from a clear night sky",
 }
 LIGHT_DIRECTIONS = ["from camera left", "from camera right", "from behind the subject", "from front-left", "from front-right", "from above and slightly to the side", "wrapping softly from both sides"]
 LIGHT_QUALITY = ["soft and diffuse", "clean and directional", "gentle window-softened", "broad and even", "subtly dramatic but natural"]
@@ -1918,17 +1919,25 @@ def resolve_lighting(rng: random.Random, location_key: str, time_key: str, weath
     source = LIGHT_SOURCES.get(source_req, source_req if source_req in LIGHT_SOURCES.values() else "")
     if not source:
         location = LOCATIONS[location_key]
+        rules = scene_rules()
+        night = time_key in {"밤", "심야"}
         if location.get("outdoor"):
-            if weather_key in {"비", "폭우", "흐림", "안개"}:
+            if night:
+                source = LIGHT_SOURCES[rules.night_source(True, location_key, rng)]
+            elif weather_key in {"비", "폭우", "눈", "흐림", "안개"}:
                 source = LIGHT_SOURCES["비 오는 날 확산광"]
             elif time_key in {"해질녘", "저녁"}:
-                source = choose(rng, [LIGHT_SOURCES["골든아워"], LIGHT_SOURCES["오후 햇빛"], LIGHT_SOURCES["도시 야간광"]])
-            elif time_key in {"밤", "심야"}:
-                source = LIGHT_SOURCES["도시 야간광"]
+                source = choose(rng, [LIGHT_SOURCES["골든아워"], LIGHT_SOURCES["오후 햇빛"]]
+                                + ([LIGHT_SOURCES["도시 야간광"]] if location_key in {"도시 거리", "기차역"} and time_key == "저녁" else []))
             else:
                 source = choose(rng, [LIGHT_SOURCES["맑은 정오"], LIGHT_SOURCES["부드러운 북향광"], LIGHT_SOURCES["오후 햇빛"]])
         else:
-            source = choose(rng, [LIGHT_SOURCES["창문 자연광"], LIGHT_SOURCES["천장 확산광"], LIGHT_SOURCES["스탠드 램프"], LIGHT_SOURCES["벽 스콘스"]])
+            if night:
+                source = LIGHT_SOURCES[rules.night_source(False, location_key, rng)]
+            elif time_key == "저녁":
+                source = choose(rng, [LIGHT_SOURCES["스탠드 램프"], LIGHT_SOURCES["벽 스콘스"], LIGHT_SOURCES["천장 확산광"], LIGHT_SOURCES["창문 자연광"]])
+            else:
+                source = choose(rng, [LIGHT_SOURCES["창문 자연광"], LIGHT_SOURCES["천장 확산광"], LIGHT_SOURCES["스탠드 램프"], LIGHT_SOURCES["벽 스콘스"]])
     direction = get_value(c, "light_direction")
     if direction not in LIGHT_DIRECTIONS:
         direction = choose(rng, LIGHT_DIRECTIONS)
@@ -1954,6 +1963,11 @@ def resolve_lighting(rng: random.Random, location_key: str, time_key: str, weath
 # ---------------------------------------------------------------------------
 # Scene resolution and relational smart-random
 # ---------------------------------------------------------------------------
+
+def scene_rules():
+    import krea2_rules
+    return krea2_rules.get_rules(CONFIG_DIR)
+
 
 def _candidate_locations_for_activity(activity_key: str) -> List[str]:
     allowed = {x for x in ACTIVITY_LOCATION_COMPAT.get(activity_key, set()) if x in LOCATIONS}
@@ -1996,13 +2010,15 @@ def _interaction_for_scene(people: int, relation_key: str, activity_key: str, re
         "전시 관람": ["함께 전시 관람", "나란히 걷기"],
         "음악 듣기": ["함께 음악 듣기", "나란히 앉아 대화"],
     }
-    candidates = table.get(activity_key)
+    rules = scene_rules()
+    candidates = [x for x in table.get(activity_key, []) if rules.interaction_fits(x, activity_key)]
     if not candidates:
+        pool = rules.interaction_candidates(activity_key)
         if relation_key in {"연인", "부부"}:
-            candidates = ["나란히 앉아 대화", "손잡기", "장난스럽게 웃기", "어깨에 기대기"]
-        else:
-            candidates = ["나란히 걷기", "마주 앉아 대화", "장난스럽게 웃기", "하이파이브"]
-    key = choose(rng, candidates)
+            romantic = [x for x in pool if x in {"손잡기", "팔짱", "어깨에 기대기", "가벼운 포옹", "나란히 앉아 대화", "나란히 걷기"}]
+            pool = romantic or pool
+        candidates = pool
+    key = choose(rng, [x for x in candidates if x in INTERACTIONS] or ["장난스럽게 웃기"])
     return key, INTERACTIONS[key]
 
 
@@ -2137,24 +2153,23 @@ def build_scene(seed: Optional[int] = None, constraints: Optional[Dict[str, Cons
         people, relationship, activity, get_value(c, "interaction"), rng
     )
 
-    pose_a_key = _compatible_pose_for_activity(activity, location, rng, people)
+    rules = scene_rules()
     pose_req = get_value(c, "pose")
-    if pose_req in BASE_POSES:
-        pose_a_key = pose_req
-    pose_a = pose_state(pose_a_key, rng)
-
-    pose_b = None
     if people == 2:
-        if interaction_key in {"손잡기", "팔짱", "나란히 걷기"} and activity in {"산책", "저녁 산책", "비 오는 날 산책", "해변 산책", "손잡고 걷기"}:
-            pose_b = pose_state("손잡고 걷기", rng)
-        elif interaction_key == "가벼운 포옹":
-            pose_b = pose_state("포옹하기", rng)
-        elif interaction_key in {"나란히 앉아 대화", "함께 책 보기", "함께 사진 보기", "함께 음악 듣기"}:
-            pose_b = pose_state("나란히 앉기", rng)
-        elif interaction_key == "마주 앉아 대화":
-            pose_b = pose_state("벤치에 앉기", rng) if pose_a_key in {"벤치에 앉기", "나란히 앉기"} else pose_state("서로 마주 보기", rng)
-        else:
-            pose_b = pose_state("편안하게 서기", rng)
+        auto_a, auto_b = rules.pair_poses(interaction_key, activity)
+        pose_a_key = pose_req if pose_req in BASE_POSES else auto_a
+        pose_b_key = auto_b
+        pose_a = pose_state(pose_a_key, rng)
+        pose_b = pose_state(pose_b_key, rng)
+    else:
+        pose_a_key = _compatible_pose_for_activity(activity, location, rng, people)
+        if pose_req in BASE_POSES:
+            pose_a_key = pose_req
+        elif not rules.pose_fits_activity(pose_a_key, activity):
+            fits = [x for x in BASE_POSES if x not in PAIR_ONLY_POSES and rules.pose_fits_activity(x, activity)]
+            pose_a_key = choose(rng, fits) if fits else pose_a_key
+        pose_a = pose_state(pose_a_key, rng)
+        pose_b = None
 
     time_req = get_value(c, "time")
     time_key = time_req if time_req in TIME_OF_DAY else choose(rng, list(TIME_OF_DAY))
@@ -2176,8 +2191,20 @@ def build_scene(seed: Optional[int] = None, constraints: Optional[Dict[str, Cons
     env = resolve_environment(location, rng, c)
     light = resolve_lighting(rng, location, time_key, weather_key, c)
     camera = resolve_camera(rng, c, people, pose_a)
-    clothing_a = resolve_clothing(rng, "A", c)
-    clothing_b = resolve_clothing(rng, "B", c) if people == 2 else None
+    def _clothing_for(slot: str) -> ClothingProfile:
+        pick = resolve_clothing(rng, slot, c)
+        if get_value(c, f"garment_{slot}") not in {"", "auto"}:
+            return pick                       # a user-fixed garment is never replaced
+        out_door = bool(LOCATIONS[location].get("outdoor"))
+        for _ in range(12):
+            fw_key = next((k_ for k_, v_ in FOOTWEAR.items() if v_ == pick.footwear), "")
+            if scene_rules().clothing_ok(pick.garment_key, fw_key, location, weather_key, out_door):
+                break
+            pick = resolve_clothing(rng, slot, c)
+        return pick
+
+    clothing_a = _clothing_for("A")
+    clothing_b = _clothing_for("B") if people == 2 else None
 
     props = []
     if get_value(c, "prop_A") not in {"", "auto"}:

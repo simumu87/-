@@ -175,9 +175,15 @@ def engine_prose_checks():
     return problems
 
 
+def consistency_checks():
+    """Automatically resolved scenes must not contradict themselves (pose/interaction/light/clothing)."""
+    import scene_consistency
+    return [] if scene_consistency.main(120, quiet=True) == 0 else [(0, 0, "scene contradictions found (run tests/scene_consistency.py)")]
+
+
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + desc_checks() + engine_prose_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + desc_checks() + engine_prose_checks() + consistency_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

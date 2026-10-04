@@ -50,6 +50,10 @@
     "갤러리 조명": {
       "en": "controlled museum track lighting",
       "desc_ko": "전시장의 트랙 조명"
+    },
+    "달빛": {
+      "en": "soft blue moonlight from a clear night sky",
+      "desc_ko": "맑은 밤하늘의 은은한 푸른 달빛"
     }
   }
 }
