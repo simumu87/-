@@ -36,8 +36,8 @@
  "moments": {
   "머리 넘기며 서기": {
    "pose_en": "stands on the gravel path with {p} weight on one leg and {p} body turned slightly toward the right side of the frame, one hand tucking a strand of hair behind {p} ear",
-   "moment_en": "{s} laughs softly toward the camera",
-   "desc_ko": "한 손으로 머리를 귀 뒤로 넘기며 카메라를 보고 웃음",
+   "moment_en": "{s} looks toward the camera",
+   "desc_ko": "한 손으로 머리를 귀 뒤로 넘기며 카메라를 봄",
    "frames": [
     "전신",
     "무릎 위",

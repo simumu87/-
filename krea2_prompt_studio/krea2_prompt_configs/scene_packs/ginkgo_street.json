@@ -3,7 +3,7 @@
  "location_ko": "은행나무 길",
  "outdoor": true,
  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. 한결 외출복 사진(1004)을 바탕으로 한 장소. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
- "setting_en": "a quiet street lined with tall ginkgo trees in autumn",
+ "setting_en": "a quiet tree-lined street in autumn",
  "feature_en": [
   "tall ginkgo trees with golden-yellow leaves on both sides of the street",
   "a low stone wall topped with a black iron fence"
@@ -36,8 +36,8 @@
  "moments": {
   "천천히 걷기": {
    "pose_en": "walks slowly toward the camera along the sidewalk with {p} weight shifting onto the forward leg",
-   "moment_en": "{s} laughs softly as a few yellow leaves drift down in front of {o}",
-   "desc_ko": "낙엽이 떨어지는 길을 카메라 쪽으로 걸으며 웃음",
+   "moment_en": "a few yellow leaves drift down in front of {o} as {s} looks toward the camera",
+   "desc_ko": "낙엽이 떨어지는 길을 카메라 쪽으로 걸으며 카메라를 봄",
    "frames": [
     "전신"
    ]
