@@ -148,7 +148,20 @@ def compose_normal(scene: "k.SceneProfile", person: "k.PersonSlot", lora: Dict[s
 # v11 split composer: person prompt + scene prompt (the user's own structure)
 # ---------------------------------------------------------------------------
 PACK_DIR = k.CONFIG_DIR / "scene_packs"
-PACK_FILES = {"해변": "beach.json"}
+
+
+def _discover_packs() -> Dict[str, str]:
+    """Every scene_packs/*.json is a location; the file's own location_ko is its menu name."""
+    found = {}
+    for path in sorted(PACK_DIR.glob("*.json")):
+        try:
+            found[json.loads(path.read_text(encoding="utf-8"))["location_ko"]] = path.name
+        except (ValueError, KeyError, OSError):
+            continue
+    return found
+
+
+PACK_FILES = _discover_packs()
 MODES = ("보통", "상세")
 
 
@@ -171,10 +184,12 @@ def load_pack(location_ko: str) -> Dict[str, Any]:
     return _load(PACK_DIR / name)
 
 
-def _fill(text: str, subj: str, poss: str, obj: str = "", color: str = "") -> str:
-    """{s}/{S} subject, {p}/{P} possessive, {o} object (her / the woman), {color} hair color."""
+def _fill(text: str, subj: str, poss: str, obj: str = "", color: str = "", lit: str = "") -> str:
+    """{s}/{S} subject, {p}/{P} possessive, {o} object (her / the woman), {color} hair color,
+    {lit} the outfit part the light lands on (outfit "lit_en", or "her outfit")."""
     obj = obj or ("her" if poss == "her" else "him" if poss == "his" else "them")
-    return text.format_map({"s": subj, "S": subj.capitalize(), "p": poss, "P": poss.capitalize(), "o": obj, "color": color})
+    return text.format_map({"s": subj, "S": subj.capitalize(), "p": poss, "P": poss.capitalize(), "o": obj,
+                            "color": color, "lit": lit or f"{poss} outfit"})
 
 
 def _join(parts: List[str]) -> str:
@@ -183,7 +198,8 @@ def _join(parts: List[str]) -> str:
 
 def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", time_key: str = "해질녘",
                   moment: str = "파도 발목", framing: str = "전신", expression: str = "환한 미소",
-                  hair: str = "", mode: str = "보통", reinforce: Optional[int] = None, seed: int = 0) -> Dict[str, Any]:
+                  hair: str = "", mode: str = "보통", reinforce: Optional[int] = None, seed: int = 0,
+                  common_outfit: bool = False) -> Dict[str, Any]:
     """Build the person prompt, the scene prompt and the combined single prompt.
 
     hair: "" keeps the LoRA hair; a preset name or free text replaces it entirely.
@@ -209,9 +225,14 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     outfit = load_outfit(outfit_id) if outfit_id else None
     pack = load_pack(location)
     tm, mo = pack["times"][time_key], pack["moments"][moment]
+    if framing not in pack["camera"]:
+        raise SystemExit(f"이 장소에 없는 프레이밍이에요: {framing} (있는 것: {', '.join(pack['camera'])})")
+    if framing not in mo.get("frames", list(pack["camera"])):
+        raise SystemExit(f"'{moment}' 순간은 이 프레이밍에서 보이지 않는 부분을 써요: {framing}")
     exp = load_expressions()[expression]
-    f = lambda t: _fill(t, subj, poss, color=color)
-    fs = lambda t: _fill(t, "the woman", "the woman's", "the woman", color)   # scene prompt that stands alone (regional use)
+    lit = (outfit or {}).get("lit_en", "")
+    f = lambda t: _fill(t, subj, poss, color=color, lit=lit)
+    fs = lambda t: _fill(t, "the woman", "the woman's", "the woman", color, lit)   # scene prompt that stands alone (regional use)
     cap = lambda t: t[:1].upper() + t[1:]
 
     # ---------------- person prompt: identity(face/body) -> hair -> outfit -> action/expression -> skin
@@ -230,6 +251,10 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     elif lora.get("hair"):
         person.append(sentence(f"{subj.capitalize()} has {k.clean_text(lora['hair'])}"))
 
+    if not outfit and common_outfit:
+        person.append(common_outfit_sentence(location, framing, subj, poss, detailed, seed))
+        for acc in lora.get("signature_accessories", []):
+            person.append(sentence(f"{subj.capitalize()} also wears " + (acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")))
     if outfit:
         wear = [outfit["normal_en"]]
         for acc in lora.get("signature_accessories", []):
@@ -237,8 +262,9 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         person.append(sentence(f"{subj.capitalize()} wears {_join(wear)}"))
         if detailed:
             person.extend(sentence(f(t)) for t in outfit.get("detail_prose_en", []))
-    person.append(sentence(f(pack["skin_en"])))
-    person.append(sentence(f"{subj.capitalize()} {mo['pose_en']}"))
+    if pack.get("person_extra_en"):
+        person.append(sentence(f(pack["person_extra_en"])))
+    person.append(sentence(f"{subj.capitalize()} {f(mo['pose_en'])}"))
     person.append(sentence(f"{subj.capitalize()} is {f(exp['main_en'])}"))      # expression gets its own sentence
     person.append(sentence(cap(f(mo["moment_en"]))))
     if expr_level >= 1:
@@ -261,23 +287,25 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
 
     # ---------------- scene prompt
     # a time of day may bring its own water / ground / far-view / style lines (e.g. night)
-    waters = list(tm.get("water_en", pack["water_en"]))
+    waters = list(tm.get("feature_en", pack["feature_en"]))
     grounds = list(tm.get("ground_en", pack["ground_en"]))
     fars = list(tm.get("far_en", pack["far_en"]))
     style_line = tm.get("style_en", pack["style_en"])
     rng.shuffle(waters), rng.shuffle(grounds), rng.shuffle(fars)
 
     def build_scene_text(fx) -> str:
-        out = [sentence(f"{pack['setting_en']} at {tm['time_en']}, {tm['sky_en']}, with {waters[0]} and {grounds[0]}")]
-        if detailed:
-            out.append(sentence(f"Farther along, {waters[1]}, with {grounds[1]}"))
-        out.append(sentence(f"{cap(fx(tm['sun_en']))}, and {tm['glitter_en']}"))
+        out = [sentence(f"{pack['setting_en']} {tm.get('time_prep', 'at')} {tm['time_en']}".replace("  ", " ") + f", {tm['sky_en']}, with {waters[0]} and {grounds[0]}")]
+        if detailed and len(waters) > 1 and len(grounds) > 1:
+            out.append(sentence(f"{pack.get('more_prefix_en', 'Farther along')}, {waters[1]}, with {grounds[1]}"))
+        light = cap(fx(tm["light_en"])) + (f", and {tm['accent_en']}" if tm.get("accent_en") else "")
+        out.append(sentence(light))
         if detailed:
             out.append(sentence(cap(_join(pack["detail_en"][time_key]))))
         out.append(sentence(f"{cap(fx(tm['shadow_en']))}, with {_join(fars[:2] if detailed else fars[:1])}"))
         if detailed:
             out.append(sentence(fx(pack["position_en"])))
-            out.append(sentence(fx(pack["feet_en"])))
+            if framing == "전신" and pack.get("ground_contact_en"):      # only what the frame can show
+                out.append(sentence(fx(pack["ground_contact_en"])))
         out.append(sentence(fx(tm.get("camera", pack["camera"])[framing])))
         out.append(sentence(style_line))
         return " ".join(out)
@@ -291,6 +319,20 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
             problems.append("LoRA hair text survived a hair override")
     return {"person": person_text, "scene": scene_text, "combined": combined, "problems": problems,
             "words": len(combined.split()), "reinforce": level}
+
+
+def common_outfit_sentence(location: str, framing: str, subj: str, poss: str, detailed: bool, seed: int) -> str:
+    """An outfit from the common pool (the main program's garment tables), fitted to the place and the frame.
+    Only what the frame can show is written (companion garment, footwear and accessory follow the engine rules)."""
+    import random
+    import krea2_prose as kp
+    c = k.defaults()
+    for key, value in {"people": "1", "location": location, "framing": framing}.items():
+        k.set_constraint_value(c, key, value)
+    scene = k.build_scene(seed, c, None, None, "", False)
+    person = k.resolve_person(random.Random(seed + 17), scene, "A", k.PersonSlot(slot="PERSON_A"))
+    ref = {"s": subj, "S": subj.capitalize(), "p": poss, "P": poss.capitalize(), "o": "her", "wear": "wears"}
+    return kp.render_clothing(person, ref, detailed, scene)
 
 
 def lint(text: str) -> List[str]:

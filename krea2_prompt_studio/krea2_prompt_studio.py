@@ -3775,29 +3775,33 @@ def composer_mode() -> None:
     lora = labels[menu_choose("인물 (LoRA)", list(labels), default=next(iter(labels)), descs=descs)]
     trigger = lora["trigger"]
 
-    outfit_id = ""
-    outfit_ids = comp.outfits_for_trigger(trigger)
-    if outfit_ids:
-        outs = {}
-        for oid in outfit_ids:
-            data = comp.load_outfit(oid)
-            outs[data.get("name_ko", oid)] = (oid, data.get("desc_ko", ""))
-        opts = ["의상 없음", *outs]
-        pick = menu_choose("의상 (로라의상)", opts, default=opts[1],
-                           descs={**{"의상 없음": "의상 문장을 넣지 않음"}, **{n: d for n, (_, d) in outs.items()}})
-        outfit_id = outs[pick][0] if pick in outs else ""
-    else:
-        info("이 인물에 등록된 로라의상이 없어 의상 문장은 넣지 않습니다. (공용의상 연동은 다음 단계)")
-
     location = menu_choose("장소", list(comp.PACK_FILES), default=next(iter(comp.PACK_FILES)),
                            descs=option_descriptions("LOCATIONS"))
+    outfit_id = ""
+    common = False
+    outs = {}
+    for oid in comp.outfits_for_trigger(trigger):
+        data = comp.load_outfit(oid)
+        if location in data.get("applies_to", {}).get("locations", [location]):      # swimwear etc. only where it belongs
+            outs[data.get("name_ko", oid)] = (oid, data.get("desc_ko", ""))
+    COMMON = "공용의상 (자동)"
+    NONE = "의상 없음"
+    opts = [*outs, COMMON, NONE]
+    pick = menu_choose("의상", opts, default=opts[0],
+                       descs={**{n: d for n, (_, d) in outs.items()},
+                              COMMON: "본체 공용 의상 풀에서 장소·프레임에 맞게 고름 (보이는 부분만 적음)",
+                              NONE: "의상 문장을 넣지 않음"})
+    if pick in outs:
+        outfit_id = outs[pick][0]
+    common = pick == COMMON
     pack = comp.load_pack(location)
     time_key = menu_choose("시간대", list(pack["times"]), default=next(iter(pack["times"])),
                            descs={**option_descriptions("TIME_OF_DAY"), **{k_: v.get("desc_ko", "") for k_, v in pack["times"].items()}})
-    moment = menu_choose("장면 속 순간", list(pack["moments"]), default=next(iter(pack["moments"])),
-                         descs={k_: v.get("desc_ko", "") for k_, v in pack["moments"].items()})
     framing = menu_choose("프레이밍", list(pack["camera"]), default=next(iter(pack["camera"])),
                           descs=option_descriptions("CAMERA_FRAMING"))
+    valid = {k_: v for k_, v in pack["moments"].items() if framing in v.get("frames", list(pack["camera"]))}
+    moment = menu_choose("장면 속 순간", list(valid), default=next(iter(valid)),
+                         descs={k_: v.get("desc_ko", "") for k_, v in valid.items()})
     exps = comp.load_expressions()
     expression = menu_choose("표정", list(exps), default=next(iter(exps)),
                              descs={k_: v.get("desc_ko", "") for k_, v in exps.items()})
@@ -3820,7 +3824,7 @@ def composer_mode() -> None:
 
     result = comp.compose_split(trigger, outfit_id, location=location, time_key=time_key, moment=moment,
                                 framing=framing, expression=expression, hair=hair, mode=mode,
-                                reinforce=reinforce, seed=random.randrange(1, 2**32))
+                                reinforce=reinforce, seed=random.randrange(1, 2**32), common_outfit=common)
     print_header(f"결과 ({result['words']}단어 · 묘사 {mode} · 강화 {result['reinforce']}회)")
     print(result["combined"])
     if result["problems"]:

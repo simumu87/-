@@ -49,3 +49,12 @@
 ## 속옷/안감 레이어 기본 꺼짐 (2026-10-04)
 - 적은 건 다 그린다는 원칙 때문에 `scene_rules.json`의 `layers.enabled`를 false로 기본 꺼둠.
 - 켜면(true) 비치는 소재(오간자·쉬폰·레이스·메시)에 불투명 안감 문장이 붙는다. 테스트도 이 값을 따라간다.
+
+## 장소 팩 기준(v2)과 장소 6곳 추가 (2026-10-04)
+- 장소 팩 스키마 krea2-scene-pack/2: 해변 전용이던 칸 이름을 일반화 (water→feature, sun→light, glitter→accent, feet→ground_contact, skin→person_extra). 해변 출력은 그대로, 단 상세+무릎 위에서 발 문장이 빠짐(안 보이므로).
+- 새 팩: 카페·아파트 거실·침실·도시 거리·공원·서점 (`scene_packs/*.json` 자동 인식).
+- 공용의상 연동: 의상 메뉴에 "공용의상 (자동)" — 장소·프레임에 맞게 고르고 보이는 부분만 적음. 로라의상은 `applies_to.locations`에 맞는 장소에서만 나옴.
+- 순간에 `frames` 칸: 발이 나오는 순간은 전신에서만. 메뉴 순서는 프레이밍 → 순간.
+- `{lit}` 자리표시자: 의상 JSON `lit_en`(비키니: the satin of the bikini).
+- 수정: `pose_en`의 `{p}`가 채워지지 않던 버그.
+- 도구: `tools/validate_packs.py`, 회귀 테스트에 장소 팩 전 조합 검사 추가. 기준 문서: `docs/장소팩_작성기준.md`.

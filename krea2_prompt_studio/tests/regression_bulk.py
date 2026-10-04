@@ -93,6 +93,37 @@ def composer_checks():
     return problems
 
 
+def pack_checks():
+    """Every scene pack x time x valid moment x frame x mode: clean prose, only what the frame can show."""
+    import krea2_composer as c
+    problems = []
+    feet = re.compile(r"\b(feet|foot|ankles?|barefoot|toes)\b", re.I)
+    for loc in c.PACK_FILES:
+        pack = c.load_pack(loc)
+        for tk in pack["times"]:
+            for mk, mo in pack["moments"].items():
+                for fr in pack["camera"]:
+                    if fr not in mo.get("frames", list(pack["camera"])):
+                        continue
+                    for mode in c.MODES:
+                        for outfit, common in (("", True), ("", False)) + ((("gold_amber_triangle_string_bikini", False),) if loc == "해변" else ()):
+                            tag = (loc, tk, mk, fr, mode, bool(outfit), common)
+                            r = c.compose_split("nayoon", outfit, location=loc, time_key=tk, moment=mk, framing=fr,
+                                                mode=mode, seed=3, common_outfit=common)
+                            for pr in r["problems"]:
+                                problems.append((0, 0, f"pack {tag}: {pr}"))
+                            text = r["combined"]
+                            if "{" in text or "}" in text:
+                                problems.append((0, 0, f"pack {tag}: unfilled placeholder"))
+                            if re.search(r"\b(at|on|in) (at|on|in)\b|\bthe the\b|\ba [aeiou]\w|\ban [bcdfghjklmnpqrstvwxyz]\w", text):
+                                problems.append((0, 0, f"pack {tag}: grammar slip"))
+                            if loc != "해변" and re.search(r"bikini|swimsuit", text, re.I):
+                                problems.append((0, 0, f"pack {tag}: swimwear outside the beach"))
+                            if fr != "전신" and feet.search(r["scene"]):
+                                problems.append((0, 0, f"pack {tag}: feet written but the frame cannot show them"))
+    return problems
+
+
 def desc_checks():
     """Every option shown in a menu must carry a Korean description."""
     problems = []
@@ -219,7 +250,7 @@ def visibility_checks():
 
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

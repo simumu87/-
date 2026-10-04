@@ -1,0 +1,68 @@
+{
+  "schema": "krea2-scene-pack/2",
+  "location_ko": "아파트 거실",
+  "outdoor": false,
+  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+  "setting_en": "a tidy apartment living room with a low linen sofa, a wooden coffee table and a large window",
+  "feature_en": [
+    "a low linen sofa with two soft cushions",
+    "a round wooden coffee table with an open book and a glass of water on it"
+  ],
+  "ground_en": [
+    "a pale oak floor with a soft wool rug",
+    "a woven cotton rug in a warm cream tone"
+  ],
+  "far_en": [
+    "a tall bookshelf with books and a few ceramic objects against the wall",
+    "a leafy potted plant standing by the window"
+  ],
+  "times": {
+    "낮 자연광": {
+      "time_en": "a quiet weekend morning",
+      "sky_en": "soft daylight filling the room",
+      "light_en": "the large window stands to the camera's left of {o}, and its daylight falls across {p} left side and the sofa",
+      "shadow_en": "a soft shadow of {o} falls on the wall behind, toward the right",
+      "desc_ko": "주말 오전, 큰 창이 인물의 왼쪽에서 자연광을 줌",
+      "time_prep": "on"
+    },
+    "밤 스탠드": {
+      "time_en": "the late evening",
+      "sky_en": "a warm lamp glowing in the quiet room",
+      "light_en": "a warm floor lamp stands to the camera's left of {o}, lighting {p} face and shoulders in a soft amber tone",
+      "shadow_en": "soft shadows gather on the wall behind {o}",
+      "desc_ko": "늦은 저녁, 스탠드 하나의 따뜻한 빛, 창밖은 어두움",
+      "time_prep": "in"
+    }
+  },
+  "moments": {
+    "소파에 앉기": {
+      "pose_en": "sits on the sofa with one leg folded under the other and a cushion in {p} lap",
+      "moment_en": "{s} looks up from the book toward the camera and smiles",
+      "desc_ko": "소파에 다리를 접고 앉아 쿠션을 안고 카메라를 봄"
+    },
+    "책 읽기": {
+      "pose_en": "sits on the sofa holding an open book on {p} knees",
+      "moment_en": "{s} lowers the book a little and looks toward the camera",
+      "desc_ko": "책을 무릎에 펼치고 읽다가 카메라를 봄"
+    }
+  },
+  "camera": {
+    "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the room softly out of focus",
+    "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the room softly out of focus"
+  },
+  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+  "detail_en": {
+    "낮 자연광": [
+      "the linen of the sofa is a soft oatmeal color with a slightly rough weave",
+      "the window shows a pale sky and the tops of distant buildings",
+      "the wool rug has a thick, slightly fluffy pile"
+    ],
+    "밤 스탠드": [
+      "the linen of the sofa is a soft oatmeal color with a slightly rough weave",
+      "the window glass shows the dark night and the reflection of the lamp",
+      "the wool rug has a thick, slightly fluffy pile"
+    ]
+  },
+  "position_en": "{S} sits on the sofa with the window and the bookshelf spreading out behind {o}",
+  "more_prefix_en": "Beyond that"
+}
