@@ -29,6 +29,12 @@
 장소(`LOCATIONS`), 포즈(`BASE_POSES`), 의상 종류(`GARMENTS`), 원단(`FABRICS`)처럼 항목 안에 여러 칸이 있는 것,
 그리고 영어만 있는 목록(표정, 시선, 헤어 스타일 등)은 구조를 정한 뒤 옮깁니다.
 
+## 한글 설명 (메뉴에 표시됨)
+- 번역풀 안의 `desc_ko`가 메뉴에서 옵션 이름 옆에 `— 설명`으로 보입니다. 새 항목을 추가하면 `desc_ko`도 같이 적어 주세요.
+- 번역풀에 없는 목록(장소, 자세, 의상, 원단, 배경 밀도 등)의 설명은 `krea2_prompt_configs/option_descriptions.json`에 있습니다.
+- 표정/헤어 프리셋/의상/장면 팩은 각 파일 안의 `desc_ko`를 씁니다.
+- 설명이 빠지면 `python tests/regression_bulk.py`가 알려줍니다.
+
 ## 번역 모듈과의 관계
 - `krea2_translator/data/*.json`: 자유 입력 문장을 용어 단위로 치환하는 사전(기존).
 - `krea2_prompt_configs/user_dictionary.json`: 사용자가 추가한 용어(기존).

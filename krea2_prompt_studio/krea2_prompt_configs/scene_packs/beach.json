@@ -22,14 +22,16 @@
       "sky_en": "the sun hanging low and orange above a clear horizon",
       "sun_en": "the low sun sits in front of {o} and to the camera's left, its warm light falling directly on {p} face, shoulders and the satin of the bikini",
       "glitter_en": "the sunlight breaks into bright glittering points across the rippling water",
-      "shadow_en": "long soft shadows stretch across the sand toward the camera's right"
+      "shadow_en": "long soft shadows stretch across the sand toward the camera's right",
+      "desc_ko": "해가 지기 직전, 낮고 따뜻한 빛이 바다와 모래에 닿음"
     },
     "오후": {
       "time_en": "a bright afternoon",
       "sky_en": "a high pale-blue sky with a few thin clouds",
       "sun_en": "the afternoon sun shines from high in front of {o} and to the camera's left, lighting {p} face, shoulders and the satin of the bikini",
       "glitter_en": "the sunlight scatters into sparkling points across the turquoise water",
-      "shadow_en": "short soft shadows pool under {p} on the sand"
+      "shadow_en": "short soft shadows pool under {p} on the sand",
+      "desc_ko": "높은 해와 터키석빛 바다, 짧은 그림자"
     },
     "밤": {
       "time_en": "a clear night",
@@ -45,7 +47,8 @@
         "wet sand shining dark and silvery each time a wave slides back",
         "shells and small bits of driftwood scattered along the waterline"
       ],
-      "style_en": "natural night photography with fine film grain and realistic skin texture"
+      "style_en": "natural night photography with fine film grain and realistic skin texture",
+      "desc_ko": "달빛 + 멀리 불 켜진 해변 건물"
     },
     "밤(달빛만)": {
       "time_en": "a clear night",
@@ -61,17 +64,20 @@
         "wet sand shining dark and silvery each time a wave slides back",
         "shells and small bits of driftwood scattered along the waterline"
       ],
-      "style_en": "natural night photography with fine film grain and realistic skin texture"
+      "style_en": "natural night photography with fine film grain and realistic skin texture",
+      "desc_ko": "달빛 하나만 광원 (먼 건물은 어둡게)"
     }
   },
   "moments": {
     "파도 발목": {
       "pose_en": "walks barefoot along the waterline in a relaxed stride",
-      "moment_en": "a shallow wave slides around {p} ankles and {s} smiles a little wider"
+      "moment_en": "a shallow wave slides around {p} ankles and {s} smiles a little wider",
+      "desc_ko": "얕은 파도가 발목을 감싸고 웃음이 더 커짐"
     },
     "천천히 걷기": {
       "pose_en": "walks barefoot along the waterline in a relaxed stride",
-      "moment_en": "{s} glances back toward the camera as the foam fades around {p} feet"
+      "moment_en": "{s} glances back toward the camera as the foam fades around {p} feet",
+      "desc_ko": "거품이 발 주변에서 사라질 때 카메라 쪽을 돌아봄"
     }
   },
   "camera": {

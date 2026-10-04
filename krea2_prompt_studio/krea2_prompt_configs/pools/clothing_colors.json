@@ -5,83 +5,83 @@
   "items": {
     "화이트": {
       "en": "clean white",
-      "desc_ko": ""
+      "desc_ko": "깨끗한 흰색"
     },
     "아이보리": {
       "en": "soft ivory",
-      "desc_ko": ""
+      "desc_ko": "부드러운 상아색"
     },
     "베이지": {
       "en": "warm beige",
-      "desc_ko": ""
+      "desc_ko": "따뜻한 베이지"
     },
     "토프": {
       "en": "muted taupe",
-      "desc_ko": ""
+      "desc_ko": "차분한 회갈색"
     },
     "연회색": {
       "en": "light gray",
-      "desc_ko": ""
+      "desc_ko": "밝은 회색"
     },
     "차콜": {
       "en": "deep charcoal gray",
-      "desc_ko": ""
+      "desc_ko": "짙은 회색"
     },
     "블랙": {
       "en": "black",
-      "desc_ko": ""
+      "desc_ko": "검정"
     },
     "네이비": {
       "en": "deep navy",
-      "desc_ko": ""
+      "desc_ko": "짙은 남색"
     },
     "하늘색": {
       "en": "pale blue",
-      "desc_ko": ""
+      "desc_ko": "연한 하늘색"
     },
     "코발트 블루": {
       "en": "cobalt blue",
-      "desc_ko": ""
+      "desc_ko": "선명한 코발트 블루"
     },
     "세이지": {
       "en": "muted sage green",
-      "desc_ko": ""
+      "desc_ko": "차분한 세이지 그린"
     },
     "올리브": {
       "en": "soft olive green",
-      "desc_ko": ""
+      "desc_ko": "부드러운 올리브 그린"
     },
     "브라운": {
       "en": "warm brown",
-      "desc_ko": ""
+      "desc_ko": "따뜻한 갈색"
     },
     "테라코타": {
       "en": "muted terracotta",
-      "desc_ko": ""
+      "desc_ko": "차분한 테라코타"
     },
     "버건디": {
       "en": "deep burgundy",
-      "desc_ko": ""
+      "desc_ko": "짙은 와인색"
     },
     "핑크": {
       "en": "soft pink",
-      "desc_ko": ""
+      "desc_ko": "부드러운 분홍"
     },
     "라일락": {
       "en": "muted lilac",
-      "desc_ko": ""
+      "desc_ko": "차분한 연보라"
     },
     "노랑": {
       "en": "soft golden yellow",
-      "desc_ko": ""
+      "desc_ko": "부드러운 황금빛 노랑"
     },
     "오렌지": {
       "en": "muted orange",
-      "desc_ko": ""
+      "desc_ko": "차분한 주황"
     },
     "데님 블루": {
       "en": "classic denim blue",
-      "desc_ko": ""
+      "desc_ko": "클래식 데님 색"
     }
   }
 }

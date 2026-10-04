@@ -21,7 +21,11 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-import krea2_prompt_studio as k
+import importlib
+
+_main = sys.modules.get("__main__")
+# started from the studio menu? reuse that module instead of loading a second copy
+k = _main if hasattr(_main, "lora_profile_for_trigger") else importlib.import_module("krea2_prompt_studio")
 
 OUTFIT_DIR = k.CONFIG_DIR / "outfits" / "lora"
 LIST_DIR = k.CONFIG_DIR / "outfits" / "lists"

@@ -5,23 +5,23 @@
   "items": {
     "포토리얼": {
       "en": "natural photorealistic rendering with credible human proportions and realistic surface detail",
-      "desc_ko": ""
+      "desc_ko": "사실적인 비율과 표면 질감의 자연스러운 사진"
     },
     "에디토리얼": {
       "en": "realistic editorial photography with controlled composition and refined styling",
-      "desc_ko": ""
+      "desc_ko": "구도를 다듬은 잡지식 사진"
     },
     "다큐멘터리": {
       "en": "documentary-style realism with authentic environmental detail",
-      "desc_ko": ""
+      "desc_ko": "현장감 있는 기록 사진 느낌"
     },
     "시네마틱": {
       "en": "cinematic realism with natural depth, grounded color and believable lighting",
-      "desc_ko": ""
+      "desc_ko": "자연스러운 깊이와 영화 같은 색감"
     },
     "라이프스타일": {
       "en": "high-end lifestyle photography with realistic textures and natural candid detail",
-      "desc_ko": ""
+      "desc_ko": "일상의 디테일을 담은 고급 라이프스타일 사진"
     }
   }
 }

@@ -82,9 +82,43 @@ def composer_checks():
     return problems
 
 
+def desc_checks():
+    """Every option shown in a menu must carry a Korean description."""
+    problems = []
+    live = {"THEMES": k.THEMES, "RELATIONSHIPS": k.RELATIONSHIPS, "INTERACTIONS": k.INTERACTIONS,
+            "ACTIVITIES": k.ACTIVITIES, "TIME_OF_DAY": k.TIME_OF_DAY, "WEATHER": k.WEATHER, "MOODS": k.MOODS,
+            "REALISM": k.REALISM, "SKIN_FINISH": k.SKIN_FINISH, "CAMERA_FRAMING": k.CAMERA_FRAMING,
+            "VIEWPOINTS": k.VIEWPOINTS, "COMPOSITIONS": k.COMPOSITIONS, "LIGHT_SOURCES": k.LIGHT_SOURCES,
+            "STYLE_LIBRARY": k.STYLE_LIBRARY, "PALETTES": k.PALETTES, "COLORS": k.COLORS,
+            "CLOTHING_STATES": k.CLOTHING_STATES, "LOCATIONS": k.LOCATIONS, "BASE_POSES": k.BASE_POSES,
+            "GARMENTS": k.GARMENTS, "FABRICS": k.FABRICS, "ENV_DENSITY": k.ENV_DENSITY,
+            "RANDOM_MODES": k.RANDOM_MODES}
+    for group, data in live.items():
+        descs = k.option_descriptions(group)
+        for key in data:
+            if not descs.get(key):
+                problems.append((0, 0, f"no Korean description: {group}/{key}"))
+        for key, text in descs.items():
+            if not re.search(r"[가-힣]", text):
+                problems.append((0, 0, f"description is not Korean: {group}/{key}"))
+    import krea2_composer as c
+    for key, v in c.load_expressions().items():
+        if not v.get("desc_ko"):
+            problems.append((0, 0, f"no Korean description: expression/{key}"))
+    for key, v in c.load_hair_presets().items():
+        if not v.get("desc_ko"):
+            problems.append((0, 0, f"no Korean description: hair preset/{key}"))
+    pack = c.load_pack("해변")
+    for sect in ("times", "moments"):
+        for key, v in pack[sect].items():
+            if not v.get("desc_ko"):
+                problems.append((0, 0, f"no Korean description: beach {sect}/{key}"))
+    return problems
+
+
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + desc_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

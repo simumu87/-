@@ -44,7 +44,7 @@ except ImportError:
     translator_list_user = None
 
 APP_NAME = "Krea2 Turbo Prompt Studio"
-APP_VERSION = "10.0.3"
+APP_VERSION = "11.0.0-dev"
 MODEL_NAME = "pornmasterKrea2_v2TurboInt8.safetensors"
 OUTPUT_DIR = Path("generated_krea2_prompts")
 HISTORY_FILE = Path("krea2_prompt_history.jsonl")
@@ -1297,25 +1297,25 @@ RANDOM_MODES = {
     "자동": "auto",
 }
 FIELD_HELP = {
-    "theme": "장면 세계와 큰 분위기",
-    "location": "실제 공간 종류",
-    "activity": "실제로 수행하는 행동",
-    "interaction": "사람 사이의 행동",
-    "pose": "신체 자세와 지지점",
-    "material": "섬유/원단 물성",
-    "garment": "의상 종류",
-    "fit": "의상 실루엣",
-    "color": "의상 색상",
-    "environment_density": "배경 오브젝트 양",
-    "environment_state": "정돈/생활감",
-    "palette": "전체 색 조화",
-    "framing": "카메라 프레이밍",
-    "viewpoint": "카메라 관점",
-    "composition": "프레임 배치",
-    "lens": "초점거리",
-    "weather": "외부 날씨",
-    "time": "시간대",
-    "mood": "분위기",
+    "theme": "장면 전체의 세계와 큰 분위기를 정합니다",
+    "location": "인물이 있는 실제 공간 종류입니다",
+    "activity": "인물이 실제로 하고 있는 행동입니다",
+    "interaction": "두 사람 사이의 몸짓입니다 (2인일 때)",
+    "pose": "몸의 자세와 체중을 받치는 곳을 정합니다",
+    "material": "의상 원단입니다. 의상 종류와 어울리는 것만 나옵니다",
+    "garment": "입는 옷의 종류입니다",
+    "fit": "옷의 실루엣(넉넉함/몸에 맞음)입니다",
+    "color": "의상 색상입니다",
+    "environment_density": "배경에 놓이는 물건의 양입니다",
+    "environment_state": "공간이 얼마나 정돈돼 보이는지입니다",
+    "palette": "장면 전체의 색 조화입니다",
+    "framing": "인물을 어디까지 화면에 담을지 정합니다",
+    "viewpoint": "카메라가 인물을 보는 방향과 높이입니다",
+    "composition": "인물과 배경을 화면에 배치하는 방식입니다",
+    "lens": "초점거리(mm)입니다. 숫자가 작을수록 넓게 보입니다",
+    "weather": "바깥 날씨입니다",
+    "time": "장면의 시간대입니다. 빛의 방향과 분위기가 달라집니다",
+    "mood": "장면이 주는 감정의 결입니다",
 }
 
 
@@ -3236,11 +3236,45 @@ def _options_header() -> None:
     print("한국어로 장면을 설계하고, 최종 결과는 Krea2 Turbo용 자연어 영어 Positive Prompt로 출력합니다.")
 
 
-def menu_choose(title: str, options: Sequence[str], default: Optional[str] = None) -> str:
+OPTION_DESC_FILE = CONFIG_DIR / "option_descriptions.json"
+# menu field name (without the _A/_B suffix) -> description group
+FIELD_GROUPS = {
+    "theme": "THEMES", "location": "LOCATIONS", "activity": "ACTIVITIES", "relationship": "RELATIONSHIPS",
+    "interaction": "INTERACTIONS", "pose": "BASE_POSES", "material": "FABRICS", "garment": "GARMENTS",
+    "color": "COLORS", "framing": "CAMERA_FRAMING", "viewpoint": "VIEWPOINTS", "composition": "COMPOSITIONS",
+    "weather": "WEATHER", "time": "TIME_OF_DAY", "mood": "MOODS", "palette": "PALETTES",
+    "environment_density": "ENV_DENSITY", "environment_state": "ENV_STATE", "skin_finish": "SKIN_FINISH",
+    "realism": "REALISM", "style": "STYLE_LIBRARY", "state": "CLOTHING_STATES", "people": "PEOPLE",
+}
+_DESC_CACHE: Dict[str, Dict[str, str]] = {}
+
+
+def option_descriptions(group: str) -> Dict[str, str]:
+    """Korean one-line descriptions for a menu group: pool file desc_ko first, then option_descriptions.json."""
+    if group in _DESC_CACHE:
+        return _DESC_CACHE[group]
+    descs: Dict[str, str] = {}
+    data = load_json(POOLS_DIR / f"{group.lower()}.json", {})
+    for ko, item in (data.get("items", {}) if isinstance(data, dict) else {}).items():
+        if isinstance(item, dict) and item.get("desc_ko"):
+            descs[ko] = str(item["desc_ko"])
+    extra = load_json(OPTION_DESC_FILE, {})
+    for ko, text in (extra.get("groups", {}).get(group, {}) if isinstance(extra, dict) else {}).items():
+        descs.setdefault(ko, str(text))
+    _DESC_CACHE[group] = descs
+    return descs
+
+
+def menu_choose(title: str, options: Sequence[str], default: Optional[str] = None,
+                descs: Optional[Dict[str, str]] = None, help_text: str = "") -> str:
     print(f"\n[{title}]")
+    if help_text:
+        print(f"  ※ {help_text}")
+    descs = descs or {}
     for i, value in enumerate(options, 1):
         suffix = " (기본)" if default and value == default else ""
-        print(f"  {i}. {value}{suffix}")
+        note = f"  — {descs[value]}" if descs.get(value) else ""
+        print(f"  {i}. {value}{suffix}{note}")
     while True:
         raw = input(f"선택 [{default or 1}]: ").strip()
         if not raw and default:
@@ -3271,16 +3305,20 @@ def ask_int(label: str, default: int, lo: int, hi: int) -> int:
 
 
 def set_menu_field(c: Dict[str, ConstraintSetting], key: str, title: str, options: Sequence[str], default: str = "auto") -> None:
-    selected = menu_choose(title, ["자동", *options], default="자동")
+    base = re.sub(r"_[AB]$", "", key)
+    descs = dict(option_descriptions(FIELD_GROUPS.get(base, "")))
+    descs["자동"] = "프로그램이 알아서 고르게 둠"
+    help_text = FIELD_HELP.get(key) or FIELD_HELP.get(base, "")
+    selected = menu_choose(title, ["자동", *options], default="자동", descs=descs, help_text=help_text)
     if selected == "자동":
         c[key] = constraint("auto", "auto", 50, "auto")
         return
-    mode_kr = menu_choose("랜덤 범위", list(RANDOM_MODES), default="고정")
+    mode_kr = menu_choose("랜덤 범위", list(RANDOM_MODES), default="고정", descs=option_descriptions("RANDOM_MODES"))
     set_constraint_value(c, key, selected, RANDOM_MODES[mode_kr], 95, "user" if mode_kr == "고정" else "user")
 
 
 def choose_random_range() -> str:
-    return menu_choose("Smart Random 범위", list(RANDOM_MODES), default="자동")
+    return menu_choose("Smart Random 범위", list(RANDOM_MODES), default="자동", descs=option_descriptions("RANDOM_MODES"))
 
 
 def configure_clothing_menu(c: Dict[str, ConstraintSetting], slot: str) -> None:
@@ -3307,7 +3345,7 @@ def configure_scene_conditions(c: Dict[str, ConstraintSetting]) -> None:
     set_menu_field(c, "theme", "테마", list(THEMES))
     set_menu_field(c, "location", "공간", list(LOCATIONS))
     set_menu_field(c, "activity", "행동", list(ACTIVITIES))
-    people = menu_choose("인물 수", ["자동", "1", "2"], default="자동")
+    people = menu_choose("인물 수", ["자동", "1", "2"], default="자동", descs=option_descriptions("PEOPLE"))
     c["people"] = constraint(people if people != "자동" else "auto", "fixed" if people != "자동" else "auto", 100 if people != "자동" else 50, "user" if people != "자동" else "auto")
     if people != "1":
         set_menu_field(c, "relationship", "관계", list(RELATIONSHIPS))
@@ -3683,6 +3721,80 @@ def run_self_test(verbose: bool = True) -> bool:
     return ok and all(state for _, state, _ in checks)
 
 
+def composer_mode() -> None:
+    """New composer: one human-readable paragraph (보통) or a restated, longer one (상세)."""
+    try:
+        import krea2_composer as comp
+    except ImportError as exc:
+        error(f"합성기 모듈을 불러오지 못했습니다: {exc}")
+        return
+    print_header("새 합성기 — 사람이 쓴 것처럼 읽히는 한 덩어리 프롬프트")
+    loras = [r for r in load_loras() if isinstance(r, dict) and r.get("trigger") and r.get("gender") != "male"]
+    if not loras:
+        warning("등록된 LoRA가 없습니다. 먼저 'LoRA 관리'에서 등록하세요.")
+        return
+    labels = {f"{r.get('name', r['trigger'])} ({r['trigger']})": r for r in loras}
+    descs = {lab: clean_text(str(r.get("identity", "")))[:48] + "…" for lab, r in labels.items()}
+    lora = labels[menu_choose("인물 (LoRA)", list(labels), default=next(iter(labels)), descs=descs)]
+    trigger = lora["trigger"]
+
+    outfit_id = ""
+    outfit_ids = comp.outfits_for_trigger(trigger)
+    if outfit_ids:
+        outs = {}
+        for oid in outfit_ids:
+            data = comp.load_outfit(oid)
+            outs[data.get("name_ko", oid)] = (oid, data.get("desc_ko", ""))
+        opts = ["의상 없음", *outs]
+        pick = menu_choose("의상 (로라의상)", opts, default=opts[1],
+                           descs={**{"의상 없음": "의상 문장을 넣지 않음"}, **{n: d for n, (_, d) in outs.items()}})
+        outfit_id = outs[pick][0] if pick in outs else ""
+    else:
+        info("이 인물에 등록된 로라의상이 없어 의상 문장은 넣지 않습니다. (공용의상 연동은 다음 단계)")
+
+    location = menu_choose("장소", list(comp.PACK_FILES), default=next(iter(comp.PACK_FILES)),
+                           descs=option_descriptions("LOCATIONS"))
+    pack = comp.load_pack(location)
+    time_key = menu_choose("시간대", list(pack["times"]), default=next(iter(pack["times"])),
+                           descs={**option_descriptions("TIME_OF_DAY"), **{k_: v.get("desc_ko", "") for k_, v in pack["times"].items()}})
+    moment = menu_choose("장면 속 순간", list(pack["moments"]), default=next(iter(pack["moments"])),
+                         descs={k_: v.get("desc_ko", "") for k_, v in pack["moments"].items()})
+    framing = menu_choose("프레이밍", list(pack["camera"]), default=next(iter(pack["camera"])),
+                          descs=option_descriptions("CAMERA_FRAMING"))
+    exps = comp.load_expressions()
+    expression = menu_choose("표정", list(exps), default=next(iter(exps)),
+                             descs={k_: v.get("desc_ko", "") for k_, v in exps.items()})
+    presets = comp.load_hair_presets()
+    keep = "LoRA 기본 헤어 유지"
+    custom = "직접 입력"
+    hair_pick = menu_choose("헤어", [keep, *presets, custom], default=keep,
+                            descs={keep: "등록된 LoRA 헤어를 그대로 사용 (아무것도 바꾸지 않음)",
+                                   custom: "원하는 헤어를 영어 문장으로 직접 씀 (LoRA 헤어는 통째로 빠짐)",
+                                   **{k_: v.get("desc_ko", "") for k_, v in presets.items()}})
+    hair = "" if hair_pick == keep else (ask_text("헤어를 영어 문장으로 입력하세요") if hair_pick == custom else hair_pick)
+    mode = menu_choose("모드", list(comp.MODES), default="보통", descs=option_descriptions("COMPOSER_MODE"))
+
+    result = comp.compose_split(trigger, outfit_id, location=location, time_key=time_key, moment=moment,
+                                framing=framing, expression=expression, hair=hair, mode=mode,
+                                seed=random.randrange(1, 2**32))
+    print_header(f"결과 ({result['words']}단어 · {mode} 모드)")
+    print(result["combined"])
+    if result["problems"]:
+        warning("점검 알림: " + ", ".join(result["problems"]))
+    else:
+        success("점검 통과: 한글 누출, 라벨, 지시문, 헤어 모순 없음")
+    if menu_choose("결과 보기", ["이대로 저장", "인물/장면 따로 보기 (리저널용)", "저장 안 함"], default="이대로 저장",
+                   descs={"이대로 저장": "합친 한 덩어리를 txt로 저장", "인물/장면 따로 보기 (리저널용)": "인물과 장면을 나눠 보여줌 (장면은 'the woman'으로 씀)",
+                          "저장 안 함": "화면에만 표시"}) == "인물/장면 따로 보기 (리저널용)":
+        print("\n[인물 프롬프트]\n" + result["person"] + "\n\n[장면 프롬프트]\n" + result["scene"])
+        return
+    if menu_choose("저장", ["저장", "저장 안 함"], default="저장") == "저장":
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        path = OUTPUT_DIR / f"krea2_composer_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        path.write_text(result["combined"] + "\n", encoding="utf-8")
+        success(f"저장했습니다: {path}")
+
+
 def main() -> None:
     ensure_dirs()
     while True:
@@ -3698,6 +3810,7 @@ def main() -> None:
             "내장 번역 사전",
             "설정",
             "자가진단",
+            "새 합성기 (보통/상세)",
             "종료",
         ]
         for i, value in enumerate(choices, 1):
@@ -3722,6 +3835,8 @@ def main() -> None:
         elif raw == "9":
             run_self_test(True)
         elif raw == "10":
+            composer_mode()
+        elif raw == "11":
             print("종료합니다.")
             return
         else:

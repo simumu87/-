@@ -5,31 +5,31 @@
   "items": {
     "혼자": {
       "en": "a single adult subject",
-      "desc_ko": ""
+      "desc_ko": "성인 한 명"
     },
     "친구": {
       "en": "two adult friends",
-      "desc_ko": ""
+      "desc_ko": "성인 친구 두 명"
     },
     "연인": {
       "en": "two adult romantic partners",
-      "desc_ko": ""
+      "desc_ko": "성인 연인 두 명"
     },
     "부부": {
       "en": "two married adult partners",
-      "desc_ko": ""
+      "desc_ko": "성인 부부 두 명"
     },
     "동료": {
       "en": "two adult colleagues",
-      "desc_ko": ""
+      "desc_ko": "성인 직장 동료 두 명"
     },
     "여행 동행": {
       "en": "two adult travel companions",
-      "desc_ko": ""
+      "desc_ko": "함께 여행하는 성인 두 명"
     },
     "스터디 메이트": {
       "en": "two adult study partners",
-      "desc_ko": ""
+      "desc_ko": "같이 공부하는 성인 두 명"
     }
   }
 }
