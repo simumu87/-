@@ -35,10 +35,6 @@
       "ko": "골드 메탈",
       "en": "gold metal"
     },
-    "choker": {
-      "ko": "딥 블랙",
-      "en": "deep black"
-    },
     "shade_en": "the gold-amber deepens slightly in shadow but stays a rich gold"
   },
   "material": {
@@ -72,30 +68,20 @@
     }
   },
   "accessories": {
-    "signature": [
-      {
-        "id": "black_choker",
-        "ko": "블랙 초커",
-        "en": "a thin, simple deep-black choker band",
-        "detail_en": "a single slim band hugging the neck as one clean black line, with the same visual thinness as the bikini straps",
-        "keep_with_outfit": true
-      }
-    ],
     "default_include_ko": [
-      "블랙 초커 1개",
-      "작은 골드 중앙 링 1개"
+      "작은 골드 중앙 링 1개 (상의에 포함)"
     ],
     "default_exclude_ko": [
       "발찌",
       "허리체인",
-      "추가 목걸이",
       "대형 펜던트",
       "장식 체인",
       "버클 장식",
       "로고 장식",
       "패턴 장식",
       "불필요한 금속 참"
-    ]
+    ],
+    "note_ko": "블랙 초커는 나윤의 시그니처 액세서리라 의상이 아니라 캐릭터(identity) 쪽에서 관리한다. 이 의상 파일에는 넣지 않는다."
   },
   "locks": [
     {
@@ -185,17 +171,6 @@
         "gentle silky highlights, like satin",
         "a smooth satin-like gloss"
       ]
-    },
-    {
-      "id": "choker",
-      "group": "accessory",
-      "priority": 1,
-      "ko": "얇은 딥 블랙 초커",
-      "en": [
-        "a thin deep-black choker around the neck",
-        "a slim black choker band at the throat",
-        "a simple black choker encircling the neck"
-      ]
     }
   ],
   "forbidden_ko": [
@@ -209,12 +184,12 @@
     "사이드 타이 제거 또는 넓은 밴드로 교체, 끈 끝에 장식 추가",
     "하이레그 라인을 낮춤",
     "원단을 완전 매트 또는 플라스틱처럼 과도한 번들거림으로 변경",
-    "초커를 골드/다른 색, 체인, 리본, 대형 장식으로 변경",
     "불필요한 귀걸이, 팔찌, 발찌, 허리체인 추가"
   ],
   "render_notes_ko": [
     "forbidden_ko는 프롬프트에 출력하지 않는다. 오버라이드/충돌 검사와 사람이 읽는 규칙 용도다.",
     "locks의 en 변형은 같은 사실을 다른 표현으로 쓴 것이다. 상세 모드의 강화 때 서로 다른 변형을 고른다.",
-    "원본 문서의 4방향 뷰, 하단 인셋 패널, 이미지 라벨, 시트 조명 기준은 장면 프롬프트에 필요 없어 변환하지 않았다."
+    "원본 문서의 4방향 뷰, 하단 인셋 패널, 이미지 라벨, 시트 조명 기준은 장면 프롬프트에 필요 없어 변환하지 않았다.",
+    "원본 문서의 블랙 초커(시그니처 액세서리) 항목은 의상에서 제외했다. 캐릭터 쪽 값으로 관리한다."
   ]
 }
