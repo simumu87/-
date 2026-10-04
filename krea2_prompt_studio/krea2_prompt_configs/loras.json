@@ -101,9 +101,9 @@
   {
     "name": "한결",
     "trigger": "hangyeol",
-    "identity": "a young Korean woman in her late twenties with a soft oval face, straight defined eyebrows, a small straight nose, deep brown eyes with a faint olive tint, fair natural skin, short chin-length bob hair with wispy bangs parted in the center, and round gold wire-frame glasses",
+    "identity": "a young Korean woman in her late twenties with a soft oval face, straight defined eyebrows, a small straight nose, deep brown eyes with a faint olive tint, fair natural skin, a slim build with narrow, straight shoulders and a full bust relative to her slim frame, short chin-length bob hair with wispy bangs parted in the center, and round gold wire-frame glasses",
     "default_clothing": "",
-    "notes": "로라 학습 전 임시 등록 [1004]. 머리색 단어는 일부러 안 적음(캡션과 같은 방침). 체형 문장은 프레임에 따라 달라 identity에서 뺐고 트리거에 맡긴다.",
+    "notes": "로라 학습 전 임시 등록 [1004]. 머리색 단어는 일부러 안 적음(캡션과 같은 방침). 체형은 identity가 프롬에 자동으로 들어가는 유일한 자리라 여기 적었다(프레임 때문에 허리 문장은 뺌).",
     "gender": "female"
   }
 ]
