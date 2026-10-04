@@ -237,7 +237,11 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     person_text = " ".join(person)
 
     # ---------------- scene prompt
-    waters, grounds, fars = list(pack["water_en"]), list(pack["ground_en"]), list(pack["far_en"])
+    # a time of day may bring its own water / ground / far-view / style lines (e.g. night)
+    waters = list(tm.get("water_en", pack["water_en"]))
+    grounds = list(tm.get("ground_en", pack["ground_en"]))
+    fars = list(tm.get("far_en", pack["far_en"]))
+    style_line = tm.get("style_en", pack["style_en"])
     rng.shuffle(waters), rng.shuffle(grounds), rng.shuffle(fars)
 
     def build_scene_text(fx) -> str:
@@ -252,7 +256,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
             out.append(sentence(fx(pack["position_en"])))
             out.append(sentence(fx(pack["feet_en"])))
         out.append(sentence(fx(pack["camera"][framing])))
-        out.append(sentence(pack["style_en"]))
+        out.append(sentence(style_line))
         return " ".join(out)
 
     scene_text = build_scene_text(fs)                          # regional use: "the woman"

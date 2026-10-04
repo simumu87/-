@@ -30,6 +30,22 @@
       "sun_en": "the afternoon sun shines from high in front of {o} and to the camera's left, lighting {p} face, shoulders and the satin of the bikini with clear warm highlights",
       "glitter_en": "the sunlight scatters into sparkling points across the turquoise water",
       "shadow_en": "short soft shadows pool under {p} on the sand"
+    },
+    "밤": {
+      "time_en": "a clear night",
+      "sky_en": "a deep blue night sky scattered with faint stars above a dark horizon",
+      "sun_en": "a full moon hangs low over the sea in front of {o} and to the camera's left, its soft blue moonlight falling on {p} face, shoulders and the satin of the bikini, while a gentle warm glow from distant shore lights keeps the bikini's gold-amber rich and warm",
+      "glitter_en": "the moonlight lays a trail of silver sparkles across the dark rippling water",
+      "shadow_en": "soft blue shadows pool on the sand beside {o}",
+      "far_en": [
+        "a wooden beach pavilion glowing with warm lights far down the shore",
+        "a faint string of warm lights along the distant shoreline"
+      ],
+      "ground_en": [
+        "wet sand shining dark and silvery each time a wave slides back",
+        "shells and small bits of driftwood scattered along the waterline"
+      ],
+      "style_en": "natural night photography with fine film grain, soft highlights and realistic skin texture"
     }
   },
   "moments": {
@@ -57,6 +73,11 @@
       "the wet sand left by each retreating wave shines like a clear mirror",
       "the foam at the edge of each wave glows bright white in the sun",
       "the sea farther out shifts from turquoise to deep blue toward the horizon"
+    ],
+    "밤": [
+      "the wet sand left by each retreating wave mirrors the moon in a thin silver film",
+      "the foam at the edge of each wave glows pale blue-white in the moonlight",
+      "the sea farther out fades into deep navy beneath a sky of faint stars"
     ]
   },
   "position_en": "{S} is centered in the frame, with the sea spreading out behind {o}",
