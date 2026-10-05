@@ -1,0 +1,68 @@
+{
+  "schema": "krea2-scene-pack/2",
+  "location_ko": "침실",
+  "outdoor": false,
+  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+  "setting_en": "a calm bedroom with a bed in white linen, a wooden nightstand and a window with sheer curtains",
+  "feature_en": [
+    "a bed made with white linen sheets and a pale gray duvet",
+    "a wooden nightstand with a small lamp and a stack of books"
+  ],
+  "ground_en": [
+    "a pale oak floor with a soft cream rug beside the bed",
+    "a woven cotton rug in a warm cream tone"
+  ],
+  "far_en": [
+    "a wooden wardrobe with a long mirror leaning beside it",
+    "a leafy potted plant standing by the window"
+  ],
+  "times": {
+    "아침 햇살": {
+      "time_en": "the early morning",
+      "sky_en": "soft daylight filling the room",
+      "light_en": "the window stands to the camera's left of {o}, and its daylight falls across {p} left side and the bed",
+      "shadow_en": "a soft shadow of {o} lies on the sheets toward the right",
+      "desc_ko": "이른 아침, 얇은 커튼 너머 창이 인물의 왼쪽에서 자연광을 줌",
+      "time_prep": "in"
+    },
+    "밤 램프": {
+      "time_en": "late at night",
+      "sky_en": "a small warm lamp glowing in the quiet room",
+      "light_en": "a small warm bedside lamp stands to the camera's left of {o}, lighting {p} face and shoulders in a soft amber tone",
+      "shadow_en": "soft shadows gather on the wall behind {o}",
+      "desc_ko": "늦은 밤, 침대 옆 작은 램프 하나의 따뜻한 빛",
+      "time_prep": ""
+    }
+  },
+  "moments": {
+    "침대에 앉기": {
+      "pose_en": "sits on the edge of the bed with both hands resting on the sheets",
+      "moment_en": "{s} looks toward the camera and the corner of {p} mouth lifts",
+      "desc_ko": "침대 가장자리에 앉아 시트에 손을 얹고 카메라를 봄"
+    },
+    "기대어 앉기": {
+      "pose_en": "sits against the pillows with {p} knees drawn up a little",
+      "moment_en": "{s} tilts {p} head and looks toward the camera",
+      "desc_ko": "베개에 기대어 앉아 고개를 기울이고 카메라를 봄"
+    }
+  },
+  "camera": {
+    "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the room softly out of focus",
+    "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the room softly out of focus"
+  },
+  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+  "detail_en": {
+    "아침 햇살": [
+      "the white linen sheets show soft, loose creases",
+      "the sheer curtains hang in long straight folds",
+      "the nightstand lamp is switched off"
+    ],
+    "밤 램프": [
+      "the white linen sheets show soft, loose creases",
+      "the sheer curtains hang in long straight folds against the dark window",
+      "the nightstand holds a stack of books beside the lamp"
+    ]
+  },
+  "position_en": "{S} sits on the bed with the window and the wardrobe spreading out behind {o}",
+  "more_prefix_en": "Beyond that"
+}

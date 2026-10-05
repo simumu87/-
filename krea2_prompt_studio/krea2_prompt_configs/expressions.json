@@ -1,0 +1,62 @@
+{
+  "schema": "krea2-expressions/2",
+  "note_ko": "표정 사전(해부학적 서술). 감정 이름 대신 얼굴 부위별로 눈에 보이는 변화(눈썹, 눈, 볼, 입꼬리, 입술·치아, 턱)를 적는다. 근육 이름은 쓰지 않는다. main_en은 보통/상세 모두, echo_en은 같은 표정을 다른 표현으로 한 번 더, echo2_en은 두 번째 반복. {p}/{P}=her/Her. 눈을 가늘게 만드는 말(narrow, squint, half-closed)은 웃음 표현에 쓰지 않는다.",
+  "items": {
+    "환한 미소": {
+      "desc_ko": "볼이 올라가고 눈꼬리가 접히며 입술이 벌어져 윗니가 보이는 활짝 웃음",
+      "parts_ko": "눈썹 편안 / 볼 올라감 / 눈꼬리 접힘 / 입꼬리 위로 / 입술 벌어짐 / 윗니",
+      "main_en": "looking directly at the camera with a wide, genuine smile: {p} cheeks rise and press the lower eyelids upward into soft creases at the outer corners of {p} eyes, the corners of {p} mouth pull up and back, {p} lips part to show the upper teeth, and {p} brows stay relaxed and slightly lifted",
+      "echo_en": "The smile involves {p} whole face, with lifted cheeks, creased outer eye corners and the upper teeth showing",
+      "echo2_en": "A bright, open smile lifts {p} cheeks, creases the corners of {p} eyes upward and parts {p} lips"
+    },
+    "은은한 미소": {
+      "desc_ko": "입을 다문 채 입꼬리만 살짝 올라가는 조용한 미소",
+      "parts_ko": "눈썹 편안 / 눈 편안히 뜸 / 볼 살짝 / 입꼬리 살짝 위로 / 입술 닫힘",
+      "main_en": "looking directly at the camera with a soft closed-lip smile: the corners of {p} mouth lift slightly, {p} cheeks rise just a little, {p} eyes stay relaxed and open, and {p} brows rest softly",
+      "echo_en": "{P} lips stay gently closed while the corners of {p} mouth curve upward",
+      "echo2_en": "{P} face is calm, with only a faint upward curve at the corners of {p} lips"
+    },
+    "수줍은 미소": {
+      "desc_ko": "턱을 살짝 당기고 눈을 올려 보며 입술을 다문 채 웃는 수줍은 미소",
+      "parts_ko": "턱 당김 / 올려보는 시선 / 입꼬리 살짝 / 입술 다묾 / 볼 은은하게 붉음",
+      "main_en": "glancing up at the camera with a shy smile: {p} chin tucked slightly, the corners of {p} mouth lifted with the lips pressed gently together, {p} eyes looking up from under softly lowered upper lids, and a faint flush on {p} cheeks",
+      "echo_en": "{P} head dips a little as {p} eyes look up at the camera, a small smile on {p} closed lips",
+      "echo2_en": "A shy, closed-lip smile lifts the corners of {p} mouth while {p} chin stays tucked"
+    },
+    "장난스러운 미소": {
+      "desc_ko": "한쪽 입꼬리가 먼저 올라가고 한쪽 눈썹이 살짝 올라가는 장난기 있는 미소",
+      "parts_ko": "한쪽 입꼬리 높게 / 한쪽 눈썹 올라감 / 눈 반짝임 / 정면 시선",
+      "main_en": "looking straight into the lens with a playful smirk: one corner of {p} mouth lifts higher than the other, one eyebrow is raised slightly, and {p} eyes are bright and fully open",
+      "echo_en": "{P} smile tilts to one side, with one raised brow and bright, direct eyes",
+      "echo2_en": "A teasing, lopsided smile lifts the corner of {p} mouth while {p} eyes stay wide open and lively"
+    },
+    "메롱": {
+      "desc_ko": "입술을 벌리고 혀를 아랫입술 위로 내민 장난스러운 표정",
+      "parts_ko": "혀 내밈 / 입술 벌어짐 / 눈 밝게 / 눈썹 올라감",
+      "main_en": "looking at the camera while playfully sticking {p} tongue out: {p} lips part and the tongue rests over the lower lip, {p} eyebrows lift slightly, and {p} eyes are bright and fully open",
+      "echo_en": "The tip of {p} tongue is out over {p} lower lip, with {p} lips parted and a playful look in {p} eyes",
+      "echo2_en": "{P} sticks out {p} tongue with raised brows and bright, wide eyes"
+    },
+    "놀람": {
+      "desc_ko": "눈썹이 높이 올라가고 눈이 크게 떠지며 입이 살짝 벌어진 놀란 얼굴",
+      "parts_ko": "눈썹 높이 올라감 / 눈 크게 뜸 / 입 살짝 벌어짐",
+      "main_en": "looking at the camera with a surprised face: {p} eyebrows raised high, {p} upper eyelids lifted so the eyes are wide open, and {p} mouth slightly open",
+      "echo_en": "{P} brows arch high and {p} eyes open wide, with {p} lips parted in surprise",
+      "echo2_en": "Surprise shows in {p} lifted brows, wide eyes and slightly open mouth"
+    },
+    "윙크": {
+      "desc_ko": "한쪽 눈을 감고 입꼬리를 살짝 올린 윙크",
+      "parts_ko": "한쪽 눈 감김 / 다른 눈 뜸 / 입꼬리 살짝 위로",
+      "main_en": "winking at the camera: one of {p} eyes is closed while the other stays open and bright, and the corner of {p} mouth lifts into a small smile",
+      "echo_en": "One eye is closed in a wink, the other open and looking straight at the camera, with a small smile at the corner of {p} mouth",
+      "echo2_en": "{P} winks with one eye and keeps the other bright and open, {p} smile tilting up on that side"
+    },
+    "무표정": {
+      "desc_ko": "눈썹이 수평이고 눈을 편안히 뜬 채 입술을 가볍게 다문 차분한 얼굴",
+      "parts_ko": "눈썹 수평 / 눈 편안히 뜸 / 볼 매끈 / 입술 닫힘",
+      "main_en": "looking directly at the camera with a calm neutral face: {p} brows level and relaxed, {p} eyes open and steady, {p} cheeks smooth, and {p} lips softly closed",
+      "echo_en": "{P} face is still and composed, {p} gaze steady and unhurried",
+      "echo2_en": "{P} features stay smooth and untroubled, with {p} lips gently closed"
+    }
+  }
+}

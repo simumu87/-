@@ -1,0 +1,87 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "은행나무 길",
+ "outdoor": true,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. 한결 외출복 사진(1004)을 바탕으로 한 장소. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a quiet tree-lined street in autumn",
+ "feature_en": [
+  "tall ginkgo trees with golden-yellow leaves on both sides of the street",
+  "a low stone wall topped with a black iron fence"
+ ],
+ "ground_en": [
+  "a paved sidewalk covered in fallen yellow ginkgo leaves",
+  "gray paving stones scattered with small yellow leaves"
+ ],
+ "far_en": [
+  "the street running away between two rows of yellow trees",
+  "a few low buildings far down the street"
+ ],
+ "times": {
+  "오후": {
+   "time_en": "an October afternoon",
+   "sky_en": "a pale blue sky showing between the yellow leaves",
+   "light_en": "warm golden sunlight comes from the camera's left at a low angle, falling across {p} face and shoulders",
+   "shadow_en": "long soft shadows of the tree trunks stretch across the pavement toward the camera's right",
+   "desc_ko": "10월 오후, 낮은 해가 인물의 왼쪽(카메라 기준)에서 비춤",
+   "time_prep": "on"
+  },
+  "해질녘": {
+   "time_en": "the last hour before sunset",
+   "sky_en": "a soft peach-colored sky above the yellow trees",
+   "light_en": "low orange sunlight comes from the camera's left, lighting {p} face and shoulders",
+   "shadow_en": "long soft shadows stretch across the pavement toward the camera's right",
+   "desc_ko": "해 지기 직전, 낮고 주황빛 해가 카메라 왼쪽에서 비춤"
+  }
+ },
+ "moments": {
+  "천천히 걷기": {
+   "pose_en": "walks slowly toward the camera along the sidewalk with {p} weight shifting onto the forward leg",
+   "moment_en": "a few yellow leaves drift down in front of {o} as {s} looks toward the camera",
+   "desc_ko": "낙엽이 떨어지는 길을 카메라 쪽으로 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  },
+  "나무에 기대 서기": {
+   "pose_en": "stands beside a ginkgo trunk with {p} shoulder resting lightly against it",
+   "moment_en": "{s} looks toward the camera and smiles a little",
+   "desc_ko": "은행나무 줄기에 어깨를 살짝 기대고 카메라를 봄",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위"
+   ]
+  },
+  "돌아보며 서기": {
+   "pose_en": "stands on the sidewalk with {p} body turned slightly to one side",
+   "moment_en": "{s} turns {p} head toward the camera with a gentle smile",
+   "desc_ko": "몸을 살짝 틀고 고개만 카메라 쪽으로 돌림",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the trees softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the trees softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the trees softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the pavement among the fallen yellow leaves",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "오후": [
+   "the ginkgo leaves are a bright golden yellow, fan-shaped, with a few drifting through the air",
+   "the trunks are dark gray-brown with rough bark",
+   "the stone wall is warm gray with a black iron fence along its top"
+  ],
+  "해질녘": [
+   "the ginkgo leaves are a deep golden yellow with warm orange edges",
+   "the trunks are dark gray-brown with rough bark",
+   "the stone wall is warm gray with a black iron fence along its top"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the street and the yellow trees spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

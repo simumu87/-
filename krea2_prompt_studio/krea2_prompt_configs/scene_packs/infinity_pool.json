@@ -1,0 +1,93 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "인피니티 풀",
+ "outdoor": true,
+ "note_ko": "절벽 위 리조트 인피니티 풀. 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. 한결 수영복 레퍼런스용. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a long infinity pool on a cliff terrace above the coast",
+ "feature_en": [
+  "a long rectangle of clear turquoise water whose far edge meets the open sea",
+  "a few tall palm trees and low white villa walls along the left side of the terrace"
+ ],
+ "ground_en": [
+  "a pale stone pool edge with a wet darker band along the water",
+  "smooth cream stone paving across the terrace"
+ ],
+ "far_en": [
+  "a dark rocky coastline curving away to the right above the sea",
+  "small islands far out on the horizon"
+ ],
+ "times": {
+  "해질녘": {
+   "time_en": "golden hour just before sunset",
+   "sky_en": "a wide sky running from deep blue overhead into orange and pink at the horizon",
+   "light_en": "low orange sunlight comes from the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "long soft shadows stretch across the stone toward the camera's right",
+   "desc_ko": "해 지기 직전, 낮은 주황빛 해가 카메라 왼쪽에서 비춤"
+  },
+  "맑은 낮": {
+   "time_en": "a bright clear midday",
+   "sky_en": "a clear deep-blue sky with a few thin white clouds",
+   "light_en": "bright white sunlight comes from above and to the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "short sharp shadows pool under {o} on the stone toward the camera's right",
+   "desc_ko": "맑은 한낮, 높은 흰 해가 카메라 왼쪽 위에서 비춤",
+   "time_prep": "on"
+  }
+ },
+ "moments": {
+  "풀 가장자리에 서기": {
+   "pose_en": "stands barefoot on the stone edge of the pool with {p} weight on {p} left leg and {p} body turned slightly toward the right side of the frame",
+   "moment_en": "{s} turns {p} head toward the camera with a gentle smile",
+   "desc_ko": "풀 가장자리에 서서 몸은 오른쪽으로, 고개는 카메라 쪽으로",
+   "frames": [
+    "전신"
+   ]
+  },
+  "수평선 보다 돌아보기": {
+   "pose_en": "stands at the pool edge facing the horizon with one hand resting on {p} other forearm",
+   "moment_en": "{s} looks back toward the camera over {p} shoulder",
+   "desc_ko": "수평선을 보다 어깨 너머로 카메라를 돌아봄",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위"
+   ]
+  },
+  "천천히 걷기": {
+   "pose_en": "walks slowly barefoot along the pool edge toward the camera",
+   "moment_en": "{s} smiles gently and looks toward the camera",
+   "desc_ko": "풀 가장자리를 맨발로 천천히 걸어옴",
+   "frames": [
+    "전신"
+   ]
+  },
+  "물속에서 가장자리에 기대기": {
+   "pose_en": "stands waist-deep in the pool with {p} back against the far edge and {p} elbows resting on the stone behind {o}",
+   "moment_en": "{s} tilts {p} head toward the camera as a few water droplets run down {p} shoulders",
+   "desc_ko": "허리까지 물에 들어가 풀 가장자리에 팔꿈치를 걸치고 기대어 카메라를 봄",
+   "frames": [
+    "허리 위"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 35mm lens, the frame running from above {p} head to below {p} bare feet, vertical frame, shallow depth of field with the sea and the sky softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the sea and the sky softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the sea and the sky softly out of focus"
+ },
+ "ground_contact_en": "{P} bare feet rest on the pale stone edge of the pool",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "해질녘": [
+   "the water is a clear turquoise that meets the sea at a straight line along the far edge",
+   "the palm trees are tall and dark green against the orange sky",
+   "the stone is cream with a darker wet band along the pool"
+  ],
+  "맑은 낮": [
+   "the water is a clear turquoise that meets the deep-blue sea at a straight line",
+   "the palm trees are tall and bright green",
+   "the stone is cream with a darker wet band along the pool"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the pool and the open sea spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

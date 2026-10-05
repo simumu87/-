@@ -1,0 +1,43 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "TIME_OF_DAY",
+  "label_ko": "시간대",
+  "items": {
+    "새벽": {
+      "en": "early dawn",
+      "desc_ko": "해 뜨기 직전의 이른 새벽빛"
+    },
+    "아침": {
+      "en": "soft morning light",
+      "desc_ko": "부드러운 아침 햇빛"
+    },
+    "오전": {
+      "en": "late morning",
+      "desc_ko": "한낮 전의 밝은 오전"
+    },
+    "정오": {
+      "en": "bright midday",
+      "desc_ko": "해가 높이 뜬 밝은 한낮"
+    },
+    "오후": {
+      "en": "warm afternoon light",
+      "desc_ko": "따뜻한 오후 햇빛"
+    },
+    "해질녘": {
+      "en": "golden hour before sunset",
+      "desc_ko": "해가 지기 직전 낮고 따뜻한 빛 (골든아워)"
+    },
+    "저녁": {
+      "en": "early evening",
+      "desc_ko": "해가 진 직후의 이른 저녁"
+    },
+    "밤": {
+      "en": "quiet night",
+      "desc_ko": "고요한 밤"
+    },
+    "심야": {
+      "en": "late night",
+      "desc_ko": "깊은 밤"
+    }
+  }
+}

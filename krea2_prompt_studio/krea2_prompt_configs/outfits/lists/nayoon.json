@@ -1,0 +1,11 @@
+{
+  "schema": "krea2-outfit-list/1",
+  "character": "나윤",
+  "trigger": "nayoon",
+  "lora_outfits": [
+    "gold_amber_triangle_string_bikini"
+  ],
+  "use_common_pool": true,
+  "default_source": "all",
+  "note_ko": "나윤 LoRA 사용 시 의상 후보 = 로라의상(lora_outfits) + 공용의상(본체 공용 풀). default_source: all(둘 다) / lora(로라의상만) / common(공용만). lora_outfits에는 outfits/lora/ 의 id를 적는다. 의상 파일 자체는 나윤 전용이 아니다."
+}

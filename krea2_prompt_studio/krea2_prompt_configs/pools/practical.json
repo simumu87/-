@@ -1,0 +1,215 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "PRACTICAL",
+  "label_ko": "생활 소품",
+  "items": {
+    "ceramic mug": {
+      "en": "a ceramic mug",
+      "desc_ko": ""
+    },
+    "smartphone": {
+      "en": "a smartphone",
+      "desc_ko": ""
+    },
+    "remote control": {
+      "en": "a remote control",
+      "desc_ko": ""
+    },
+    "charging cable": {
+      "en": "a charging cable",
+      "desc_ko": ""
+    },
+    "coffee machine": {
+      "en": "a compact coffee machine",
+      "desc_ko": ""
+    },
+    "kettle": {
+      "en": "a kettle",
+      "desc_ko": ""
+    },
+    "dish rack": {
+      "en": "a dish rack",
+      "desc_ko": ""
+    },
+    "fruit bowl": {
+      "en": "a fruit bowl",
+      "desc_ko": ""
+    },
+    "cookbook": {
+      "en": "an open cookbook",
+      "desc_ko": ""
+    },
+    "glass of water": {
+      "en": "a glass of water",
+      "desc_ko": ""
+    },
+    "alarm clock": {
+      "en": "an alarm clock",
+      "desc_ko": ""
+    },
+    "reading glasses": {
+      "en": "reading glasses",
+      "desc_ko": ""
+    },
+    "laptop": {
+      "en": "an open laptop",
+      "desc_ko": ""
+    },
+    "monitor": {
+      "en": "a desktop monitor",
+      "desc_ko": ""
+    },
+    "keyboard": {
+      "en": "a keyboard",
+      "desc_ko": ""
+    },
+    "notebook": {
+      "en": "an open notebook",
+      "desc_ko": ""
+    },
+    "pen cup": {
+      "en": "a pen cup",
+      "desc_ko": ""
+    },
+    "headphones": {
+      "en": "a pair of headphones",
+      "desc_ko": ""
+    },
+    "coffee grinder": {
+      "en": "a coffee grinder",
+      "desc_ko": ""
+    },
+    "pastry display": {
+      "en": "a compact pastry display",
+      "desc_ko": ""
+    },
+    "paper menus": {
+      "en": "paper menus",
+      "desc_ko": ""
+    },
+    "water carafe": {
+      "en": "a water carafe",
+      "desc_ko": ""
+    },
+    "open books": {
+      "en": "open books",
+      "desc_ko": ""
+    },
+    "shopping basket": {
+      "en": "a shopping basket",
+      "desc_ko": ""
+    },
+    "bookmark display": {
+      "en": "a bookmark display",
+      "desc_ko": ""
+    },
+    "museum brochure": {
+      "en": "a museum brochure",
+      "desc_ko": ""
+    },
+    "audio guide": {
+      "en": "an audio guide",
+      "desc_ko": ""
+    },
+    "visitor map": {
+      "en": "a visitor map",
+      "desc_ko": ""
+    },
+    "library card": {
+      "en": "a library card",
+      "desc_ko": ""
+    },
+    "crosswalk signal": {
+      "en": "a crosswalk signal",
+      "desc_ko": ""
+    },
+    "bicycle rack": {
+      "en": "a bicycle rack",
+      "desc_ko": ""
+    },
+    "parked bicycles": {
+      "en": "parked bicycles",
+      "desc_ko": ""
+    },
+    "recycling bin": {
+      "en": "a recycling bin",
+      "desc_ko": ""
+    },
+    "park map": {
+      "en": "a park map",
+      "desc_ko": ""
+    },
+    "tote bag": {
+      "en": "a practical tote bag",
+      "desc_ko": ""
+    },
+    "water bottle": {
+      "en": "a reusable water bottle",
+      "desc_ko": ""
+    },
+    "beach towel": {
+      "en": "a neatly folded beach towel",
+      "desc_ko": ""
+    },
+    "sunglasses": {
+      "en": "a pair of sunglasses",
+      "desc_ko": ""
+    },
+    "walking backpack": {
+      "en": "a practical walking backpack",
+      "desc_ko": ""
+    },
+    "trail map": {
+      "en": "a folded trail map",
+      "desc_ko": ""
+    },
+    "hotel brochures": {
+      "en": "hotel brochures",
+      "desc_ko": ""
+    },
+    "key-card holder": {
+      "en": "a key-card holder",
+      "desc_ko": ""
+    },
+    "small luggage trolley": {
+      "en": "a small luggage trolley",
+      "desc_ko": ""
+    },
+    "room-service menu": {
+      "en": "a room-service menu",
+      "desc_ko": ""
+    },
+    "luggage": {
+      "en": "travel luggage",
+      "desc_ko": ""
+    },
+    "phone charger": {
+      "en": "a phone charger",
+      "desc_ko": ""
+    },
+    "rolling suitcase": {
+      "en": "a rolling suitcase",
+      "desc_ko": ""
+    },
+    "travel bag": {
+      "en": "a compact travel bag",
+      "desc_ko": ""
+    },
+    "train ticket": {
+      "en": "a train ticket",
+      "desc_ko": ""
+    },
+    "open novel": {
+      "en": "an open novel",
+      "desc_ko": ""
+    },
+    "coffee cup": {
+      "en": "a coffee cup",
+      "desc_ko": ""
+    },
+    "bookmark": {
+      "en": "a bookmark",
+      "desc_ko": ""
+    }
+  }
+}

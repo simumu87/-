@@ -1,0 +1,23 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "SKIN_FINISH",
+  "label_ko": "피부 질감",
+  "items": {
+    "자연 피부": {
+      "en": "natural skin with visible pores, fine vellus hair and subtle tonal variation",
+      "desc_ko": "모공과 잔털이 보이는 자연스러운 피부"
+    },
+    "매트": {
+      "en": "soft matte-natural skin without artificial plastic gloss",
+      "desc_ko": "번들거림 없이 차분한 피부"
+    },
+    "은은한 윤기": {
+      "en": "subtle healthy skin sheen with realistic specular response",
+      "desc_ko": "건강해 보이는 은은한 윤기"
+    },
+    "부드러운 스튜디오": {
+      "en": "softly lit natural skin with controlled studio highlights",
+      "desc_ko": "스튜디오 조명을 받은 부드러운 피부"
+    }
+  }
+}

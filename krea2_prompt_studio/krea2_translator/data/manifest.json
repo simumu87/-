@@ -1,0 +1,12 @@
+{
+  "module": "Krea2 Embedded Translator",
+  "version": "1.0.0",
+  "language": "ko-en",
+  "mode": "offline_deterministic",
+  "updateable_files": [
+    "core_ko_en.json",
+    "domains_ko_en.json",
+    "patterns.json",
+    "normalization.json"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "ACCESSORIES",
+  "label_ko": "액세서리",
+  "items": {
+    "시계": {
+      "en": "a simple wristwatch",
+      "desc_ko": ""
+    },
+    "안경": {
+      "en": "thin-framed eyeglasses",
+      "desc_ko": ""
+    },
+    "선글라스": {
+      "en": "simple sunglasses",
+      "desc_ko": ""
+    },
+    "작은 귀걸이": {
+      "en": "small understated earrings",
+      "desc_ko": ""
+    },
+    "목걸이": {
+      "en": "a delicate necklace",
+      "desc_ko": ""
+    },
+    "반지": {
+      "en": "a simple ring",
+      "desc_ko": ""
+    },
+    "가죽 가방": {
+      "en": "a structured leather shoulder bag",
+      "desc_ko": ""
+    },
+    "캔버스 토트백": {
+      "en": "a practical canvas tote bag",
+      "desc_ko": ""
+    },
+    "백팩": {
+      "en": "a practical backpack",
+      "desc_ko": ""
+    },
+    "스카프": {
+      "en": "a lightweight scarf",
+      "desc_ko": ""
+    },
+    "모자": {
+      "en": "a simple baseball cap",
+      "desc_ko": ""
+    },
+    "비니": {
+      "en": "a soft knit beanie",
+      "desc_ko": ""
+    },
+    "헤어밴드": {
+      "en": "a simple fabric headband",
+      "desc_ko": ""
+    },
+    "없음": {
+      "en": "no prominent accessory",
+      "desc_ko": ""
+    }
+  }
+}

@@ -1,0 +1,138 @@
+[
+  {
+    "pattern": "(?<![가-힣])(\\d+)명(?:의)?",
+    "replacement": "\\1 people"
+  },
+  {
+    "pattern": "연인이 손을 잡고 걷는다",
+    "replacement": "the couple hold hands and walk"
+  },
+  {
+    "pattern": "연인이 손을 잡고 걷다",
+    "replacement": "the couple hold hands and walk"
+  },
+  {
+    "pattern": "커플이 손을 잡고 걷는다",
+    "replacement": "the couple hold hands and walk"
+  },
+  {
+    "pattern": "커플이 손을 잡고 걷다",
+    "replacement": "the couple hold hands and walk"
+  },
+  {
+    "pattern": "연인이 손을 잡고 있다",
+    "replacement": "the couple are holding hands"
+  },
+  {
+    "pattern": "커플이 손을 잡고 있다",
+    "replacement": "the couple are holding hands"
+  },
+  {
+    "pattern": "함께 웃는다",
+    "replacement": "laugh together"
+  },
+  {
+    "pattern": "함께 웃고 있다",
+    "replacement": "are laughing together"
+  },
+  {
+    "pattern": "서로 바라본다",
+    "replacement": "look at each other"
+  },
+  {
+    "pattern": "서로 바라보고 있다",
+    "replacement": "are looking at each other"
+  },
+  {
+    "pattern": "정면에서 바라본 전신 구도",
+    "replacement": "full-body composition viewed from the front"
+  },
+  {
+    "pattern": "정면에서 바라본",
+    "replacement": "viewed from the front"
+  },
+  {
+    "pattern": "창문으로 들어오는 자연광",
+    "replacement": "natural light coming through the window"
+  },
+  {
+    "pattern": "창문으로 들어오는 햇빛",
+    "replacement": "sunlight coming through the window"
+  },
+  {
+    "pattern": "왼쪽에 있는",
+    "replacement": "on the left"
+  },
+  {
+    "pattern": "오른쪽에 있는",
+    "replacement": "on the right"
+  },
+  {
+    "pattern": "왼손으로",
+    "replacement": "with the left hand"
+  },
+  {
+    "pattern": "오른손으로",
+    "replacement": "with the right hand"
+  },
+  {
+    "pattern": "왼발로",
+    "replacement": "with the left foot"
+  },
+  {
+    "pattern": "오른발로",
+    "replacement": "with the right foot"
+  },
+  {
+    "pattern": "왼쪽 다리",
+    "replacement": "left leg"
+  },
+  {
+    "pattern": "오른쪽 다리",
+    "replacement": "right leg"
+  },
+  {
+    "pattern": "왼팔",
+    "replacement": "left arm"
+  },
+  {
+    "pattern": "오른팔",
+    "replacement": "right arm"
+  },
+  {
+    "pattern": "왼손",
+    "replacement": "left hand"
+  },
+  {
+    "pattern": "오른손",
+    "replacement": "right hand"
+  },
+  {
+    "pattern": "왼발",
+    "replacement": "left foot"
+  },
+  {
+    "pattern": "오른발",
+    "replacement": "right foot"
+  },
+  {
+    "pattern": "창문 옆",
+    "replacement": "beside the window"
+  },
+  {
+    "pattern": "창가",
+    "replacement": "by the window"
+  },
+  {
+    "pattern": "테이블 옆",
+    "replacement": "beside the table"
+  },
+  {
+    "pattern": "소파 옆",
+    "replacement": "beside the sofa"
+  },
+  {
+    "pattern": "자연광이 들어오는",
+    "replacement": "filled with natural light"
+  }
+]

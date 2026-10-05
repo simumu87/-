@@ -1,0 +1,86 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_yellow_sundress",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "노란 끈 썬드레스",
+  "name_en": "pale yellow sundress",
+  "desc_ko": "연한 노란 가는 끈 썬드레스(하트 네크라인, 풍성한 치마) + 갈색 끈 샌들 (노바 코디, 오빠가 특히 예쁘다고 함)",
+  "category": "casual",
+  "source_doc": "노바 코디 4벌(1005) · `사진첩/한결/로라시험/` 사진에서 보이는 것만 적음",
+  "applies_to": {
+    "locations": [
+      "수국 정원",
+      "식물원 정원길",
+      "공원"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "연한 노랑",
+      "en": "pale yellow"
+    }
+  },
+  "material": {
+    "ko": "면",
+    "en": "cotton",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a pale yellow cotton sundress with thin straps, a sweetheart neckline, a fitted bodice with a gathered waist and a full skirt ending above the knees, with brown ankle-strap flat sandals",
+  "normal_waist_en": "a pale yellow cotton sundress with thin straps, a sweetheart neckline and a fitted bodice with a gathered waist",
+  "normal_noshoe_en": "a pale yellow cotton sundress with thin straps, a sweetheart neckline, a fitted bodice with a gathered waist and a full skirt ending above the knees",
+  "normal_top_en": "a pale yellow cotton sundress with thin straps and a sweetheart neckline",
+  "detail_prose_en": [
+    "The sundress is opaque pale yellow cotton with thin straps over the shoulders and a sweetheart neckline",
+    {
+      "depth": 2,
+      "en": "The fitted bodice is gathered into the waist"
+    },
+    {
+      "depth": 4,
+      "en": "The full skirt spreads round and ends above the knees"
+    },
+    {
+      "depth": 6,
+      "en": "{P} brown flat sandals have a thin strap around each ankle"
+    }
+  ],
+  "echo_en": [
+    "The sundress is a single pale yellow",
+    "The thin straps and the sweetheart neckline stay clearly visible"
+  ],
+  "lit_en": "the pale yellow cotton of the sundress",
+  "parts": {
+    "top": {
+      "ko": "연한 노란 끈 상체",
+      "en": "a pale yellow strapped bodice",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "풍성한 노란 치마",
+      "en": "a full pale yellow skirt",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}

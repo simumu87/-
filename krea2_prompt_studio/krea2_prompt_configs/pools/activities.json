@@ -1,0 +1,239 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "ACTIVITIES",
+  "label_ko": "활동",
+  "items": {
+    "커피 마시기": {
+      "en": "having coffee",
+      "desc_ko": "커피를 마시는 모습"
+    },
+    "차 마시기": {
+      "en": "having tea",
+      "desc_ko": "차를 마시는 모습"
+    },
+    "아침 식사": {
+      "en": "having a relaxed breakfast",
+      "desc_ko": "여유로운 아침 식사"
+    },
+    "저녁 식사": {
+      "en": "sharing a casual dinner",
+      "desc_ko": "편안한 저녁 식사"
+    },
+    "요리하기": {
+      "en": "cooking a simple meal",
+      "desc_ko": "간단한 요리를 하는 모습"
+    },
+    "베이킹": {
+      "en": "baking in a home kitchen",
+      "desc_ko": "집 주방에서 빵이나 과자를 굽는 모습"
+    },
+    "책 읽기": {
+      "en": "reading a book",
+      "desc_ko": "책을 읽는 모습"
+    },
+    "잡지 보기": {
+      "en": "looking through a magazine",
+      "desc_ko": "잡지를 넘겨 보는 모습"
+    },
+    "공부하기": {
+      "en": "studying with organized notes",
+      "desc_ko": "노트를 정리하며 공부하는 모습"
+    },
+    "노트북 작업": {
+      "en": "working on a laptop",
+      "desc_ko": "노트북으로 작업하는 모습"
+    },
+    "화상회의": {
+      "en": "joining a casual video meeting",
+      "desc_ko": "가볍게 화상회의에 참여하는 모습"
+    },
+    "그림 그리기": {
+      "en": "drawing or sketching",
+      "desc_ko": "그림이나 스케치를 그리는 모습"
+    },
+    "사진 찍기": {
+      "en": "taking photographs",
+      "desc_ko": "사진을 찍는 모습"
+    },
+    "음악 듣기": {
+      "en": "listening to music",
+      "desc_ko": "음악을 듣는 모습"
+    },
+    "기타 연주": {
+      "en": "playing an acoustic guitar",
+      "desc_ko": "어쿠스틱 기타를 치는 모습"
+    },
+    "피아노 연주": {
+      "en": "playing a piano",
+      "desc_ko": "피아노를 치는 모습"
+    },
+    "영화 보기": {
+      "en": "watching a film at home",
+      "desc_ko": "집에서 영화를 보는 모습"
+    },
+    "게임하기": {
+      "en": "playing a casual video game",
+      "desc_ko": "가볍게 비디오 게임을 하는 모습"
+    },
+    "보드게임": {
+      "en": "playing a board game",
+      "desc_ko": "보드게임을 하는 모습"
+    },
+    "정리하기": {
+      "en": "organizing a room",
+      "desc_ko": "방을 정리하는 모습"
+    },
+    "식물 돌보기": {
+      "en": "caring for houseplants",
+      "desc_ko": "화분을 돌보는 모습"
+    },
+    "산책": {
+      "en": "taking a relaxed walk",
+      "desc_ko": "느긋하게 걷는 모습"
+    },
+    "조깅": {
+      "en": "going for a light recreational jog",
+      "desc_ko": "가볍게 달리는 모습"
+    },
+    "자전거": {
+      "en": "riding a bicycle recreationally",
+      "desc_ko": "자전거를 타는 모습"
+    },
+    "공원 피크닉": {
+      "en": "having a casual park picnic",
+      "desc_ko": "공원에서 하는 가벼운 피크닉"
+    },
+    "해변 산책": {
+      "en": "walking along the beach",
+      "desc_ko": "해변을 따라 걷는 모습"
+    },
+    "여행 출발": {
+      "en": "getting ready to start a trip",
+      "desc_ko": "여행을 떠날 채비를 하는 모습"
+    },
+    "여행 중 휴식": {
+      "en": "taking a break while traveling",
+      "desc_ko": "여행 중 잠깐 쉬는 모습"
+    },
+    "기차 기다리기": {
+      "en": "waiting for a train",
+      "desc_ko": "기차를 기다리는 모습"
+    },
+    "전시 관람": {
+      "en": "visiting an art exhibition",
+      "desc_ko": "미술 전시를 보는 모습"
+    },
+    "서점 구경": {
+      "en": "browsing books in a bookstore",
+      "desc_ko": "서점에서 책을 구경하는 모습"
+    },
+    "카페 데이트": {
+      "en": "having a relaxed cafe date",
+      "desc_ko": "여유로운 카페 데이트"
+    },
+    "저녁 산책": {
+      "en": "taking an evening walk",
+      "desc_ko": "저녁에 걷는 모습"
+    },
+    "비 오는 날 산책": {
+      "en": "taking a walk on a rainy day",
+      "desc_ko": "비 오는 날 걷는 모습"
+    },
+    "창가에서 쉬기": {
+      "en": "relaxing beside a window",
+      "desc_ko": "창가에서 쉬는 모습"
+    },
+    "친구와 대화": {
+      "en": "having a friendly conversation",
+      "desc_ko": "친구와 다정하게 이야기함"
+    },
+    "연인과 대화": {
+      "en": "having a quiet romantic conversation",
+      "desc_ko": "연인과 조용히 이야기함"
+    },
+    "기념사진": {
+      "en": "taking a commemorative photo together",
+      "desc_ko": "함께 기념사진을 찍는 모습"
+    },
+    "선물 고르기": {
+      "en": "choosing a small gift together",
+      "desc_ko": "함께 작은 선물을 고르는 모습"
+    },
+    "쇼핑": {
+      "en": "shopping casually",
+      "desc_ko": "가볍게 쇼핑하는 모습"
+    },
+    "가볍게 운동하기": {
+      "en": "doing light recreational exercise",
+      "desc_ko": "가벼운 운동을 하는 모습"
+    },
+    "가볍게 포옹하기": {
+      "en": "sharing a warm everyday embrace",
+      "desc_ko": "따뜻하게 가볍게 안는 모습"
+    },
+    "글쓰기": {
+      "en": "writing in a notebook at a desk",
+      "desc_ko": "책상에서 노트에 글을 쓰는 모습"
+    },
+    "기차 타기": {
+      "en": "traveling by train",
+      "desc_ko": "기차로 이동하는 모습"
+    },
+    "대화하기": {
+      "en": "having an ordinary conversation",
+      "desc_ko": "평범하게 이야기하는 모습"
+    },
+    "바닷가 산책": {
+      "en": "walking along the seaside",
+      "desc_ko": "바닷가를 따라 걷는 모습"
+    },
+    "사진 보기": {
+      "en": "looking through photographs",
+      "desc_ko": "사진을 훑어보는 모습"
+    },
+    "사진 촬영": {
+      "en": "taking lifestyle photographs",
+      "desc_ko": "라이프스타일 사진을 찍는 모습"
+    },
+    "선물 주고받기": {
+      "en": "exchanging a small gift",
+      "desc_ko": "작은 선물을 주고받는 모습"
+    },
+    "손잡고 걷기": {
+      "en": "taking a walk while holding hands",
+      "desc_ko": "손을 잡고 함께 걷는 모습"
+    },
+    "아침 준비": {
+      "en": "going through a morning routine",
+      "desc_ko": "아침 일과를 준비하는 모습"
+    },
+    "악기 연주": {
+      "en": "practicing a musical instrument",
+      "desc_ko": "악기를 연습하는 모습"
+    },
+    "업무 보기": {
+      "en": "doing focused desk work",
+      "desc_ko": "책상에서 집중해서 일하는 모습"
+    },
+    "여행 준비": {
+      "en": "preparing for a trip",
+      "desc_ko": "여행 짐을 챙기는 모습"
+    },
+    "요가하기": {
+      "en": "practicing beginner yoga",
+      "desc_ko": "초보자용 요가를 하는 모습"
+    },
+    "자전거 타기": {
+      "en": "riding a bicycle",
+      "desc_ko": "자전거를 타는 모습"
+    },
+    "함께 요리하기": {
+      "en": "cooking together in the kitchen",
+      "desc_ko": "주방에서 같이 요리하는 모습"
+    },
+    "호텔 체크인": {
+      "en": "arriving at a hotel",
+      "desc_ko": "호텔에 도착해 체크인하는 모습"
+    }
+  }
+}

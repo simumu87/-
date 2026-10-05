@@ -1,0 +1,39 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "PALETTES",
+  "label_ko": "색 조화",
+  "items": {
+    "뉴트럴": {
+      "en": "warm neutral harmony of ivory, beige, gray and natural wood",
+      "desc_ko": "아이보리·베이지·회색의 따뜻한 중립 조화"
+    },
+    "쿨 뉴트럴": {
+      "en": "cool neutral harmony of soft gray, blue-gray and pale wood",
+      "desc_ko": "연회색·블루그레이의 차가운 중립 조화"
+    },
+    "웜 뉴트럴": {
+      "en": "warm ivory, beige, tan and muted brown harmony",
+      "desc_ko": "아이보리·베이지·탄·갈색의 따뜻한 조화"
+    },
+    "세이지": {
+      "en": "sage green, cream and natural wood harmony",
+      "desc_ko": "세이지 그린·크림·나무 색 조화"
+    },
+    "블루": {
+      "en": "muted blue, ivory and charcoal harmony",
+      "desc_ko": "차분한 블루·아이보리·차콜 조화"
+    },
+    "테라코타": {
+      "en": "muted terracotta, cream and warm wood harmony",
+      "desc_ko": "차분한 테라코타·크림·따뜻한 나무 색 조화"
+    },
+    "모노톤": {
+      "en": "coherent monochrome palette with subtle tonal variation",
+      "desc_ko": "한 색 계열의 모노크롬"
+    },
+    "파스텔": {
+      "en": "soft pastel palette with restrained saturation",
+      "desc_ko": "채도를 낮춘 부드러운 파스텔"
+    }
+  }
+}
