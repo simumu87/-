@@ -1,0 +1,86 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_blue_crop_cardigan_white_tennis",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "하늘색 크롭 가디건 + 흰 테니스 스커트",
+  "name_en": "light-blue cropped cardigan with white tennis skirt",
+  "desc_ko": "하늘색 반팔 크롭 가디건, 흰 레이스 트림 탑, 흰 플리츠 테니스 스커트, 흰 스니커즈 (노바 코디, 오빠가 특히 예쁘다고 함)",
+  "category": "casual",
+  "source_doc": "노바 코디 4벌(1005) · `사진첩/한결/로라시험/` 사진에서 보이는 것만 적음",
+  "applies_to": {
+    "locations": [
+      "수국 정원",
+      "식물원 정원길",
+      "공원"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "하늘색 + 흰색",
+      "en": "light blue and white"
+    }
+  },
+  "material": {
+    "ko": "고운 니트와 가벼운 직물",
+    "en": "fine knit and light fabric",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a light-blue short-sleeve cropped cardigan worn open over a white camisole with lace trim, a white pleated tennis skirt and white leather sneakers",
+  "normal_waist_en": "a light-blue short-sleeve cropped cardigan worn open over a white camisole with lace trim and a white pleated tennis skirt",
+  "normal_noshoe_en": "a light-blue short-sleeve cropped cardigan worn open over a white camisole with lace trim and a white pleated tennis skirt",
+  "normal_top_en": "a light-blue short-sleeve cropped cardigan worn open over a white camisole with lace trim",
+  "detail_prose_en": [
+    "The cardigan is a soft light-blue knit with short sleeves, ribbed cuffs and a row of small buttons, worn open",
+    {
+      "depth": 2,
+      "en": "The white camisole has a V neckline edged with lace"
+    },
+    {
+      "depth": 3,
+      "en": "The white tennis skirt has narrow pleats and sits above the knee"
+    },
+    {
+      "depth": 6,
+      "en": "{P} white leather sneakers are laced"
+    }
+  ],
+  "echo_en": [
+    "The cardigan is light blue knit and cropped",
+    "The white lace trim edges the neckline of the camisole"
+  ],
+  "lit_en": "the light-blue knit of the cardigan",
+  "parts": {
+    "top": {
+      "ko": "하늘색 크롭 가디건과 흰 레이스 탑",
+      "en": "a light-blue cropped cardigan over a white lace camisole",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "흰 플리츠 테니스 스커트",
+      "en": "a white pleated tennis skirt",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}

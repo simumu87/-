@@ -1,0 +1,83 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_wine_slip_midi",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "와인색 슬립 원피스(옆트임)",
+  "name_en": "wine-red slip midi dress",
+  "desc_ko": "와인색 가는 어깨끈 슬립 원피스(옆트임, 종아리 길이) + 베이지 발목끈 힐 (노바 코디)",
+  "category": "casual",
+  "source_doc": "노바 코디 4벌(1005) · `사진첩/한결/로라시험/` 사진에서 보이는 것만 적음",
+  "applies_to": {
+    "locations": [
+      "수국 정원",
+      "식물원 정원길",
+      "공원"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "와인색",
+      "en": "wine-red"
+    }
+  },
+  "material": {
+    "ko": "새틴",
+    "en": "satin",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a wine-red satin slip dress with thin adjustable shoulder straps, a V neckline and a calf-length skirt with a slit on one side, with beige ankle-strap high heels",
+  "normal_waist_en": "a wine-red satin slip dress with thin adjustable shoulder straps and a V neckline",
+  "normal_noshoe_en": "a wine-red satin slip dress with thin adjustable shoulder straps, a V neckline and a calf-length skirt with a slit on one side",
+  "normal_top_en": "a wine-red satin slip dress with thin adjustable shoulder straps and a V neckline",
+  "detail_prose_en": [
+    "The dress is opaque wine-red satin with two thin shoulder straps that have small metal adjusters",
+    "The V neckline drapes in a soft fold",
+    {
+      "depth": 4,
+      "en": "The calf-length skirt falls straight with a slit on one side"
+    },
+    {
+      "depth": 6,
+      "en": "{P} beige high heels have a thin strap around each ankle"
+    }
+  ],
+  "echo_en": [
+    "The slip dress is a single wine-red",
+    "The shoulder straps are thin"
+  ],
+  "lit_en": "the wine-red satin of the dress",
+  "parts": {
+    "top": {
+      "ko": "와인색 슬립 상체",
+      "en": "a wine-red slip bodice",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "와인색 슬립 스커트",
+      "en": "a wine-red slip skirt",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}
