@@ -173,6 +173,9 @@ def compose_normal(scene: "k.SceneProfile", person: "k.PersonSlot", lora: Dict[s
     hair = k.clean_text(hair_override) or k.clean_text(lora.get("hair", ""))   # override replaces the LoRA hair entirely
     if hair:
         chunks.append(hair_sentence(subj, hair))
+    mk = resolve_makeup(lora)
+    if mk:
+        chunks.append(makeup_sentence(subj, mk))
     for acc in lora.get("signature_accessories", []):
         chunks.append(sentence(f"{acc} rests around {poss} neck" if "choker" in acc else f"{acc}"))
     if outfit:
@@ -216,6 +219,28 @@ def load_hair_presets() -> Dict[str, Any]:
     return _load(k.CONFIG_DIR / "hair_presets.json")["items"]
 
 
+def load_makeup() -> Dict[str, Any]:
+    return _load(k.CONFIG_DIR / "makeup.json")["items"]
+
+
+def resolve_makeup(lora: Dict[str, Any], pick: str = "") -> str:
+    """The makeup text for one person. pick = a name from makeup.json, or free English text; empty keeps the
+    LoRA's own default (the `makeup` field in loras.json, empty if the LoRA has none). A pick replaces the default."""
+    pick = k.clean_text(pick)
+    if pick:
+        items = load_makeup()
+        return k.clean_text(items[pick]["prose_en"]) if pick in items else pick
+    return k.clean_text(lora.get("makeup", ""))
+
+
+def makeup_sentence(subj: str, text: str) -> str:
+    """Same rule as hair_sentence: a full sentence ("Her makeup is ...") is used as it is, a phrase gets "She has"."""
+    text = k.clean_text(text)
+    if re.match(r"^(?:her|his|their|she|he|they)\s", text, flags=re.I):
+        return sentence(text)
+    return sentence(f"{subj.capitalize()} has {text}")
+
+
 def load_pack(location_ko: str) -> Dict[str, Any]:
     name = PACK_FILES.get(location_ko)
     if not name:
@@ -238,10 +263,12 @@ def _join(parts: List[str]) -> str:
 def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", time_key: str = "해질녘",
                   moment: str = "파도 발목", framing: str = "전신", expression: str = "환한 미소",
                   hair: str = "", mode: str = "보통", reinforce: Optional[int] = None, seed: int = 0,
-                  common_outfit: bool = False, reference: bool = False) -> Dict[str, Any]:
+                  common_outfit: bool = False, reference: bool = False, makeup: str = "") -> Dict[str, Any]:
     """Build the person prompt, the scene prompt and the combined single prompt.
 
     hair: "" keeps the LoRA hair; a preset name or free text replaces it entirely.
+    makeup: "" keeps the LoRA's default makeup (loras.json `makeup`, none if absent); a name from makeup.json or free
+        English text replaces it. Left out in reference mode (the photo carries the face).
     mode: how much the scene and outfit are described. 보통 (concise) / 상세 (outfit parts, more place detail).
     reference: True when an attached reference photo carries the face and body. The identity sentence, the skin
         sentence and every restatement are left out, because a longer prompt makes the model drift from the photo.
@@ -296,6 +323,10 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
             person.append(sentence(k.clean_text(hair)))
     elif lora.get("hair") and not reference:
         person.append(hair_sentence(subj, lora["hair"]))
+
+    mk_text = "" if reference else resolve_makeup(lora, makeup)
+    if mk_text:
+        person.append(makeup_sentence(subj, mk_text))
 
     if not outfit and common_outfit:
         person.append(common_outfit_sentence(location, framing, subj, poss, detailed, seed))
@@ -366,6 +397,9 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         old = k.clean_text(lora["hair"]).lower()
         if old[:40] in combined.lower() or "knot high on the crown" in combined.lower() and "knot" not in hair.lower():
             problems.append("LoRA hair text survived a hair override")
+    if makeup and not reference and re.search(r"make-?up|eyeshadow|eyeliner|lipstick|lip colou?r|tinted lips|blush",
+                                              k.clean_text(lora.get("identity", "")), re.I):
+        problems.append("identity still has makeup text: move it to the loras.json makeup field")
     return {"person": person_text, "scene": scene_text, "combined": combined, "problems": problems,
             "words": len(combined.split()), "reinforce": level}
 
@@ -428,6 +462,7 @@ def main() -> int:
     ap.add_argument("--framing", default="전신")
     ap.add_argument("--time", default="해질녘")
     ap.add_argument("--hair", default="", help="override the LoRA hair: a preset name or free text (replaces it entirely)")
+    ap.add_argument("--makeup", default="", help="a name from makeup.json or free English text (replaces the LoRA default makeup)")
     ap.add_argument("--mode", default="보통", choices=MODES, help="description volume: 보통 / 상세")
     ap.add_argument("--reinforce", type=int, default=None, choices=(0, 1, 2),
                     help="how many extra restatements of expression/hair/outfit (default: 보통=0, 상세=1)")
@@ -439,7 +474,8 @@ def main() -> int:
         print(f"\n[{result['words']} words, seed {result['seed']}, problems: {result['problems'] or 'none'}]")
         return 1 if result["problems"] else 0
     r = compose_split(args.trigger, args.outfit, time_key=args.time, framing=args.framing,
-                      expression=args.expression, hair=args.hair, mode=args.mode, reinforce=args.reinforce, seed=args.seed)
+                      expression=args.expression, hair=args.hair, mode=args.mode, reinforce=args.reinforce, seed=args.seed,
+                      makeup=args.makeup)
     if args.parts:
         print("[인물 프롬프트]\n" + r["person"] + "\n\n[장면 프롬프트]\n" + r["scene"])
     else:

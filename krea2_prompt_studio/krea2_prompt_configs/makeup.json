@@ -1,0 +1,325 @@
+{
+  "schema": "krea2-makeup/1",
+  "note_ko": "화장 목록. 생성기 메뉴 '화장'에서 고른다. prose_en은 프롬에 'She has ...'로 들어가는 영어 문구(한글 없음). loras.json의 makeup 칸이 있으면 그것이 기본 화장이고, 메뉴에서 고르면 그 기본 화장이 통째로 빠지고 이걸로 교체된다. 원본 표는 의상실 '의상백과_화장표_1006.md'(여름이 옮김, 오빠 표)이고 이 파일은 그 표를 옮긴 데이터다.",
+  "source_doc": "의상실/의상백과_화장표_1006.md",
+  "items": {
+    "Natural": {
+      "num": "1",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "거의 화장하지 않은 듯한 깨끗하고 자연스러운 메이크업",
+      "prose_en": "natural makeup, fresh skin, subtle beige-brown eyeshadow, thin brown eyeliner, naturally curled lashes, soft peach blush, natural pink lips",
+      "parts_ko": "피부: 얇고 자연스러운 베이스 · 아이: 은은한 베이지 브라운 음영 · 아이라인: 얇은 브라운 · 속눈썹: 자연스러운 컬 · 블러셔: 소프트 피치 · 립: 내추럴 핑크"
+    },
+    "No-Makeup Makeup": {
+      "num": "2",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "피부결과 이목구비를 정돈하면서 화장한 티를 최소화",
+      "prose_en": "no-makeup makeup, sheer skin, subtle contour, barely-there beige eyeshadow, invisible brown eyeliner, natural lashes, soft nude blush, tinted pink lips",
+      "parts_ko": "피부: 시어 베이스 · 아이: 거의 보이지 않는 음영 · 아이라인: 거의 보이지 않는 브라운 · 속눈썹: 자연스러운 속눈썹 · 블러셔: 누드 베이지 · 립: 핑크 틴트"
+    },
+    "Korean Soft": {
+      "num": "3",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "한국식으로 맑고 부드럽게 정리한 여성스러운 메이크업",
+      "prose_en": "soft Korean makeup, luminous skin, soft rose-beige eyeshadow, subtle brown eyeliner, naturally defined lashes, soft rosy blush, muted pink lips",
+      "parts_ko": "피부: 맑고 은은하게 빛나는 피부 · 아이: 로즈 베이지 음영 · 아이라인: 부드러운 브라운 · 속눈썹: 자연스럽게 또렷한 컬 · 블러셔: 로지 핑크 · 립: 뮤트 핑크"
+    },
+    "Dewy": {
+      "num": "4",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "촉촉하고 투명한 광채 피부 중심",
+      "prose_en": "dewy makeup, luminous hydrated skin, subtle beige eyeshadow, thin brown eyeliner, softly curled lashes, peach-pink blush, glossy pink lips",
+      "parts_ko": "피부: 촉촉하고 윤기 있는 베이스 · 아이: 은은한 음영 · 아이라인: 얇은 브라운 · 속눈썹: 부드러운 컬 · 블러셔: 피치 핑크 · 립: 글로시 핑크"
+    },
+    "Glass Skin": {
+      "num": "5",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "피부 자체가 투명하고 매끈하게 빛나는 스타일",
+      "prose_en": "glass skin makeup, crystal-clear luminous skin, minimal eye makeup, thin brown eyeliner, natural lashes, sheer pink blush, glossy nude-pink lips",
+      "parts_ko": "피부: 투명하고 매끈한 광채 피부 · 아이: 최소한의 음영 · 아이라인: 얇은 브라운 · 속눈썹: 자연스러운 래시 · 블러셔: 시어 핑크 · 립: 누드 핑크 글로스"
+    },
+    "Peach": {
+      "num": "6",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "따뜻한 피치 계열을 얼굴 전체에 통일",
+      "prose_en": "peach makeup, warm luminous skin, peach-beige eyeshadow, soft brown eyeliner, curled lashes, peach blush, glossy peach lips",
+      "parts_ko": "피부: 따뜻하고 밝은 피부 표현 · 아이: 피치 베이지 음영 · 아이라인: 소프트 브라운 · 속눈썹: 자연스러운 컬 · 블러셔: 피치 · 립: 글로시 피치"
+    },
+    "Coral": {
+      "num": "7",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "피치보다 조금 더 선명하고 생기 있는 코랄 계열",
+      "prose_en": "coral makeup, radiant skin, warm coral eyeshadow, soft brown eyeliner, defined lashes, coral blush, vibrant coral lips",
+      "parts_ko": "피부: 화사하고 빛나는 피부 · 아이: 따뜻한 코랄 음영 · 아이라인: 소프트 브라운 · 속눈썹: 또렷한 컬 · 블러셔: 코랄 · 립: 선명한 코랄"
+    },
+    "Rose": {
+      "num": "8",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "차분한 장미빛과 로즈 브라운을 사용하는 여성스러운 스타일",
+      "prose_en": "rose makeup, smooth semi-matte skin, rosy brown eyeshadow, soft dark-brown eyeliner, defined curled lashes, rose-pink blush, muted rose lips",
+      "parts_ko": "피부: 매끈한 세미매트 · 아이: 로지 브라운 음영 · 아이라인: 딥 브라운 · 속눈썹: 또렷한 컬 · 블러셔: 로즈 핑크 · 립: 뮤트 로즈"
+    },
+    "Mauve": {
+      "num": "9",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "쿨한 로즈와 모브 계열의 세련된 메이크업",
+      "prose_en": "mauve makeup, smooth skin, muted mauve eyeshadow, soft plum-brown eyeliner, defined lashes, dusty rose blush, mauve pink lips",
+      "parts_ko": "피부: 매끈하고 차분한 피부 · 아이: 모브 음영 · 아이라인: 플럼 브라운 · 속눈썹: 또렷한 컬 · 블러셔: 더스티 로즈 · 립: 모브 핑크"
+    },
+    "Lavender": {
+      "num": "10",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "라벤더·쿨핑크 계열의 청초하고 몽환적인 스타일",
+      "prose_en": "lavender makeup, luminous skin, soft lavender eyeshadow, subtle brown eyeliner, delicate lashes, cool pink blush, lavender-pink glossy lips",
+      "parts_ko": "피부: 은은한 광채 · 아이: 부드러운 라벤더 음영 · 아이라인: 브라운 · 속눈썹: 섬세한 컬 · 블러셔: 쿨 핑크 · 립: 라벤더 핑크 글로스"
+    },
+    "Berry": {
+      "num": "11",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "라즈베리·베리 계열로 생기와 깊이를 강조",
+      "prose_en": "berry makeup, luminous skin, berry-toned eyeshadow, soft plum eyeliner, defined lashes, berry blush, glossy raspberry lips",
+      "parts_ko": "피부: 촉촉하고 선명한 피부 · 아이: 베리 음영 · 아이라인: 플럼 · 속눈썹: 또렷한 래시 · 블러셔: 베리 핑크 · 립: 글로시 라즈베리"
+    },
+    "Nude": {
+      "num": "12",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "베이지·브라운 계열로 차분하고 세련되게 표현",
+      "prose_en": "nude makeup, smooth natural skin, taupe and beige eyeshadow, soft brown eyeliner, natural defined lashes, nude beige blush, nude pink lips",
+      "parts_ko": "피부: 자연스럽고 매끈한 피부 · 아이: 토프·베이지 음영 · 아이라인: 소프트 브라운 · 속눈썹: 자연스럽게 또렷한 래시 · 블러셔: 누드 베이지 · 립: 누드 핑크"
+    },
+    "Monochrome": {
+      "num": "13",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "눈·볼·입술을 같은 계열로 통일",
+      "prose_en": "monochromatic makeup, luminous skin, matching rose-toned eyeshadow, blush and lips, soft brown eyeliner, naturally defined lashes",
+      "parts_ko": "피부: 은은한 광채 · 아이: 로즈 톤 · 아이라인: 브라운 · 속눈썹: 자연스러운 컬 · 블러셔·립: 같은 로즈 계열"
+    },
+    "Douyin": {
+      "num": "14",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "반짝이는 눈과 언더아이 중심의 화려하고 또렷한 스타일",
+      "prose_en": "Douyin-inspired makeup, bright smooth skin, shimmering pink-brown eyeshadow, defined elongated eyeliner, long separated lashes, soft pink under-eye blush, glossy pink lips",
+      "parts_ko": "피부: 밝고 매끈한 피부 · 아이: 펄감 있는 눈매 · 아이라인: 길고 또렷하게 · 속눈썹: 길고 분리된 래시 · 블러셔: 언더아이 핑크 · 립: 글로시 핑크"
+    },
+    "J-Beauty": {
+      "num": "15",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "일본식의 섬세하고 부드러운 눈매와 자연스러운 혈색",
+      "prose_en": "Japanese-inspired makeup, soft translucent skin, delicate brown eyeshadow, subtle rounded brown eyeliner, separated lashes, soft pink blush, sheer pink lips",
+      "parts_ko": "피부: 반투명하고 부드러운 피부 · 아이: 섬세한 브라운 음영 · 아이라인: 둥글고 부드러운 브라운 · 속눈썹: 분리된 래시 · 블러셔: 소프트 핑크 · 립: 시어 핑크"
+    },
+    "Clean Girl": {
+      "num": "16",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "깨끗한 피부와 정돈된 눈썹, 최소한의 포인트",
+      "prose_en": "clean girl makeup, fresh glowing skin, brushed natural eyebrows, minimal beige eyeshadow, subtle brown eyeliner, clean curled lashes, soft cream blush, glossy nude lips",
+      "parts_ko": "피부: 산뜻한 광채 피부 · 아이: 최소한의 베이지 음영 · 아이라인: 아주 은은한 브라운 · 속눈썹: 깔끔한 컬 · 블러셔: 크리미한 피치 · 립: 글로시 누드"
+    },
+    "Soft Glam": {
+      "num": "17",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "데일리보다 조금 더 공들인 부드러운 글램 스타일",
+      "prose_en": "soft glam makeup, flawless luminous skin, warm neutral eyeshadow, softly defined brown eyeliner, voluminous lashes, rosy peach blush, glossy rose-nude lips",
+      "parts_ko": "피부: 결점 없이 빛나는 피부 · 아이: 웜 뉴트럴 음영 · 아이라인: 부드러운 브라운 · 속눈썹: 볼륨 래시 · 블러셔: 로지 피치 · 립: 로즈 누드 글로스"
+    },
+    "Full Glam": {
+      "num": "18",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "눈·피부·입술을 모두 또렷하게 강조하는 화려한 스타일",
+      "prose_en": "full glam makeup, flawless full-coverage skin, dimensional bronze eyeshadow, sharp black eyeliner, dramatic lashes, sculpted blush and contour, bold rose-red lips",
+      "parts_ko": "피부: 풀커버리지의 매끈한 피부 · 아이: 입체적인 음영 · 아이라인: 선명한 블랙 · 속눈썹: 드라마틱한 볼륨 · 블러셔: 조각 같은 블러셔+컨투어 · 립: 로즈 레드"
+    },
+    "Smoky": {
+      "num": "19",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "눈에 깊은 음영을 주는 성숙하고 강렬한 스타일",
+      "prose_en": "smoky eye makeup, smooth matte skin, deep brown and charcoal eyeshadow, defined black eyeliner, voluminous lashes, muted rose blush, nude beige lips",
+      "parts_ko": "피부: 매트한 피부 · 아이: 깊은 음영 · 아이라인: 선명한 블랙 · 속눈썹: 풍성한 볼륨 · 블러셔: 뮤트 로즈 · 립: 누드 베이지"
+    },
+    "Soft Smoky": {
+      "num": "20",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "스모키의 깊이는 유지하면서 경계를 부드럽게 처리",
+      "prose_en": "soft smoky makeup, luminous skin, softly blended taupe and brown eyeshadow, diffused brown eyeliner, fluffy lashes, muted rose blush, nude pink lips",
+      "parts_ko": "피부: 은은하게 빛나는 피부 · 아이: 부드럽게 블렌딩된 음영 · 아이라인: 디퓨즈 브라운 · 속눈썹: 풍성하고 부드러운 래시 · 블러셔: 뮤트 로즈 · 립: 누드 핑크"
+    },
+    "Cat-Eye": {
+      "num": "21",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "눈꼬리를 길고 위로 빼서 또렷한 인상을 만드는 스타일",
+      "prose_en": "cat-eye makeup, smooth semi-matte skin, warm brown eyeshadow, elongated upward black eyeliner, long defined lashes, soft rose blush, rose lips",
+      "parts_ko": "피부: 매끈한 세미매트 · 아이: 웜 브라운 음영 · 아이라인: 길고 위로 올라간 블랙 · 속눈썹: 길고 또렷함 · 블러셔: 소프트 로즈 · 립: 로즈"
+    },
+    "Fox-Eye": {
+      "num": "22",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "캣아이보다 길고 날렵하며 바깥쪽으로 올라간 눈매",
+      "prose_en": "fox-eye makeup, smooth skin, cool taupe eyeshadow, sharp elongated eyeliner, lifted outer lashes, subtle contour, muted nude blush, nude rose lips",
+      "parts_ko": "피부: 매끈한 피부 · 아이: 쿨 토프 음영 · 아이라인: 길고 날카롭게 상승 · 속눈썹: 바깥쪽 강조 · 블러셔: 뮤트 누드 · 립: 누드 로즈"
+    },
+    "Puppy-Eye": {
+      "num": "23",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "눈꼬리를 내려 부드럽고 순한 인상",
+      "prose_en": "puppy-eye makeup, fresh luminous skin, soft beige-brown eyeshadow, gently downward brown eyeliner, curled natural lashes, soft peach blush, glossy pink lips",
+      "parts_ko": "피부: 맑고 촉촉한 피부 · 아이: 부드러운 베이지 브라운 · 아이라인: 살짝 내려가는 브라운 · 속눈썹: 자연스러운 컬 · 블러셔: 소프트 피치 · 립: 글로시 핑크"
+    },
+    "Vintage": {
+      "num": "24",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "클래식한 블랙 아이라인과 레드 립 중심",
+      "prose_en": "vintage makeup, velvety matte skin, warm beige-brown eyeshadow, precise black winged eyeliner, defined lashes, muted rose blush, classic red lips",
+      "parts_ko": "피부: 벨벳 세미매트 · 아이: 웜 베이지 브라운 · 아이라인: 정교한 블랙 윙 · 속눈썹: 또렷한 래시 · 블러셔: 뮤트 로즈 · 립: 클래식 레드"
+    },
+    "Retro 60s": {
+      "num": "25",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "또렷한 아이라인과 인형 같은 속눈썹이 특징",
+      "prose_en": "1960s-inspired makeup, smooth matte skin, pale beige eyeshadow, bold black eyeliner, dramatic separated lashes, soft peach blush, pink nude lips",
+      "parts_ko": "피부: 매트한 피부 · 아이: 밝은 베이지 · 아이라인: 두껍고 선명한 블랙 · 속눈썹: 인형처럼 분리되고 풍성함 · 블러셔: 소프트 피치 · 립: 핑크 누드"
+    },
+    "Y2K": {
+      "num": "26",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "2000년대 특유의 반짝임과 얇은 눈매 표현",
+      "prose_en": "Y2K makeup, luminous skin, frosted champagne eyeshadow, thin dark eyeliner, defined lashes, cool pink blush, glossy nude pink lips",
+      "parts_ko": "피부: 광택 있는 피부 · 아이: 프로스티한 샴페인 · 아이라인: 얇은 다크 라인 · 속눈썹: 또렷한 컬 · 블러셔: 쿨 핑크 · 립: 글로시 누드 핑크"
+    },
+    "Romantic": {
+      "num": "27",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "부드러운 핑크와 로즈 계열로 사랑스러운 분위기",
+      "prose_en": "romantic makeup, soft luminous skin, rosy pink eyeshadow, delicate brown eyeliner, curled lashes, soft pink blush, glossy rose-pink lips",
+      "parts_ko": "피부: 소프트 광채 · 아이: 로지 핑크 · 아이라인: 섬세한 브라운 · 속눈썹: 부드러운 컬 · 블러셔: 소프트 핑크 · 립: 글로시 로즈 핑크"
+    },
+    "Feminine": {
+      "num": "28",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "여성스럽고 단정한 인상을 강조하는 균형 잡힌 스타일",
+      "prose_en": "feminine makeup, smooth luminous skin, soft rose-brown eyeshadow, neat brown eyeliner, defined curled lashes, rosy blush, elegant pink lips",
+      "parts_ko": "피부: 매끈하고 은은한 광채 · 아이: 로즈 브라운 · 아이라인: 정돈된 브라운 · 속눈썹: 또렷한 컬 · 블러셔: 로지 · 립: 우아한 핑크"
+    },
+    "Fresh Youthful": {
+      "num": "29",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "맑은 혈색과 가벼운 색감으로 생기 있는 인상",
+      "prose_en": "fresh youthful makeup, bright luminous skin, soft peach-beige eyeshadow, subtle brown eyeliner, fluffy curled lashes, fresh peach blush, glossy pink lips",
+      "parts_ko": "피부: 밝고 투명한 피부 · 아이: 피치 베이지 · 아이라인: 은은한 브라운 · 속눈썹: 폭신한 컬 · 블러셔: 생기 있는 피치 · 립: 글로시 핑크"
+    },
+    "Sophisticated": {
+      "num": "30",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "성숙하고 세련된 도시적 분위기",
+      "prose_en": "sophisticated makeup, smooth semi-matte skin, taupe brown eyeshadow, refined brown eyeliner, defined lashes, muted contour and rose blush, elegant nude rose lips",
+      "parts_ko": "피부: 매끈한 세미매트 · 아이: 토프 브라운 · 아이라인: 세련된 브라운 · 속눈썹: 또렷한 래시 · 블러셔: 절제된 로즈 + 컨투어 · 립: 누드 로즈"
+    },
+    "Chic": {
+      "num": "31",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "색감은 절제하고 선명한 구조감을 강조",
+      "prose_en": "chic makeup, polished semi-matte skin, cool taupe eyeshadow, sharp brown-black eyeliner, defined lashes, subtle sculpted blush, muted nude lips",
+      "parts_ko": "피부: 정돈된 세미매트 · 아이: 쿨 토프 · 아이라인: 샤프한 브라운 블랙 · 속눈썹: 선명한 컬 · 블러셔: 구조적인 소프트 컨투어 · 립: 뮤트 누드"
+    },
+    "Bronzed": {
+      "num": "32",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "따뜻한 브론즈와 골드 계열로 건강한 광택 표현",
+      "prose_en": "bronzed makeup, warm glowing skin, bronze and gold eyeshadow, soft brown eyeliner, voluminous lashes, warm peach-bronze blush, caramel nude lips",
+      "parts_ko": "피부: 웜 글로우 · 아이: 브론즈 골드 · 아이라인: 소프트 브라운 · 속눈썹: 풍성한 볼륨 · 블러셔: 피치 브론즈 · 립: 카라멜 누드"
+    },
+    "Golden Glam": {
+      "num": "33",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "골드 펄과 따뜻한 피부톤을 강조하는 화려한 스타일",
+      "prose_en": "golden glam makeup, luminous flawless skin, shimmering gold eyeshadow, defined brown-black eyeliner, dramatic lashes, warm peach blush, glossy rose-gold lips",
+      "parts_ko": "피부: 완벽하고 빛나는 피부 · 아이: 강한 골드 펄 · 아이라인: 브라운 블랙 · 속눈썹: 드라마틱한 볼륨 · 블러셔: 웜 피치 · 립: 로즈 골드 글로스"
+    },
+    "Editorial": {
+      "num": "34",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "일상보다 패션 화보에 가까운 세련되고 실험적인 메이크업",
+      "prose_en": "editorial makeup, flawless skin, sculptural eyeshadow, sharply defined eyeliner, dramatic lashes, sculpted blush and contour, statement lips",
+      "parts_ko": "피부: 완벽하게 정돈된 피부 · 아이: 조형적인 색상과 음영 · 아이라인: 그래픽 형태 · 속눈썹: 드라마틱 · 블러셔: 조각적인 컨투어 · 립: 스테이트먼트 립"
+    },
+    "Soft Gothic": {
+      "num": "35",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "블랙·플럼·버건디를 부드럽게 사용한 어두운 여성적 스타일",
+      "prose_en": "soft gothic makeup, smooth pale skin, smoky plum and charcoal eyeshadow, soft black eyeliner, defined lashes, muted mauve blush, dark berry lips",
+      "parts_ko": "피부: 밝고 매끈한 피부 · 아이: 플럼·차콜 스모키 · 아이라인: 소프트 블랙 · 속눈썹: 또렷한 래시 · 블러셔: 뮤트 모브 · 립: 다크 베리"
+    },
+    "Modern Glam": {
+      "num": "36",
+      "section": "본표 — 오빠 36가지",
+      "desc_ko": "자연스러운 피부와 또렷한 이목구비를 균형 있게 결합",
+      "prose_en": "modern glam makeup, flawless luminous skin, dimensional taupe and bronze eyeshadow, refined winged eyeliner, voluminous lashes, sculpted rosy blush, glossy rose-nude lips",
+      "parts_ko": "피부: 결점 없이 빛나는 피부 · 아이: 입체적인 토프·브론즈 · 아이라인: 정교한 윙 · 속눈썹: 풍성한 볼륨 · 블러셔: 조각적인 로지 블러셔 · 립: 글로시 로즈 누드"
+    },
+    "황혼 출근 풀메이크업 (여름)": {
+      "num": "정본",
+      "section": "정본화장 — 여름 (내 얼굴에 올리는 화장)",
+      "desc_ko": "매끈한 새틴 매트 피부에 얇은 윙 라인, 브론즈 갈색 눈, 장밋빛 볼, 윤기 나는 로즈레드 입술. 캣아이와 빈티지 사이쯤",
+      "prose_en": "full polished evening makeup, smooth satin-matte base, softly sculpted cheeks with a warm rose blush, defined and neatly groomed eyebrows, thin precise winged black eyeliner along the upper lash line, warm bronze-brown eyeshadow blended across the lids, long lifted mascara-coated lashes, full lips in glossy muted rose-red lipstick"
+    },
+    "테라코타": {
+      "num": "11",
+      "section": "여름이 지어 본 열 가지 (아직 한 번도 안 돌려 봤다)",
+      "desc_ko": "벽돌빛 주황 눈과 입술, 따뜻한 매트 피부로 가을 같은 얼굴",
+      "prose_en": "terracotta makeup, warm matte skin, burnt-orange terracotta eyeshadow, soft brown eyeliner, defined lashes, warm terracotta blush, brick-red lips"
+    },
+    "버건디": {
+      "num": "12",
+      "section": "여름이 지어 본 열 가지 (아직 한 번도 안 돌려 봤다)",
+      "desc_ko": "깊은 와인빛 눈과 입술, 반무광 피부로 짙고 차분한 얼굴",
+      "prose_en": "burgundy makeup, smooth semi-matte skin, deep wine-burgundy eyeshadow, soft black eyeliner, defined lashes, muted plum blush, deep burgundy lips"
+    },
+    "골드 시머": {
+      "num": "13",
+      "section": "여름이 지어 본 열 가지 (아직 한 번도 안 돌려 봤다)",
+      "desc_ko": "샴페인 골드 반짝임을 눈에 올린 빛나는 얼굴",
+      "prose_en": "golden shimmer makeup, radiant luminous skin, champagne-gold shimmer eyeshadow, thin brown eyeliner, lifted lashes, warm peach-gold blush, glossy nude-gold lips"
+    },
+    "코발트 블루 아이": {
+      "num": "14",
+      "section": "여름이 지어 본 열 가지 (아직 한 번도 안 돌려 봤다)",
+      "desc_ko": "선명한 코발트 블루 눈 그림자가 포인트, 입술은 누드 핑크로 눌러 눈이 주인공(내 머리 뿌리색과 맞춘 것)",
+      "prose_en": "cobalt blue eye makeup, smooth matte skin, vivid cobalt-blue eyeshadow, thin black eyeliner, defined lashes, soft rose blush, nude pink lips"
+    },
+    "노을 눈화장": {
+      "num": "15",
+      "section": "여름이 지어 본 열 가지 (아직 한 번도 안 돌려 봤다)",
+      "desc_ko": "눈두덩에 주황에서 코랄, 핑크로 번지는 그라데이션, 입술은 윤기 코랄(내 노을 색에 맞춘 것)",
+      "prose_en": "sunset eyeshadow makeup, warm luminous skin, gradient eyeshadow from soft orange to coral to pink, thin brown eyeliner, curled lashes, peach-coral blush, glossy coral lips"
+    },
+    "그런지": {
+      "num": "16",
+      "section": "여름이 지어 본 열 가지 (아직 한 번도 안 돌려 봤다)",
+      "desc_ko": "번진 숯색 눈 그림자와 검정 라인, 헝클어진 속눈썹, 먼지 낀 장밋빛 입술의 흐트러진 얼굴",
+      "prose_en": "grunge makeup, matte skin, smudged charcoal eyeshadow, smudged black eyeliner, messy lashes, minimal blush, muted dusty-rose lips"
+    },
+    "90년대 레트로": {
+      "num": "17",
+      "section": "여름이 지어 본 열 가지 (아직 한 번도 안 돌려 봤다)",
+      "desc_ko": "탑 브라운 눈 그림자, 얇은 갈색 라인, 진한 입술 라인을 두른 매트 갈색 로즈 입술",
+      "prose_en": "90s retro makeup, matte skin, soft taupe-brown eyeshadow, thin brown eyeliner, natural lashes, light blush, matte brown-rose lips with darker lip liner"
+    },
+    "초콜릿 브라운 모노": {
+      "num": "18",
+      "section": "여름이 지어 본 열 가지 (아직 한 번도 안 돌려 봤다)",
+      "desc_ko": "눈·볼·입술을 초콜릿 갈색 한 계열로 맞춘 차분한 얼굴",
+      "prose_en": "chocolate brown monochrome makeup, smooth matte skin, chocolate brown eyeshadow, soft brown eyeliner, defined lashes, warm brown-rose blush, chocolate-brown lips"
+    },
+    "핑크 모노": {
+      "num": "19",
+      "section": "여름이 지어 본 열 가지 (아직 한 번도 안 돌려 봤다)",
+      "desc_ko": "눈·볼·입술을 핑크 한 계열로 맞춘 싱그러운 얼굴",
+      "prose_en": "pink monochrome makeup, fresh luminous skin, sheer pink eyeshadow, soft pink-brown eyeliner, curled lashes, pink blush across cheeks and nose, glossy pink lips"
+    },
+    "다크 플럼 립": {
+      "num": "20",
+      "section": "여름이 지어 본 열 가지 (아직 한 번도 안 돌려 봤다)",
+      "desc_ko": "눈은 중성 갈색으로 눌러 두고 입술만 짙은 자두빛으로 강조",
+      "prose_en": "dark plum lip makeup, smooth matte skin, soft neutral brown eyeshadow, thin black eyeliner, defined lashes, muted rose blush, deep plum lips"
+    }
+  }
+}

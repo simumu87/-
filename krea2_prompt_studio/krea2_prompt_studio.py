@@ -3820,6 +3820,13 @@ def composer_mode() -> None:
                                    custom: "원하는 헤어를 영어 문장으로 직접 씀 (LoRA 헤어는 통째로 빠짐)",
                                    **{k_: v.get("desc_ko", "") for k_, v in presets.items()}})
     hair = "" if hair_pick == keep else (ask_text("헤어를 영어 문장으로 입력하세요") if hair_pick == custom else hair_pick)
+    makeups = comp.load_makeup()
+    keep_mk = "LoRA 기본 화장 유지"
+    mk_pick = menu_choose("화장", [keep_mk, *makeups, custom], default=keep_mk,
+                          descs={keep_mk: "loras.json의 makeup 칸을 그대로 사용 (그 칸이 비었으면 화장 문장을 넣지 않음)",
+                                 custom: "원하는 화장을 영어 문장으로 직접 씀 (LoRA 기본 화장은 통째로 빠짐)",
+                                 **{k_: v.get("desc_ko", "") for k_, v in makeups.items()}})
+    makeup = "" if mk_pick == keep_mk else (ask_text("화장을 영어 문장으로 입력하세요") if mk_pick == custom else mk_pick)
     saved = load_json(SETTINGS_FILE, {})
     saved = saved if isinstance(saved, dict) else {}
     mode = menu_choose("묘사 분량", list(comp.MODES), default=saved.get("prompt_detail", "보통"),
@@ -3834,7 +3841,7 @@ def composer_mode() -> None:
 
     result = comp.compose_split(trigger, outfit_id, location=location, time_key=time_key, moment=moment,
                                 framing=framing, expression=expression, hair=hair, mode=mode,
-                                reinforce=reinforce, seed=random.randrange(1, 2**32), common_outfit=common, reference=reference)
+                                reinforce=reinforce, seed=random.randrange(1, 2**32), common_outfit=common, reference=reference, makeup=makeup)
     print_header(f"결과 ({result['words']}단어 · 묘사 {mode} · 강화 {result['reinforce']}회)")
     print(result["combined"])
     if result["problems"]:

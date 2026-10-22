@@ -319,6 +319,41 @@ def visibility_checks():
     return problems
 
 
+def makeup_checks():
+    """Makeup is selectable: every makeup in makeup.json composes cleanly, a pick replaces the LoRA default, reference mode leaves it out."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    base = dict(location="해변", time_key="해질녘", moment="파도 발목", framing="전신", expression="환한 미소", mode="보통", seed=2)
+    items = c.load_makeup()
+    for name, v in items.items():
+        if re.search(r"[가-힣]", v["prose_en"]):
+            problems.append((9, 1, f"makeup {name}: Hangul in prose_en"))
+        r = c.compose_split("hangyeol", makeup=name, **base)
+        if r["problems"]:
+            problems.append((9, 1, f"makeup {name}: {r['problems']}"))
+        if v["prose_en"].lower() not in r["person"].lower():
+            problems.append((9, 1, f"makeup {name}: not in the person prompt"))
+        ref = c.compose_split("hangyeol", makeup=name, reference=True, **base)
+        if v["prose_en"].lower() in ref["person"].lower():
+            problems.append((9, 1, f"makeup {name}: present in reference mode"))
+    # a LoRA default (loras.json `makeup`) is used when nothing is picked and replaced when something is picked
+    k = importlib.import_module("krea2_prompt_studio")
+    lora = dict(k.lora_profile_for_trigger("hangyeol"))
+    lora["makeup"] = "faint peach blush and sheer rose lips"
+    orig = k.lora_profile_for_trigger
+    k.lora_profile_for_trigger = lambda t: lora if t == "hangyeol" else orig(t)
+    try:
+        keep = c.compose_split("hangyeol", **base)["person"]
+        pick = c.compose_split("hangyeol", makeup="Dewy", **base)["person"]
+    finally:
+        k.lora_profile_for_trigger = orig
+    if "faint peach blush and sheer rose lips" not in keep:
+        problems.append((9, 1, "LoRA default makeup missing when nothing is picked"))
+    if "faint peach blush" in pick or "dewy makeup" not in pick.lower():
+        problems.append((9, 1, "a makeup pick did not replace the LoRA default"))
+    return problems
+
+
 def hangyeol_checks():
     """Hangyeol outfits: every listed outfit x its locations x times x frames x modes composes cleanly,
     and each outfit only names what the frame can show (shoes only on full-length, belt/skirt only from the waist down)."""
@@ -363,7 +398,7 @@ def hangyeol_checks():
 
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()
