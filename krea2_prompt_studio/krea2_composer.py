@@ -77,6 +77,15 @@ def sentence(text: str) -> str:
     return text[:1].upper() + text[1:] if text else text
 
 
+def hair_sentence(subj: str, hair: str) -> str:
+    """A stored hair value is either a noun phrase ("dark hair swept back ...") or already a full sentence
+    ("Her hair is ...", "Her korvi hairstyle, ..."). A full sentence is used as it is; a noun phrase gets "She has"."""
+    text = k.clean_text(hair)
+    if re.match(r"^(?:her|his|their)\s", text, flags=re.I):
+        return sentence(text)
+    return sentence(f"{subj.capitalize()} has {text}")
+
+
 def lock_en(outfit: Dict[str, Any], lock_id: str, variant: int = 0) -> str:
     for lock in outfit.get("locks", []):
         if lock["id"] == lock_id:
@@ -163,7 +172,7 @@ def compose_normal(scene: "k.SceneProfile", person: "k.PersonSlot", lora: Dict[s
     chunks = [f"{lora['trigger']}, {identity}".rstrip(".") + "."]      # trigger stays exactly as registered
     hair = k.clean_text(hair_override) or k.clean_text(lora.get("hair", ""))   # override replaces the LoRA hair entirely
     if hair:
-        chunks.append(sentence(f"{subj} has {hair}"))
+        chunks.append(hair_sentence(subj, hair))
     for acc in lora.get("signature_accessories", []):
         chunks.append(sentence(f"{acc} rests around {poss} neck" if "choker" in acc else f"{acc}"))
     if outfit:
@@ -286,7 +295,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         else:
             person.append(sentence(k.clean_text(hair)))
     elif lora.get("hair") and not reference:
-        person.append(sentence(f"{subj.capitalize()} has {k.clean_text(lora['hair'])}"))
+        person.append(hair_sentence(subj, lora["hair"]))
 
     if not outfit and common_outfit:
         person.append(common_outfit_sentence(location, framing, subj, poss, detailed, seed))

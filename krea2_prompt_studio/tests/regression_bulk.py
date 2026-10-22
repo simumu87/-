@@ -32,7 +32,7 @@ def hair_checks():
         if override:
             k.set_constraint_value(c, "hair_A", override)
         text = k.generate_one(o, c, seed=5).combined_prompt
-        has_knot = "knot high on the crown" in text
+        has_knot = "half-up style" in text
         if override and (has_knot or "blunt bangs" not in text):
             problems.append((0, 1, "hair override did not replace the LoRA hair"))
         if not override and not has_knot:
@@ -272,7 +272,7 @@ def engine_prose_checks():
     o = k.GenerationOptions(seed=3)
     o.person_a = k.PersonSlot(slot="PERSON_A", lora_trigger="nayoon")
     text = k.generate_one(o, k.defaults(), seed=3).combined_prompt
-    if not text.startswith("nayoon, ") or "knot high on the crown" not in text:
+    if not text.startswith("nayoon, ") or "half-up style" not in text:
         problems.append((3, 1, "LoRA person: trigger/hair missing in engine prompt"))
     return problems
 
