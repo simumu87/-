@@ -1,0 +1,87 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "식물원 정원길",
+ "outdoor": true,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. 한결 외출복 사진(1004)을 바탕으로 한 장소. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a quiet botanical garden courtyard in autumn",
+ "feature_en": [
+  "a red maple tree and a yellow-leaved tree beside the stone path",
+  "low green shrubs and ornamental grasses along both edges of the path"
+ ],
+ "ground_en": [
+  "a path of flat gray stones with moss in the gaps",
+  "brown fallen leaves scattered over the stones and the soil"
+ ],
+ "far_en": [
+  "the stone path curving away between tall trees",
+  "a trimmed green hedge and a stone lantern far in the garden"
+ ],
+ "times": {
+  "오후": {
+   "time_en": "a late autumn afternoon",
+   "sky_en": "a soft blue sky seen through the red and yellow leaves",
+   "light_en": "warm soft sunlight comes from the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "soft shadows of the branches lie across the stones toward the camera's right",
+   "desc_ko": "늦가을 오후, 따뜻한 햇빛이 카메라 왼쪽에서 비춤",
+   "time_prep": "on"
+  },
+  "해질녘": {
+   "time_en": "the hour before sunset",
+   "sky_en": "a pale orange sky behind the tree crowns",
+   "light_en": "low amber sunlight comes from the camera's left, lighting {p} face and shoulders",
+   "shadow_en": "long soft shadows stretch across the stone path toward the camera's right",
+   "desc_ko": "해 지기 직전, 낮은 호박빛 해가 카메라 왼쪽에서 비춤"
+  }
+ },
+ "moments": {
+  "천천히 걷기": {
+   "pose_en": "walks slowly along the stone path toward the camera in a relaxed three-quarter stride",
+   "moment_en": "{s} smiles gently and glances toward the camera",
+   "desc_ko": "돌길을 천천히 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  },
+  "3/4 서기": {
+   "pose_en": "stands on the stone path with {p} body angled toward the left side of the frame and one hand holding a shoulder-bag strap near {p} chest",
+   "moment_en": "{s} turns {p} head toward the camera with a warm smile",
+   "desc_ko": "몸은 왼쪽으로 3/4, 고개는 카메라 쪽, 한 손은 가방끈",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위"
+   ]
+  },
+  "단풍 보며 서기": {
+   "pose_en": "stands on the stone path with {p} weight on one leg",
+   "moment_en": "{s} looks toward the camera and smiles a little",
+   "desc_ko": "한쪽 다리에 체중을 싣고 서서 카메라를 봄",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the garden softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the garden softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the garden softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the flat gray stones among a few fallen leaves",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "오후": [
+   "the maple leaves are a deep red and the other tree's leaves a clear yellow",
+   "the stones are flat and gray with green moss between them",
+   "the shrubs are dark green with a few brown leaves on the ground around them"
+  ],
+  "해질녘": [
+   "the maple leaves are a deep red with orange edges and the other tree's leaves a warm yellow",
+   "the stones are flat and gray with green moss between them",
+   "the shrubs are dark green with a few brown leaves on the ground around them"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the stone path and the autumn trees spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

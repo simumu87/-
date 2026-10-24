@@ -1,0 +1,55 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "FOOTWEAR",
+  "label_ko": "신발",
+  "items": {
+    "화이트 스니커즈": {
+      "en": "clean white leather sneakers",
+      "desc_ko": ""
+    },
+    "캔버스 스니커즈": {
+      "en": "classic canvas sneakers",
+      "desc_ko": ""
+    },
+    "러닝화": {
+      "en": "lightweight running shoes",
+      "desc_ko": ""
+    },
+    "로퍼": {
+      "en": "polished leather loafers",
+      "desc_ko": ""
+    },
+    "메리제인": {
+      "en": "classic Mary Jane shoes",
+      "desc_ko": ""
+    },
+    "발레 플랫": {
+      "en": "simple ballet flats",
+      "desc_ko": ""
+    },
+    "앵클 부츠": {
+      "en": "leather ankle boots",
+      "desc_ko": ""
+    },
+    "첼시 부츠": {
+      "en": "Chelsea boots",
+      "desc_ko": ""
+    },
+    "샌들": {
+      "en": "minimal leather sandals",
+      "desc_ko": ""
+    },
+    "스니커즈": {
+      "en": "casual sneakers",
+      "desc_ko": ""
+    },
+    "실내 슬리퍼": {
+      "en": "soft indoor slippers",
+      "desc_ko": ""
+    },
+    "맨발": {
+      "en": "bare feet suitable to the setting",
+      "desc_ko": ""
+    }
+  }
+}

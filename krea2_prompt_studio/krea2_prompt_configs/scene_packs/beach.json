@@ -1,0 +1,203 @@
+{
+  "schema": "krea2-scene-pack/2",
+  "outdoor": true,
+  "location_ko": "해변",
+  "note_ko": "장소별 문장 재료. 합성기가 시간대·카메라 선택에 맞춰 골라 문장으로 엮는다. {s}/{S}=she/She, {p}=her 같은 인칭 자리표시자를 쓴다.",
+  "setting_en": "a quiet sandy beach with fine pale sand and gentle shallow waves",
+  "feature_en": [
+    "small waves rolling in with soft white foam",
+    "the sea rippling in long gentle lines toward the horizon"
+  ],
+  "ground_en": [
+    "wet sand shining like a thin mirror each time a wave slides back",
+    "shells and small bits of driftwood scattered along the waterline"
+  ],
+  "far_en": [
+    "a wooden beach pavilion far down the shore",
+    "a low seawall fading into the haze in the distance"
+  ],
+  "person_extra_en": "a few droplets of sea water cling to {p} bare skin",
+  "times": {
+    "해질녘": {
+      "time_en": "golden hour just before sunset",
+      "sky_en": "the sun hanging low and orange above a clear horizon",
+      "light_en": "the low sun sits in front of {o} and to the camera's left, its warm light falling directly on {p} face, shoulders and {lit}",
+      "accent_en": "the sunlight breaks into bright glittering points across the rippling water",
+      "shadow_en": "long soft shadows stretch across the sand toward the camera's right",
+      "desc_ko": "해가 지기 직전, 낮고 따뜻한 빛이 바다와 모래에 닿음"
+    },
+    "오후": {
+      "time_en": "a bright afternoon",
+      "sky_en": "a high pale-blue sky with a few thin clouds",
+      "light_en": "the afternoon sun shines from high in front of {o} and to the camera's left, lighting {p} face, shoulders and {lit}",
+      "accent_en": "the sunlight scatters into sparkling points across the turquoise water",
+      "shadow_en": "short soft shadows pool under {p} on the sand",
+      "desc_ko": "높은 해와 터키석빛 바다, 짧은 그림자"
+    },
+    "밤": {
+      "time_en": "a clear night",
+      "sky_en": "a deep blue night sky scattered with faint stars above a dark horizon",
+      "light_en": "a full moon hangs low over the sea in front of {o} and to the camera's left, its soft blue moonlight falling on {p} face, shoulders and {lit}",
+      "accent_en": "the moonlight lays a trail of silver sparkles across the dark rippling water",
+      "shadow_en": "soft blue shadows pool on the sand beside {o}",
+      "far_en": [
+        "a wooden beach pavilion glowing with warm lights far down the shore",
+        "a faint string of warm lights along the distant shoreline"
+      ],
+      "ground_en": [
+        "wet sand shining dark and silvery each time a wave slides back",
+        "shells and small bits of driftwood scattered along the waterline"
+      ],
+      "style_en": "natural night photography with fine film grain and realistic skin texture",
+      "desc_ko": "달빛 + 멀리 불 켜진 해변 건물"
+    },
+    "밤(달빛만)": {
+      "time_en": "a clear night",
+      "sky_en": "a deep blue night sky scattered with faint stars above a dark horizon",
+      "light_en": "a full moon hangs low over the sea in front of {o} and to the camera's left, its soft blue moonlight falling on {p} face, shoulders and {lit}",
+      "accent_en": "the moonlight lays a trail of silver sparkles across the dark rippling water",
+      "shadow_en": "soft blue shadows pool on the sand beside {o}",
+      "far_en": [
+        "a dark wooden beach pavilion far down the shore",
+        "a low seawall fading into the dark in the distance"
+      ],
+      "ground_en": [
+        "wet sand shining dark and silvery each time a wave slides back",
+        "shells and small bits of driftwood scattered along the waterline"
+      ],
+      "style_en": "natural night photography with fine film grain and realistic skin texture",
+      "desc_ko": "달빛 하나만 광원 (먼 건물은 어둡게)"
+    },
+    "밤(달빛 역광)": {
+      "time_en": "a clear night",
+      "sky_en": "a deep blue night sky scattered with faint stars above a dark horizon",
+      "light_en": "a full moon hangs low over the sea behind {o}, and the open night sky above glows a deep clear blue",
+      "accent_en": "the moonlight lays a trail of silver sparkles across the dark rippling water",
+      "shadow_en": "a long soft shadow of {o} stretches across the wet sand toward the camera",
+      "far_en": [
+        "a dark wooden beach pavilion far down the shore",
+        "a low seawall fading into the dark in the distance"
+      ],
+      "ground_en": [
+        "wet sand shining dark and silvery each time a wave slides back",
+        "shells and small bits of driftwood scattered along the waterline"
+      ],
+      "style_en": "natural night photography with fine film grain and realistic skin texture",
+      "desc_ko": "달이 바다 위, 인물 뒤쪽에 있음 (역광). 바다·달·그림자 위치가 서로 맞음"
+    },
+    "밤(달빛 측광)": {
+      "time_en": "a clear night",
+      "sky_en": "a deep blue night sky scattered with faint stars above a dark horizon",
+      "light_en": "the sea fills the left side of the frame with a full moon hanging low over the water at the left, its soft blue moonlight falling on {p} left side and {lit}",
+      "accent_en": "the moonlight lays a trail of silver sparkles across the dark rippling water",
+      "shadow_en": "a soft blue shadow of {o} stretches across the sand to the right",
+      "far_en": [
+        "a dark wooden beach pavilion far down the shore",
+        "a low seawall fading into the dark in the distance"
+      ],
+      "ground_en": [
+        "wet sand shining dark and silvery each time a wave slides back",
+        "shells and small bits of driftwood scattered along the waterline"
+      ],
+      "style_en": "natural night photography with fine film grain and realistic skin texture",
+      "desc_ko": "바다가 화면 왼쪽, 달이 그 위에서 인물의 왼쪽을 비춤 (측광). 바다·달·그림자 위치가 서로 맞음",
+      "camera": {
+        "전신": "Full-length shot from eye level with a 35mm lens, the frame running from the top of {p} head down to {p} bare feet in the shallow foam, vertical frame, shallow depth of field with the sea along the left edge of the frame softly out of focus",
+        "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the sea along the left edge of the frame softly out of focus"
+      }
+    },
+    "밤(달빛 측광·위치만)": {
+      "time_en": "a clear night",
+      "sky_en": "a deep blue night sky scattered with faint stars above a dark horizon",
+      "light_en": "the sea fills the left side of the frame with a full moon hanging low over the water at the left",
+      "accent_en": "the moonlight lays a trail of silver sparkles across the dark rippling water",
+      "shadow_en": "a soft blue shadow of {o} stretches across the sand to the right",
+      "far_en": [
+        "a dark wooden beach pavilion far down the shore",
+        "a low seawall fading into the dark in the distance"
+      ],
+      "ground_en": [
+        "wet sand shining dark and silvery each time a wave slides back",
+        "shells and small bits of driftwood scattered along the waterline"
+      ],
+      "style_en": "natural night photography with fine film grain and realistic skin texture",
+      "desc_ko": "측광 배치에서 달 위치만 적고 빛이 어디에 닿는지는 적지 않음 (모델에 맡김)",
+      "camera": {
+        "전신": "Full-length shot from eye level with a 35mm lens, the frame running from the top of {p} head down to {p} bare feet in the shallow foam, vertical frame, shallow depth of field with the sea along the left edge of the frame softly out of focus",
+        "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the sea along the left edge of the frame softly out of focus"
+      }
+    }
+  },
+  "moments": {
+    "파도 발목": {
+      "pose_en": "walks barefoot along the waterline in a relaxed stride",
+      "moment_en": "a shallow wave slides around {p} ankles and {s} smiles a little wider",
+      "desc_ko": "얕은 파도가 발목을 감싸고 웃음이 더 커짐",
+      "frames": [
+        "전신"
+      ]
+    },
+    "천천히 걷기": {
+      "pose_en": "walks barefoot along the waterline in a relaxed stride",
+      "moment_en": "{s} glances back toward the camera as the foam fades around {p} feet",
+      "desc_ko": "거품이 발 주변에서 사라질 때 카메라 쪽을 돌아봄",
+      "frames": [
+        "전신"
+      ]
+    },
+    "바다 보다 돌아보기": {
+      "pose_en": "stands at the waterline in the soft sea breeze",
+      "moment_en": "{s} turns {p} head and looks toward the camera with a relaxed smile",
+      "desc_ko": "물가에 서서 바람을 맞다 카메라 쪽으로 고개를 돌림 (전신/무릎 위 모두 가능)",
+      "frames": [
+        "전신",
+        "무릎 위"
+      ]
+    }
+  },
+  "camera": {
+    "전신": "Full-length shot from eye level with a 35mm lens, the frame running from the top of {p} head down to {p} bare feet in the shallow foam, vertical frame, shallow depth of field with the sea softly out of focus",
+    "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the sea softly out of focus"
+  },
+  "style_en": "natural travel-editorial photography with fine film grain and realistic skin texture",
+  "detail_en": {
+    "해질녘": [
+      "the wet sand left by each retreating wave mirrors the glowing sky in a thin, bright film",
+      "the foam at the edge of each wave catches the warm light in pale gold",
+      "the sea farther out turns a deep blue with a path of sparkling light running toward the sun"
+    ],
+    "오후": [
+      "the wet sand left by each retreating wave shines like a clear mirror",
+      "the foam at the edge of each wave glows bright white in the sun",
+      "the sea farther out shifts from turquoise to deep blue toward the horizon"
+    ],
+    "밤": [
+      "the wet sand left by each retreating wave mirrors the moon in a thin silver film",
+      "the foam at the edge of each wave glows pale blue-white in the moonlight",
+      "the sea farther out fades into deep navy beneath a sky of faint stars"
+    ],
+    "밤(달빛만)": [
+      "the wet sand left by each retreating wave mirrors the moon in a thin silver film",
+      "the foam at the edge of each wave glows pale blue-white in the moonlight",
+      "the sea farther out fades into deep navy beneath a sky of faint stars"
+    ],
+    "밤(달빛 역광)": [
+      "the wet sand left by each retreating wave mirrors the moon in a thin silver film",
+      "the foam at the edge of each wave glows pale blue-white in the moonlight",
+      "the sea farther out fades into deep navy beneath a sky of faint stars"
+    ],
+    "밤(달빛 측광)": [
+      "the wet sand left by each retreating wave mirrors the moon in a thin silver film",
+      "the foam at the edge of each wave glows pale blue-white in the moonlight",
+      "the sea farther out fades into deep navy beneath a sky of faint stars"
+    ],
+    "밤(달빛 측광·위치만)": [
+      "the wet sand left by each retreating wave mirrors the moon in a thin silver film",
+      "the foam at the edge of each wave glows pale blue-white in the moonlight",
+      "the sea farther out fades into deep navy beneath a sky of faint stars"
+    ]
+  },
+  "position_en": "{S} is centered in the frame, with the sea spreading out behind {o}",
+  "ground_contact_en": "{P} bare feet and ankles are fully visible in the shallow water",
+  "more_prefix_en": "Farther along"
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "krea2-scene-pack/2",
+  "location_ko": "카페",
+  "outdoor": false,
+  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+  "setting_en": "a small neighborhood café with warm wooden tables, a long counter and tall front windows",
+  "feature_en": [
+    "a round wooden table with a ceramic cup and saucer on it",
+    "a woven rattan chair pulled out beside the table"
+  ],
+  "ground_en": [
+    "a worn light-oak plank floor",
+    "small square cement tiles near the entrance"
+  ],
+  "far_en": [
+    "a long wooden counter with an espresso machine and a row of glass jars",
+    "shelves of ceramic cups and coffee bags along the back wall"
+  ],
+  "times": {
+    "낮 창가": {
+      "time_en": "a calm weekday afternoon",
+      "sky_en": "soft daylight filling the room",
+      "light_en": "the window stands to the camera's left of {o}, and its daylight falls across {p} left side and the tabletop",
+      "shadow_en": "a soft shadow of {o} falls on the wall behind, toward the right",
+      "desc_ko": "평일 오후, 큰 창이 인물의 왼쪽에서 자연광을 줌",
+      "time_prep": "on"
+    },
+    "저녁 조명": {
+      "time_en": "the early evening",
+      "sky_en": "warm pendant lamps glowing over the tables while the street outside turns dusky blue",
+      "light_en": "a warm pendant lamp hangs above and slightly in front of {o}, lighting {p} face and shoulders in a soft amber tone",
+      "shadow_en": "soft shadows gather on the wall behind {o}",
+      "desc_ko": "저녁, 천장 펜던트 램프의 따뜻한 빛, 창밖은 푸르게 어두워짐",
+      "time_prep": "in"
+    }
+  },
+  "moments": {
+    "창가에 앉기": {
+      "pose_en": "sits at a wooden table by the window with one hand resting on a ceramic cup",
+      "moment_en": "{s} glances toward the camera and the corner of {p} mouth lifts",
+      "desc_ko": "창가 테이블에 앉아 컵에 손을 올리고 카메라를 봄"
+    },
+    "컵 들기": {
+      "pose_en": "sits at a wooden table and lifts a ceramic cup with both hands",
+      "moment_en": "{s} looks over the rim of the cup toward the camera",
+      "desc_ko": "두 손으로 컵을 들고 컵 너머로 카메라를 봄"
+    }
+  },
+  "camera": {
+    "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the café interior softly out of focus",
+    "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the café interior softly out of focus"
+  },
+  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+  "detail_en": {
+    "낮 창가": [
+      "the table top is smooth pale wood with a faint grain",
+      "the glass of the front window shows a blurred street outside",
+      "the cup holds a latte with a thin leaf pattern in the foam"
+    ],
+    "저녁 조명": [
+      "the table top is smooth pale wood with a faint grain",
+      "the window glass shows a deep blue dusk and the reflections of the lamps",
+      "the cup holds a latte with a thin leaf pattern in the foam"
+    ]
+  },
+  "position_en": "{S} sits at the table with the window and the café interior spreading out behind {o}",
+  "more_prefix_en": "Beyond that"
+}

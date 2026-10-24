@@ -1,0 +1,87 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_white_floral_chiffon_dress",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "흰 바탕 푸른 들꽃 쉬폰 원피스",
+  "name_en": "white chiffon dress with small blue wildflowers",
+  "desc_ko": "흰 바탕에 작은 푸른 들꽃 프린트 쉬폰 미디 원피스 (퍼프 소매·사각 목선)",
+  "category": "dress",
+  "source_doc": "한결_정체성.md §3-D/§3-E (1004)",
+  "applies_to": {
+    "locations": [
+      "수국 정원",
+      "식물원 정원길",
+      "공원"
+    ],
+    "note_ko": "프레임이 허리 위·가슴 위면 보이는 부분만 적는다(normal_waist_en / normal_top_en, 상세 문장은 depth 칸)."
+  },
+  "color": {
+    "primary": {
+      "ko": "흰색 + 푸른 들꽃 프린트",
+      "en": "white with small blue wildflowers"
+    }
+  },
+  "material": {
+    "ko": "쉬폰",
+    "en": "chiffon",
+    "finish_ko": "",
+    "finish_en": "a light finish",
+    "behavior_en": "the layers move a little in the breeze"
+  },
+  "normal_en": "a white chiffon midi dress printed with small blue wildflowers, with short puffed sleeves, a square neckline, a fitted bodice with a smocked waist and a tiered skirt that ends just below the knees, with white leather flat sandals",
+  "normal_waist_en": "a white chiffon dress printed with small blue wildflowers, with short puffed sleeves, a square neckline and a fitted bodice with a smocked waist",
+  "normal_top_en": "a white chiffon dress printed with small blue wildflowers, with short puffed sleeves and a square neckline",
+  "detail_prose_en": [
+    "The dress is white chiffon printed all over with small blue wildflowers, with short puffed sleeves and a square neckline",
+    {
+      "depth": 2,
+      "en": "The fitted bodice is gathered into a smocked waist"
+    },
+    {
+      "depth": 4,
+      "en": "The tiered skirt falls in light layers to just below the knees"
+    },
+    {
+      "depth": 6,
+      "en": "{P} white leather flat sandals have thin straps"
+    }
+  ],
+  "echo_en": [
+    "The white chiffon is printed with small blue wildflowers",
+    "The short puffed sleeves and the square neckline stay clearly visible"
+  ],
+  "lit_en": "the white chiffon of the dress",
+  "parts": {
+    "top": {
+      "ko": "흰 쉬폰 상체",
+      "en": "a white chiffon bodice with puffed sleeves",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "티어드 스커트",
+      "en": "a tiered chiffon skirt",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결의 identity 쪽에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "단색 라벤더·긴소매·발목 길이(2안, 할머니 옷 같았음)로 변경",
+    "소녀풍 플러터 소매 로즈 원피스(1안)로 변경"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "색은 이름으로만 적고 반사·광택 결과는 쓰지 않는다"
+  ],
+  "normal_noshoe_en": "a white chiffon midi dress printed with small blue wildflowers, with short puffed sleeves, a square neckline, a fitted bodice with a smocked waist and a tiered skirt that ends just below the knees"
+}

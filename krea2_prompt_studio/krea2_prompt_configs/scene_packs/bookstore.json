@@ -1,0 +1,68 @@
+{
+  "schema": "krea2-scene-pack/2",
+  "location_ko": "서점",
+  "outdoor": false,
+  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+  "setting_en": "a cozy independent bookstore with tall wooden shelves, a ladder and a reading corner",
+  "feature_en": [
+    "tall wooden shelves filled with books with colorful spines",
+    "a small wooden table stacked with new books and a handwritten card"
+  ],
+  "ground_en": [
+    "a dark wooden plank floor with a faint worn path",
+    "a deep red patterned rug in the aisle"
+  ],
+  "far_en": [
+    "a rolling wooden ladder leaning against the far shelves",
+    "a reading corner with an armchair and a small lamp"
+  ],
+  "times": {
+    "낮 조명": {
+      "time_en": "a quiet afternoon",
+      "sky_en": "soft daylight mixing with warm ceiling lights",
+      "light_en": "the shop window stands to the camera's left of {o}, and its daylight falls across {p} left side",
+      "shadow_en": "a soft shadow of {o} falls on the shelves behind, toward the right",
+      "desc_ko": "조용한 오후, 가게 창의 자연광과 따뜻한 천장 조명",
+      "time_prep": "on"
+    },
+    "저녁 조명": {
+      "time_en": "the evening",
+      "sky_en": "warm lamps glowing between the shelves",
+      "light_en": "a warm shelf lamp stands to the camera's left of {o}, lighting {p} face and shoulders in a soft amber tone",
+      "shadow_en": "soft shadows gather between the shelves behind {o}",
+      "desc_ko": "저녁, 서가 사이 램프의 따뜻한 빛, 창밖은 어두운 거리",
+      "time_prep": "in"
+    }
+  },
+  "moments": {
+    "책 고르기": {
+      "pose_en": "stands in the aisle holding an open book in both hands",
+      "moment_en": "{s} looks up from the page toward the camera and smiles a little",
+      "desc_ko": "서가 앞에서 책을 펼쳐 들고 카메라를 올려봄"
+    },
+    "서가 앞에 서기": {
+      "pose_en": "stands in the aisle with one hand on a shelf",
+      "moment_en": "{s} turns {p} head and looks toward the camera",
+      "desc_ko": "한 손을 서가에 얹고 카메라 쪽으로 고개를 돌림"
+    }
+  },
+  "camera": {
+    "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the shelves softly out of focus",
+    "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the shelves softly out of focus"
+  },
+  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+  "detail_en": {
+    "낮 조명": [
+      "the book spines are in muted reds, greens and creams",
+      "the wooden shelves are dark with a smooth worn finish",
+      "the table holds a neat stack of new hardcovers"
+    ],
+    "저녁 조명": [
+      "the book spines are in muted reds, greens and creams",
+      "the wooden shelves are dark with a smooth worn finish",
+      "the window glass shows the dark street and the reflection of the lamps"
+    ]
+  },
+  "position_en": "{S} stands in the aisle with the shelves spreading out behind {o}",
+  "more_prefix_en": "Beyond that"
+}

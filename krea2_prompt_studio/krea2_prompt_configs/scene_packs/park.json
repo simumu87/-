@@ -1,0 +1,67 @@
+{
+  "schema": "krea2-scene-pack/2",
+  "location_ko": "공원",
+  "outdoor": true,
+  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+  "setting_en": "a quiet city park with a wide gravel path, tall old trees and a few wooden benches",
+  "feature_en": [
+    "a wooden bench beside the path under a tree",
+    "tall old trees with broad green leaves along both sides of the path"
+  ],
+  "ground_en": [
+    "a pale gravel path with a thin edge of short grass",
+    "short green grass with a few small white flowers"
+  ],
+  "far_en": [
+    "the path curving gently away between the trees",
+    "a small pond glinting far off through the trunks"
+  ],
+  "times": {
+    "오후": {
+      "time_en": "a bright afternoon",
+      "sky_en": "a high pale-blue sky seen between the leaves",
+      "light_en": "the afternoon sun shines from high in front of {o} and to the camera's left, lighting {p} face and shoulders",
+      "shadow_en": "short soft shadows pool under {o} on the gravel",
+      "desc_ko": "밝은 오후, 높은 해가 인물의 앞 왼쪽에서 비춤",
+      "time_prep": "on"
+    },
+    "해질녘": {
+      "time_en": "golden hour just before sunset",
+      "sky_en": "the low sun hanging orange above the treetops",
+      "light_en": "the low sun sits in front of {o} and to the camera's left, its warm light falling directly on {p} face and shoulders",
+      "shadow_en": "long soft shadows stretch across the gravel toward the camera's right",
+      "desc_ko": "해 지기 직전, 낮고 따뜻한 빛이 인물의 앞 왼쪽에서 비춤"
+    }
+  },
+  "moments": {
+    "천천히 걷기": {
+      "pose_en": "walks along the gravel path in a relaxed stride",
+      "moment_en": "{s} glances back toward the camera as the breeze lifts a few leaves",
+      "desc_ko": "자갈길을 천천히 걷다 카메라 쪽을 돌아봄"
+    },
+    "벤치에 앉기": {
+      "pose_en": "sits on the wooden bench with {p} hands resting on {p} knees",
+      "moment_en": "{s} looks toward the camera and smiles a little",
+      "desc_ko": "나무 벤치에 앉아 무릎 위에 손을 올리고 카메라를 봄"
+    }
+  },
+  "camera": {
+    "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the trees softly out of focus",
+    "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the trees softly out of focus"
+  },
+  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+  "detail_en": {
+    "오후": [
+      "the leaves are a fresh mid green with small patches of sky between them",
+      "the gravel is pale gray with fine grains",
+      "the bench is weathered wood with dark iron legs"
+    ],
+    "해질녘": [
+      "the leaves are a deep green with warm orange edges",
+      "the gravel is pale gray with fine grains",
+      "the bench is weathered wood with dark iron legs"
+    ]
+  },
+  "position_en": "{S} is centered in the frame, with the path and the trees spreading out behind {o}",
+  "more_prefix_en": "Beyond that"
+}

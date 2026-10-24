@@ -1,0 +1,87 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "THEMES",
+  "label_ko": "테마",
+  "items": {
+    "일상": {
+      "en": "ordinary everyday life",
+      "desc_ko": "평범한 하루의 장면"
+    },
+    "로맨스": {
+      "en": "a quiet romantic moment between adults",
+      "desc_ko": "성인 두 사람의 조용하고 로맨틱한 순간"
+    },
+    "데이트": {
+      "en": "a casual adult date",
+      "desc_ko": "가볍고 편안한 성인 데이트"
+    },
+    "주말": {
+      "en": "a relaxed weekend lifestyle scene",
+      "desc_ko": "느긋하게 보내는 주말 장면"
+    },
+    "휴식": {
+      "en": "calm personal downtime",
+      "desc_ko": "혼자 쉬는 차분한 시간"
+    },
+    "친구": {
+      "en": "a warm everyday friendship moment",
+      "desc_ko": "친구와 보내는 따뜻한 일상"
+    },
+    "여행": {
+      "en": "an adult travel lifestyle scene",
+      "desc_ko": "여행 중의 생활 장면"
+    },
+    "도시 생활": {
+      "en": "modern urban lifestyle",
+      "desc_ko": "현대 도시의 일상"
+    },
+    "자연": {
+      "en": "a peaceful outdoor lifestyle",
+      "desc_ko": "야외에서 보내는 평화로운 시간"
+    },
+    "직장": {
+      "en": "professional everyday work life",
+      "desc_ko": "일하는 평범한 하루"
+    },
+    "공부": {
+      "en": "a focused study session",
+      "desc_ko": "집중해서 공부하는 시간"
+    },
+    "취미": {
+      "en": "a casual hobby activity",
+      "desc_ko": "가볍게 즐기는 취미 활동"
+    },
+    "예술": {
+      "en": "a creative artistic activity",
+      "desc_ko": "창작과 예술 활동"
+    },
+    "스포츠": {
+      "en": "recreational sports activity",
+      "desc_ko": "가벼운 레크리에이션 운동"
+    },
+    "비 오는 날": {
+      "en": "a cozy rainy-day lifestyle scene",
+      "desc_ko": "비 오는 날의 아늑한 장면"
+    },
+    "아침": {
+      "en": "a fresh morning routine",
+      "desc_ko": "상쾌한 아침 일과"
+    },
+    "저녁": {
+      "en": "a quiet evening routine",
+      "desc_ko": "조용한 저녁 일과"
+    },
+    "축제": {
+      "en": "a lively cultural festival atmosphere",
+      "desc_ko": "활기찬 문화 축제 분위기"
+    },
+    "휴가": {
+      "en": "a relaxed vacation atmosphere",
+      "desc_ko": "여유로운 휴가 분위기"
+    },
+    "사진 화보": {
+      "en": "a refined lifestyle editorial photograph",
+      "desc_ko": "정돈된 라이프스타일 화보 사진"
+    }
+  }
+}

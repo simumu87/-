@@ -1,0 +1,7 @@
+[
+  {"pattern": "\\bstanding naturally with relaxed posture and relaxed posture\\b", "replacement": "standing naturally with relaxed posture"},
+  {"pattern": "\\bfull body full-body composition\\b", "replacement": "full-body composition"},
+  {"pattern": "\\bfront-facing viewpoint viewpoint\\b", "replacement": "front-facing viewpoint"},
+  {"pattern": "\\s+,", "replacement": ","},
+  {"pattern": "\\s{2,}", "replacement": " "}
+]

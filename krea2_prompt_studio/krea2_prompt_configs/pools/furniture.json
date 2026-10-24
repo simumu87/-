@@ -1,0 +1,235 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "FURNITURE",
+  "label_ko": "가구",
+  "items": {
+    "three-seat sofa": {
+      "en": "a proportionally sized three-seat sofa",
+      "desc_ko": ""
+    },
+    "low coffee table": {
+      "en": "a low rectangular coffee table",
+      "desc_ko": ""
+    },
+    "media console": {
+      "en": "a compact media console",
+      "desc_ko": ""
+    },
+    "accent chair": {
+      "en": "a proportionally sized accent chair",
+      "desc_ko": ""
+    },
+    "floor lamp": {
+      "en": "a floor lamp with a realistic human-scale stand",
+      "desc_ko": ""
+    },
+    "side table": {
+      "en": "a small side table",
+      "desc_ko": ""
+    },
+    "kitchen island": {
+      "en": "a proportionally sized kitchen island",
+      "desc_ko": ""
+    },
+    "counter stools": {
+      "en": "counter-height stools",
+      "desc_ko": ""
+    },
+    "dining table": {
+      "en": "a realistically sized dining table",
+      "desc_ko": ""
+    },
+    "dining chairs": {
+      "en": "simple dining chairs",
+      "desc_ko": ""
+    },
+    "built-in cabinetry": {
+      "en": "built-in kitchen cabinetry",
+      "desc_ko": ""
+    },
+    "writing desk": {
+      "en": "a functional writing desk",
+      "desc_ko": ""
+    },
+    "ergonomic office chair": {
+      "en": "an ergonomic office chair",
+      "desc_ko": ""
+    },
+    "bookshelf": {
+      "en": "a tall bookshelf",
+      "desc_ko": ""
+    },
+    "drawer cabinet": {
+      "en": "a compact drawer cabinet",
+      "desc_ko": ""
+    },
+    "double bed": {
+      "en": "a proportionally sized double bed",
+      "desc_ko": ""
+    },
+    "bedside tables": {
+      "en": "bedside tables",
+      "desc_ko": ""
+    },
+    "wooden dresser": {
+      "en": "a wooden dresser",
+      "desc_ko": ""
+    },
+    "reading chair": {
+      "en": "a comfortable reading chair",
+      "desc_ko": ""
+    },
+    "standing mirror": {
+      "en": "a full-height standing mirror",
+      "desc_ko": ""
+    },
+    "small round tables": {
+      "en": "small round cafe tables",
+      "desc_ko": ""
+    },
+    "wooden cafe chairs": {
+      "en": "wooden cafe chairs",
+      "desc_ko": ""
+    },
+    "long counter": {
+      "en": "a cafe counter",
+      "desc_ko": ""
+    },
+    "bar stools": {
+      "en": "counter-height cafe stools",
+      "desc_ko": ""
+    },
+    "bench seating": {
+      "en": "a long upholstered bench",
+      "desc_ko": ""
+    },
+    "tall bookshelves": {
+      "en": "tall bookshelves with realistic aisle spacing",
+      "desc_ko": ""
+    },
+    "reading table": {
+      "en": "a shared reading table",
+      "desc_ko": ""
+    },
+    "armchair": {
+      "en": "a comfortable armchair",
+      "desc_ko": ""
+    },
+    "small display pedestal": {
+      "en": "a small display pedestal",
+      "desc_ko": ""
+    },
+    "minimal bench": {
+      "en": "a minimal gallery bench",
+      "desc_ko": ""
+    },
+    "reception desk": {
+      "en": "a reception desk",
+      "desc_ko": ""
+    },
+    "sculpture plinths": {
+      "en": "museum sculpture plinths",
+      "desc_ko": ""
+    },
+    "long study tables": {
+      "en": "long study tables",
+      "desc_ko": ""
+    },
+    "individual study desks": {
+      "en": "individual study desks",
+      "desc_ko": ""
+    },
+    "reading chairs": {
+      "en": "reading chairs",
+      "desc_ko": ""
+    },
+    "street bench": {
+      "en": "a street bench",
+      "desc_ko": ""
+    },
+    "small outdoor tables": {
+      "en": "small outdoor tables",
+      "desc_ko": ""
+    },
+    "bus shelter": {
+      "en": "a bus shelter",
+      "desc_ko": ""
+    },
+    "wooden bench": {
+      "en": "a realistic wooden park bench",
+      "desc_ko": ""
+    },
+    "picnic table": {
+      "en": "a picnic table",
+      "desc_ko": ""
+    },
+    "small pavilion": {
+      "en": "a small park pavilion",
+      "desc_ko": ""
+    },
+    "folding beach chair": {
+      "en": "a folding beach chair",
+      "desc_ko": ""
+    },
+    "small sun shelter": {
+      "en": "a simple sun shelter",
+      "desc_ko": ""
+    },
+    "trail bench": {
+      "en": "a trail-side bench",
+      "desc_ko": ""
+    },
+    "wooden rest shelter": {
+      "en": "a small wooden trail shelter",
+      "desc_ko": ""
+    },
+    "deep lounge chairs": {
+      "en": "deep lounge chairs",
+      "desc_ko": ""
+    },
+    "sofas": {
+      "en": "hotel lobby sofas",
+      "desc_ko": ""
+    },
+    "marble side tables": {
+      "en": "marble side tables",
+      "desc_ko": ""
+    },
+    "queen bed": {
+      "en": "a proportionally sized queen bed",
+      "desc_ko": ""
+    },
+    "desk": {
+      "en": "a hotel writing desk",
+      "desc_ko": ""
+    },
+    "lounge chair": {
+      "en": "a hotel lounge chair",
+      "desc_ko": ""
+    },
+    "luggage bench": {
+      "en": "a luggage bench",
+      "desc_ko": ""
+    },
+    "metal benches": {
+      "en": "station benches",
+      "desc_ko": ""
+    },
+    "ticket kiosks": {
+      "en": "ticket kiosks",
+      "desc_ko": ""
+    },
+    "information desk": {
+      "en": "a station information desk",
+      "desc_ko": ""
+    },
+    "small cafe table": {
+      "en": "a small cafe table",
+      "desc_ko": ""
+    },
+    "reading armchair": {
+      "en": "a bookstore reading armchair",
+      "desc_ko": ""
+    }
+  }
+}

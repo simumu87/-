@@ -1,0 +1,73 @@
+{
+  "schema": "krea2-scene-pack/2",
+  "location_ko": "도시 거리",
+  "outdoor": true,
+  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+  "setting_en": "a quiet city street lined with low brick buildings, small shops and young trees",
+  "feature_en": [
+    "a row of shop fronts with glass windows and small hanging signs",
+    "a young tree growing from a square cut in the pavement"
+  ],
+  "ground_en": [
+    "gray stone pavement with a thin line of paving seams",
+    "a smooth asphalt road with a faint painted crosswalk"
+  ],
+  "far_en": [
+    "the street running straight into the distance between brick buildings",
+    "a few parked bicycles and scooters along the curb"
+  ],
+  "times": {
+    "오후": {
+      "time_en": "a clear afternoon",
+      "sky_en": "a pale blue sky with a few thin clouds above the rooftops",
+      "light_en": "the afternoon sun shines from high in front of {o} and to the camera's left, lighting {p} face and shoulders",
+      "shadow_en": "short soft shadows fall on the pavement toward the camera's right",
+      "desc_ko": "맑은 오후, 높은 해가 인물의 앞 왼쪽에서 비춤",
+      "time_prep": "on"
+    },
+    "밤 가로등": {
+      "time_en": "a clear night",
+      "sky_en": "a deep navy sky above the rooftops",
+      "light_en": "a street lamp stands to the camera's left of {o}, lighting {p} face and shoulders in a warm amber tone",
+      "shadow_en": "a soft shadow of {o} stretches across the pavement to the right",
+      "far_en": [
+        "the street running into the distance with a line of warm street lamps",
+        "shop windows glowing warmly along both sides of the street"
+      ],
+      "desc_ko": "맑은 밤, 가로등 하나가 인물의 왼쪽에서 따뜻하게 비춤",
+      "time_prep": "on"
+    }
+  },
+  "moments": {
+    "천천히 걷기": {
+      "pose_en": "walks along the pavement in a relaxed stride",
+      "moment_en": "{s} glances back toward the camera over {p} shoulder",
+      "desc_ko": "보도를 천천히 걷다 어깨 너머로 카메라를 돌아봄"
+    },
+    "멈춰 서기": {
+      "pose_en": "stands on the pavement with one hand in {p} pocket",
+      "moment_en": "{s} looks toward the camera and smiles a little",
+      "desc_ko": "보도에 멈춰 서서 한 손을 주머니에 넣고 카메라를 봄"
+    }
+  },
+  "camera": {
+    "전신": "Full-length shot from eye level with a 35mm lens, the frame running from the top of {p} head down to {p} feet on the pavement, vertical frame, shallow depth of field with the street softly out of focus",
+    "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the street softly out of focus"
+  },
+  "style_en": "natural street photography with fine film grain and realistic skin texture",
+  "detail_en": {
+    "오후": [
+      "the brick walls are a warm red-brown with pale mortar lines",
+      "the shop windows show shelves and a few hanging plants",
+      "the pavement is dry and lightly worn"
+    ],
+    "밤 가로등": [
+      "the brick walls are a deep red-brown with pale mortar lines",
+      "the shop windows glow with warm interior lights",
+      "the pavement is dry and lightly worn"
+    ]
+  },
+  "position_en": "{S} is centered in the frame, with the street spreading out behind {o}",
+  "more_prefix_en": "Beyond that",
+  "ground_contact_en": "{P} shoes are fully visible on the pavement"
+}

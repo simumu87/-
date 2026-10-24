@@ -1,0 +1,23 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "DEPTHS",
+  "label_ko": "심도(환경)",
+  "items": {
+    "깊음": {
+      "en": "deep depth of field with both subject and environment remaining clear",
+      "desc_ko": ""
+    },
+    "보통": {
+      "en": "moderate depth of field with gentle background separation",
+      "desc_ko": ""
+    },
+    "얕음": {
+      "en": "shallow depth of field with selective subject emphasis",
+      "desc_ko": ""
+    },
+    "매우 얕음": {
+      "en": "very shallow depth of field reserved for close portrait details",
+      "desc_ko": ""
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "WEATHER",
+  "label_ko": "날씨",
+  "items": {
+    "맑음": {
+      "en": "clear weather",
+      "desc_ko": "구름 없이 맑은 날"
+    },
+    "구름 조금": {
+      "en": "partly cloudy weather",
+      "desc_ko": "구름이 약간 낀 날"
+    },
+    "흐림": {
+      "en": "overcast weather",
+      "desc_ko": "구름이 두껍게 덮인 날"
+    },
+    "비": {
+      "en": "gentle rain",
+      "desc_ko": "잔잔하게 내리는 비"
+    },
+    "폭우": {
+      "en": "heavy rain outside",
+      "desc_ko": "세차게 쏟아지는 비"
+    },
+    "눈": {
+      "en": "light snowfall",
+      "desc_ko": "가볍게 내리는 눈"
+    },
+    "안개": {
+      "en": "soft morning mist",
+      "desc_ko": "부드러운 안개"
+    },
+    "바람": {
+      "en": "a breezy day",
+      "desc_ko": "바람이 부는 날"
+    }
+  }
+}

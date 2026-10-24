@@ -1,0 +1,17 @@
+{
+  "schema": "krea2-outfit-list/1",
+  "character": "한결",
+  "trigger": "hangyeol",
+  "lora_outfits": [
+    "hangyeol_ink_navy_two_piece",
+    "hangyeol_autumn_cream_knit_sage_pleated",
+    "hangyeol_white_floral_chiffon_dress",
+    "hangyeol_black_satin_off_shoulder_mini",
+    "hangyeol_wine_slip_midi",
+    "hangyeol_blue_crop_cardigan_white_tennis",
+    "hangyeol_yellow_sundress"
+  ],
+  "use_common_pool": true,
+  "default_source": "all",
+  "note_ko": "한결 의상: 수영복 2판(해변·인피니티 풀), 크림 니트+세이지 플리츠, 흰 푸른 들꽃 쉬폰, 노바 코디 4벌(검정 새틴 오프숄더·와인 슬립·하늘색 크롭 가디건+흰 테니스 스커트·노란 썬드레스). 한결 LoRA 사용 시 의상 후보 = 로라의상 + 공용의상."
+}
