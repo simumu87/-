@@ -354,6 +354,46 @@ def makeup_checks():
     return problems
 
 
+def gui_checks():
+    """The sections returned by compose_split rebuild a clean weighted prompt, and the GUI server functions answer."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    w = importlib.import_module("krea2_weighted")
+    g = importlib.import_module("gui_server")
+    opt = g.options()
+    if not opt["loras"] or not opt["locations"]:
+        problems.append((10, 1, "gui options empty"))
+    for trig in ("hangyeol", "nayoon", "ara"):
+        for loc in list(c.PACK_FILES)[:4]:
+            place = g.place_options(trig, loc)
+            if not (place["times"] and place["framings"] and place["moments"]):
+                problems.append((10, 1, f"gui place options empty: {trig} {loc}"))
+                continue
+            body = {"trigger": trig, "outfit": "__common__", "location": loc, "time": place["times"][0]["key"],
+                    "framing": place["framings"][0], "moment": [m for m in place["moments"] if place["framings"][0] in m["frames"]][0]["key"],
+                    "expression": opt["expressions"][0]["key"], "seed": 5}
+            out = g.compose(body)
+            need = {"identity", "action", "skin", "setting", "light", "camera", "style"}
+            if not need <= set(out["sections"]):
+                problems.append((10, 1, f"sections missing: {trig} {loc} {need - set(out['sections'])}"))
+            text = out["weighted"]
+            if text.count("(") != text.count(")"):
+                problems.append((10, 1, f"unbalanced brackets: {trig} {loc}"))
+            if not text.startswith("(Lighting:1.1)."):
+                problems.append((10, 1, f"lighting tag missing: {trig} {loc}"))
+            if re.search(r"[가-힣]", text):
+                problems.append((10, 1, f"Hangul in weighted prompt: {trig} {loc}"))
+            if re.search(r":\d(?:\.\d+)?\)[^.\n]", text):
+                problems.append((10, 1, f"weighted group not closed with a period: {trig} {loc}"))
+    # the weights really change the output, and an empty weight removes the brackets
+    r = c.compose_split("hangyeol", "", location="해변", time_key="해질녘", moment="파도 발목", framing="전신", expression="환한 미소", seed=1, common_outfit=True)
+    a = w.weighted_prompt(r["sections"], {"outfit": 1.6})
+    b = w.weighted_prompt(r["sections"], {"outfit": None})
+    if ":1.6)" not in a or ":1.6)" in b:
+        problems.append((10, 1, "outfit weight does not switch the brackets"))
+    return problems
+
+
 def hangyeol_checks():
     """Hangyeol outfits: every listed outfit x its locations x times x frames x modes composes cleanly,
     and each outfit only names what the frame can show (shoes only on full-length, belt/skirt only from the waist down)."""
@@ -398,7 +438,7 @@ def hangyeol_checks():
 
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + gui_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

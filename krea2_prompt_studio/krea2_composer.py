@@ -19,7 +19,7 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import importlib
 
@@ -327,6 +327,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     mk_text = "" if reference else resolve_makeup(lora, makeup)
     if mk_text:
         person.append(makeup_sentence(subj, mk_text))
+    cut_identity = len(person)                        # sections: identity | outfit | action | skin (for the weighted view)
 
     if not outfit and common_outfit:
         person.append(common_outfit_sentence(location, framing, subj, poss, detailed, seed))
@@ -339,6 +340,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         person.append(sentence(f"{subj.capitalize()} wears {_join(wear)}"))
         if detailed:
             person.extend(sentence(f(t)) for t in outfit_detail_for(outfit, framing))
+    cut_outfit = len(person)
     if pack.get("person_extra_en"):
         person.append(sentence(f(pack["person_extra_en"])))
     person.append(sentence(f"{subj.capitalize()} {f(mo['pose_en'])}"))
@@ -359,6 +361,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
             person.append(sentence(hair_echo2))
         if outfit and len(outfit.get("echo_en", [])) > 1:
             person.append(sentence(f(outfit["echo_en"][1])))
+    cut_action = len(person)
     if not reference:
         person.append(sentence(f"{poss.capitalize()} skin shows fine pores and soft vellus hair, matte, with no smoothing and no retouching"))
     person_text = " ".join(person)
@@ -373,22 +376,26 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         style_line = f"{style_line}, {lora['style_extra_en']}"
     rng.shuffle(waters), rng.shuffle(grounds), rng.shuffle(fars)
 
-    def build_scene_text(fx) -> str:
-        out = [sentence(f"{pack['setting_en']} {tm.get('time_prep', 'at')} {tm['time_en']}".replace("  ", " ") + f", {tm['sky_en']}, with {waters[0]} and {grounds[0]}")]
+    def build_scene_parts(fx) -> List[Tuple[str, str]]:
+        """(section, sentence) in the original order: setting | light | camera | style."""
+        out = [("setting", sentence(f"{pack['setting_en']} {tm.get('time_prep', 'at')} {tm['time_en']}".replace("  ", " ") + f", {tm['sky_en']}, with {waters[0]} and {grounds[0]}"))]
         if detailed and len(waters) > 1 and len(grounds) > 1:
-            out.append(sentence(f"{pack.get('more_prefix_en', 'Farther along')}, {waters[1]}, with {grounds[1]}"))
+            out.append(("setting", sentence(f"{pack.get('more_prefix_en', 'Farther along')}, {waters[1]}, with {grounds[1]}")))
         light = cap(fx(tm["light_en"])) + (f", and {tm['accent_en']}" if tm.get("accent_en") else "")
-        out.append(sentence(light))
+        out.append(("light", sentence(light)))
         if detailed:
-            out.append(sentence(cap(_join(pack["detail_en"][time_key]))))
-        out.append(sentence(f"{cap(fx(tm['shadow_en']))}, with {_join(fars[:2] if detailed else fars[:1])}"))
+            out.append(("setting", sentence(cap(_join(pack["detail_en"][time_key])))))
+        out.append(("light", sentence(f"{cap(fx(tm['shadow_en']))}, with {_join(fars[:2] if detailed else fars[:1])}")))
         if detailed:
-            out.append(sentence(fx(pack["position_en"])))
+            out.append(("setting", sentence(fx(pack["position_en"]))))
             if framing == "전신" and pack.get("ground_contact_en"):      # only what the frame can show
-                out.append(sentence(fx(pack["ground_contact_en"])))
-        out.append(sentence(fx(tm.get("camera", pack["camera"])[framing])))
-        out.append(sentence(style_line))
-        return " ".join(out)
+                out.append(("setting", sentence(fx(pack["ground_contact_en"]))))
+        out.append(("camera", sentence(fx(tm.get("camera", pack["camera"])[framing]))))
+        out.append(("style", sentence(style_line)))
+        return out
+
+    def build_scene_text(fx) -> str:
+        return " ".join(text for _, text in build_scene_parts(fx))
 
     scene_text = build_scene_text(fs)                          # regional use: "the woman"
     combined = f"{person_text} {build_scene_text(f)}"          # one person, one prompt: "her" keeps the thread
@@ -400,8 +407,18 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     if makeup and not reference and re.search(r"make-?up|eyeshadow|eyeliner|lipstick|lip colou?r|tinted lips|blush",
                                               k.clean_text(lora.get("identity", "")), re.I):
         problems.append("identity still has makeup text: move it to the loras.json makeup field")
+    scene_by = {}
+    for tag, text in build_scene_parts(f):
+        scene_by.setdefault(tag, []).append(text)
+    sections = {
+        "identity": " ".join(person[:cut_identity]),
+        "outfit": " ".join(person[cut_identity:cut_outfit]),
+        "action": " ".join(person[cut_outfit:cut_action]),
+        "skin": " ".join(person[cut_action:]),
+        **{tag: " ".join(texts) for tag, texts in scene_by.items()},
+    }
     return {"person": person_text, "scene": scene_text, "combined": combined, "problems": problems,
-            "words": len(combined.split()), "reinforce": level}
+            "words": len(combined.split()), "reinforce": level, "sections": sections}
 
 
 def common_outfit_sentence(location: str, framing: str, subj: str, poss: str, detailed: bool, seed: int) -> str:
