@@ -1,0 +1,82 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "도서관 열람실",
+ "outdoor": false,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a quiet public library reading room with long wooden tables and tall bookshelves",
+ "feature_en": [
+  "long oak reading tables with green-shaded brass lamps",
+  "tall bookshelves filled with books in muted blue, brown and cream"
+ ],
+ "ground_en": [
+  "a polished wooden floor between the tables",
+  "a worn gray carpet runner along the aisle"
+ ],
+ "far_en": [
+  "rows of tables running away toward a tall arched window",
+  "a rolling wooden ladder leaning on the far shelves"
+ ],
+ "times": {
+  "낮": {
+   "time_en": "a quiet weekday afternoon",
+   "time_prep": "on",
+   "sky_en": "soft daylight from the tall windows mixing with the warm lamps",
+   "light_en": "daylight comes from the tall window on the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "soft shadows of the shelves gather on the floor toward the camera's right",
+   "desc_ko": "조용한 평일 오후, 카메라 왼쪽 큰 창의 자연광"
+  },
+  "저녁": {
+   "time_en": "the evening",
+   "time_prep": "in",
+   "sky_en": "warm lamplight under the dark windows",
+   "light_en": "a green-shaded brass lamp on the table stands in front of {o} and to the camera's left, lighting {p} face and hands",
+   "shadow_en": "deep shadows gather between the bookshelves behind {o}",
+   "desc_ko": "저녁, 탁자 위 초록 갓 램프가 앞쪽 왼편에서 비춤"
+  }
+ },
+ "moments": {
+  "책 펼쳐 읽기": {
+   "pose_en": "sits at a reading table with an open book held in both hands",
+   "moment_en": "{s} looks up from the page toward the camera with a small smile",
+   "desc_ko": "책을 두 손으로 펼쳐 읽다가 고개를 들어 카메라를 봄",
+   "frames": [
+    "무릎 위",
+    "허리 위"
+   ]
+  },
+  "책장 앞에서 고르기": {
+   "pose_en": "stands in front of a bookshelf with one hand touching a book spine",
+   "moment_en": "{s} turns {p} head toward the camera with a gentle smile",
+   "desc_ko": "책장 앞에서 책등에 손을 대고 카메라 쪽으로 고개를 돌림"
+  },
+  "책 안고 걷기": {
+   "pose_en": "walks slowly along the aisle with two books held against {p} chest",
+   "moment_en": "{s} looks toward the camera with a soft smile",
+   "desc_ko": "책 두 권을 가슴에 안고 통로를 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the shelves softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the shelves softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the shelves softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the wooden floor beside the carpet runner",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮": [
+   "the reading tables are pale oak with dark edges",
+   "the shelf spines are muted blue, brown and cream",
+   "the arched window frames are painted white"
+  ],
+  "저녁": [
+   "the lamp shades are dark green with brass stems",
+   "the shelf spines are muted blue, brown and cream",
+   "the arched windows are dark panes in white frames"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the tables and shelves spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

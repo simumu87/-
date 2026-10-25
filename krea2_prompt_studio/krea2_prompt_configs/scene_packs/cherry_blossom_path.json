@@ -1,0 +1,86 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "벚꽃 길",
+ "outdoor": true,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a paved park path in spring lined with blooming cherry trees",
+ "feature_en": [
+  "cherry trees in full bloom with pale pink blossoms arching over the path",
+  "a low wooden bench beside the path"
+ ],
+ "ground_en": [
+  "a gray paved path scattered with pale pink petals",
+  "fresh green grass along both edges of the path"
+ ],
+ "far_en": [
+  "the path curving away beneath a canopy of blossoms",
+  "a few small figures far down the path"
+ ],
+ "times": {
+  "오전": {
+   "time_en": "a clear spring morning",
+   "time_prep": "on",
+   "sky_en": "a pale blue sky showing between the blossoms",
+   "light_en": "soft morning sunlight comes through the blossoms from above and to the camera's right",
+   "shadow_en": "dappled shadows of the branches fall across the path toward the camera's left",
+   "desc_ko": "맑은 봄 아침, 꽃가지 사이로 위와 오른쪽에서 오는 부드러운 햇빛"
+  },
+  "해질녘": {
+   "time_en": "the last hour before sunset",
+   "sky_en": "a soft peach-colored sky behind the pink blossoms",
+   "light_en": "low warm sunlight comes from behind {o} on the camera's left, lighting the edges of {p} hair and shoulders",
+   "shadow_en": "long soft shadows of the trees stretch across the path toward the camera's right",
+   "desc_ko": "해 지기 직전, 낮은 해가 카메라 왼쪽 뒤에서 비춤"
+  }
+ },
+ "moments": {
+  "꽃잎 맞으며 서기": {
+   "pose_en": "stands on the path with {p} face tilted slightly upward",
+   "moment_en": "pale pink petals fall around {o} as {s} looks toward the camera with a soft smile",
+   "desc_ko": "꽃잎이 떨어지는 길에서 살짝 올려다보다 카메라를 봄"
+  },
+  "귀 뒤로 머리 넘기기": {
+   "pose_en": "stands on the path with one hand lifting a lock of hair behind {p} ear",
+   "moment_en": "{s} looks toward the camera with a gentle smile",
+   "desc_ko": "한 손으로 머리카락을 귀 뒤로 넘기며 카메라를 봄"
+  },
+  "천천히 걷기": {
+   "pose_en": "walks slowly toward the camera along the path with one foot stepping forward",
+   "moment_en": "a few petals drift down in front of {o} as {s} looks toward the camera",
+   "desc_ko": "꽃잎이 떨어지는 길을 카메라 쪽으로 걸음",
+   "frames": [
+    "전신"
+   ]
+  },
+  "벤치에 앉기": {
+   "pose_en": "sits on a low wooden bench with {p} hands resting in {p} lap",
+   "moment_en": "{s} looks toward the camera and smiles a little as petals settle on the bench",
+   "desc_ko": "벤치에 앉아 무릎에 손을 두고 카메라를 봄",
+   "frames": [
+    "무릎 위",
+    "허리 위"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the blossoms softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the blossoms softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the blossoms softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the paved path among the fallen pale pink petals",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "오전": [
+   "the blossoms are pale pink with white centers, clustered on dark branches",
+   "petals drift through the air and lie on the path in small drifts",
+   "the grass along the path is a fresh spring green"
+  ],
+  "해질녘": [
+   "the blossoms are pale pink with a warm orange tint from the low sun",
+   "petals drift through the air and lie on the path in small drifts",
+   "the dark branches arch over the path in a long tunnel"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the path and the blossoming trees spreading out around {o}",
+ "more_prefix_en": "Beyond that"
+}

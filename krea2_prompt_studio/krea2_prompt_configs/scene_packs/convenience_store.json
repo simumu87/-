@@ -1,0 +1,73 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "편의점",
+ "outdoor": false,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a small 24-hour convenience store with bright shelves and a refrigerated drink case",
+ "feature_en": [
+  "a glass-door drink case lined with colorful bottles and cans",
+  "white metal shelves stocked with snack packages"
+ ],
+ "ground_en": [
+  "a clean white vinyl floor with a faint gray pattern",
+  "a rubber mat by the entrance"
+ ],
+ "far_en": [
+  "the aisle running back to a counter with a cash register",
+  "a round wall clock above the counter"
+ ],
+ "times": {
+  "낮": {
+   "time_en": "a quiet afternoon",
+   "time_prep": "on",
+   "sky_en": "bright white ceiling light mixed with daylight from the front window",
+   "light_en": "white ceiling light comes from above {o}, and daylight from the front window falls on the camera's left side of {p} face",
+   "shadow_en": "soft shadows gather under the shelves behind {o}",
+   "desc_ko": "조용한 오후, 천장의 흰 조명과 카메라 왼쪽 앞 창의 자연광"
+  },
+  "한밤중": {
+   "time_en": "the middle of the night",
+   "time_prep": "in",
+   "sky_en": "bright white ceiling light under a dark front window",
+   "light_en": "white ceiling light comes from above {o}, and the cool light from the drink case on the camera's right falls across {p} cheek and shoulder",
+   "shadow_en": "deep shadows lie in the dark window behind {o}, and soft shadows gather under the shelves",
+   "desc_ko": "한밤중, 천장의 흰 조명과 카메라 오른쪽 음료 냉장고의 차가운 빛"
+  }
+ },
+ "moments": {
+  "음료 고르기": {
+   "pose_en": "stands in front of the drink case with one hand holding the door handle",
+   "moment_en": "{s} looks toward the camera with a small smile",
+   "desc_ko": "음료 냉장고 앞에서 문 손잡이를 잡고 카메라를 봄"
+  },
+  "컵라면 들기": {
+   "pose_en": "holds a cup of instant noodles in both hands in front of the shelves",
+   "moment_en": "{s} looks toward the camera and grins",
+   "desc_ko": "선반 앞에서 컵라면을 두 손으로 들고 카메라를 보며 웃음"
+  },
+  "바 의자에 앉기": {
+   "pose_en": "sits on a stool at the window counter with one hand on a canned drink",
+   "moment_en": "{s} looks toward the camera with a relaxed smile",
+   "desc_ko": "창가 바 의자에 앉아 캔 음료에 손을 두고 카메라를 봄"
+  }
+ },
+ "camera": {
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the shelves softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the shelves softly out of focus"
+ },
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮": [
+   "the shelf rows are white metal with bright snack packages in red, yellow and blue",
+   "the drink case is full of bottles in green, orange and clear plastic",
+   "the counter is pale gray with a small cash register"
+  ],
+  "한밤중": [
+   "the shelf rows are white metal with bright snack packages in red, yellow and blue",
+   "the drink case is full of bottles in green, orange and clear plastic",
+   "the front window is a dark pane with a few reflected lights"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the bright shelves and the drink case spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

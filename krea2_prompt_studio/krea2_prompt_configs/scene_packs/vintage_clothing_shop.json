@@ -1,0 +1,79 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "빈티지 옷가게",
+ "outdoor": false,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a small vintage clothing shop with crowded metal racks and a full-length mirror",
+ "feature_en": [
+  "metal clothing racks packed with garments in faded colors",
+  "a tall standing mirror in a dark wooden frame"
+ ],
+ "ground_en": [
+  "a worn wooden plank floor",
+  "a faded red rug in front of the mirror"
+ ],
+ "far_en": [
+  "a narrow aisle running back between the racks",
+  "a wall hung with old posters and straw hats"
+ ],
+ "times": {
+  "낮": {
+   "time_en": "a slow afternoon",
+   "time_prep": "on",
+   "sky_en": "soft daylight from the shop window mixing with warm bulbs",
+   "light_en": "daylight comes from the shop window on the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "soft shadows gather between the racks toward the camera's right",
+   "desc_ko": "한가한 오후, 카메라 왼쪽 가게 창의 자연광과 따뜻한 전구"
+  },
+  "저녁": {
+   "time_en": "the evening",
+   "time_prep": "in",
+   "sky_en": "warm bulbs under a dark shop window",
+   "light_en": "a warm hanging bulb stands above {o} and slightly in front, lighting {p} hair and face",
+   "shadow_en": "deep shadows gather between the racks behind {o}",
+   "desc_ko": "저녁, 머리 위 앞쪽 따뜻한 전구가 비춤"
+  }
+ },
+ "moments": {
+  "거울 앞에 서기": {
+   "pose_en": "stands in front of the standing mirror with one hand holding a hanger up against {p} chest",
+   "moment_en": "{s} looks toward the camera with a playful smile",
+   "desc_ko": "거울 앞에서 옷걸이를 가슴에 대고 카메라를 보며 웃음"
+  },
+  "옷걸이 넘기기": {
+   "pose_en": "stands beside a rack with one hand sliding the hangers along the rail",
+   "moment_en": "{s} turns {p} head toward the camera with a bright smile",
+   "desc_ko": "옷걸이 레일을 한 손으로 넘기다 카메라 쪽으로 고개를 돌려 웃음"
+  },
+  "밀짚모자 써보기": {
+   "pose_en": "holds a straw hat with both hands just above {p} head",
+   "moment_en": "{s} looks toward the camera with a laugh",
+   "desc_ko": "밀짚모자를 두 손으로 머리 위에 대며 카메라를 보고 웃음",
+   "frames": [
+    "무릎 위",
+    "허리 위"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the racks softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the racks softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the racks softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the worn wooden floor",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮": [
+   "the racks are black metal with wooden hangers",
+   "the garments on the racks are faded denim blue, mustard and cream",
+   "the standing mirror has a dark walnut frame"
+  ],
+  "저녁": [
+   "the racks are black metal with wooden hangers",
+   "the hanging bulbs are warm yellow with exposed filaments",
+   "the standing mirror has a dark walnut frame"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the racks and the mirror spreading out on both sides of {o}",
+ "more_prefix_en": "Beyond that"
+}

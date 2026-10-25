@@ -1,0 +1,78 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "눈 내리는 거리",
+ "outdoor": true,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a quiet street in winter with snow falling past old street lamps",
+ "feature_en": [
+  "bare tree branches covered in snow over the street",
+  "warm yellow street lamps on black iron poles"
+ ],
+ "ground_en": [
+  "fresh white snow on the sidewalk",
+  "dark wet asphalt in the road"
+ ],
+ "far_en": [
+  "the street running away between snow-covered rooftops",
+  "a few warm yellow windows far down the street"
+ ],
+ "times": {
+  "낮 눈": {
+   "time_en": "a snowy afternoon",
+   "time_prep": "on",
+   "sky_en": "a pale white sky with light falling snow",
+   "light_en": "soft white daylight comes from above and from the camera's left, falling evenly on {p} face and shoulders",
+   "shadow_en": "faint soft shadows lie on the snow toward the camera's right",
+   "desc_ko": "눈 오는 오후, 위와 왼쪽에서 오는 부드러운 흰 빛"
+  },
+  "저녁 눈": {
+   "time_en": "a snowy early evening",
+   "time_prep": "on",
+   "sky_en": "a dusky blue sky with falling snow",
+   "light_en": "a warm yellow street lamp stands behind {o} on the camera's left, lighting the edges of {p} hair and shoulders and the falling snow",
+   "shadow_en": "the street in front of {o} falls into a soft blue shade with a long pool of warm light lying on the snow toward the camera's right",
+   "desc_ko": "눈 오는 저녁, 카메라 왼쪽 뒤 가로등의 따뜻한 노란 빛과 푸른 그늘"
+  }
+ },
+ "moments": {
+  "눈 맞으며 올려다보기": {
+   "pose_en": "stands on the sidewalk with {p} face tilted up toward the falling snow",
+   "moment_en": "snowflakes land on {p} hair as {s} lowers {p} gaze to the camera with a soft smile",
+   "desc_ko": "내리는 눈을 올려다보다 카메라를 봄"
+  },
+  "손바닥에 눈 받기": {
+   "pose_en": "stands on the sidewalk with one hand held out palm up to catch the snow",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "한 손을 펴서 눈을 받으며 카메라를 보고 웃음"
+  },
+  "눈길 걷기": {
+   "pose_en": "walks toward the camera along the snowy sidewalk with one foot stepping forward",
+   "moment_en": "snowflakes drift past {o} as {s} looks toward the camera",
+   "desc_ko": "눈 쌓인 길을 카메라 쪽으로 걸음",
+   "frames": [
+    "전신"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the street lamps softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the street lamps softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the street lamps softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the snow-covered sidewalk",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮 눈": [
+   "the snow is soft and fresh with small footprints along the sidewalk",
+   "the branches are dark brown with a thin layer of snow along each one",
+   "the lamp posts are black iron with round white lamps"
+  ],
+  "저녁 눈": [
+   "the snow is soft and fresh with small footprints along the sidewalk",
+   "the branches are dark brown with a thin layer of snow along each one",
+   "the lamp posts are black iron with round yellow lamps"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the street and the lamps spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

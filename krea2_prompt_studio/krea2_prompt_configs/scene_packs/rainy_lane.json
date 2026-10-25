@@ -1,0 +1,78 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "비 오는 골목",
+ "outdoor": true,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a narrow neighborhood lane on a rainy day lined with low houses and small shops",
+ "feature_en": [
+  "low tiled-roof houses with wooden gates along the lane",
+  "a row of potted green plants beside the walls"
+ ],
+ "ground_en": [
+  "wet gray paving stones",
+  "thin streams of water running along the gutter"
+ ],
+ "far_en": [
+  "the lane curving away between the houses",
+  "a lamp post far down the lane"
+ ],
+ "times": {
+  "낮 비": {
+   "time_en": "a rainy afternoon",
+   "time_prep": "on",
+   "sky_en": "a soft gray sky with steady light rain",
+   "light_en": "soft gray daylight comes from above and from the camera's left, falling evenly on {p} face and shoulders",
+   "shadow_en": "soft shadows gather under the eaves behind {o} toward the camera's right",
+   "desc_ko": "비 오는 오후, 위와 왼쪽에서 오는 부드러운 회색 빛"
+  },
+  "밤 비": {
+   "time_en": "a rainy night",
+   "time_prep": "on",
+   "sky_en": "a dark sky with thin falling rain",
+   "light_en": "a warm street lamp stands behind {o} on the camera's left, lighting the edges of {p} hair and shoulders and the falling raindrops",
+   "shadow_en": "the lane in front of {o} falls into deep shadow with long streaks of warm light lying on the wet stones toward the camera's right",
+   "desc_ko": "비 오는 밤, 카메라 왼쪽 뒤 가로등의 따뜻한 빛과 젖은 돌 위의 긴 빛줄기"
+  }
+ },
+ "moments": {
+  "투명 우산 쓰고 서기": {
+   "pose_en": "stands in the lane holding a clear umbrella over {p} head with one hand",
+   "moment_en": "raindrops run down the umbrella as {s} looks toward the camera with a soft smile",
+   "desc_ko": "투명 우산을 쓰고 카메라를 보며 미소"
+  },
+  "우산 아래서 올려다보기": {
+   "pose_en": "stands under a clear umbrella with {p} chin lifted slightly",
+   "moment_en": "{s} looks up at the rain and then toward the camera with a gentle smile",
+   "desc_ko": "우산 아래서 비를 올려다보다 카메라를 봄"
+  },
+  "비 맞으며 걷기": {
+   "pose_en": "walks toward the camera along the lane with the clear umbrella tilted over one shoulder",
+   "moment_en": "{s} smiles as {s} looks toward the camera",
+   "desc_ko": "우산을 어깨에 기울이고 카메라 쪽으로 걸음",
+   "frames": [
+    "전신"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the houses softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the houses softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the houses softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the wet paving stones",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮 비": [
+   "the paving stones are dark gray and wet with small puddles",
+   "the roof tiles are charcoal gray with water running off the eaves",
+   "the wooden gates are dark brown with iron handles"
+  ],
+  "밤 비": [
+   "the paving stones are black and wet with small puddles",
+   "the roof tiles are dark charcoal with water running off the eaves",
+   "the lamp post is black iron with a round warm lamp"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the lane and the houses spreading out on both sides of {o}",
+ "more_prefix_en": "Beyond that"
+}

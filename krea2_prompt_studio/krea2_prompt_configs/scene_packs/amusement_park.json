@@ -1,0 +1,77 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "놀이공원",
+ "outdoor": true,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "an amusement park walkway on a bright day with a carousel and colorful stalls",
+ "feature_en": [
+  "a carousel with painted horses under a striped canopy",
+  "a cart selling bunches of colorful balloons"
+ ],
+ "ground_en": [
+  "a smooth paved walkway in warm beige",
+  "painted yellow lines along the curb"
+ ],
+ "far_en": [
+  "a tall ferris wheel rising above the trees",
+  "rows of striped stalls along the walkway"
+ ],
+ "times": {
+  "맑은 낮": {
+   "time_en": "a bright clear afternoon",
+   "time_prep": "on",
+   "sky_en": "a clear blue sky with a few white clouds",
+   "light_en": "strong daylight comes from above and to the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "short soft shadows fall on the walkway toward the camera's right",
+   "desc_ko": "맑은 낮, 위와 왼쪽에서 오는 밝은 햇빛"
+  },
+  "해질녘": {
+   "time_en": "the last hour before sunset",
+   "sky_en": "a soft orange and pink sky behind the ferris wheel",
+   "light_en": "low golden sunlight comes from behind {o} on the camera's left, lighting the edges of {p} hair and shoulders",
+   "shadow_en": "long soft shadows stretch across the walkway toward the camera's right",
+   "desc_ko": "해 지기 직전, 낮고 노란 해가 카메라 왼쪽 뒤에서 비춤"
+  }
+ },
+ "moments": {
+  "풍선 들고 서기": {
+   "pose_en": "stands on the walkway holding a bunch of colorful balloon strings in one hand",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "한 손에 풍선 다발을 들고 카메라를 보며 웃음"
+  },
+  "회전목마 앞에서 웃기": {
+   "pose_en": "stands in front of the carousel with {p} hands clasped behind {p} back",
+   "moment_en": "{s} laughs and looks toward the camera as the carousel turns behind {o}",
+   "desc_ko": "회전목마 앞에서 뒷짐을 지고 웃음"
+  },
+  "손 흔들며 걷기": {
+   "pose_en": "walks toward the camera along the walkway with one hand raised in a small wave",
+   "moment_en": "{s} smiles widely as {s} looks toward the camera",
+   "desc_ko": "손을 흔들며 카메라 쪽으로 걸음",
+   "frames": [
+    "전신"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the carousel and the stalls softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the carousel and the stalls softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the carousel and the stalls softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the beige walkway",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "맑은 낮": [
+   "the carousel horses are painted white, red and gold with brass poles",
+   "the balloons are red, yellow, blue and pink on thin strings",
+   "the ferris wheel has colored cars along a white frame"
+  ],
+  "해질녘": [
+   "the carousel horses are painted white, red and gold with brass poles",
+   "the balloons are red, yellow, blue and pink on thin strings",
+   "the ferris wheel is a dark shape with lit cars along its frame"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the carousel and the stalls spreading out around {o}",
+ "more_prefix_en": "Beyond that"
+}

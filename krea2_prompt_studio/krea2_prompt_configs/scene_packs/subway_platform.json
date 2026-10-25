@@ -1,0 +1,79 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "지하철 승강장",
+ "outdoor": false,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "an underground subway platform with a tiled wall and a train waiting at the edge",
+ "feature_en": [
+  "a wall of white square tiles with a green line along the middle",
+  "a yellow safety line painted along the platform edge"
+ ],
+ "ground_en": [
+  "a smooth gray stone platform floor",
+  "yellow tactile tiles along the edge"
+ ],
+ "far_en": [
+  "the platform running away toward a dark tunnel",
+  "a few round station signs hanging far down the platform"
+ ],
+ "times": {
+  "낮 운행": {
+   "time_en": "a quiet midday",
+   "time_prep": "at",
+   "sky_en": "even white light from the ceiling panels",
+   "light_en": "white light comes from the ceiling panels above and slightly in front of {o}, falling on {p} hair and shoulders",
+   "shadow_en": "short soft shadows lie under {o} and along the tiled wall behind",
+   "desc_ko": "한산한 한낮, 천장 패널의 하얀 빛이 위 앞쪽에서 비춤"
+  },
+  "막차 시간": {
+   "time_en": "the last train of the night",
+   "time_prep": "at",
+   "sky_en": "a single row of cool white ceiling lights",
+   "light_en": "cool white light comes from the lamps above {o} on the camera's left, and the train windows on the right throw a pale yellow light across {p} side",
+   "shadow_en": "long shadows stretch along the platform floor toward the dark tunnel behind {o}",
+   "desc_ko": "막차 시간, 왼쪽 위 형광등과 오른쪽 열차 창의 연노랑 빛"
+  }
+ },
+ "moments": {
+  "벽에 기대 기다리기": {
+   "pose_en": "leans one shoulder against the tiled wall with {p} hands holding a bag strap",
+   "moment_en": "{s} looks toward the camera with a calm smile",
+   "desc_ko": "타일 벽에 어깨를 기대고 가방끈을 쥔 채 카메라를 봄"
+  },
+  "노란 선 앞에 서기": {
+   "pose_en": "stands behind the yellow line with {p} weight on one leg",
+   "moment_en": "{s} turns {p} head toward the camera with a soft smile",
+   "desc_ko": "노란 선 뒤에 한쪽 다리에 체중을 싣고 서서 카메라 쪽으로 고개를 돌림"
+  },
+  "벤치에 앉기": {
+   "pose_en": "sits on a metal bench with {p} hands resting in {p} lap",
+   "moment_en": "{s} looks toward the camera and smiles a little",
+   "desc_ko": "금속 벤치에 앉아 무릎에 손을 두고 카메라를 봄",
+   "frames": [
+    "무릎 위",
+    "허리 위"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the platform softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the platform softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the platform softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the gray stone floor behind the yellow line",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮 운행": [
+   "the wall tiles are glossy white with thin gray grout lines",
+   "the green line runs along the wall at waist height",
+   "the platform floor is gray stone with yellow edge tiles"
+  ],
+  "막차 시간": [
+   "the wall tiles are white with thin gray grout lines",
+   "the train doors are stainless steel with a blue stripe",
+   "the platform floor is gray stone with yellow edge tiles"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the tiled wall and the platform spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

@@ -1,0 +1,78 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "네온 골목",
+ "outdoor": true,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a narrow alley at night lined with small shops and lit neon signs",
+ "feature_en": [
+  "pink and teal neon tube signs mounted on the shop walls",
+  "closed metal shop shutters in dark gray and brick red"
+ ],
+ "ground_en": [
+  "a wet asphalt lane",
+  "small puddles between patched gray concrete"
+ ],
+ "far_en": [
+  "the alley running away between two rows of small shops",
+  "a few round white lamps hanging far down the alley"
+ ],
+ "times": {
+  "밤": {
+   "time_en": "a clear night",
+   "time_prep": "on",
+   "sky_en": "a black night sky above the narrow roofline",
+   "light_en": "pink neon light comes from the camera's left and teal neon light comes from the camera's right, both falling on {p} hair, face and shoulders",
+   "shadow_en": "the far end of the alley and the spaces between the signs fall into deep shadow behind {o}",
+   "desc_ko": "맑은 밤, 분홍 네온이 카메라 왼쪽, 청록 네온이 오른쪽에서 비춤"
+  },
+  "비 온 뒤 밤": {
+   "time_en": "a night just after the rain",
+   "time_prep": "on",
+   "sky_en": "a dark night sky with a few thin clouds",
+   "light_en": "pink neon light comes from the camera's left and a warm white lamp hangs above and in front of {o}, falling on {p} face and shoulders",
+   "shadow_en": "the far end of the alley falls into deep shadow behind {o}, with long streaks of pink and white lying on the wet lane toward the camera's right",
+   "desc_ko": "비 온 뒤 밤, 분홍 네온과 위쪽 흰 등이 비추고 젖은 길에 색이 길게 번짐"
+  }
+ },
+ "moments": {
+  "주머니에 손 넣고 서기": {
+   "pose_en": "stands in the middle of the lane with one hand in a pocket and the other holding a bag strap",
+   "moment_en": "{s} looks toward the camera with a playful smile",
+   "desc_ko": "한 손은 주머니에, 한 손은 가방끈을 쥐고 카메라를 보며 웃음"
+  },
+  "벽에 기대기": {
+   "pose_en": "leans one shoulder against a shop wall with {p} arms crossed loosely",
+   "moment_en": "{s} looks toward the camera with a calm smile",
+   "desc_ko": "가게 벽에 어깨를 기대고 팔짱을 낀 채 카메라를 봄"
+  },
+  "돌아보며 걷기": {
+   "pose_en": "walks away down the lane and turns {p} head back over one shoulder",
+   "moment_en": "{s} looks back toward the camera with a bright smile",
+   "desc_ko": "골목을 걸어가다 어깨 너머로 돌아봄",
+   "frames": [
+    "전신"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the neon signs softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the neon signs softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the neon signs softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the wet asphalt lane",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "밤": [
+   "the neon tubes are bent into simple shapes in pink and teal",
+   "the shop walls are dark brick and gray plaster",
+   "the lane is dry dark asphalt with painted edge lines"
+  ],
+  "비 온 뒤 밤": [
+   "the neon tubes are bent into simple shapes in pink and teal",
+   "the lane is wet black asphalt covered with thin sheets of water",
+   "the shop walls are dark brick and gray plaster"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the lane and the lit signs spreading out on both sides of {o}",
+ "more_prefix_en": "Beyond that"
+}

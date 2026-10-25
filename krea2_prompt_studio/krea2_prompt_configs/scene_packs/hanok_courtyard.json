@@ -1,0 +1,78 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "한옥 마당",
+ "outdoor": true,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a traditional Korean house courtyard with a wooden veranda and curved tile roofs",
+ "feature_en": [
+  "a wooden veranda with a polished plank floor and paper-screen doors",
+  "a persimmon tree with orange fruit beside a low earthen wall"
+ ],
+ "ground_en": [
+  "a raked pale-gray earth courtyard",
+  "flat stepping stones leading to the veranda"
+ ],
+ "far_en": [
+  "curved tile roofs with upturned eaves",
+  "a low earthen wall with a wooden gate"
+ ],
+ "times": {
+  "맑은 오후": {
+   "time_en": "a clear autumn afternoon",
+   "time_prep": "on",
+   "sky_en": "a high pale blue sky above the tile roofs",
+   "light_en": "warm sunlight comes from above and to the camera's left, falling across {p} face and shoulders and the veranda",
+   "shadow_en": "the deep shadow of the eaves falls across the veranda toward the camera's right",
+   "desc_ko": "맑은 가을 오후, 위와 왼쪽에서 오는 따뜻한 햇빛과 처마 그늘"
+  },
+  "해질녘": {
+   "time_en": "the last hour before sunset",
+   "sky_en": "a soft orange sky behind the tile roofs",
+   "light_en": "low orange sunlight comes from behind {o} on the camera's left, lighting the edges of {p} hair and shoulders and the courtyard",
+   "shadow_en": "long soft shadows of the eaves and the tree stretch across the courtyard toward the camera's right",
+   "desc_ko": "해 지기 직전, 낮은 주황빛 해가 카메라 왼쪽 뒤에서 비춤"
+  }
+ },
+ "moments": {
+  "툇마루에 앉기": {
+   "pose_en": "sits on the edge of the wooden veranda with {p} hands resting on the planks beside {o}",
+   "moment_en": "{s} looks toward the camera and smiles a little",
+   "desc_ko": "툇마루 끝에 앉아 두 손을 짚고 카메라를 봄",
+   "frames": [
+    "무릎 위",
+    "허리 위"
+   ]
+  },
+  "마당에 서기": {
+   "pose_en": "stands in the courtyard with {p} hands clasped in front of {o}",
+   "moment_en": "{s} looks toward the camera with a calm smile",
+   "desc_ko": "마당에 서서 두 손을 모으고 카메라를 봄"
+  },
+  "문기둥에 기대 서기": {
+   "pose_en": "stands beside a wooden pillar of the veranda with one hand resting on it",
+   "moment_en": "{s} turns {p} head toward the camera with a gentle smile",
+   "desc_ko": "툇마루 기둥 옆에 서서 한 손을 얹고 카메라를 봄"
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the tile roofs softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the tile roofs softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the tile roofs softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the pale-gray courtyard earth beside a stepping stone",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "맑은 오후": [
+   "the roof tiles are charcoal gray with white mortar lines",
+   "the paper-screen doors are pale cream with dark wooden lattice frames",
+   "the persimmons are bright orange against dark branches"
+  ],
+  "해질녘": [
+   "the roof tiles are charcoal gray with warm orange edges",
+   "the paper-screen doors are pale cream with dark wooden lattice frames",
+   "the persimmons are deep orange against dark branches"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the veranda and the tile roofs spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}
