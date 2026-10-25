@@ -2,10 +2,16 @@
   {
     "name": "아라",
     "trigger": "ara",
-    "identity": "early-20s East Asian woman, a single adult with amber eyes and a slightly sharp eye shape, a slender face with a small straight nose and thin lips, dark brown wavy hair with honey-brown highlights pulled into a half-up ponytail tied with a white fabric measuring tape whose ruler markings are visible, heavy see-through bangs and stray wisps, one stud and two small hoops on her right ear, two thin rings of different sizes on her left ear",
+    "gender": "female",
+    "identity": "She is a young Korean woman in her early twenties, small and slim at about 158 cm, with a slender oval face whose jawline tapers smoothly and softly from the cheeks down to a small, gently pointed chin, a smooth narrow forehead, high but soft cheekbones and a slim, straight line along her cheeks, amber eyes with a slightly sharp eye shape, a small straight nose, thin lips, and pale fair skin with a cool rosy undertone, evenly toned and never tanned. She wears soft glam makeup: flawless luminous skin, warm neutral eyeshadow, softly defined brown eyeliner, voluminous lashes, rosy peach blush and glossy rose-nude lips. She has C-cup breasts, medium-sized with noticeable forward projection and a wider breast base, realistic proportions for her slim torso. Her toenails are painted with glossy soft rose-pink pedicure polish.",
+    "hair": "Her mivh hairstyle: shoulder-length layered wavy brown hair with a center part and long bangs falling beside her face.",
+    "hair_color": "brown",
+    "signature_accessories": [
+      "one stud and two small hoop earrings on her right ear",
+      "two thin rings of different sizes on her left ear"
+    ],
     "default_clothing": "",
-    "notes": "",
-    "gender": "female"
+    "notes": "[아라 개인값 1023 갱신 · 오빠 확인 전 초안] 출처: 내 로라 4.5 캡션 110쌍(트리거 ara, 기본 머리 토큰 mivh, 문신 토큰 zekt)과 1009 개인값. 새로 지은 값은 없다. 바뀐 것: ① hair 칸을 낮게 묶은 머리 정본에서 기본 머리 토큰 mivh(어깨 길이 층 웨이브 갈색, 가운데 가르마, 긴 앞머리)로 바꿨다. 오빠 말 「헤어스타일은 바리에이션이니깐 기본머리 적거나 해도될거같은뎅」(노바 때 말)을 따랐다. 낮게 묶은 머리·하프업 포니테일 같은 묶음은 장면마다 바꾸는 변주라 고정값에 안 넣는다. 1009의 낮은 묶음 문장은 _구버전에 백업돼 있다. ② 문신 토큰 zekt: 로라 4.5에서 왼쪽 손목 안쪽 열쇠 문신(작은 세로 가는 검은 선 열쇠, 고리는 아래쪽, 톱니는 손 쪽을 향함)을 가리키는 이름이다. 헤어 폴더 11장에만 있어서 문신은 고정 외형에 넣지 않고 손목이 크게 보이는 클로즈업에서만 한 번 쓴다는 1009 원칙은 그대로다. ③ 피부: 4.5 캡션은 pale ivory skin이고 사진에는 볼·코·이마·어깨에 유분 광택이 보여서 matte를 뺐다. identity 칸의 피부 문장(pale fair skin, cool rosy undertone)은 오빠 확인 전이라 안 고쳤다. 쓰는 곳 구분: 얼굴·머리 문장은 얼굴 다듬기(디테일러)를 쓰는 스튜디오 쪽 값이다. 로라만 쓰는 단독 컷에는 얼굴 묘사를 프롬에 쓰지 않는다(노바 개인값 노트가 옮긴 콤퓨수첩 1013 절). 못 정한 것: 표정 소스(내가 돌린 컷의 프롬 문장 원문)는 4.5 학습 중이라 아직 없다. 1009에서 이어받은 원칙(프롬에 말하면 다 그린다, 상세 원칙, 문신 크기 원칙)은 아래 1009 원문 그대로다. [1009 원문] [아라 개인값 1009 정리 · 오빠 확인 전 초안] 머리: 낮은 묶음이 정본 문장(디테일러 문구에도 똑같이 넣어야 함 — 디테일러가 얼굴·머리를 새로 그린다). 표정은 별도 문장으로 장면마다 넣고 디테일러에도 같이 넣는다. 문신: 왼쪽 손목 안쪽, 가는 검은 선 열쇠(구식 스켈레톤 키) 문신, 세로 방향, 약 3cm. 문신은 손목 안쪽과 한 세트라서 따로 쓰면 아무 데나 찍힌다 — '문신은 왼쪽 손목 안쪽에 있고 손목 안쪽이 카메라에 보일 때만 그린다'로 한 문장에 묶는다. 악세사리를 안 낀 손목은 '맨손목, 악세사리도 문신도 없음'이라고 쓴다. 문신·팔찌는 고정 외형에 넣지 않고 장면마다 필요할 때만 쓴다. 로라는 외형을 강하게 잡으므로 고정값은 트리거와 소수의 특징만 둔다. 대원칙: 프롬에 말하면 다 그린다 — 있다고 써도 없다고 써도 그 단어가 그려진다. 안 그리고 싶은 건 아예 쓰지 않고, 그리고 싶은 건 위치·크기·색을 구체적으로 한 문장에 묶어 쓴다. 상세 원칙: 머릿속 장면을 해부학적으로 상세하게 쓰고, 결과만 쓰지 않고 그 결과가 되는 과정(어디서 시작해 어디를 지나 어디에 닿는지)도 간단히라도 쓴다. 상세하면 다시 뽑아도 유지되고, 간단하면 빠진 부분을 모델이 매번 다르게 채운다. 문신 크기 원칙: 가는 선 문신은 전신·3/4 컷에서 조잡하게 나오므로 그런 컷에서는 문신 문장을 쓰지 않고 손목은 팔찌만 쓴다. 손목이나 손이 크게 보이는 클로즈업에서만 왼쪽 손목 안쪽 한 세트로 한 번만 쓴다."
   },
   {
     "name": "노바",
