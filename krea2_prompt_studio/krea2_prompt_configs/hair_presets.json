@@ -1,6 +1,6 @@
 {
   "schema": "krea2-hair-presets/1",
-  "note_ko": "헤어 프리셋. 고르면 LoRA 헤어가 통째로 빠지고 이걸로 교체된다. main_en(새 상태), closing_en(남는 가능성을 닫는 문장)은 보통/상세 모두, echo_en(다른 표현 반복)은 상세에서만 쓴다. {color}=LoRA의 hair_color, {p}/{P}=her/Her.",
+  "note_ko": "헤어 프리셋. 고르면 LoRA 헤어가 통째로 빠지고 이걸로 교체된다. main_en(새 상태), closing_en(남는 가능성을 닫는 문장)은 보통/상세 모두, echo_en(다른 표현 반복)은 상세에서만 쓴다. {color}=LoRA의 hair_color, {p}/{P}=her/Her. 1025: 9종 추가(총 12종).",
   "items": {
     "뱅 + 긴 생머리": {
       "desc_ko": "이마를 덮는 앞머리와 어깨 아래로 곧게 내려오는 긴 머리",
@@ -22,6 +22,69 @@
       "closing_en": "{p} forehead and face are fully open and no hair falls loose past {p} shoulders",
       "echo_en": "The low ponytail rests between {p} shoulder blades, tied neatly at the nape",
       "echo2_en": "A single smooth ponytail falls from the nape of {p} neck, and {p} face stays open"
+    },
+    "턱선 C컬 단발": {
+      "desc_ko": "턱선 길이로 자르고 끝이 안쪽으로 둥글게 말리는 단발",
+      "main_en": "{P} {color} hair is cut in a chin-length bob with the ends curling gently inward toward {p} jaw",
+      "closing_en": "the hair ends at {p} jawline and {p} neck is fully visible",
+      "echo_en": "The bob stops at the jawline and every end curves inward in a soft C shape",
+      "echo2_en": "The {color} bob frames {p} face, with the inward-curled ends resting just under {p} chin"
+    },
+    "허쉬컷 레이어드 미디엄": {
+      "desc_ko": "쇄골 아래까지 오는, 길이를 층층이 다르게 자른 가벼운 레이어드",
+      "main_en": "{P} {color} hair falls just past {p} collarbones in long loose layers cut at different lengths, with soft face-framing strands beside {p} cheeks",
+      "closing_en": "the layers start near {p} chin and the longest strands end below {p} collarbones",
+      "echo_en": "Light layers of different lengths move around {p} shoulders, with thin strands framing each cheek",
+      "echo2_en": "The {color} hair falls in airy layers from {p} crown to just below {p} collarbones"
+    },
+    "긴 웨이브 (S컬)": {
+      "desc_ko": "가슴 아래까지 내려오는 부드러운 S자 긴 웨이브",
+      "main_en": "{P} {color} hair falls past {p} chest in long soft S-shaped waves, parted slightly off center",
+      "closing_en": "the waves begin at {p} ears and roll smoothly down to the middle of {p} chest",
+      "echo_en": "Soft S-shaped waves roll down both sides of {p} face to the middle of {p} chest",
+      "echo2_en": "The long {color} waves spread over {p} shoulders in smooth, even curves"
+    },
+    "반묶음 (하프업)": {
+      "desc_ko": "윗머리만 뒤에서 작은 클립으로 묶고 아래는 어깨 아래로 내린 머리",
+      "main_en": "the top half of {p} {color} hair is gathered at the back of {p} head with a small clip, while the lower half falls straight past {p} shoulders",
+      "closing_en": "two thin strands hang loose beside {p} ears and the lower hair rests on {p} shoulders and back",
+      "echo_en": "A small clip holds the upper hair at the back of {p} head while the rest falls down past {p} shoulders",
+      "echo2_en": "The upper half of the {color} hair is pulled back and the lower half hangs free along {p} back"
+    },
+    "양갈래 땋은 머리": {
+      "desc_ko": "가운데 가르마를 타고 양쪽으로 길게 땋아 어깨 앞으로 내린 머리",
+      "main_en": "{P} {color} hair is parted down the center and braided into two long braids that hang over the front of {p} shoulders",
+      "closing_en": "each braid is tied at the end with a thin dark band and reaches {p} chest",
+      "echo_en": "Two long braids hang on either side of {p} neck from a straight center part",
+      "echo2_en": "The {color} braids run down from behind {p} ears, one over each shoulder"
+    },
+    "로우 번 (낮은 올림머리)": {
+      "desc_ko": "목덜미 위에 단정하게 말아 올린 낮은 번, 귀 옆 잔머리 몇 가닥",
+      "main_en": "{P} {color} hair is gathered into a neat low bun at the nape of {p} neck",
+      "closing_en": "a few short strands fall beside {p} ears and {p} forehead and neck are fully visible",
+      "echo_en": "A smooth low bun sits at the nape of {p} neck, held in place at the center",
+      "echo2_en": "All of the {color} hair is wound into one low bun, leaving {p} ears and neck uncovered"
+    },
+    "하이 포니테일": {
+      "desc_ko": "뒤통수 높은 곳에서 하나로 묶어 어깨뼈 아래까지 내려오는 포니테일",
+      "main_en": "{P} {color} hair is pulled up and back and tied high on the back of {p} head into one ponytail that swings down to {p} shoulder blades",
+      "closing_en": "{p} forehead, ears and neck are fully visible and the tail ends between {p} shoulder blades",
+      "echo_en": "The high ponytail starts at the crown of {p} head and hangs behind {p} neck",
+      "echo2_en": "A single {color} ponytail rises from the back of {p} head, with {p} face and neck open"
+    },
+    "가운데 가르마 긴 생머리": {
+      "desc_ko": "가운데 가르마를 타고 가슴 중간까지 곧게 내려오는 긴 생머리",
+      "main_en": "{P} {color} hair is parted in the center and falls straight and smooth to the middle of {p} chest on both sides of {p} face",
+      "closing_en": "the part runs straight from {p} hairline to the crown and the hair hangs flat and smooth along {p} cheeks",
+      "echo_en": "The straight center part opens {p} forehead, and the long {color} hair hangs evenly down both shoulders",
+      "echo2_en": "Smooth straight hair frames both sides of {p} face down to the middle of {p} chest"
+    },
+    "숏컷 (귀 아래 짧은 머리)": {
+      "desc_ko": "귀를 덮는 길이의 짧은 숏컷, 옆으로 흐르는 앞머리",
+      "main_en": "{P} {color} hair is cut short in light layers that end at the middle of {p} ears, with a side-swept fringe over {p} forehead",
+      "closing_en": "{p} neck and the back of {p} head are covered only by short hair and nothing reaches {p} shoulders",
+      "echo_en": "Short layered hair ends at {p} ears, and the fringe sweeps from the part toward one side",
+      "echo2_en": "The cropped {color} hair frames {p} face above {p} jawline, leaving {p} neck clear"
     }
   }
 }

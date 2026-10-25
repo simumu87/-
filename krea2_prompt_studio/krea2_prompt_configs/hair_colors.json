@@ -1,0 +1,46 @@
+{
+  "schema": "krea2-hair-colors/1",
+  "note_ko": "헤어 색 선택. 고르면 LoRA 기본 머리의 색 단어를 이 색으로 바꾸고(헤어 프리셋을 고르면 {color} 자리에 들어감) 색만 짚는 문장 한 줄을 따로 더한다(화면 가중치 칸 「헤어 색」). 오빠 관찰(1025): 작은 변화는 안 먹으니 분명한 색 이름 + 강한 가중치로 쓴다. 와인색은 빛이 닿는 쪽에서만 와인색으로 읽히고 어두운 쪽은 검정에 가깝다.",
+  "items": {
+    "초콜릿 브라운": {
+      "desc_ko": "진하고 따뜻한 초콜릿색 갈색",
+      "en": "rich chocolate brown",
+      "emphasis_en": "{P} hair color is a distinct rich chocolate brown from the roots to the ends"
+    },
+    "애쉬 브라운": {
+      "desc_ko": "회색 기가 도는 차분한 갈색",
+      "en": "cool ash brown",
+      "emphasis_en": "{P} hair color is a distinct cool ash brown with a gray cast from the roots to the ends"
+    },
+    "와인 브라운": {
+      "desc_ko": "붉은 와인색이 도는 갈색 (빛이 닿는 쪽에서 와인색이 보임)",
+      "en": "wine-red brown",
+      "emphasis_en": "{P} hair color is a distinct wine-red brown from the roots to the ends"
+    },
+    "버건디": {
+      "desc_ko": "깊은 자주빛 붉은색",
+      "en": "deep burgundy",
+      "emphasis_en": "{P} hair color is a distinct deep burgundy red from the roots to the ends"
+    },
+    "베이지 블론드": {
+      "desc_ko": "따뜻한 연한 베이지빛 금발",
+      "en": "warm beige blonde",
+      "emphasis_en": "{P} hair color is a distinct warm beige blonde from the roots to the ends"
+    },
+    "핑크 브라운 옴브레": {
+      "desc_ko": "뿌리는 갈색, 끝으로 갈수록 더스티 핑크로 번지는 옴브레",
+      "en": "brown-to-dusty-pink ombre",
+      "emphasis_en": "{P} hair is brown at the roots and fades into dusty pink toward the ends"
+    },
+    "블루 블랙": {
+      "desc_ko": "푸른 기가 도는 검정 (Krea에서 끝이 파랗게 번질 수 있음)",
+      "en": "blue-black",
+      "emphasis_en": "{P} hair color is a distinct blue-black from the roots to the ends"
+    },
+    "밝은 갈색": {
+      "desc_ko": "밝고 따뜻한 갈색",
+      "en": "light warm brown",
+      "emphasis_en": "{P} hair color is a distinct light warm brown from the roots to the ends"
+    }
+  }
+}

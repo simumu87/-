@@ -319,6 +319,34 @@ def visibility_checks():
     return problems
 
 
+def hair_color_checks():
+    """Every hair preset x every hair color composes cleanly; the color reaches the prompt and its own section; the default color is replaced."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    base = dict(location="해변", time_key="해질녘", moment="파도 발목", framing="전신", expression="환한 미소", mode="보통", seed=2)
+    presets, colors = c.load_hair_presets(), c.load_hair_colors()
+    for name, v in colors.items():
+        if re.search(r"[가-힣]", v["en"] + v["emphasis_en"]):
+            problems.append((9, 1, f"hair color {name}: Hangul in English field"))
+        r = c.compose_split("hangyeol", hair_color=name, **base)
+        if r["problems"]:
+            problems.append((9, 1, f"hair color {name}: {r['problems']}"))
+        if v["en"].lower() not in r["person"].lower() or "hair" not in r["sections"]:
+            problems.append((9, 1, f"hair color {name}: not in the prompt or the hair section is missing"))
+        if "dark brown-black" in r["person"]:
+            problems.append((9, 1, f"hair color {name}: the LoRA default color word survived"))
+        for hp, pv in presets.items():
+            r = c.compose_split("hangyeol", hair=hp, hair_color=name, **{**base, "mode": "상세"})
+            if r["problems"]:
+                problems.append((9, 1, f"hair {hp} x {name}: {r['problems']}"))
+            if "{" in r["person"] or "dark brown-black" in r["person"]:
+                problems.append((9, 1, f"hair {hp} x {name}: unfilled slot or the default color survived"))
+    r = c.compose_split("hangyeol", **base)
+    if "hair" in r["sections"]:
+        problems.append((9, 1, "hair section present although no hair color was picked"))
+    return problems
+
+
 def makeup_checks():
     """Makeup is selectable: every makeup in makeup.json composes cleanly, a pick replaces the LoRA default, reference mode leaves it out."""
     problems = []
@@ -438,7 +466,7 @@ def hangyeol_checks():
 
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + gui_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + hair_color_checks() + gui_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

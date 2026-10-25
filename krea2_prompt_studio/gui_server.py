@@ -40,6 +40,7 @@ def options() -> dict:
         "locations": list(comp.PACK_FILES),
         "expressions": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in exps.items()],
         "hair_presets": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_hair_presets().items()],
+        "hair_colors": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_hair_colors().items()],
         "makeups": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_makeup().items()],
         "modes": list(comp.MODES),
         "weights": {k: v for k, v in wt.DEFAULT_WEIGHTS.items()},
@@ -73,7 +74,8 @@ def compose(body: dict) -> dict:
         location=body["location"], time_key=body["time"], moment=body["moment"], framing=body["framing"],
         expression=body["expression"], hair=body.get("hair", ""), mode=body.get("mode", "보통"),
         reinforce=None if body.get("reinforce", "auto") == "auto" else int(body["reinforce"]),
-        seed=seed, common_outfit=common, reference=bool(body.get("reference")), makeup=body.get("makeup", ""))
+        seed=seed, common_outfit=common, reference=bool(body.get("reference")), makeup=body.get("makeup", ""),
+        hair_color=body.get("hair_color", ""))
     weights = {}
     for key, value in (body.get("weights") or {}).items():
         weights[key] = None if value in ("", None) else float(value)

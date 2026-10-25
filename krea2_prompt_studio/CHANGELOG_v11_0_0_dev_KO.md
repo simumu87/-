@@ -112,3 +112,8 @@
 - `loras.json`의 한결 항목: 머리를 identity에서 빼서 `hair` 칸(`Her heslin hairstyle … dark brown-black hair`)과 `hair_color`로 옮기고 피부를 `pale apricot-ivory`로 고쳤다(한결 값은 내 값).
 - 회귀 테스트에 화면 확인 추가(칸 존재 · 괄호 짝 · 맨 앞 태그 · 한글 없음 · 문장 끝 마침표 · 가중치가 실제로 괄호를 켜고 끔). 일부러 괄호를 망가뜨리면 테스트가 걸리는 것도 확인.
 
+## 장소·옷·헤어 확장 (2026-10-25)
+- 오빠 「장소랑 옷은 두배이상 늘려도 좋을것같아」·「헤어스타일도 그렇구」. 장소 팩 11 → 25곳(`scene_packs/`에 14개 파일 추가, 코드 수정 없음), 한결 로라 의상 7 → 26벌(`outfits/lora/hangyeol_*.json` 19개 추가, `outfits/lists/hangyeol.json` 갱신), 기존 한결 옷 6벌은 `applies_to.locations`에 새 장소를 더함.
+- 헤어 프리셋 3 → 12종(`hair_presets.json`): 턱선 C컬 단발 · 허쉬컷 레이어드 미디엄 · 긴 웨이브 · 반묶음 · 양갈래 땋은 머리 · 로우 번 · 하이 포니테일 · 가운데 가르마 긴 생머리 · 숏컷 추가.
+- 헤어 색 선택 추가: `hair_colors.json`(8가지: 초콜릿 브라운 · 애쉬 브라운 · 와인 브라운 · 버건디 · 베이지 블론드 · 핑크 브라운 옴브레 · 블루 블랙 · 밝은 갈색). `compose_split(hair_color=...)` · CLI `--hair-color`. 고르면 ① LoRA 머리 문장 안의 색 단어를 바꾸거나(헤어 프리셋이면 `{color}` 자리에 들어감) ② 색만 말하는 한 문장을 더해 `sections["hair"]`로 따로 돌려준다. 가중치 화면에 「헤어 색」 칸(기본 1.7)이 생겼고, 색을 안 고르면 이 칸은 비어 있어 프롬에 안 나온다.
+- 검수: `validate_packs.py` 25개 ok · `scene_consistency.py` 800 scenes 0 contradictions · `validate_outfits.py` 27 files 0 problems · 옷×장소×시간대×순간×프레이밍×보통/상세 6392조합 problems 0 · `regression_bulk.py 60`에 `hair_color_checks()` 추가(헤어 12종 × 색 8가지 × 상세, 기본 색 단어 잔존·슬롯 미치환 확인), 120 prompts 0 problems.

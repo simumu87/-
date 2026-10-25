@@ -10,9 +10,9 @@ skin 1.3; identity and style are left unweighted. A weight of None or 1 leaves a
 """
 from typing import Dict, Optional
 
-ORDER = ("identity", "outfit", "action", "setting", "camera", "light", "skin", "style")
+ORDER = ("identity", "hair", "outfit", "action", "setting", "camera", "light", "skin", "style")
 DEFAULT_WEIGHTS: Dict[str, Optional[float]] = {
-    "identity": None, "outfit": 1.6, "action": 1.5, "setting": 1.4,
+    "identity": None, "hair": 1.7, "outfit": 1.6, "action": 1.5, "setting": 1.4,
     "camera": 2.5, "light": 1.7, "skin": 1.3, "style": None,
 }
 SHORT_SKIN = "Natural matte skin texture"

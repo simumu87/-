@@ -76,6 +76,10 @@
       <label for="hair">헤어</label>
       <select id="hair"></select>
       <input type="text" id="hairCustom" placeholder="영어 문장으로 직접 입력" hidden>
+      <label for="hairColor">헤어 색</label>
+      <select id="hairColor"></select>
+      <input type="text" id="hairColorCustom" placeholder="영어 색 이름으로 직접 입력 (예: pastel lavender)" hidden>
+      <div class="hint" id="hairColorHint"></div>
       <label for="makeup">화장</label>
       <select id="makeup"></select>
       <input type="text" id="makeupCustom" placeholder="영어 문장으로 직접 입력" hidden>
@@ -157,7 +161,7 @@
 
 <script>
 const $ = id => document.getElementById(id);
-const LABELS = {identity: "인물", outfit: "옷", action: "동작·표정", setting: "장소", camera: "카메라·구도", light: "빛", skin: "피부", style: "화면 느낌"};
+const LABELS = {identity: "인물", hair: "헤어 색", outfit: "옷", action: "동작·표정", setting: "장소", camera: "카메라·구도", light: "빛", skin: "피부", style: "화면 느낌"};
 let OPT = null, PLACE = null;
 
 const toast = msg => { const t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1500); };
@@ -174,6 +178,8 @@ async function init() {
   fill($("mode"), OPT.modes, m => [m, m]);
   const hair = [["", "LoRA 기본 헤어 유지"], ...OPT.hair_presets.map(h => [h.key, h.key, h.desc]), ["__custom__", "직접 입력"]];
   fill($("hair"), hair, h => [h[0], h[1], h[2]]);
+  const hc = [["", "LoRA 기본 색 유지"], ...OPT.hair_colors.map(h => [h.key, h.key, h.desc]), ["__custom__", "직접 입력"]];
+  fill($("hairColor"), hc, h => [h[0], h[1], h[2]]);
   const mk = [["", "LoRA 기본 화장 유지"], ...OPT.makeups.map(m => [m.key, m.key, m.desc]), ["__custom__", "직접 입력"]];
   fill($("makeup"), mk, m => [m[0], m[1], m[2]]);
   const wbox = $("weights");
@@ -213,6 +219,7 @@ $("outfit").onchange = () => hint("outfit", "outfitHint");
 $("moment").onchange = () => hint("moment", "momentHint");
 $("expression").onchange = () => hint("expression", "expressionHint");
 $("hair").onchange = () => { $("hairCustom").hidden = $("hair").value !== "__custom__"; };
+$("hairColor").onchange = () => { $("hairColorCustom").hidden = $("hairColor").value !== "__custom__"; hint("hairColor", "hairColorHint"); };
 $("makeup").onchange = () => { $("makeupCustom").hidden = $("makeup").value !== "__custom__"; hint("makeup", "makeupHint"); };
 $("extraCamera").oninput = () => { $("extraCamera").dataset.touched = "1"; };
 $("reseed").onclick = () => { $("seed").value = ""; toast("다음부터 매번 새 시드"); };
@@ -225,7 +232,7 @@ async function go() {
   const body = {
     trigger: $("trigger").value, outfit: $("outfit").value, location: $("location").value, time: $("time").value,
     framing: $("framing").value, moment: $("moment").value, expression: $("expression").value,
-    hair: pick("hair", "hairCustom"), makeup: pick("makeup", "makeupCustom"), mode: $("mode").value,
+    hair: pick("hair", "hairCustom"), hair_color: pick("hairColor", "hairColorCustom"), makeup: pick("makeup", "makeupCustom"), mode: $("mode").value,
     reinforce: $("reinforce").value, seed: $("seed").value, reference: $("reference").checked,
     weights, lighting_tag: $("lightingTag").checked, lighting_weight: $("lightingWeight").value,
     short_skin: $("shortSkin").checked, extra_camera: $("extraCamera").value,
