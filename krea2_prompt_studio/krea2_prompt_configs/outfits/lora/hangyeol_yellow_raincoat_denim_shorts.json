@@ -1,0 +1,87 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_yellow_raincoat_denim_shorts",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "노란 레인코트 + 데님 쇼츠 + 장화",
+  "name_en": "yellow raincoat with denim shorts and rain boots",
+  "desc_ko": "노란 짧은 레인코트(모자 내림), 흰 티, 청 데님 쇼츠, 흰 장화",
+  "category": "casual",
+  "source_doc": "오빠 「공간이랑 의상 이런게 좀 적으니까 이런거좀 더 추가」(1025) · 한결이 새로 정함. 노바 코디 4벌처럼 일자로 떨어지는 긴 단색·긴소매·발목 길이는 피하고 몸의 선이 보이는 실루엣으로 골랐다",
+  "applies_to": {
+    "locations": [
+      "비 오는 골목",
+      "도시 거리",
+      "편의점",
+      "지하철 승강장"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "노랑 + 흰색 + 청색",
+      "en": "yellow, white and blue"
+    }
+  },
+  "material": {
+    "ko": "방수 직물과 데님",
+    "en": "waterproof fabric and denim",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a bright yellow hip-length raincoat with the hood down, worn open over a white cotton tee, blue denim shorts ending at the upper thigh and white rubber rain boots",
+  "normal_waist_en": "a bright yellow hip-length raincoat with the hood down, worn open over a white cotton tee and blue denim shorts ending at the upper thigh",
+  "normal_noshoe_en": "a bright yellow hip-length raincoat with the hood down, worn open over a white cotton tee and blue denim shorts ending at the upper thigh",
+  "normal_top_en": "a bright yellow hip-length raincoat with the hood down, worn open over a white cotton tee",
+  "detail_prose_en": [
+    "The yellow raincoat has a front row of snap buttons, two pockets and a hood resting behind the neck",
+    {
+      "depth": 2,
+      "en": "The white tee has a round neckline"
+    },
+    {
+      "depth": 3,
+      "en": "The blue denim shorts have a plain hem"
+    },
+    {
+      "depth": 5,
+      "en": "{P} white rubber rain boots reach the lower calf"
+    }
+  ],
+  "echo_en": [
+    "The raincoat is a bright yellow",
+    "The white tee shows under the open raincoat"
+  ],
+  "lit_en": "the yellow fabric of the raincoat",
+  "parts": {
+    "top": {
+      "ko": "노란 레인코트와 흰 티",
+      "en": "a bright yellow hip-length raincoat with the hood down, worn open over a white cotton tee",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "데님 쇼츠",
+      "en": "blue denim shorts ending at the upper thigh",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}

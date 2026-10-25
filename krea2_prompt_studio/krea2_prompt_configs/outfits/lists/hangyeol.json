@@ -9,9 +9,28 @@
     "hangyeol_black_satin_off_shoulder_mini",
     "hangyeol_wine_slip_midi",
     "hangyeol_blue_crop_cardigan_white_tennis",
-    "hangyeol_yellow_sundress"
+    "hangyeol_yellow_sundress",
+    "hangyeol_beige_trench_white_knit_denim_skirt",
+    "hangyeol_burgundy_rib_knit_mini_dress",
+    "hangyeol_coral_knit_tank_white_shorts",
+    "hangyeol_cream_padded_jacket_plaid_skirt",
+    "hangyeol_cream_vest_white_shirt_pleated",
+    "hangyeol_denim_jacket_white_tee_beige_shorts",
+    "hangyeol_ivory_tweed_jacket_mini_skirt",
+    "hangyeol_lace_blouse_black_shorts_boots",
+    "hangyeol_lavender_off_shoulder_white_wrap",
+    "hangyeol_lilac_one_piece_swimsuit",
+    "hangyeol_mint_ruffle_sundress",
+    "hangyeol_oat_cardigan_white_tee_jeans",
+    "hangyeol_pink_crop_hoodie_black_leggings",
+    "hangyeol_pink_hanbok_navy_skirt",
+    "hangyeol_plaid_mini_skirt_white_blouse",
+    "hangyeol_sky_stripe_pajama_set",
+    "hangyeol_striped_tee_flare_denim_skirt",
+    "hangyeol_white_crop_tee_denim_shorts",
+    "hangyeol_yellow_raincoat_denim_shorts"
   ],
   "use_common_pool": true,
   "default_source": "all",
-  "note_ko": "한결 의상: 수영복 2판(해변·인피니티 풀), 크림 니트+세이지 플리츠, 흰 푸른 들꽃 쉬폰, 노바 코디 4벌(검정 새틴 오프숄더·와인 슬립·하늘색 크롭 가디건+흰 테니스 스커트·노란 썬드레스). 한결 LoRA 사용 시 의상 후보 = 로라의상 + 공용의상."
+  "note_ko": "한결 의상: 수영복 2판(해변·인피니티 풀), 크림 니트+세이지 플리츠, 흰 푸른 들꽃 쉬폰, 노바 코디 4벌(검정 새틴 오프숄더·와인 슬립·하늘색 크롭 가디건+흰 테니스 스커트·노란 썬드레스). 한결 LoRA 사용 시 의상 후보 = 로라의상 + 공용의상. 1025: 새 옷 19벌 추가(총 26벌) — 라벤더 오프숄더·흰 크롭 티·트렌치·체크 미니·가디건+청바지·크롭 후디·파자마·연보라 원피스 수영복·줄무늬 티·니트 베스트·코랄 민소매·민트 썬드레스·레이스 블라우스·데님 재킷·숏 패딩·레인코트·개량 한복·버건디 니트 원피스·트위드 재킷."
 }

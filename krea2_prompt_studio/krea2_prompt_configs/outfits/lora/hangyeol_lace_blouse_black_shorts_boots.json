@@ -1,0 +1,95 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_lace_blouse_black_shorts_boots",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "레이스 블라우스 + 검정 하이웨이스트 쇼츠 + 앵클부츠",
+  "name_en": "lace-trim blouse with black high-waisted shorts and ankle boots",
+  "desc_ko": "아이보리 레이스 트림 블라우스, 검정 하이웨이스트 쇼츠, 검정 앵클부츠",
+  "category": "casual",
+  "source_doc": "오빠 「공간이랑 의상 이런게 좀 적으니까 이런거좀 더 추가」(1025) · 한결이 새로 정함. 노바 코디 4벌처럼 일자로 떨어지는 긴 단색·긴소매·발목 길이는 피하고 몸의 선이 보이는 실루엣으로 골랐다",
+  "applies_to": {
+    "locations": [
+      "네온 골목",
+      "루프탑 야경",
+      "야시장",
+      "도시 거리",
+      "지하철 승강장",
+      "카페",
+      "편의점",
+      "벚꽃 길",
+      "공원",
+      "식물원 정원길",
+      "수국 정원",
+      "놀이공원",
+      "서점",
+      "사진 스튜디오",
+      "도서관 열람실",
+      "빈티지 옷가게"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "아이보리 + 검정",
+      "en": "ivory and black"
+    }
+  },
+  "material": {
+    "ko": "면 레이스와 직물",
+    "en": "cotton lace and woven fabric",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "an ivory cotton blouse with lace trim along the collar and the cuffs, black high-waisted tailored shorts and black leather ankle boots",
+  "normal_waist_en": "an ivory cotton blouse with lace trim along the collar and the cuffs and black high-waisted tailored shorts",
+  "normal_noshoe_en": "an ivory cotton blouse with lace trim along the collar and the cuffs and black high-waisted tailored shorts",
+  "normal_top_en": "an ivory cotton blouse with lace trim along the collar and the cuffs",
+  "detail_prose_en": [
+    "The ivory blouse has a lace-trimmed collar, lace-trimmed cuffs and a row of small buttons",
+    {
+      "depth": 2,
+      "en": "The black shorts sit high on the waist with a narrow belt and end at the upper thigh"
+    },
+    {
+      "depth": 5,
+      "en": "{P} black leather ankle boots have a block heel"
+    }
+  ],
+  "echo_en": [
+    "The blouse has ivory lace along the collar",
+    "The black shorts sit high on the waist"
+  ],
+  "lit_en": "the ivory cotton of the blouse",
+  "parts": {
+    "top": {
+      "ko": "아이보리 레이스 블라우스",
+      "en": "an ivory cotton blouse with lace trim along the collar and the cuffs",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "검정 하이웨이스트 쇼츠",
+      "en": "black high-waisted tailored shorts",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_lilac_one_piece_swimsuit",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "연보라 원피스 수영복",
+  "name_en": "lilac one-piece swimsuit",
+  "desc_ko": "연보라색 원피스 수영복(둥근 앞 목선, 가는 어깨끈, 등이 U자로 파임), 맨발",
+  "category": "swimwear",
+  "source_doc": "오빠 「공간이랑 의상 이런게 좀 적으니까 이런거좀 더 추가」(1025) · 한결이 새로 정함. 노바 코디 4벌처럼 일자로 떨어지는 긴 단색·긴소매·발목 길이는 피하고 몸의 선이 보이는 실루엣으로 골랐다",
+  "applies_to": {
+    "locations": [
+      "해변",
+      "인피니티 풀"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "연보라",
+      "en": "lilac"
+    }
+  },
+  "material": {
+    "ko": "매트한 스판 직물",
+    "en": "matte stretch fabric",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a lilac one-piece swimsuit with a scooped front neckline and thin shoulder straps, with bare feet",
+  "normal_waist_en": "a lilac one-piece swimsuit with a scooped front neckline and thin shoulder straps",
+  "normal_noshoe_en": "a lilac one-piece swimsuit with a scooped front neckline and thin shoulder straps",
+  "normal_top_en": "a lilac one-piece swimsuit with a scooped front neckline and thin shoulder straps",
+  "detail_prose_en": [
+    "The lilac swimsuit is a single solid color with a scooped front neckline and thin shoulder straps",
+    {
+      "depth": 3,
+      "en": "The back dips into a U shape between the shoulder blades"
+    },
+    {
+      "depth": 5,
+      "en": "{P} bare feet rest flat"
+    }
+  ],
+  "echo_en": [
+    "The swimsuit is a single soft lilac",
+    "The thin straps run over both shoulders"
+  ],
+  "lit_en": "the lilac fabric of the swimsuit",
+  "parts": {
+    "top": {
+      "ko": "연보라 원피스 수영복",
+      "en": "a lilac one-piece swimsuit with a scooped front neckline and thin shoulder straps",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "연보라 원피스 수영복",
+      "en": "a lilac one-piece swimsuit with a scooped front neckline and thin shoulder straps",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}
