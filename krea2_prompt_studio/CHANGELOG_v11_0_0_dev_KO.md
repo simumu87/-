@@ -117,3 +117,8 @@
 - 헤어 프리셋 3 → 12종(`hair_presets.json`): 턱선 C컬 단발 · 허쉬컷 레이어드 미디엄 · 긴 웨이브 · 반묶음 · 양갈래 땋은 머리 · 로우 번 · 하이 포니테일 · 가운데 가르마 긴 생머리 · 숏컷 추가.
 - 헤어 색 선택 추가: `hair_colors.json`(8가지: 초콜릿 브라운 · 애쉬 브라운 · 와인 브라운 · 버건디 · 베이지 블론드 · 핑크 브라운 옴브레 · 블루 블랙 · 밝은 갈색). `compose_split(hair_color=...)` · CLI `--hair-color`. 고르면 ① LoRA 머리 문장 안의 색 단어를 바꾸거나(헤어 프리셋이면 `{color}` 자리에 들어감) ② 색만 말하는 한 문장을 더해 `sections["hair"]`로 따로 돌려준다. 가중치 화면에 「헤어 색」 칸(기본 1.7)이 생겼고, 색을 안 고르면 이 칸은 비어 있어 프롬에 안 나온다.
 - 검수: `validate_packs.py` 25개 ok · `scene_consistency.py` 800 scenes 0 contradictions · `validate_outfits.py` 27 files 0 problems · 옷×장소×시간대×순간×프레이밍×보통/상세 6392조합 problems 0 · `regression_bulk.py 60`에 `hair_color_checks()` 추가(헤어 12종 × 색 8가지 × 상세, 기본 색 단어 잔존·슬롯 미치환 확인), 120 prompts 0 problems.
+
+## 여름 4.6 값 반영 + 문장형 머리색 처리 (2026-10-26)
+- 오빠가 준 여름 4.6 개인값을 `loras.json`의 `yeoreum` 항목에 반영(바뀐 칸: identity · hair · hair_color · signature_accessories · notes). 체형에서 키 숫자와 lean·toned를 뺐고, 피부는 fair ivory, 목걸이는 로라가 배운 켈핀 문장, 머리는 학습된 벨나리 문장. 다른 사람 항목은 그대로(diff 12줄).
+- 합성기: 머리색이 문장형(`cobalt navy at the roots, fading …`처럼 쉼표·fading·at the roots·not 포함, 여름·나윤·단희)이면 헤어 프리셋이나 직접 입력 머리를 쓸 때 프리셋 문장에서 색 단어를 빼고(`Her hair is …`) 색을 `Her hair color is …` 한 문장으로 따로 말한다(화면 가중치 칸 「헤어 색」에 들어감). 헤어를 안 고르면 LoRA 자기 머리 문장이 그대로 나간다. 헤어 색 메뉴로 색을 직접 고르면 예전 방식 그대로.
+- 회귀 테스트: 문장형 머리색 LoRA 3명 × (프리셋 12 + 직접 입력) 조합에서 색 문장이 정확히 한 번 나오는지, 자리표시자·빈칸 이중 공백이 없는지, 헤어 미선택 시 LoRA 머리 문장이 남는지 확인. 120 prompts 0 problems.

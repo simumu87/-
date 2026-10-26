@@ -326,6 +326,10 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     exp = load_expressions()[expression]
     lit = (outfit or {}).get("lit_en", "")
     f = lambda t: _fill(t, subj, poss, color=color, lit=lit)
+    # a color written as a clause ("cobalt navy at the roots, fading through ...") cannot sit before the word "hair":
+    # a hair preset or a free hair text then drops the color word and states the color in its own sentence instead
+    clause_color = bool(color) and not color_words and bool(re.search(r",|\bfading\b|\bat the roots\b|\bnot\b", color))
+    fp = (lambda t: re.sub(r"\s+", " ", _fill(t, subj, poss, color="", lit=lit)).strip()) if clause_color else f
     fs = lambda t: _fill(t, "the woman", "the woman's", "the woman", color, lit)   # scene prompt that stands alone (regional use)
     cap = lambda t: t[:1].upper() + t[1:]
 
@@ -340,11 +344,13 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         person.append(f"Only {poss} face and body follow the {lora['trigger']} reference; {poss} hairstyle is set separately here.")
         if hair in presets:
             h = presets[hair]
-            person.append(sentence(f(h["main_en"]) + "; " + f(h["closing_en"])))
-            hair_echo = f(h["echo_en"])
-            hair_echo2 = f(h.get("echo2_en", ""))
+            person.append(sentence(fp(h["main_en"]) + "; " + fp(h["closing_en"])))
+            hair_echo = fp(h["echo_en"])
+            hair_echo2 = fp(h.get("echo2_en", ""))
         else:
             person.append(sentence(k.clean_text(hair)))
+        if clause_color and not color_sentence:
+            color_sentence = "{P} hair color is " + color
     elif lora.get("hair") and not reference:
         base_hair = lora["hair"]
         if color_words and base_color and re.search(re.escape(base_color), base_hair, re.I):

@@ -344,6 +344,18 @@ def hair_color_checks():
     r = c.compose_split("hangyeol", **base)
     if "hair" in r["sections"]:
         problems.append((9, 1, "hair section present although no hair color was picked"))
+    # a LoRA hair color written as a clause ("... at the roots, fading ..."): a preset or free hair text drops the color word
+    # and states the color once, in its own sentence; the LoRA's own hair stays untouched when no hair is picked
+    for trig in ("yeoreum", "nayoon", "danhee"):
+        color = c.k.lora_profile_for_trigger(trig)["hair_color"]
+        for hp in list(presets) + ["straight blunt bangs over the forehead, hair worn loose past the shoulders"]:
+            r = c.compose_split(trig, hair=hp, **base)
+            n = r["person"].count(color)
+            if r["problems"] or n != 1 or "{" in r["person"] or "  " in r["person"] or "hair" not in r["sections"]:
+                problems.append((9, 1, f"{trig} x {hp[:30]}: clause hair color written {n} times / {r['problems']}"))
+        own = c.k.clean_text(c.k.lora_profile_for_trigger(trig)["hair"]).rstrip(".")
+        if own not in c.compose_split(trig, **base)["person"]:
+            problems.append((9, 1, f"{trig}: the LoRA's own hair text is missing when no hair is picked"))
     return problems
 
 
