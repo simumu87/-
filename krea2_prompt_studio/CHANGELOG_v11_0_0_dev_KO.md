@@ -122,3 +122,11 @@
 - 오빠가 준 여름 4.6 개인값을 `loras.json`의 `yeoreum` 항목에 반영(바뀐 칸: identity · hair · hair_color · signature_accessories · notes). 체형에서 키 숫자와 lean·toned를 뺐고, 피부는 fair ivory, 목걸이는 로라가 배운 켈핀 문장, 머리는 학습된 벨나리 문장. 다른 사람 항목은 그대로(diff 12줄).
 - 합성기: 머리색이 문장형(`cobalt navy at the roots, fading …`처럼 쉼표·fading·at the roots·not 포함, 여름·나윤·단희)이면 헤어 프리셋이나 직접 입력 머리를 쓸 때 프리셋 문장에서 색 단어를 빼고(`Her hair is …`) 색을 `Her hair color is …` 한 문장으로 따로 말한다(화면 가중치 칸 「헤어 색」에 들어감). 헤어를 안 고르면 LoRA 자기 머리 문장이 그대로 나간다. 헤어 색 메뉴로 색을 직접 고르면 예전 방식 그대로.
 - 회귀 테스트: 문장형 머리색 LoRA 3명 × (프리셋 12 + 직접 입력) 조합에서 색 문장이 정확히 한 번 나오는지, 자리표시자·빈칸 이중 공백이 없는지, 헤어 미선택 시 LoRA 머리 문장이 남는지 확인. 120 prompts 0 problems.
+
+## 1027 의뢰서(여름 → 한결) 1~3번 + 포즈 직접 입력 (2026-10-26)
+- 1) 여름 의상: `outfits/lists/yeoreum.json`(11벌) + `outfits/lora/yeoreum_*.json` 10개. 의상 메뉴에 「직접 입력」(영어 문장 그대로, 한국어는 번역 모듈) · 「옷 색만 바꾸기」(`outfit_colors.json` 24색 또는 직접 입력). 색 바꾸기는 `color.primary.en`의 색 단어만 바꾸고 a/an·하이픈 철자를 맞춘다. 합성기 `outfit_text` · `outfit_color`.
+- 2) 소지품 칸(`accessory_options.json`, 여름): 켈핀 목걸이 켜기/끄기(켜면 「She wears only one necklace」 문장이 붙음, 끄면 `loras.json` 시그니처 중 kelpin 문장이 빠짐) · Y 각인 끔/금색/은색/검정(켈핀이 켜져 있을 때만, 가중치 1.5 괄호로 따로 나가는 `engraving` 칸) · 시계(orvael) 끄기/켜기(전신에서만; ★문장 원문 대기, 지금은 임시 문장). 합성기 `accessories={"necklace":…,"engraving":…,"watch":…}`. 이 파일에 없는 LoRA는 예전처럼 시그니처가 항상 켜진다. 가중치 칸에 「소지품」(기본 없음) · 「Y 각인」(기본 1.5) 추가.
+- 3) 목걸이 중복 검사: 옷 문장(고른 옷·직접 입력·공용의상)에 necklace·pendant·choker·neckband가 있는데 시그니처 목걸이도 켜져 있으면 점검 알림 「two necklaces」.
+- 포즈 직접 입력(오빠 1026 「포즈는 기본포즈외에 선택포즈로 직접 입력할수있게」): 화면 「장면 속 순간」에 「직접 입력」, 합성기 `pose_text`. 입력한 문장이 고른 순간의 포즈·상황 문장을 통째로 대신하고, 프레이밍에 안 보이는 발·신발 말을 쓰면 점검 알림이 뜬다.
+- 손목 규칙(4번 일부): 손이 턱·볼에 닿는 포즈(순간의 `pose_en` 또는 직접 입력 문장에 hand와 chin/cheek이 같이 있거나 순간에 `wrist_straight: true`)에는 「Her wrist stays straight, in line with her forearm」 문장이 포즈 바로 뒤에 자동으로 붙는다.
+- 회귀: `outfit_custom_checks()` · `accessory_pose_checks()` 추가. `regression_bulk.py 60` 120 prompts 0 problems.

@@ -28,6 +28,8 @@
   @media (max-width: 860px) { main { grid-template-columns: 1fr; padding: 12px 16px 40px; } }
   section.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
   section.card + section.card { margin-top: 14px; }
+  label.chk { display: flex; gap: 8px; align-items: center; margin: 8px 0 4px; color: var(--ink, inherit); }
+  label.chk input { width: auto; margin: 0; }
   h2 { font-size: 13px; letter-spacing: .04em; color: var(--muted); margin: 0 0 10px; font-weight: 650; }
   label { display: block; font-size: 13px; color: var(--muted); margin: 10px 0 3px; }
   select, input[type=text], input[type=number], textarea {
@@ -74,6 +76,14 @@
       <select id="outfit"></select>
       <div class="hint" id="outfitHint"></div>
       <textarea id="outfitCustom" rows="3" placeholder="입을 옷을 영어 문장으로 (예: a lavender knit cardigan and a white pleated skirt). 한국어는 일부만 번역돼요" hidden></textarea>
+      <div id="accBox" hidden>
+        <label>소지품</label>
+        <label class="chk"><input type="checkbox" id="accNecklace"> <span id="accNecklaceLabel">목걸이</span></label>
+        <label for="accEngraving" id="accEngravingLabel">Y 각인</label>
+        <select id="accEngraving"></select>
+        <label class="chk"><input type="checkbox" id="accWatch"> <span id="accWatchLabel">시계</span></label>
+        <div class="hint" id="accHint"></div>
+      </div>
       <label for="outfitColor">옷 색만 바꾸기</label>
       <select id="outfitColor"></select>
       <input type="text" id="outfitColorCustom" placeholder="영어 색 이름으로 직접 입력 (예: pale peach)" hidden>
@@ -99,8 +109,9 @@
         <div><label for="time">시간대</label><select id="time"></select></div>
         <div><label for="framing">프레이밍</label><select id="framing"></select></div>
       </div>
-      <label for="moment">장면 속 순간</label>
+      <label for="moment">장면 속 순간 (포즈)</label>
       <select id="moment"></select>
+      <textarea id="poseCustom" rows="3" placeholder="포즈를 영어 문장으로 (예: sits on the railing and looks back over her shoulder). 한국어는 일부만 번역돼요" hidden></textarea>
       <div class="hint" id="momentHint"></div>
       <label for="expression">표정</label>
       <select id="expression"></select>
@@ -166,7 +177,7 @@
 
 <script>
 const $ = id => document.getElementById(id);
-const LABELS = {identity: "인물", hair: "헤어 색", outfit: "옷", action: "동작·표정", setting: "장소", camera: "카메라·구도", light: "빛", skin: "피부", style: "화면 느낌"};
+const LABELS = {identity: "인물", hair: "헤어 색", accessory: "소지품", engraving: "Y 각인", outfit: "옷", action: "동작·표정", setting: "장소", camera: "카메라·구도", light: "빛", skin: "피부", style: "화면 느낌"};
 let OPT = null, PLACE = null;
 
 const toast = msg => { const t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1500); };
@@ -203,6 +214,7 @@ async function init() {
 async function loadPlace() {
   const q = `trigger=${encodeURIComponent($("trigger").value)}&location=${encodeURIComponent($("location").value)}`;
   PLACE = await getJSON("/api/place?" + q);
+  buildAcc();
   const outs = [...PLACE.outfits.map(o => [o.id, o.name, o.desc]), ["__common__", "공용의상 (자동)", "본체 공용 의상 풀에서 장소·프레임에 맞게 고름"], ["__custom__", "직접 입력", "아래 칸에 입은 옷을 문장으로 적음"], ["__none__", "의상 없음", "의상 문장을 넣지 않음"]];
   fill($("outfit"), outs, o => [o[0], o[1], o[2]]);
   fill($("time"), PLACE.times, t => [t.key, t.key, t.desc]);
@@ -213,9 +225,11 @@ async function loadPlace() {
 
 function refreshMoments() {
   const fr = $("framing").value;
-  const list = PLACE.moments.filter(m => m.frames.includes(fr));
-  fill($("moment"), list, m => [m.key, m.key, m.desc]);
+  const list = PLACE.moments.filter(m => m.frames.includes(fr)).concat([{key: "__custom__", desc: "직접 입력: 아래 칸에 포즈를 영어 문장으로 적음 (고른 순간의 포즈·상황 문장을 통째로 대신함)"}]);
+  fill($("moment"), list, m => [m.key, m.key === "__custom__" ? "직접 입력" : m.key, m.desc]);
+  $("poseCustom").hidden = $("moment").value !== "__custom__";
   hint("moment", "momentHint");
+  syncAcc();
   if (OPT && !$("extraCamera").dataset.touched) $("extraCamera").value = (fr === "전신") ? OPT.full_body_frame : "";
 }
 
@@ -231,7 +245,29 @@ function syncOutfit() {
 }
 $("outfit").onchange = syncOutfit;
 $("outfitColor").onchange = () => { $("outfitColorCustom").hidden = $("outfitColor").value !== "__custom__"; };
-$("moment").onchange = () => hint("moment", "momentHint");
+$("moment").onchange = () => { $("poseCustom").hidden = $("moment").value !== "__custom__"; hint("moment", "momentHint"); };
+function buildAcc() {
+  const cfg = (OPT.accessory_options || {})[$("trigger").value];
+  $("accBox").hidden = !cfg;
+  if (!cfg) return;
+  $("accNecklaceLabel").textContent = cfg.necklace.label_ko + " (켜면 「목걸이는 하나뿐」 문장이 같이 붙음)";
+  $("accNecklace").checked = cfg.necklace.default;
+  $("accEngravingLabel").textContent = cfg.engraving.label_ko + " (켈핀 목걸이가 켜져 있을 때만, 괄호 가중치 " + cfg.engraving.weight + ")";
+  fill($("accEngraving"), Object.keys(cfg.engraving.choices), k => [k, k]);
+  $("accEngraving").value = cfg.engraving.default;
+  $("accWatchLabel").textContent = cfg.watch.label_ko + " — 전신에서만" + (cfg.watch.status === "draft" ? " (★임시 문장, 원문 대기)" : "");
+  $("accWatch").checked = cfg.watch.default;
+  syncAcc();
+}
+function syncAcc() {
+  const cfg = (OPT.accessory_options || {})[$("trigger").value];
+  if (!cfg) return;
+  const ok = cfg.watch.frames.includes($("framing").value);
+  $("accWatch").disabled = !ok; if (!ok) $("accWatch").checked = false;
+  $("accEngraving").disabled = !$("accNecklace").checked;
+  $("accHint").textContent = ok ? "" : "시계는 손목이 보이는 「전신」 프레이밍에서만 켤 수 있어요.";
+}
+$("accNecklace").onchange = syncAcc;
 $("expression").onchange = () => hint("expression", "expressionHint");
 $("hair").onchange = () => { $("hairCustom").hidden = $("hair").value !== "__custom__"; };
 $("hairColor").onchange = () => { $("hairColorCustom").hidden = $("hairColor").value !== "__custom__"; hint("hairColor", "hairColorHint"); };
@@ -247,7 +283,8 @@ async function go() {
   const body = {
     trigger: $("trigger").value, outfit: $("outfit").value, location: $("location").value, time: $("time").value,
     framing: $("framing").value, moment: $("moment").value, expression: $("expression").value,
-    hair: pick("hair", "hairCustom"), hair_color: pick("hairColor", "hairColorCustom"), outfit_text: $("outfitCustom").value.trim(), outfit_color: pick("outfitColor", "outfitColorCustom"), makeup: pick("makeup", "makeupCustom"), mode: $("mode").value,
+    hair: pick("hair", "hairCustom"), hair_color: pick("hairColor", "hairColorCustom"), outfit_text: $("outfitCustom").value.trim(), pose_text: $("poseCustom").value.trim(),
+    accessories: (OPT.accessory_options || {})[$("trigger").value] ? {necklace: $("accNecklace").checked, engraving: $("accEngraving").value, watch: $("accWatch").checked} : null, outfit_color: pick("outfitColor", "outfitColorCustom"), makeup: pick("makeup", "makeupCustom"), mode: $("mode").value,
     reinforce: $("reinforce").value, seed: $("seed").value, reference: $("reference").checked,
     weights, lighting_tag: $("lightingTag").checked, lighting_weight: $("lightingWeight").value,
     short_skin: $("shortSkin").checked, extra_camera: $("extraCamera").value,

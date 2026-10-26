@@ -41,6 +41,7 @@ def options() -> dict:
         "expressions": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in exps.items()],
         "hair_presets": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_hair_presets().items()],
         "hair_colors": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_hair_colors().items()],
+        "accessory_options": {k: v for k, v in comp.load_accessory_options().items() if isinstance(v, dict)},
         "outfit_colors": [{"key": k, "en": v} for k, v in comp.load_outfit_colors().items()],
         "makeups": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_makeup().items()],
         "modes": list(comp.MODES),
@@ -73,7 +74,10 @@ def compose(body: dict) -> dict:
     custom = outfit == "__custom__"
     r = comp.compose_split(
         body["trigger"], "" if outfit in ("", "__none__", "__common__", "__custom__") else outfit,
-        location=body["location"], time_key=body["time"], moment=body["moment"], framing=body["framing"],
+        location=body["location"], time_key=body["time"],
+        moment=(list(comp.load_pack(body["location"])["moments"])[0] if body["moment"] == "__custom__" else body["moment"]),
+        framing=body["framing"], pose_text=body.get("pose_text", "") if body["moment"] == "__custom__" else "",
+        accessories=body.get("accessories") or None,
         expression=body["expression"], hair=body.get("hair", ""), mode=body.get("mode", "보통"),
         reinforce=None if body.get("reinforce", "auto") == "auto" else int(body["reinforce"]),
         seed=seed, common_outfit=common, reference=bool(body.get("reference")), makeup=body.get("makeup", ""),

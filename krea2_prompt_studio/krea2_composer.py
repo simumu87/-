@@ -223,6 +223,42 @@ def load_makeup() -> Dict[str, Any]:
     return _load(k.CONFIG_DIR / "makeup.json")["items"]
 
 
+def load_accessory_options() -> Dict[str, Any]:
+    return _load(k.CONFIG_DIR / "accessory_options.json")
+
+
+def resolve_accessories(lora: Dict[str, Any], trigger: str, choice: Optional[Dict[str, Any]], framing: str,
+                        subj: str, poss: str) -> Tuple[List[str], List[str], str]:
+    """(signature accessories to wear, extra accessory sentences, engraving sentence).
+    A LoRA without an entry in accessory_options.json keeps every signature accessory, as before."""
+    sigs = list(lora.get("signature_accessories", []))
+    cfg = load_accessory_options().get(trigger)
+    if not cfg:
+        return sigs, [], ""
+    choice = choice or {}
+    extra: List[str] = []
+    engraving = ""
+    neck = cfg.get("necklace")
+    neck_on = True
+    if neck:
+        neck_on = bool(choice.get("necklace", neck.get("default", True)))
+        if neck_on:
+            if neck.get("only_one_en"):
+                extra.append(sentence(_fill(neck["only_one_en"], subj, poss)))
+        else:
+            sigs = [a for a in sigs if neck["match_en"].lower() not in a.lower()]
+    eng = cfg.get("engraving")
+    if eng and neck_on:
+        pick = choice.get("engraving", eng.get("default", "끔"))
+        color_en = eng["choices"].get(pick, pick if pick and pick not in eng["choices"] else "")
+        if color_en:
+            engraving = sentence(_fill(eng["sentence_en"], subj, poss, color=color_en))
+    watch = cfg.get("watch")
+    if watch and choice.get("watch", watch.get("default", False)) and framing in watch.get("frames", ["전신"]):
+        extra.append(sentence(_fill(watch["sentence_en"], subj, poss)))
+    return sigs, extra, engraving
+
+
 def load_outfit_colors() -> Dict[str, str]:
     return _load(k.CONFIG_DIR / "outfit_colors.json")["items"]
 
@@ -357,7 +393,8 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
                   moment: str = "파도 발목", framing: str = "전신", expression: str = "환한 미소",
                   hair: str = "", mode: str = "보통", reinforce: Optional[int] = None, seed: int = 0,
                   common_outfit: bool = False, reference: bool = False, makeup: str = "", hair_color: str = "",
-                  outfit_text: str = "", outfit_color: str = "") -> Dict[str, Any]:
+                  outfit_text: str = "", outfit_color: str = "", accessories: Optional[Dict[str, Any]] = None,
+                  pose_text: str = "") -> Dict[str, Any]:
     """Build the person prompt, the scene prompt and the combined single prompt.
 
     hair: "" keeps the LoRA hair; a preset name or free text replaces it entirely.
@@ -368,6 +405,10 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         which the weighted view can emphasize as its own section.
     outfit_text: free outfit sentence (English; Korean goes through the translator). Replaces the chosen outfit.
     outfit_color: a name from outfit_colors.json or free color words; only the chosen outfit's main color words are swapped.
+    pose_text: a free pose sentence (English; Korean goes through the translator). It replaces the chosen moment's pose and
+        situation sentences; `moment` is then not looked up. Hands on the chin or cheek get the straight-wrist sentence.
+    accessories: {"necklace": bool, "engraving": "끔|금색|은색|검정", "watch": bool} for LoRAs listed in accessory_options.json;
+        left out = that file's defaults (necklace on, no engraving, no watch).
     mode: how much the scene and outfit are described. 보통 (concise) / 상세 (outfit parts, more place detail).
     reference: True when an attached reference photo carries the face and body. The identity sentence, the skin
         sentence and every restatement are left out, because a longer prompt makes the model drift from the photo.
@@ -398,6 +439,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     outfit = load_outfit(outfit_id) if outfit_id else None
     custom_outfit = ""
     outfit_problems: List[str] = []
+    pose_problems: List[str] = []
     if (outfit_text or "").strip():
         outfit, custom_outfit = None, to_english(outfit_text).rstrip(".")
     elif outfit and (outfit_color or "").strip():
@@ -407,10 +449,12 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         if not hit:
             outfit_problems.append("outfit color words not found: the color was not changed")
     pack = load_pack(location)
-    tm, mo = pack["times"][time_key], pack["moments"][moment]
+    custom_pose = to_english(pose_text).rstrip(".") if (pose_text or "").strip() else ""
+    tm = pack["times"][time_key]
+    mo = {"pose_en": "", "moment_en": ""} if custom_pose else pack["moments"][moment]
     if framing not in pack["camera"]:
         raise SystemExit(f"이 장소에 없는 프레이밍이에요: {framing} (있는 것: {', '.join(pack['camera'])})")
-    if framing not in mo.get("frames", list(pack["camera"])):
+    if not custom_pose and framing not in mo.get("frames", list(pack["camera"])):
         raise SystemExit(f"'{moment}' 순간은 이 프레이밍에서 보이지 않는 부분을 써요: {framing}")
     exp = load_expressions()[expression]
     lit = (outfit or {}).get("lit_en", "")
@@ -450,6 +494,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         person.append(sentence(f(color_sentence)))
         hair_color_idx = len(person) - 1
 
+    sigs, acc_extra, acc_engraving = resolve_accessories(lora, trigger, accessories, framing, subj, poss)
     mk_text = "" if reference else resolve_makeup(lora, makeup)
     if mk_text:
         person.append(makeup_sentence(subj, mk_text))
@@ -457,26 +502,41 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
 
     if not outfit and not custom_outfit and common_outfit:
         person.append(common_outfit_sentence(location, framing, subj, poss, detailed, seed))
-        for acc in lora.get("signature_accessories", []):
+        for acc in sigs:
             person.append(sentence(f"{subj.capitalize()} also wears " + (acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")))
     if outfit:
         wear = [outfit_normal_for(outfit, framing)]
-        for acc in lora.get("signature_accessories", []):
+        for acc in sigs:
             wear.append(acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")
         person.append(sentence(f"{subj.capitalize()} wears {_join(wear)}"))
         if detailed:
             person.extend(sentence(f(t)) for t in outfit_detail_for(outfit, framing))
     if custom_outfit:
         wear = [custom_outfit]
-        for acc in lora.get("signature_accessories", []):
+        for acc in sigs:
             wear.append(acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")
         person.append(sentence(f"{subj.capitalize()} wears {_join(wear)}"))
+    cut_pre_acc = len(person)
+    if outfit or custom_outfit or common_outfit:      # accessory sentences only make sense when something is worn
+        person.extend(acc_extra)
+    cut_acc = len(person)
+    if (outfit or custom_outfit or common_outfit) and acc_engraving:
+        person.append(acc_engraving)
     cut_outfit = len(person)
     if pack.get("person_extra_en"):
         person.append(sentence(f(pack["person_extra_en"])))
-    person.append(sentence(f"{subj.capitalize()} {f(mo['pose_en'])}"))
+    if custom_pose:
+        person.append(sentence(custom_pose if re.match(r"(?:she|her|the woman)\b", custom_pose, re.I) else f"{subj.capitalize()} {custom_pose}"))
+        if re.search(r"\b(?:feet|foot|ankles?|barefoot|toes|shoes|sneakers|heels)\b", custom_pose, re.I) and framing != "전신":
+            pose_problems.append("the typed pose names feet or shoes but this framing does not show them")
+    else:
+        person.append(sentence(f"{subj.capitalize()} {f(mo['pose_en'])}"))
+    if (mo.get("wrist_straight") or re.search(r"\bhands?\b.*\b(?:chin|cheeks?)\b|\b(?:chin|cheeks?)\b.*\bhands?\b",
+                                              custom_pose or mo.get("pose_en", ""), re.I)):
+        person.append(sentence(f"{poss.capitalize()} wrist stays straight, in line with {poss} forearm"))
     person.append(sentence(f"{subj.capitalize()} is {f(exp['main_en'])}"))      # expression gets its own sentence
-    person.append(sentence(cap(f(mo["moment_en"]))))
+    if mo.get("moment_en"):
+        person.append(sentence(cap(f(mo["moment_en"]))))
     if expr_level >= 1:
         person.append(sentence(f(exp["echo_en"])))
     if level >= 1:
@@ -530,7 +590,14 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
 
     scene_text = build_scene_text(fs)                          # regional use: "the woman"
     combined = f"{person_text} {build_scene_text(f)}"          # one person, one prompt: "her" keeps the thread
-    problems = lint(combined) + outfit_problems
+    problems = lint(combined) + outfit_problems + pose_problems
+    neck_sig = [a for a in sigs if re.search(r"\b(necklace|pendant|choker|neckband)\b", a, re.I)]
+    if neck_sig:       # a necklace in the outfit text plus the signature necklace draws two necklaces
+        probe = " ".join(person[cut_identity:cut_pre_acc])
+        for a in neck_sig:
+            probe = probe.replace(a, "")
+        if re.search(r"\b(necklace|pendant|choker|neckband)\b", probe, re.I):
+            problems.append("outfit text has a necklace while the signature necklace is on (two necklaces)")
     if hair and lora.get("hair"):                               # the replaced LoRA hair must be gone entirely
         old = k.clean_text(lora["hair"]).lower()
         if old[:40] in combined.lower() or "knot high on the crown" in combined.lower() and "knot" not in hair.lower():
@@ -544,7 +611,9 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     sections = {
         "identity": " ".join(t for i, t in enumerate(person[:cut_identity]) if i != hair_color_idx),
         **({"hair": person[hair_color_idx]} if hair_color_idx >= 0 else {}),
-        "outfit": " ".join(person[cut_identity:cut_outfit]),
+        "outfit": " ".join(person[cut_identity:cut_pre_acc]),
+        **({"accessory": " ".join(person[cut_pre_acc:cut_acc])} if cut_acc > cut_pre_acc else {}),
+        **({"engraving": " ".join(person[cut_acc:cut_outfit])} if cut_outfit > cut_acc else {}),
         "action": " ".join(person[cut_outfit:cut_action]),
         "skin": " ".join(person[cut_action:]),
         **{tag: " ".join(texts) for tag, texts in scene_by.items()},

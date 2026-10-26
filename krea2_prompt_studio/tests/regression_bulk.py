@@ -319,6 +319,50 @@ def visibility_checks():
     return problems
 
 
+def accessory_pose_checks():
+    """Accessory switches (yeoreum): kelpin 0/1 times, engraving only with the necklace, watch only in full-body, one-necklace sentence;
+    duplicate necklace is flagged; a typed pose replaces the moment; hand on the chin gets the straight-wrist sentence."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    pk = c.load_pack("도시 거리")
+    base = dict(location="도시 거리", time_key=list(pk["times"])[0], moment=list(pk["moments"])[0], framing="전신",
+                expression="은은한 미소", mode="보통", seed=4)
+    oid = "yeoreum_black_rib_bodycon_midi_loafers"
+
+    def n(**kw):
+        r = c.compose_split("yeoreum", oid, **{**base, **kw})
+        return r["combined"], r["problems"], r["sections"]
+    t, pr, _ = n()
+    if t.count("kelpin") != 1 or "only one necklace" not in t or pr:
+        problems.append((9, 1, f"default accessories wrong: kelpin {t.count('kelpin')} {pr}"))
+    t, pr, _ = n(accessories={"necklace": False, "engraving": "금색", "watch": False})
+    if "kelpin" in t or "only one necklace" in t or "capital letter Y" in t:
+        problems.append((9, 1, "necklace off still leaves kelpin / one-necklace / Y"))
+    for pick, word in (("금색", "gold"), ("은색", "silver"), ("검정", "black")):
+        t, pr, sec = n(accessories={"engraving": pick})
+        if f"engraved in {word}" not in t or "engraving" not in sec or t.count("kelpin") != 1:
+            problems.append((9, 1, f"engraving {pick} wrong"))
+    t, _, _ = n(accessories={"watch": True})
+    if "orvael" not in t:
+        problems.append((9, 1, "watch on in full-body did not appear"))
+    t, _, _ = n(accessories={"watch": True}, framing="무릎 위")
+    if "orvael" in t:
+        problems.append((9, 1, "watch appeared in a framing that hides the wrist"))
+    r = c.compose_split("yeoreum", outfit_text="a white blouse with a gold necklace", **base)
+    if not any("two necklaces" in x for x in r["problems"]):
+        problems.append((9, 1, "duplicate necklace not flagged"))
+    r = c.compose_split("yeoreum", outfit_text="a white blouse with a gold necklace", accessories={"necklace": False}, **base)
+    if any("two necklaces" in x for x in r["problems"]):
+        problems.append((9, 1, "duplicate necklace flagged although the signature necklace is off"))
+    r = c.compose_split("hangyeol", pose_text="sits at the table with her chin resting on one hand", **{**base, "framing": "무릎 위"})
+    if "sits at the table" not in r["person"] or "wrist stays straight" not in r["person"] or r["problems"]:
+        problems.append((9, 1, f"typed pose or wrist sentence missing: {r['problems']}"))
+    r = c.compose_split("hangyeol", pose_text="stands with her shoes on the floor", **{**base, "framing": "무릎 위"})
+    if not any("feet or shoes" in x for x in r["problems"]):
+        problems.append((9, 1, "feet in a typed pose not flagged for a framing that hides them"))
+    return problems
+
+
 def outfit_custom_checks():
     """Outfit lists are per LoRA; a typed outfit goes into the prompt as it is; a color pick swaps only the main color words."""
     problems = []
@@ -512,7 +556,7 @@ def hangyeol_checks():
 
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + hair_color_checks() + outfit_custom_checks() + gui_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + hair_color_checks() + outfit_custom_checks() + accessory_pose_checks() + gui_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()
