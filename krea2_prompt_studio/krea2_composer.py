@@ -223,6 +223,82 @@ def load_makeup() -> Dict[str, Any]:
     return _load(k.CONFIG_DIR / "makeup.json")["items"]
 
 
+def load_outfit_colors() -> Dict[str, str]:
+    return _load(k.CONFIG_DIR / "outfit_colors.json")["items"]
+
+
+def to_english(text: str) -> str:
+    """Free input: English stays as it is; Korean goes through the built-in translator (words it does not know stay Korean,
+    which the Hangul check then reports)."""
+    text = k.clean_text(text)
+    if re.search(r"[가-힣]", text):
+        from krea2_translator.translator import translate_text
+        text = k.clean_text(translate_text(text))
+    return text
+
+
+def recolor_outfit(outfit: Dict[str, Any], new_color_en: str) -> Tuple[Dict[str, Any], bool]:
+    """A copy of the outfit with its main color words replaced in every English field (only color words are touched).
+    Returns (outfit, whether any color word was found). The old color is color.primary.en; the first spelling that
+    occurs in the outfit text wins, tried in this order: the whole phrase, the first color of a list ("cream, gray and
+    brown plaid" -> "cream"), then that color without its leading adjectives ("warm deep gold-amber" -> "gold-amber").
+    A hyphenated spelling in the text ("light-blue") keeps its hyphen."""
+    old = (outfit.get("color", {}).get("primary", {}).get("en") or "").strip()
+    first = re.split(r",\s*|\s+(?:and|with)\s+", old)[0].strip()
+    first = re.sub(r"\s+(?:stripes|striped|plaid|check|checked|floral)$", "", first, flags=re.I).strip()
+    words = first.split()
+    groups = [[old], [first], [" ".join(words[i:]) for i in range(1, len(words))]]
+    english = []
+
+    def collect(node, key=""):
+        if isinstance(node, dict):
+            for kk, v in node.items():
+                if kk in ("color", "name_en", "applies_to", "source_doc"):
+                    continue
+                collect(v, kk)
+        elif isinstance(node, list):
+            for v in node:
+                collect(v, key)
+        elif isinstance(node, str) and (key == "en" or key.endswith("_en")) and not key.startswith("name") and key != "finish_en":
+            english.append(node)
+
+    collect(outfit)
+    blob = " ".join(english)
+    pats = []
+    for group in groups:
+        cands = []
+        for g in group:
+            if g:
+                cands += [g, g.replace(" ", "-")]
+        cands = sorted(set(cands), key=len, reverse=True)
+        pats = [re.compile(r"(?<![\w-])" + re.escape(cd) + r"(?![\w])", re.I) for cd in cands]
+        if any(pt.search(blob) for pt in pats):
+            break
+    else:
+        return outfit, False
+
+    hyphenated = new_color_en.replace(" ", "-")
+
+    def swap(text: str) -> str:
+        for pt in pats:
+            text = pt.sub(lambda m: hyphenated if "-" in m.group(0) else new_color_en, text)
+        # keep "a"/"an" in step with the new first sound
+        art = "an" if new_color_en[:1].lower() in "aeiou" else "a"
+        return re.sub(r"\b([Aa])n?(\s+)(?=" + re.escape(new_color_en[:1]) + r")(?=" + re.escape(new_color_en.split()[0]) + r")",
+                      lambda m: (art.capitalize() if m.group(1) == "A" else art) + m.group(2), text)
+
+    def walk(node, key=""):
+        if isinstance(node, dict):
+            return {kk: (v if kk in ("color", "name_en", "applies_to", "source_doc") else walk(v, kk)) for kk, v in node.items()}
+        if isinstance(node, list):
+            return [walk(v, key) for v in node]
+        if isinstance(node, str) and (key == "en" or key.endswith("_en")) and not key.startswith("name") and key != "finish_en":
+            return swap(node)
+        return node
+
+    return walk(outfit), True
+
+
 def load_hair_colors() -> Dict[str, Any]:
     return _load(k.CONFIG_DIR / "hair_colors.json")["items"]
 
@@ -280,7 +356,8 @@ def _join(parts: List[str]) -> str:
 def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", time_key: str = "해질녘",
                   moment: str = "파도 발목", framing: str = "전신", expression: str = "환한 미소",
                   hair: str = "", mode: str = "보통", reinforce: Optional[int] = None, seed: int = 0,
-                  common_outfit: bool = False, reference: bool = False, makeup: str = "", hair_color: str = "") -> Dict[str, Any]:
+                  common_outfit: bool = False, reference: bool = False, makeup: str = "", hair_color: str = "",
+                  outfit_text: str = "", outfit_color: str = "") -> Dict[str, Any]:
     """Build the person prompt, the scene prompt and the combined single prompt.
 
     hair: "" keeps the LoRA hair; a preset name or free text replaces it entirely.
@@ -289,6 +366,8 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     hair_color: "" keeps the LoRA's hair color; a name from hair_colors.json or free English color words replaces the color
         word inside the LoRA hair (or fills {color} of a hair preset) and adds one sentence that states only the color,
         which the weighted view can emphasize as its own section.
+    outfit_text: free outfit sentence (English; Korean goes through the translator). Replaces the chosen outfit.
+    outfit_color: a name from outfit_colors.json or free color words; only the chosen outfit's main color words are swapped.
     mode: how much the scene and outfit are described. 보통 (concise) / 상세 (outfit parts, more place detail).
     reference: True when an attached reference photo carries the face and body. The identity sentence, the skin
         sentence and every restatement are left out, because a longer prompt makes the model drift from the photo.
@@ -317,6 +396,16 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     if color_words:
         color = color_words
     outfit = load_outfit(outfit_id) if outfit_id else None
+    custom_outfit = ""
+    outfit_problems: List[str] = []
+    if (outfit_text or "").strip():
+        outfit, custom_outfit = None, to_english(outfit_text).rstrip(".")
+    elif outfit and (outfit_color or "").strip():
+        pick = outfit_color.strip()
+        new_en = load_outfit_colors().get(pick) or to_english(pick)
+        outfit, hit = recolor_outfit(outfit, new_en)
+        if not hit:
+            outfit_problems.append("outfit color words not found: the color was not changed")
     pack = load_pack(location)
     tm, mo = pack["times"][time_key], pack["moments"][moment]
     if framing not in pack["camera"]:
@@ -366,7 +455,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         person.append(makeup_sentence(subj, mk_text))
     cut_identity = len(person)                        # sections: identity | outfit | action | skin (for the weighted view)
 
-    if not outfit and common_outfit:
+    if not outfit and not custom_outfit and common_outfit:
         person.append(common_outfit_sentence(location, framing, subj, poss, detailed, seed))
         for acc in lora.get("signature_accessories", []):
             person.append(sentence(f"{subj.capitalize()} also wears " + (acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")))
@@ -377,6 +466,11 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         person.append(sentence(f"{subj.capitalize()} wears {_join(wear)}"))
         if detailed:
             person.extend(sentence(f(t)) for t in outfit_detail_for(outfit, framing))
+    if custom_outfit:
+        wear = [custom_outfit]
+        for acc in lora.get("signature_accessories", []):
+            wear.append(acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")
+        person.append(sentence(f"{subj.capitalize()} wears {_join(wear)}"))
     cut_outfit = len(person)
     if pack.get("person_extra_en"):
         person.append(sentence(f(pack["person_extra_en"])))
@@ -436,7 +530,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
 
     scene_text = build_scene_text(fs)                          # regional use: "the woman"
     combined = f"{person_text} {build_scene_text(f)}"          # one person, one prompt: "her" keeps the thread
-    problems = lint(combined)
+    problems = lint(combined) + outfit_problems
     if hair and lora.get("hair"):                               # the replaced LoRA hair must be gone entirely
         old = k.clean_text(lora["hair"]).lower()
         if old[:40] in combined.lower() or "knot high on the crown" in combined.lower() and "knot" not in hair.lower():

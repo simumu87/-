@@ -1,0 +1,99 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "yeoreum_cream_satin_slip_black_cropped_cardigan",
+  "scope": "lora_outfit",
+  "character": "여름",
+  "name_ko": "크림 새틴 슬립 원피스 + 검정 크롭 가디건",
+  "name_en": "cream satin slip dress with black cropped cardigan",
+  "desc_ko": "크림 새틴 V넥 슬립 미디 원피스(가는 어깨끈), 검정 크롭 니트 가디건, 검정 첼시 앵클부츠",
+  "category": "dress",
+  "source_doc": "의뢰서 「프롬프트 스튜디오 추가 의뢰서 — 여름 → 한결」(1027) 1) · 의상백과 표(원피스·상의·하의·신발)에서 한결이 짠 조합. 여름 의상표(1009)의 검정 리브 바디콘 미디 원피스 줄만 옮김(속옷 줄은 옮기지 않음, 올리브 코듀로이는 오빠 판정 「절대 입지마」로 제외)",
+  "applies_to": {
+    "locations": [
+      "도시 거리",
+      "카페",
+      "서점",
+      "도서관 열람실",
+      "빈티지 옷가게",
+      "사진 스튜디오",
+      "공원",
+      "벚꽃 길",
+      "은행나무 길",
+      "놀이공원",
+      "야시장",
+      "편의점",
+      "지하철 승강장",
+      "억새밭",
+      "네온 골목",
+      "루프탑 야경"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "크림",
+      "en": "cream"
+    }
+  },
+  "material": {
+    "ko": "새틴과 니트",
+    "en": "satin and knit",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a cream satin V-neck slip dress with thin shoulder straps, worn under a black cropped knit cardigan with the buttons open, with black leather Chelsea ankle boots with elastic side panels",
+  "normal_waist_en": "a cream satin V-neck slip dress with thin shoulder straps, worn under a black cropped knit cardigan with the buttons open",
+  "normal_noshoe_en": "a cream satin V-neck slip dress with thin shoulder straps, worn under a black cropped knit cardigan with the buttons open",
+  "normal_top_en": "a cream satin V-neck slip dress with thin shoulder straps, worn under a black cropped knit cardigan with the buttons open",
+  "detail_prose_en": [
+    "The cream slip dress has a V neckline and thin shoulder straps",
+    {
+      "depth": 2,
+      "en": "The black cropped cardigan ends at the waist with the buttons open"
+    },
+    {
+      "depth": 4,
+      "en": "The slip dress falls in one smooth line to mid-calf"
+    },
+    {
+      "depth": 6,
+      "en": "{P} black leather Chelsea boots have elastic side panels and a low block heel"
+    }
+  ],
+  "echo_en": [
+    "The slip dress is a single cream",
+    "The black cardigan is cropped and worn open"
+  ],
+  "lit_en": "the cream satin of the slip dress",
+  "parts": {
+    "top": {
+      "ko": "크림 슬립 원피스와 검정 크롭 가디건",
+      "en": "a cream satin V-neck slip dress with thin shoulder straps, worn under a black cropped knit cardigan with the buttons open",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "크림 슬립 원피스와 검정 크롭 가디건",
+      "en": "a cream satin V-neck slip dress with thin shoulder straps, worn under a black cropped knit cardigan with the buttons open",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}

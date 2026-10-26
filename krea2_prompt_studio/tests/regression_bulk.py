@@ -319,6 +319,40 @@ def visibility_checks():
     return problems
 
 
+def outfit_custom_checks():
+    """Outfit lists are per LoRA; a typed outfit goes into the prompt as it is; a color pick swaps only the main color words."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    pk = c.load_pack("도시 거리")
+    base = dict(location="도시 거리", time_key=list(pk["times"])[0], moment=list(pk["moments"])[0], framing="무릎 위",
+                expression="은은한 미소", mode="상세", seed=4)
+    if any(o.startswith("hangyeol") for o in c.outfits_for_trigger("yeoreum")):
+        problems.append((9, 1, "a hangyeol outfit is listed for yeoreum"))
+    if not c.outfits_for_trigger("yeoreum"):
+        problems.append((9, 1, "yeoreum has no outfit list"))
+    text = "a lavender knit cardigan and a white pleated skirt"
+    out = c.compose_split("yeoreum", outfit_text=text, **base)
+    if text not in out["person"] or out["problems"]:
+        problems.append((9, 1, f"typed outfit missing or flagged: {out['problems']}"))
+    for oid in c.outfits_for_trigger("yeoreum") + c.outfits_for_trigger("hangyeol"):
+        o = c.load_outfit(oid)
+        old = (o.get("color", {}).get("primary", {}).get("en") or "").split(" and ")[0]
+        for name, en in c.load_outfit_colors().items():
+            r = c.compose_split("yeoreum" if oid.startswith("yeoreum") or oid.startswith("gold") else "hangyeol", oid,
+                                outfit_color=name, **{**base, "location": o["applies_to"]["locations"][0],
+                                                       "time_key": list(c.load_pack(o["applies_to"]["locations"][0])["times"])[0],
+                                                       "moment": [m for m, v in c.load_pack(o["applies_to"]["locations"][0])["moments"].items()
+                                                                  if "무릎 위" in v.get("frames", list(c.load_pack(o["applies_to"]["locations"][0])["camera"]))][0]}) \
+                if "무릎 위" in c.load_pack(o["applies_to"]["locations"][0])["camera"] else None
+            if r is None:
+                continue
+            if r["problems"]:
+                problems.append((9, 1, f"{oid} x {name}: {r['problems']}"))
+            if "{" in r["person"]:
+                problems.append((9, 1, f"{oid} x {name}: unfilled slot"))
+    return problems
+
+
 def hair_color_checks():
     """Every hair preset x every hair color composes cleanly; the color reaches the prompt and its own section; the default color is replaced."""
     problems = []
@@ -478,7 +512,7 @@ def hangyeol_checks():
 
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + hair_color_checks() + gui_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + hair_color_checks() + outfit_custom_checks() + gui_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

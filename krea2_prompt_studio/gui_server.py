@@ -41,6 +41,7 @@ def options() -> dict:
         "expressions": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in exps.items()],
         "hair_presets": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_hair_presets().items()],
         "hair_colors": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_hair_colors().items()],
+        "outfit_colors": [{"key": k, "en": v} for k, v in comp.load_outfit_colors().items()],
         "makeups": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_makeup().items()],
         "modes": list(comp.MODES),
         "weights": {k: v for k, v in wt.DEFAULT_WEIGHTS.items()},
@@ -69,13 +70,15 @@ def compose(body: dict) -> dict:
     seed = int(body.get("seed") or random.randrange(1, 2**32))
     outfit = body.get("outfit", "")
     common = outfit == "__common__"
+    custom = outfit == "__custom__"
     r = comp.compose_split(
-        body["trigger"], "" if outfit in ("", "__none__", "__common__") else outfit,
+        body["trigger"], "" if outfit in ("", "__none__", "__common__", "__custom__") else outfit,
         location=body["location"], time_key=body["time"], moment=body["moment"], framing=body["framing"],
         expression=body["expression"], hair=body.get("hair", ""), mode=body.get("mode", "보통"),
         reinforce=None if body.get("reinforce", "auto") == "auto" else int(body["reinforce"]),
         seed=seed, common_outfit=common, reference=bool(body.get("reference")), makeup=body.get("makeup", ""),
-        hair_color=body.get("hair_color", ""))
+        hair_color=body.get("hair_color", ""),
+        outfit_text=body.get("outfit_text", "") if custom else "", outfit_color="" if (custom or common) else body.get("outfit_color", ""))
     weights = {}
     for key, value in (body.get("weights") or {}).items():
         weights[key] = None if value in ("", None) else float(value)

@@ -73,6 +73,11 @@
       <label for="outfit">의상</label>
       <select id="outfit"></select>
       <div class="hint" id="outfitHint"></div>
+      <textarea id="outfitCustom" rows="3" placeholder="입을 옷을 영어 문장으로 (예: a lavender knit cardigan and a white pleated skirt). 한국어는 일부만 번역돼요" hidden></textarea>
+      <label for="outfitColor">옷 색만 바꾸기</label>
+      <select id="outfitColor"></select>
+      <input type="text" id="outfitColorCustom" placeholder="영어 색 이름으로 직접 입력 (예: pale peach)" hidden>
+      <div class="hint" id="outfitColorHint">고른 옷의 문장 안에서 주된 색 단어만 바뀝니다. 「공용의상」·「직접 입력」에는 적용되지 않아요.</div>
       <label for="hair">헤어</label>
       <select id="hair"></select>
       <input type="text" id="hairCustom" placeholder="영어 문장으로 직접 입력" hidden>
@@ -180,6 +185,8 @@ async function init() {
   fill($("hair"), hair, h => [h[0], h[1], h[2]]);
   const hc = [["", "LoRA 기본 색 유지"], ...OPT.hair_colors.map(h => [h.key, h.key, h.desc]), ["__custom__", "직접 입력"]];
   fill($("hairColor"), hc, h => [h[0], h[1], h[2]]);
+  const oc = [["", "옷 색 그대로"], ...OPT.outfit_colors.map(c => [c.key, c.key + " (" + c.en + ")"]), ["__custom__", "직접 입력"]];
+  fill($("outfitColor"), oc, c => [c[0], c[1]]);
   const mk = [["", "LoRA 기본 화장 유지"], ...OPT.makeups.map(m => [m.key, m.key, m.desc]), ["__custom__", "직접 입력"]];
   fill($("makeup"), mk, m => [m[0], m[1], m[2]]);
   const wbox = $("weights");
@@ -196,12 +203,12 @@ async function init() {
 async function loadPlace() {
   const q = `trigger=${encodeURIComponent($("trigger").value)}&location=${encodeURIComponent($("location").value)}`;
   PLACE = await getJSON("/api/place?" + q);
-  const outs = [...PLACE.outfits.map(o => [o.id, o.name, o.desc]), ["__common__", "공용의상 (자동)", "본체 공용 의상 풀에서 장소·프레임에 맞게 고름"], ["__none__", "의상 없음", "의상 문장을 넣지 않음"]];
+  const outs = [...PLACE.outfits.map(o => [o.id, o.name, o.desc]), ["__common__", "공용의상 (자동)", "본체 공용 의상 풀에서 장소·프레임에 맞게 고름"], ["__custom__", "직접 입력", "아래 칸에 입은 옷을 문장으로 적음"], ["__none__", "의상 없음", "의상 문장을 넣지 않음"]];
   fill($("outfit"), outs, o => [o[0], o[1], o[2]]);
   fill($("time"), PLACE.times, t => [t.key, t.key, t.desc]);
   fill($("framing"), PLACE.framings, f => [f, f]);
   refreshMoments();
-  hint("outfit", "outfitHint");
+  syncOutfit();
 }
 
 function refreshMoments() {
@@ -215,7 +222,15 @@ function refreshMoments() {
 $("trigger").onchange = loadPlace;
 $("location").onchange = loadPlace;
 $("framing").onchange = refreshMoments;
-$("outfit").onchange = () => hint("outfit", "outfitHint");
+function syncOutfit() {
+  const v = $("outfit").value;
+  $("outfitCustom").hidden = v !== "__custom__";
+  const noColor = v === "__custom__" || v === "__common__" || v === "__none__";
+  $("outfitColor").disabled = noColor; $("outfitColorCustom").disabled = noColor;
+  hint("outfit", "outfitHint");
+}
+$("outfit").onchange = syncOutfit;
+$("outfitColor").onchange = () => { $("outfitColorCustom").hidden = $("outfitColor").value !== "__custom__"; };
 $("moment").onchange = () => hint("moment", "momentHint");
 $("expression").onchange = () => hint("expression", "expressionHint");
 $("hair").onchange = () => { $("hairCustom").hidden = $("hair").value !== "__custom__"; };
@@ -232,7 +247,7 @@ async function go() {
   const body = {
     trigger: $("trigger").value, outfit: $("outfit").value, location: $("location").value, time: $("time").value,
     framing: $("framing").value, moment: $("moment").value, expression: $("expression").value,
-    hair: pick("hair", "hairCustom"), hair_color: pick("hairColor", "hairColorCustom"), makeup: pick("makeup", "makeupCustom"), mode: $("mode").value,
+    hair: pick("hair", "hairCustom"), hair_color: pick("hairColor", "hairColorCustom"), outfit_text: $("outfitCustom").value.trim(), outfit_color: pick("outfitColor", "outfitColorCustom"), makeup: pick("makeup", "makeupCustom"), mode: $("mode").value,
     reinforce: $("reinforce").value, seed: $("seed").value, reference: $("reference").checked,
     weights, lighting_tag: $("lightingTag").checked, lighting_weight: $("lightingWeight").value,
     short_skin: $("shortSkin").checked, extra_camera: $("extraCamera").value,

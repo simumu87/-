@@ -1,0 +1,30 @@
+{
+  "schema": "krea2-outfit-colors/1",
+  "note_ko": "옷 색만 바꾸기용 색 목록(영어 색 이름). 고르면 그 옷 문장 안의 주된 색 단어만 이 색으로 바뀐다. 색 코드는 Krea가 모르므로 색 이름으로만 쓴다.",
+  "items": {
+    "검정": "black",
+    "흰색": "white",
+    "크림": "cream",
+    "아이보리": "ivory",
+    "베이지": "beige",
+    "연회색": "light gray",
+    "차콜": "charcoal gray",
+    "연핑크": "pale pink",
+    "더스티 로즈": "dusty rose",
+    "코랄": "coral pink",
+    "빨강": "red",
+    "와인": "wine red",
+    "버건디": "deep burgundy",
+    "노랑": "pale yellow",
+    "머스터드": "mustard yellow",
+    "민트": "mint green",
+    "세이지 그린": "sage green",
+    "하늘색": "sky blue",
+    "코발트 블루": "cobalt blue",
+    "네이비": "navy blue",
+    "라벤더": "lavender",
+    "연보라": "lilac",
+    "카멜": "camel brown",
+    "초콜릿 브라운": "chocolate brown"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "yeoreum_wine_satin_cami_black_jeans",
+  "scope": "lora_outfit",
+  "character": "여름",
+  "name_ko": "와인색 새틴 캐미 + 검정 스트레이트 청바지",
+  "name_en": "wine-red satin camisole with black straight jeans",
+  "desc_ko": "와인색 새틴 캐미솔(가는 어깨끈), 검정 하이웨이스트 스트레이트 청바지, 검정 스트랩 힐 샌들",
+  "category": "casual",
+  "source_doc": "의뢰서 「프롬프트 스튜디오 추가 의뢰서 — 여름 → 한결」(1027) 1) · 의상백과 표(원피스·상의·하의·신발)에서 한결이 짠 조합. 여름 의상표(1009)의 검정 리브 바디콘 미디 원피스 줄만 옮김(속옷 줄은 옮기지 않음, 올리브 코듀로이는 오빠 판정 「절대 입지마」로 제외)",
+  "applies_to": {
+    "locations": [
+      "네온 골목",
+      "루프탑 야경",
+      "야시장",
+      "도시 거리",
+      "지하철 승강장",
+      "카페",
+      "편의점",
+      "사진 스튜디오",
+      "빈티지 옷가게"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "와인",
+      "en": "wine red"
+    }
+  },
+  "material": {
+    "ko": "새틴과 데님",
+    "en": "satin and denim",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a wine-red satin camisole with thin shoulder straps and a straight neckline, black high-waisted straight-leg jeans and black strappy heeled sandals",
+  "normal_waist_en": "a wine-red satin camisole with thin shoulder straps and a straight neckline and black high-waisted straight-leg jeans",
+  "normal_noshoe_en": "a wine-red satin camisole with thin shoulder straps and a straight neckline and black high-waisted straight-leg jeans",
+  "normal_top_en": "a wine-red satin camisole with thin shoulder straps and a straight neckline",
+  "detail_prose_en": [
+    "The wine-red camisole has thin shoulder straps and a straight neckline",
+    {
+      "depth": 2,
+      "en": "The black jeans sit high on the waist and are straight in the leg"
+    },
+    {
+      "depth": 5,
+      "en": "{P} black heeled sandals have thin straps across the toes and around the ankles"
+    }
+  ],
+  "echo_en": [
+    "The camisole is a deep wine red",
+    "The black jeans sit high on the waist"
+  ],
+  "lit_en": "the wine-red satin of the camisole",
+  "parts": {
+    "top": {
+      "ko": "와인색 새틴 캐미솔",
+      "en": "a wine-red satin camisole with thin shoulder straps and a straight neckline",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "검정 스트레이트 청바지",
+      "en": "black high-waisted straight-leg jeans",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}
