@@ -11,7 +11,9 @@
   "applies_to": {
     "locations": [
       "침실",
-      "아파트 거실"
+      "아파트 거실",
+      "기본 욕실",
+      "호화 욕실"
     ],
     "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
   },

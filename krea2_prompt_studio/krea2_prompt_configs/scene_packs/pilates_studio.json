@@ -1,0 +1,129 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "필라테스 스튜디오",
+ "outdoor": false,
+ "note_ko": "구체적인 장소 팩(오빠 1026: 분위기·재질을 구체적으로 적어야 공간이 달라진다). 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a bright pilates studio with a light wood floor, a full-length mirror wall and white reformer machines",
+ "feature_en": [
+  "a full-length mirror wall along one side of the room",
+  "two white reformer machines with pale gray leather pads"
+ ],
+ "ground_en": [
+  "a light maple wide-plank floor",
+  "a rolled pale gray exercise mat on the floor"
+ ],
+ "far_en": [
+  "a tall window with white linen curtains",
+  "a wooden rack holding balls and foam rollers in soft colors"
+ ],
+ "times": {
+  "아침": {
+   "time_en": "a bright morning",
+   "time_prep": "on",
+   "sky_en": "soft daylight through the tall window",
+   "light_en": "soft daylight comes through the tall window on the camera's left of {o}, falling across {p} face and shoulders, with the mirror wall giving a second soft light",
+   "shadow_en": "soft shadows of the machines lie across the floor toward the camera's right",
+   "desc_ko": "밝은 아침, 카메라 왼쪽 큰 창의 부드러운 자연광"
+  },
+  "해질녘": {
+   "time_en": "the last orange hour of the afternoon",
+   "time_prep": "in",
+   "sky_en": "warm orange light entering through the tall window",
+   "light_en": "orange evening light comes through the tall window on the camera's right of {o}, falling across {p} cheek and shoulder",
+   "shadow_en": "long soft shadows of the machines lie across the wooden floor toward the camera's left",
+   "desc_ko": "해질녘, 카메라 오른쪽 큰 창에서 들어오는 주황빛"
+  },
+  "밤": {
+   "time_en": "the evening",
+   "time_prep": "in",
+   "sky_en": "warm recessed ceiling lights under a dark window",
+   "light_en": "warm white light from recessed ceiling lights falls from above and slightly in front of {o}, lighting {p} hair and shoulders",
+   "shadow_en": "soft shadows gather under the machines behind {o}",
+   "desc_ko": "저녁 수업, 머리 위 앞쪽 매입등의 따뜻한 흰 조명"
+  }
+ },
+ "moments": {
+  "거울 앞에서 스트레칭": {
+   "pose_en": "stands in front of the mirror wall with one arm raised overhead in a gentle stretch",
+   "moment_en": "{s} looks toward the camera with a calm smile",
+   "desc_ko": "거울 앞에서 한 팔을 머리 위로 뻗어 스트레칭하며 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "매트에 앉기": {
+   "pose_en": "sits on a gray mat with {p} legs folded to one side and both hands resting on the floor",
+   "moment_en": "{s} looks toward the camera with a gentle smile",
+   "desc_ko": "회색 매트에 다리를 한쪽으로 모으고 앉아 카메라를 봄",
+   "frames": [
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "리포머에 걸터앉기": {
+   "pose_en": "sits on the edge of a white reformer with {p} hands holding its frame",
+   "moment_en": "{s} turns {p} head toward the camera with a bright smile",
+   "desc_ko": "흰 리포머 가장자리에 걸터앉아 프레임을 잡고 카메라 쪽으로 고개를 돌림",
+   "frames": [
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "수건으로 땀 닦기": {
+   "pose_en": "holds a small white towel against {p} neck with one hand",
+   "moment_en": "{s} looks toward the camera with a tired smile",
+   "desc_ko": "작은 흰 수건을 목에 대고 카메라를 보며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "천천히 걷기": {
+   "pose_en": "walks slowly across the wooden floor with one foot stepping forward",
+   "moment_en": "{s} looks toward the camera with a soft smile",
+   "desc_ko": "나무 바닥을 천천히 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the mirror wall softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the mirror wall softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the mirror wall softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the mirror wall softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the mirror wall softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the mirror wall softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the mirror wall softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the light maple floor",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "아침": [
+   "the walls are plain white with a soft pale gray baseboard",
+   "the reformer frames are white painted steel",
+   "the linen curtains are white and softly gathered"
+  ],
+  "해질녘": [
+   "the walls are plain white with a soft pale gray baseboard",
+   "the reformer frames are white painted steel",
+   "the mirror wall doubles the room and the orange stripes on the floor"
+  ],
+  "밤": [
+   "the walls are plain white with a soft pale gray baseboard",
+   "the reformer frames are white painted steel",
+   "the window is a dark pane reflecting the lights of the room"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the mirror wall and the machines spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

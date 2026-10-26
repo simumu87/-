@@ -1,0 +1,120 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "기본 욕실",
+ "outdoor": false,
+ "note_ko": "구체적인 장소 팩(오빠 1026: 분위기·재질을 구체적으로 적어야 공간이 달라진다). 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a small ordinary bathroom with white square wall tiles, a plain white ceramic sink and a rectangular mirror above it",
+ "feature_en": [
+  "a white ceramic pedestal sink with a chrome tap",
+  "a plain rectangular mirror with a thin silver frame above the sink"
+ ],
+ "ground_en": [
+  "a small gray tile floor with white grout lines",
+  "a cotton bath mat in pale blue beside the sink"
+ ],
+ "far_en": [
+  "a white shower curtain hanging from a chrome rail",
+  "a small wall shelf holding a toothbrush cup and folded white towels"
+ ],
+ "times": {
+  "아침": {
+   "time_en": "a quiet morning",
+   "time_prep": "on",
+   "sky_en": "soft daylight through a frosted window",
+   "light_en": "soft daylight comes through the frosted window on the camera's left of {o}, falling across {p} face and shoulders",
+   "shadow_en": "soft shadows gather beside the sink toward the camera's right",
+   "desc_ko": "조용한 아침, 카메라 왼쪽 불투명 창의 부드러운 자연광"
+  },
+  "저녁": {
+   "time_en": "the evening",
+   "time_prep": "in",
+   "sky_en": "even white light from a round ceiling lamp",
+   "light_en": "white light from a round ceiling lamp hangs above {o}, and a bar light over the mirror stands in front of {o}, falling on {p} face",
+   "shadow_en": "short soft shadows lie under {o} on the tile floor behind",
+   "desc_ko": "저녁, 머리 위 둥근 천장등과 앞쪽 거울 위 조명"
+  },
+  "밤": {
+   "time_en": "late at night",
+   "time_prep": "at",
+   "sky_en": "a single warm lamp over the mirror",
+   "light_en": "warm yellow light from a small lamp over the mirror stands in front of {o}, falling on {p} face and shoulders",
+   "shadow_en": "deep shadows gather in the corners of the room behind {o}",
+   "desc_ko": "한밤, 거울 위 작은 램프의 따뜻한 노란빛"
+  }
+ },
+ "moments": {
+  "거울 보며 머리 만지기": {
+   "pose_en": "stands in front of the mirror with one hand smoothing {p} hair beside {p} ear",
+   "moment_en": "{s} looks toward the camera with a relaxed smile",
+   "desc_ko": "거울 앞에서 한 손으로 머리를 쓸어 정리하며 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "세면대에 두 손 얹기": {
+   "pose_en": "stands at the sink with both hands resting on its edge",
+   "moment_en": "{s} looks up toward the camera with a soft smile",
+   "desc_ko": "세면대 가장자리에 두 손을 얹고 카메라를 올려다봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "세면대에 기대 서기": {
+   "pose_en": "leans one hip against the sink with {p} arms loosely crossed",
+   "moment_en": "{s} looks toward the camera with a calm smile",
+   "desc_ko": "세면대에 기대 팔짱을 끼고 카메라를 봄",
+   "frames": [
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "수건에 얼굴 묻기": {
+   "pose_en": "holds a folded white towel against {p} cheek with one hand",
+   "moment_en": "{s} peeks over the towel toward the camera with a smile",
+   "desc_ko": "접은 흰 수건을 볼에 대고 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  }
+ },
+ "camera": {
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the tiles softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the tiles softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the tiles softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the tiles softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the tiles softly out of focus"
+ },
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "아침": [
+   "the wall tiles are glossy white squares with thin gray grout",
+   "the chrome tap and the towel bar are plain polished metal",
+   "the frosted window is a small square pane above the shower curtain"
+  ],
+  "저녁": [
+   "the wall tiles are glossy white squares with thin gray grout",
+   "the chrome tap and the towel bar are plain polished metal",
+   "the bar light over the mirror is a plain white strip"
+  ],
+  "밤": [
+   "the wall tiles are glossy white squares with thin gray grout",
+   "the chrome tap and the towel bar are plain polished metal",
+   "the shower curtain is white with faint gray stripes"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the sink and the mirror behind {o}",
+ "more_prefix_en": "Beyond that"
+}

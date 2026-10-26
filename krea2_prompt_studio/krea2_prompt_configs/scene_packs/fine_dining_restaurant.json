@@ -1,0 +1,136 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "고급 레스토랑",
+ "outdoor": false,
+ "note_ko": "구체적인 장소 팩(오빠 1026: 분위기·재질을 구체적으로 적어야 공간이 달라진다). 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "an upscale restaurant dining room with white tablecloths, candles and tall windows over the city",
+ "feature_en": [
+  "round tables set with white tablecloths, folded napkins and slim candles",
+  "tall windows with a view over the city lights"
+ ],
+ "ground_en": [
+  "a dark polished wooden floor",
+  "a long runner of deep red carpet between the tables"
+ ],
+ "far_en": [
+  "a service counter with rows of wine glasses",
+  "a large painting in a gold frame on the far wall"
+ ],
+ "times": {
+  "낮": {
+   "time_en": "a quiet lunch hour",
+   "time_prep": "at",
+   "sky_en": "soft daylight through the tall windows",
+   "light_en": "daylight comes through the tall window on the camera's left of {o}, falling across {p} face and shoulders and the white linen",
+   "shadow_en": "soft shadows of the chairs lie on the floor toward the camera's right",
+   "desc_ko": "조용한 점심 시간, 카메라 왼쪽 큰 창의 자연광"
+  },
+  "해질녘": {
+   "time_en": "the last orange hour of the afternoon",
+   "time_prep": "in",
+   "sky_en": "warm orange light entering through the tall windows",
+   "light_en": "orange evening light comes through the tall window on the camera's right of {o}, falling across {p} cheek and shoulder, with candlelight on the table in front",
+   "shadow_en": "long soft shadows of the chairs lie across the floor toward the camera's left",
+   "desc_ko": "해질녘, 카메라 오른쪽 큰 창의 주황빛과 테이블 촛불"
+  },
+  "밤": {
+   "time_en": "a dinner evening",
+   "time_prep": "at",
+   "sky_en": "warm candlelight under dark windows",
+   "light_en": "warm yellow candlelight from the table stands in front of {o} and below, and a small brass wall lamp stands to the camera's left",
+   "shadow_en": "deep shadows gather between the tables behind {o}",
+   "desc_ko": "저녁 식사 시간, 앞쪽 아래 테이블 촛불과 카메라 왼쪽 황동 벽등"
+  }
+ },
+ "moments": {
+  "테이블에 앉아 와인잔 들기": {
+   "pose_en": "sits at a round table holding a wine glass with one hand near {p} shoulder",
+   "moment_en": "{s} looks toward the camera over the glass with a soft smile",
+   "desc_ko": "둥근 테이블에 앉아 와인잔을 한 손으로 들고 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "촛불 보며 턱 괴기": {
+   "pose_en": "sits at the table with one elbow on the white linen and {p} chin resting on {p} hand beside a candle",
+   "moment_en": "{s} looks toward the camera with a quiet smile",
+   "desc_ko": "테이블에서 촛불 옆에 턱을 괴고 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ],
+   "wrist_straight": true
+  },
+  "창가 서기": {
+   "pose_en": "stands beside the tall window with one hand resting on the heavy curtain",
+   "moment_en": "{s} turns {p} head toward the camera with a gentle smile",
+   "desc_ko": "큰 창 옆에서 한 손을 두꺼운 커튼에 얹고 카메라 쪽으로 고개를 돌림",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "냅킨 접으며 웃기": {
+   "pose_en": "sits at the table folding a white napkin with both hands",
+   "moment_en": "{s} looks up toward the camera with a bright smile",
+   "desc_ko": "테이블에서 흰 냅킨을 두 손으로 접다가 카메라를 올려다보며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "천천히 걷기": {
+   "pose_en": "walks slowly along the red carpet between the tables with one foot stepping forward",
+   "moment_en": "{s} looks toward the camera with a soft smile",
+   "desc_ko": "테이블 사이 붉은 카펫을 천천히 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the dining room softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the dining room softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the dining room softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the dining room softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the dining room softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the dining room softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the dining room softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the dark polished wooden floor",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮": [
+   "the tablecloths are heavy white linen with a crisp fold along the edge",
+   "the candles are slim cream tapers in small silver holders",
+   "the glasses on the tables are clear crystal with thin stems"
+  ],
+  "해질녘": [
+   "the tablecloths are heavy white linen with a crisp fold along the edge",
+   "the candles are slim cream tapers in small silver holders",
+   "the city beyond the windows is a field of orange-lit rooftops"
+  ],
+  "밤": [
+   "the tablecloths are heavy white linen with a crisp fold along the edge",
+   "the candles are slim cream tapers in small silver holders",
+   "the windows are dark panes with the lights of the city far below"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the tables and the tall windows spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}
