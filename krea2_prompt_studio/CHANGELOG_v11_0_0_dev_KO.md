@@ -145,3 +145,9 @@
 - 옷 연결: 한결·여름 옷 34벌의 `applies_to.locations`에 새 장소를 장소 성격에 맞게 더함(호텔·레스토랑·와인 바에는 원피스류, 욕실에는 파자마·티셔츠류, 펜트하우스 풀에는 수영복과 밤 원피스, 필라테스에는 운동복 등).
 - 운동복 4벌 추가: 한결 회색 리브 탱크+검정 레깅스 · 네이비 긴소매 핏 탑+회색 레깅스, 여름 검정 핏 탑+검정 레깅스 · 와인색 탱크+검정 레깅스(그립 양말). 한결 옷 28벌 · 여름 옷 13벌.
 - 검수: validate_packs 37개 ok · validate_outfits 41 files 0 problems · scene_consistency 800 scenes 0 contradictions · regression_bulk 60 120 prompts 0 problems · 새 장소 × 연결 옷 × 시간대 × 순간 × 프레이밍 × 보통/상세 21420조합 점검 알림 0건.
+
+## 이름 변경 · 시계 원문 · 얼굴 순간 확대 (2026-10-26)
+- 장소 이름 `인피니티 풀` → `리조트 인피니티 풀`(오빠 1026). 장소 팩 `location_ko`와 이 장소를 쓰는 옷 3벌(`ink_navy_two_piece` · `lilac_one_piece_swimsuit` · `gold_amber_triangle_string_bikini`)의 `applies_to.locations`, 한결 목록 설명, README를 같이 바꿈.
+- 시계(orvael) 문장을 로라4 캡션 원문으로 교체: `Her orvael set, a cobalt-navy watch with thin thread bracelets, sits on her image-right wrist at her hip.` 손목이 보이는 프레이밍(허벅지 위·무릎 위·3/4 전신·전신)에서만 넣고, 허리 위·가슴 위·클로즈업에서는 문장 자체를 안 넣는다. 손을 얼굴·머리 쪽으로 올린 포즈와 같이 켜면 점검 알림(`the watch sentence puts the wrist at the hip …`). `status: confirmed`.
+- 얼굴 컷용 순간 확대: 37곳 모두에 순간 2개씩(74개) 추가 — 고개 기울여 웃기 · 머리 쓸어 넘기며 웃기 · 눈 감고 미소 짓기 · 입가 가리고 웃기 중 장소마다 두 가지(장소 위치 문장 포함, 앉는 장소는 무릎 위까지만). 이제 클로즈업·가슴 위에서 고를 수 있는 순간이 장소마다 3~6개. 손이 얼굴에 닿는 순간은 손목 곧게 문장이 자동.
+- 검수: validate_packs 37 ok · validate_outfits 41 files 0 problems · scene_consistency 0 contradictions · regression_bulk 60 120 prompts 0 problems · 한결·여름 옷 × 연결 장소 × 시간대 × 순간 × 프레이밍 × 보통/상세 54072조합 점검 알림 0건.

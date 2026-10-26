@@ -370,8 +370,16 @@ def accessory_pose_checks():
     if "orvael" not in t:
         problems.append((9, 1, "watch on in full-body did not appear"))
     t, _, _ = n(accessories={"watch": True}, framing="무릎 위")
-    if "orvael" in t:
-        problems.append((9, 1, "watch appeared in a framing that hides the wrist"))
+    if "Her orvael set, a cobalt-navy watch with thin thread bracelets, sits on her image-right wrist at her hip." not in t:
+        problems.append((9, 1, "watch sentence is not the caption original in a framing that shows the wrist"))
+    for hidden in ("허리 위", "가슴 위", "클로즈업"):
+        if hidden in c.load_pack("도시 거리")["camera"]:
+            t, _, _ = n(accessories={"watch": True}, framing=hidden, moment=[m for m, v in pk["moments"].items() if hidden in v["frames"]][0])
+            if "orvael" in t:
+                problems.append((9, 1, f"watch appeared in {hidden}, which hides the wrist"))
+    r = c.compose_split("yeoreum", oid, accessories={"watch": True}, **{**base, "moment": "머리카락 귀 뒤로 넘기며 웃기"})
+    if not any("raises a hand" in x for x in r["problems"]):
+        problems.append((9, 1, "watch + hand-to-hair pose not flagged")) 
     r = c.compose_split("yeoreum", outfit_text="a white blouse with a gold necklace", **base)
     if not any("two necklaces" in x for x in r["problems"]):
         problems.append((9, 1, "duplicate necklace not flagged"))

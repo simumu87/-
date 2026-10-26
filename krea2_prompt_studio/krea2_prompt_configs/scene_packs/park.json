@@ -83,6 +83,31 @@
     "허벅지 위",
     "무릎 위"
    ]
+  },
+  "고개 기울여 웃기": {
+   "pose_en": "stands on the gravel path under the trees with {p} head tilted slightly to one side",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "나무 아래 자갈길에서 고개를 살짝 기울이고 카메라를 보며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "머리 쓸어 넘기며 웃기": {
+   "pose_en": "stands on the gravel path under the trees with one hand sweeping a strand of hair away from {p} face",
+   "moment_en": "{s} laughs softly toward the camera",
+   "desc_ko": "나무 아래 자갈길에서 한 손으로 머리카락을 얼굴에서 쓸어 넘기며 카메라를 보고 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ],
+   "wrist_straight": true
   }
  },
  "camera": {

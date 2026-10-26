@@ -263,7 +263,7 @@ function buildAcc() {
   $("accEngravingLabel").textContent = cfg.engraving.label_ko + " (켈핀 목걸이가 켜져 있을 때만, 괄호 가중치 " + cfg.engraving.weight + ")";
   fill($("accEngraving"), Object.keys(cfg.engraving.choices), k => [k, k]);
   $("accEngraving").value = cfg.engraving.default;
-  $("accWatchLabel").textContent = cfg.watch.label_ko + " — 전신에서만" + (cfg.watch.status === "draft" ? " (★임시 문장, 원문 대기)" : "");
+  $("accWatchLabel").textContent = cfg.watch.label_ko + " — 손목이 골반 높이로 보이는 프레이밍(" + cfg.watch.frames.join("·") + ")에서만" + (cfg.watch.status === "draft" ? " (★임시 문장, 원문 대기)" : "");
   $("accWatch").checked = cfg.watch.default;
   syncAcc();
 }
@@ -273,7 +273,7 @@ function syncAcc() {
   const ok = cfg.watch.frames.includes($("framing").value);
   $("accWatch").disabled = !ok; if (!ok) $("accWatch").checked = false;
   $("accEngraving").disabled = !$("accNecklace").checked;
-  $("accHint").textContent = ok ? "" : "시계는 손목이 보이는 「전신」 프레이밍에서만 켤 수 있어요.";
+  $("accHint").textContent = ok ? "시계 문장은 손이 몸 옆(골반 높이)에 내려온 포즈일 때 쓰는 문장이에요. 손을 얼굴 쪽으로 올린 포즈와 같이 켜면 점검 알림이 떠요." : "시계는 손목이 보이는 프레이밍(" + cfg.watch.frames.join("·") + ")에서만 켤 수 있어요.";
 }
 $("accNecklace").onchange = syncAcc;
 $("expression").onchange = () => hint("expression", "expressionHint");

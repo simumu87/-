@@ -88,6 +88,36 @@
     "3/4 전신",
     "전신"
    ]
+  },
+  "머리 쓸어 넘기며 웃기": {
+   "pose_en": "stands on the stone path among the autumn leaves with one hand sweeping a strand of hair away from {p} face",
+   "moment_en": "{s} laughs softly toward the camera",
+   "desc_ko": "단풍 든 돌길에서 한 손으로 머리카락을 얼굴에서 쓸어 넘기며 카메라를 보고 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
+  },
+  "입가 가리고 웃기": {
+   "pose_en": "stands on the stone path among the autumn leaves with the back of one hand held lightly against {p} mouth",
+   "moment_en": "{s} laughs with {p} eyes crinkled toward the camera",
+   "desc_ko": "단풍 든 돌길에서 손등으로 입가를 가볍게 가리고 눈웃음으로 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
   }
  },
  "camera": {

@@ -1,6 +1,6 @@
 {
  "schema": "krea2-scene-pack/2",
- "location_ko": "인피니티 풀",
+ "location_ko": "리조트 인피니티 풀",
  "outdoor": true,
  "note_ko": "절벽 위 리조트 인피니티 풀. 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. 한결 수영복 레퍼런스용. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
  "setting_en": "a long infinity pool on a cliff terrace above the coast",
@@ -83,6 +83,34 @@
    "pose_en": "stands at the pool edge with one hand sweeping {p} hair back from {p} forehead",
    "moment_en": "{s} looks toward the camera with a relaxed smile",
    "desc_ko": "풀 가장자리에서 한 손으로 머리를 이마 뒤로 쓸어 올리며 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "고개 기울여 웃기": {
+   "pose_en": "stands at the pool edge with {p} head tilted slightly to one side",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "풀 가장자리에서 고개를 살짝 기울이고 카메라를 보며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "눈 감고 미소 짓기": {
+   "pose_en": "stands at the pool edge with {p} eyes closed and {p} face turned slightly upward",
+   "moment_en": "{s} smiles faintly with {p} lips closed",
+   "desc_ko": "풀 가장자리에서 눈을 감고 얼굴을 살짝 들어 입을 다문 채 미소",
    "frames": [
     "클로즈업",
     "가슴 위",

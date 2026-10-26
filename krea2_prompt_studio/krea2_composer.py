@@ -590,6 +590,10 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
 
     scene_text = build_scene_text(fs)                          # regional use: "the woman"
     combined = f"{person_text} {build_scene_text(f)}"          # one person, one prompt: "her" keeps the thread
+    if accessories and accessories.get("watch") and any(re.search(r"orvael", t) for t in acc_extra):
+        pose_blob = custom_pose or (mo.get("pose_en", "") + " " + mo.get("moment_en", ""))
+        if re.search(r"\b(?:hand|hands)\b[^.]*\b(?:chin|cheeks?|ears?|hair|face|mouth|forehead|head|lips)\b|\b(?:chin|cheeks?|ears?|hair|face|mouth|forehead|head|lips)\b[^.]*\b(?:hand|hands)\b", pose_blob, re.I):
+            pose_problems.append("the watch sentence puts the wrist at the hip but this pose raises a hand toward the face or hair")
     problems = lint(combined) + outfit_problems + pose_problems
     neck_sig = [a for a in sigs if re.search(r"\b(necklace|pendant|choker|neckband)\b", a, re.I)]
     if neck_sig:       # a necklace in the outfit text plus the signature necklace draws two necklaces

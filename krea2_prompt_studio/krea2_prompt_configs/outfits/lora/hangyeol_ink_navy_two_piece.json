@@ -11,7 +11,7 @@
   "applies_to": {
     "locations": [
       "해변",
-      "인피니티 풀",
+      "리조트 인피니티 풀",
       "펜트하우스 인피니티 풀"
     ],
     "note_ko": "프레임이 허리 위·가슴 위면 보이는 부분만 적는다(normal_waist_en / normal_top_en, 상세 문장은 depth 칸)."

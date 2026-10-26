@@ -98,6 +98,35 @@
    "frames": [
     "전신"
    ]
+  },
+  "눈 감고 미소 짓기": {
+   "pose_en": "stands on the riverside promenade with {p} eyes closed and {p} face turned slightly upward",
+   "moment_en": "{s} smiles faintly with {p} lips closed",
+   "desc_ko": "강변 산책로에서 눈을 감고 얼굴을 살짝 들어 입을 다문 채 미소",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "입가 가리고 웃기": {
+   "pose_en": "stands on the riverside promenade with the back of one hand held lightly against {p} mouth",
+   "moment_en": "{s} laughs with {p} eyes crinkled toward the camera",
+   "desc_ko": "강변 산책로에서 손등으로 입가를 가볍게 가리고 눈웃음으로 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
   }
  },
  "camera": {
