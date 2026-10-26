@@ -32,32 +32,74 @@
    "light_en": "daylight comes from a tall window to the camera's right of {o}, falling across {p} cheek and shoulder",
    "shadow_en": "soft shadows fall on the backdrop behind {o}, toward the left",
    "desc_ko": "밝은 아침 촬영, 카메라 오른쪽 큰 창의 자연광"
+  },
+  "해질녘 창가": {
+   "time_en": "a golden-hour session",
+   "time_prep": "in",
+   "sky_en": "low orange light from a tall studio window",
+   "light_en": "orange evening light comes through a tall window to the camera's right of {o}, falling across {p} cheek and shoulder",
+   "shadow_en": "soft shadows fall on the backdrop behind {o}, toward the left",
+   "desc_ko": "해질녘 촬영, 카메라 오른쪽 큰 창의 낮은 주황빛"
   }
  },
  "moments": {
   "배경지 앞 정자세": {
    "pose_en": "stands in front of the backdrop with {p} arms relaxed at {p} sides",
    "moment_en": "{s} looks toward the camera with a soft smile",
-   "desc_ko": "배경지 앞에 팔을 내리고 서서 카메라를 봄"
+   "desc_ko": "배경지 앞에 팔을 내리고 서서 카메라를 봄",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
   },
   "바닥에 앉기": {
    "pose_en": "sits on the floor on the beige paper with {p} legs folded to one side and one hand resting on the floor",
    "moment_en": "{s} looks toward the camera with a gentle smile",
    "desc_ko": "배경지 위에 다리를 한쪽으로 모으고 앉아 카메라를 봄",
    "frames": [
-    "전신"
+    "전신",
+    "3/4 전신"
    ]
   },
   "머리카락 만지기": {
    "pose_en": "stands in front of the backdrop with one hand lifting a lock of hair",
    "moment_en": "{s} tilts {p} head and looks toward the camera with a playful smile",
-   "desc_ko": "한 손으로 머리카락을 들고 고개를 기울여 카메라를 보며 웃음"
+   "desc_ko": "한 손으로 머리카락을 들고 고개를 기울여 카메라를 보며 웃음",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
+  },
+  "스툴에 앉아 턱 괴기": {
+   "pose_en": "sits on a wooden stool with one elbow on {p} knee and {p} chin resting on {p} hand",
+   "moment_en": "{s} looks toward the camera with a calm smile",
+   "desc_ko": "나무 스툴에 앉아 무릎에 팔꿈치를 대고 턱을 괴며 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
   }
  },
  "camera": {
   "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the backdrop softly out of focus",
   "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the backdrop softly out of focus",
-  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the backdrop softly out of focus"
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the backdrop softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the backdrop softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the backdrop softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the backdrop softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the backdrop softly out of focus"
  },
  "ground_contact_en": "{P} feet rest on the beige paper over the concrete floor",
  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
@@ -68,6 +110,11 @@
    "the floor is smooth gray concrete"
   ],
   "창가 자연광": [
+   "the backdrop is warm beige seamless paper",
+   "the window has thin black steel frames",
+   "the floor is smooth gray concrete"
+  ],
+  "해질녘 창가": [
    "the backdrop is warm beige seamless paper",
    "the window has thin black steel frames",
    "the floor is smooth gray concrete"

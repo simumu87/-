@@ -319,6 +319,30 @@ def visibility_checks():
     return problems
 
 
+def frame_visibility_checks():
+    """New frames (클로즈업·가슴 위·허리 위·허벅지 위) never write feet, shoes or ankles, for every LoRA outfit in every place it is listed."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    feet = re.compile(r"\b(feet|foot|ankles?|barefoot|toes|shoes|sneakers|loafers|boots|sandals|heels|socks|slingbacks)\b", re.I)
+    for trig in ("hangyeol", "yeoreum"):
+        for oid in c.outfits_for_trigger(trig):
+            o = c.load_outfit(oid)
+            for loc in o["applies_to"]["locations"]:
+                pk = c.load_pack(loc)
+                for fr in ("클로즈업", "가슴 위", "허리 위", "허벅지 위"):
+                    if fr not in pk["camera"]:
+                        continue
+                    ms = [m for m, v in pk["moments"].items() if fr in v.get("frames", list(pk["camera"]))]
+                    if not ms:
+                        problems.append((9, 1, f"{loc}: no moment can be shown in {fr}"))
+                        continue
+                    r = c.compose_split(trig, oid, location=loc, time_key=list(pk["times"])[0], moment=ms[0], framing=fr,
+                                        expression="은은한 미소", mode="상세", seed=3)
+                    if r["problems"] or feet.search(r["person"]):
+                        problems.append((9, 1, f"{oid} @ {loc} / {fr}: {r['problems']} {feet.search(r['person']).group(0) if feet.search(r['person']) else ''}"))
+    return problems
+
+
 def accessory_pose_checks():
     """Accessory switches (yeoreum): kelpin 0/1 times, engraving only with the necklace, watch only in full-body, one-necklace sentence;
     duplicate necklace is flagged; a typed pose replaces the moment; hand on the chin gets the straight-wrist sentence."""
@@ -556,7 +580,7 @@ def hangyeol_checks():
 
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + hair_color_checks() + outfit_custom_checks() + accessory_pose_checks() + gui_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + hair_color_checks() + outfit_custom_checks() + accessory_pose_checks() + frame_visibility_checks() + gui_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

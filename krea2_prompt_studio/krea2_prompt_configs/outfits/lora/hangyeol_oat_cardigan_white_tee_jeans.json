@@ -53,11 +53,15 @@
     },
     {
       "depth": 3,
-      "en": "The light-blue jeans are straight in the leg and end at the ankle"
+      "en": "The light-blue jeans are straight in the leg"
     },
     {
       "depth": 5,
       "en": "{P} white leather sneakers are laced"
+    },
+    {
+      "depth": 5,
+      "en": "The light-blue jeans end at the ankle"
     }
   ],
   "echo_en": [

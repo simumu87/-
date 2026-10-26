@@ -42,11 +42,15 @@
     "The dusty pink hoodie is cropped at the waist with a hood resting behind the neck and the zipper half closed",
     {
       "depth": 2,
-      "en": "The black leggings fit close along the legs from the high waist to the ankle"
+      "en": "The black leggings fit close along the legs from the high waist"
     },
     {
       "depth": 5,
       "en": "{P} white running sneakers have thick soles and gray laces"
+    },
+    {
+      "depth": 5,
+      "en": "The black leggings reach down to the ankle"
     }
   ],
   "echo_en": [

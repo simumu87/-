@@ -50,11 +50,15 @@
     "The white tank top has a scooped neckline and wide straps in a fine rib",
     {
       "depth": 2,
-      "en": "The black wide-leg pants sit high on the waist with a narrow belt and fall straight to the ankle"
+      "en": "The black wide-leg pants sit high on the waist with a narrow belt and fall straight down the legs"
     },
     {
       "depth": 5,
       "en": "{P} black sandals have thin straps across the toes and around the ankles"
+    },
+    {
+      "depth": 5,
+      "en": "The black wide legs end at the ankle"
     }
   ],
   "echo_en": [

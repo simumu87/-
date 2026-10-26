@@ -42,6 +42,7 @@ def options() -> dict:
         "hair_presets": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_hair_presets().items()],
         "hair_colors": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_hair_colors().items()],
         "accessory_options": {k: v for k, v in comp.load_accessory_options().items() if isinstance(v, dict)},
+        "canvas_sizes": json.loads((comp.k.CONFIG_DIR / "canvas_sizes.json").read_text(encoding="utf-8"))["items"],
         "outfit_colors": [{"key": k, "en": v} for k, v in comp.load_outfit_colors().items()],
         "makeups": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_makeup().items()],
         "modes": list(comp.MODES),

@@ -61,6 +61,8 @@ def check(path: Path):
             for key in ("sky_en", "light_en", "shadow_en"):
                 if OUTDOOR_ONLY.search(tm.get(key, "")):
                     errs.append(f"실내 팩 '{tk}'/{key}: 야외 전용 단어 ({OUTDOOR_ONLY.search(tm[key]).group(0)})")
+        if tm.get("camera") and set(tm["camera"]) != set(d["camera"]):
+            errs.append(f"시간대 '{tk}': 자체 camera의 프레이밍이 팩 camera와 다름 ({sorted(set(d['camera']) ^ set(tm['camera']))})")
         if tm.get("light_en") and not re.search(r"\b(left|right|behind|above|front|beside|overhead)\b", tm["light_en"]):
             errs.append(f"시간대 '{tk}': light_en에 광원 위치가 없음")
         if "left" in tm.get("light_en", "") and "right" not in tm.get("shadow_en", "") and "behind" not in tm.get("shadow_en", "") and "gather" not in tm.get("shadow_en", "") and "pool" not in tm.get("shadow_en", ""):

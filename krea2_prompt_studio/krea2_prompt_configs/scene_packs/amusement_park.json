@@ -31,24 +31,61 @@
    "light_en": "low golden sunlight comes from behind {o} on the camera's left, lighting the edges of {p} hair and shoulders",
    "shadow_en": "long soft shadows stretch across the walkway toward the camera's right",
    "desc_ko": "해 지기 직전, 낮고 노란 해가 카메라 왼쪽 뒤에서 비춤"
+  },
+  "밤 조명": {
+   "time_en": "a clear night",
+   "time_prep": "on",
+   "sky_en": "a black night sky above the lit rides",
+   "light_en": "strings of warm round bulbs and the lit carousel stand to the camera's left of {o}, their yellow and pink light falling on {p} face and shoulders",
+   "shadow_en": "deep shadows gather between the dark stalls behind {o}",
+   "desc_ko": "맑은 밤, 카메라 왼쪽 회전목마와 전구 줄의 노랑·분홍 불빛"
   }
  },
  "moments": {
   "풍선 들고 서기": {
    "pose_en": "stands on the walkway holding a bunch of colorful balloon strings in one hand",
    "moment_en": "{s} looks toward the camera with a bright smile",
-   "desc_ko": "한 손에 풍선 다발을 들고 카메라를 보며 웃음"
+   "desc_ko": "한 손에 풍선 다발을 들고 카메라를 보며 웃음",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
   },
   "회전목마 앞에서 웃기": {
    "pose_en": "stands in front of the carousel with {p} hands clasped behind {p} back",
    "moment_en": "{s} laughs and looks toward the camera as the carousel turns behind {o}",
-   "desc_ko": "회전목마 앞에서 뒷짐을 지고 웃음"
+   "desc_ko": "회전목마 앞에서 뒷짐을 지고 웃음",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
   },
   "손 흔들며 걷기": {
    "pose_en": "walks toward the camera along the walkway with one hand raised in a small wave",
    "moment_en": "{s} smiles widely as {s} looks toward the camera",
    "desc_ko": "손을 흔들며 카메라 쪽으로 걸음",
    "frames": [
+    "전신",
+    "3/4 전신"
+   ]
+  },
+  "솜사탕 들고 웃기": {
+   "pose_en": "stands near the carousel with a stick of pink cotton candy held up beside {p} face",
+   "moment_en": "{s} looks toward the camera and laughs",
+   "desc_ko": "회전목마 옆에서 솜사탕을 얼굴 옆에 들고 카메라를 보며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
     "전신"
    ]
   }
@@ -56,7 +93,11 @@
  "camera": {
   "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the carousel and the stalls softly out of focus",
   "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the carousel and the stalls softly out of focus",
-  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the carousel and the stalls softly out of focus"
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the carousel and the stalls softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the carousel and the stalls softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the carousel and the stalls softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the carousel and the stalls softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the carousel and the stalls softly out of focus"
  },
  "ground_contact_en": "{P} feet rest on the beige walkway",
  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
@@ -70,6 +111,11 @@
    "the carousel horses are painted white, red and gold with brass poles",
    "the balloons are red, yellow, blue and pink on thin strings",
    "the ferris wheel is a dark shape with lit cars along its frame"
+  ],
+  "밤 조명": [
+   "the carousel canopy is outlined in rows of round warm bulbs above its painted horses",
+   "the ferris wheel is traced in lines of pink and blue lights",
+   "the walkway is warm beige paving lit in patches of yellow"
   ]
  },
  "position_en": "{S} is centered in the frame, with the carousel and the stalls spreading out around {o}",

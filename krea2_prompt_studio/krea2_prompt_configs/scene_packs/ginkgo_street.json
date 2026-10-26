@@ -31,6 +31,14 @@
    "light_en": "low orange sunlight comes from the camera's left, lighting {p} face and shoulders",
    "shadow_en": "long soft shadows stretch across the pavement toward the camera's right",
    "desc_ko": "해 지기 직전, 낮고 주황빛 해가 카메라 왼쪽에서 비춤"
+  },
+  "밤 가로등": {
+   "time_en": "a clear autumn night",
+   "time_prep": "on",
+   "sky_en": "a dark blue night sky between the yellow leaves",
+   "light_en": "warm white light from a street lamp stands in front of {o} and to the camera's left, lighting {p} face and shoulders and the yellow leaves above",
+   "shadow_en": "deep soft shadows of the trunks stretch across the pavement toward the camera's right",
+   "desc_ko": "가을밤, 카메라 왼쪽 앞 가로등의 따뜻한 흰 불빛"
   }
  },
  "moments": {
@@ -39,7 +47,8 @@
    "moment_en": "a few yellow leaves drift down in front of {o} as {s} looks toward the camera",
    "desc_ko": "낙엽이 떨어지는 길을 카메라 쪽으로 걸으며 카메라를 봄",
    "frames": [
-    "전신"
+    "전신",
+    "3/4 전신"
    ]
   },
   "나무에 기대 서기": {
@@ -49,7 +58,9 @@
    "frames": [
     "전신",
     "무릎 위",
-    "허리 위"
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
    ]
   },
   "돌아보며 서기": {
@@ -59,14 +70,34 @@
    "frames": [
     "전신",
     "무릎 위",
-    "허리 위"
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
+  },
+  "낙엽 들어 올리기": {
+   "pose_en": "holds one yellow ginkgo leaf up in front of {p} face with one hand",
+   "moment_en": "{s} peeks over the leaf toward the camera with a smile",
+   "desc_ko": "노란 은행잎을 얼굴 앞에 들고 잎 너머로 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
    ]
   }
  },
  "camera": {
   "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the trees softly out of focus",
   "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the trees softly out of focus",
-  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the trees softly out of focus"
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the trees softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the trees softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the trees softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the trees softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the trees softly out of focus"
  },
  "ground_contact_en": "{P} feet rest on the pavement among the fallen yellow leaves",
  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
@@ -78,6 +109,11 @@
   ],
   "해질녘": [
    "the ginkgo leaves are a deep golden yellow with warm orange edges",
+   "the trunks are dark gray-brown with rough bark",
+   "the stone wall is warm gray with a black iron fence along its top"
+  ],
+  "밤 가로등": [
+   "the ginkgo leaves are golden yellow under the lamplight",
    "the trunks are dark gray-brown with rough bark",
    "the stone wall is warm gray with a black iron fence along its top"
   ]

@@ -32,18 +32,40 @@
    "light_en": "a warm yellow street lamp stands behind {o} on the camera's left, lighting the edges of {p} hair and shoulders and the falling snow",
    "shadow_en": "the street in front of {o} falls into a soft blue shade with a long pool of warm light lying on the snow toward the camera's right",
    "desc_ko": "눈 오는 저녁, 카메라 왼쪽 뒤 가로등의 따뜻한 노란 빛과 푸른 그늘"
+  },
+  "밤 눈": {
+   "time_en": "a snowy night",
+   "time_prep": "on",
+   "sky_en": "a dark gray-blue sky with steady falling snow",
+   "light_en": "warm yellow light from a street lamp stands in front of {o} and to the camera's left, falling on {p} face and shoulders through the snowflakes",
+   "shadow_en": "soft blue shadows lie on the snow behind {o}, toward the right",
+   "desc_ko": "눈 오는 밤, 카메라 왼쪽 앞 가로등의 따뜻한 노란빛"
   }
  },
  "moments": {
   "눈 맞으며 올려다보기": {
    "pose_en": "stands on the sidewalk with {p} face tilted up toward the falling snow",
    "moment_en": "snowflakes land on {p} hair as {s} lowers {p} gaze to the camera with a soft smile",
-   "desc_ko": "내리는 눈을 올려다보다 카메라를 봄"
+   "desc_ko": "내리는 눈을 올려다보다 카메라를 봄",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
   },
   "손바닥에 눈 받기": {
    "pose_en": "stands on the sidewalk with one hand held out palm up to catch the snow",
    "moment_en": "{s} looks toward the camera with a bright smile",
-   "desc_ko": "한 손을 펴서 눈을 받으며 카메라를 보고 웃음"
+   "desc_ko": "한 손을 펴서 눈을 받으며 카메라를 보고 웃음",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
   },
   "눈길 걷기": {
    "pose_en": "walks toward the camera along the snowy sidewalk with one foot stepping forward",
@@ -52,12 +74,28 @@
    "frames": [
     "전신"
    ]
+  },
+  "입김 불기": {
+   "pose_en": "holds one open hand in front of {p} mouth and blows a breath of white vapor",
+   "moment_en": "{s} looks toward the camera with {p} cheeks lifted",
+   "desc_ko": "한 손을 입 앞에 펴고 하얀 입김을 불며 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
   }
  },
  "camera": {
   "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the street lamps softly out of focus",
   "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the street lamps softly out of focus",
-  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the street lamps softly out of focus"
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the street lamps softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the street lamps softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the street lamps softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the street lamps softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the street lamps softly out of focus"
  },
  "ground_contact_en": "{P} feet rest on the snow-covered sidewalk",
  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
@@ -71,6 +109,11 @@
    "the snow is soft and fresh with small footprints along the sidewalk",
    "the branches are dark brown with a thin layer of snow along each one",
    "the lamp posts are black iron with round yellow lamps"
+  ],
+  "밤 눈": [
+   "the lamp is warm yellow on a black iron pole",
+   "fresh white snow covers the sidewalk and the bare branches",
+   "a few warm yellow windows glow far down the street"
   ]
  },
  "position_en": "{S} is centered in the frame, with the street and the lamps spreading out behind {o}",

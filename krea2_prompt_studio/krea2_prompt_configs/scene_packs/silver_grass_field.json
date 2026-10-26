@@ -31,6 +31,14 @@
    "light_en": "low orange sunlight comes from behind {o} on the camera's right, lighting the edges of {p} hair and shoulders",
    "shadow_en": "long soft shadows stretch across the path toward the camera's left",
    "desc_ko": "해 지기 직전, 낮은 주황 해가 카메라 오른쪽 뒤에서 비춤"
+  },
+  "밤 달빛": {
+   "time_en": "a clear autumn night",
+   "time_prep": "on",
+   "sky_en": "a deep blue night sky with a bright moon",
+   "light_en": "soft white moonlight comes from behind {o} on the camera's right, lighting the edges of {p} hair and shoulders",
+   "shadow_en": "long soft shadows of the grass plumes stretch across the path toward the camera's left",
+   "desc_ko": "가을밤, 카메라 오른쪽 뒤 달빛이 머리와 어깨 가장자리를 비춤"
   }
  },
  "moments": {
@@ -39,24 +47,57 @@
    "moment_en": "{s} looks toward the camera with a gentle smile",
    "desc_ko": "길을 걸으며 한 손으로 억새를 쓸고 카메라를 봄",
    "frames": [
-    "전신"
+    "전신",
+    "3/4 전신"
    ]
   },
   "바람 맞으며 서기": {
    "pose_en": "stands on the path with {p} hair lifted by the wind",
    "moment_en": "{s} looks toward the camera with a soft smile",
-   "desc_ko": "바람에 머리카락이 날리는 채로 서서 카메라를 봄"
+   "desc_ko": "바람에 머리카락이 날리는 채로 서서 카메라를 봄",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
   },
   "억새에 손 얹기": {
    "pose_en": "stands beside the tall grass with one hand resting on a plume",
    "moment_en": "{s} turns {p} head toward the camera with a bright smile",
-   "desc_ko": "억새 이삭에 손을 얹고 카메라 쪽으로 고개를 돌려 웃음"
+   "desc_ko": "억새 이삭에 손을 얹고 카메라 쪽으로 고개를 돌려 웃음",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
+  },
+  "억새 귀에 꽂고 웃기": {
+   "pose_en": "stands among the tall grass with one silver plume tucked behind {p} ear",
+   "moment_en": "{s} looks toward the camera with a gentle laugh",
+   "desc_ko": "억새 이삭 하나를 귀 뒤에 꽂고 카메라를 보며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
   }
  },
  "camera": {
   "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the grass softly out of focus",
   "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the grass softly out of focus",
-  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the grass softly out of focus"
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the grass softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the grass softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the grass softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the grass softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the grass softly out of focus"
  },
  "ground_contact_en": "{P} feet rest on the dirt path among the bending grass",
  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
@@ -70,6 +111,11 @@
    "the grass plumes are silver-white with an orange tint on their tips",
    "the path is brown dirt with small gray stones",
    "the distant hills are covered in deep gold grass"
+  ],
+  "밤 달빛": [
+   "the grass plumes are silver-white in the moonlight",
+   "the path is pale dirt with small stones",
+   "the distant hills are dark with a faint silver edge"
   ]
  },
  "position_en": "{S} is centered in the frame, with the silver grass and the hills spreading out behind {o}",

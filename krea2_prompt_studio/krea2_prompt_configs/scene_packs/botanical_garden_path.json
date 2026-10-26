@@ -31,6 +31,14 @@
    "light_en": "low amber sunlight comes from the camera's left, lighting {p} face and shoulders",
    "shadow_en": "long soft shadows stretch across the stone path toward the camera's right",
    "desc_ko": "해 지기 직전, 낮은 호박빛 해가 카메라 왼쪽에서 비춤"
+  },
+  "밤 정원등": {
+   "time_en": "a clear autumn night",
+   "time_prep": "on",
+   "sky_en": "a black night sky above the dark trees",
+   "light_en": "warm white garden lamps on low posts stand to the camera's left of {o}, lighting {p} face and shoulders and the leaves behind",
+   "shadow_en": "deep soft shadows gather between the trees behind {o}",
+   "desc_ko": "가을밤, 카메라 왼쪽 낮은 정원등의 따뜻한 흰 불빛"
   }
  },
  "moments": {
@@ -39,7 +47,8 @@
    "moment_en": "{s} smiles gently and glances toward the camera",
    "desc_ko": "돌길을 천천히 걸으며 카메라를 봄",
    "frames": [
-    "전신"
+    "전신",
+    "3/4 전신"
    ]
   },
   "3/4 서기": {
@@ -49,7 +58,9 @@
    "frames": [
     "전신",
     "무릎 위",
-    "허리 위"
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
    ]
   },
   "단풍 보며 서기": {
@@ -59,14 +70,34 @@
    "frames": [
     "전신",
     "무릎 위",
-    "허리 위"
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
+  },
+  "잎 가까이 얼굴 대기": {
+   "pose_en": "stands beside a large green leaf with one hand holding its edge near {p} cheek",
+   "moment_en": "{s} looks toward the camera with a gentle smile",
+   "desc_ko": "큰 잎 가장자리를 볼 옆에 잡고 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
    ]
   }
  },
  "camera": {
   "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the garden softly out of focus",
   "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the garden softly out of focus",
-  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the garden softly out of focus"
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the garden softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the garden softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the garden softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the garden softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the garden softly out of focus"
  },
  "ground_contact_en": "{P} feet rest on the flat gray stones among a few fallen leaves",
  "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
@@ -80,6 +111,11 @@
    "the maple leaves are a deep red with orange edges and the other tree's leaves a warm yellow",
    "the stones are flat and gray with green moss between them",
    "the shrubs are dark green with a few brown leaves on the ground around them"
+  ],
+  "밤 정원등": [
+   "the garden lamps are low black posts with round warm white globes",
+   "the maple leaves are red and the other tree's leaves are yellow",
+   "the stone path is flat gray stones with moss in the gaps"
   ]
  },
  "position_en": "{S} is centered in the frame, with the stone path and the autumn trees spreading out behind {o}",

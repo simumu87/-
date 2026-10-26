@@ -109,6 +109,7 @@
         <div><label for="time">시간대</label><select id="time"></select></div>
         <div><label for="framing">프레이밍</label><select id="framing"></select></div>
       </div>
+      <div class="hint" id="canvasHint"></div>
       <label for="moment">장면 속 순간 (포즈)</label>
       <select id="moment"></select>
       <textarea id="poseCustom" rows="3" placeholder="포즈를 영어 문장으로 (예: sits on the railing and looks back over her shoulder). 한국어는 일부만 번역돼요" hidden></textarea>
@@ -223,8 +224,15 @@ async function loadPlace() {
   syncOutfit();
 }
 
+function canvasHint() {
+  const c = (OPT.canvas_sizes || {})[$("framing").value];
+  const one = (x) => `${x.width}×${x.height} (${x.ratio}) — ${x.status === "확인" ? "확인: 여름이 실제로 돌려 본 크기" : "후보: 아직 안 돌려 본 값"}`;
+  $("canvasHint").textContent = c ? "캔버스 추천 " + one(c) + (c.alt ? " · " + c.alt.label_ko + " " + one(c.alt) : "") + " · 크기는 콤피에서 직접 맞추세요" : "";
+}
+
 function refreshMoments() {
   const fr = $("framing").value;
+  canvasHint();
   const list = PLACE.moments.filter(m => m.frames.includes(fr)).concat([{key: "__custom__", desc: "직접 입력: 아래 칸에 포즈를 영어 문장으로 적음 (고른 순간의 포즈·상황 문장을 통째로 대신함)"}]);
   fill($("moment"), list, m => [m.key, m.key === "__custom__" ? "직접 입력" : m.key, m.desc]);
   $("poseCustom").hidden = $("moment").value !== "__custom__";
