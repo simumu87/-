@@ -43,6 +43,7 @@ def options() -> dict:
         "hair_colors": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_hair_colors().items()],
         "accessory_options": {k: v for k, v in comp.load_accessory_options().items() if isinstance(v, dict)},
         "canvas_sizes": json.loads((comp.k.CONFIG_DIR / "canvas_sizes.json").read_text(encoding="utf-8"))["items"],
+        "lighting_triggers": json.loads((comp.k.CONFIG_DIR / "lighting_triggers.json").read_text(encoding="utf-8")),
         "outfit_colors": [{"key": k, "en": v} for k, v in comp.load_outfit_colors().items()],
         "makeups": [{"key": k, "desc": v.get("desc_ko", "")} for k, v in comp.load_makeup().items()],
         "modes": list(comp.MODES),
@@ -91,6 +92,7 @@ def compose(body: dict) -> dict:
     weighted = wt.weighted_prompt(
         r["sections"], weights, lighting_tag=bool(body.get("lighting_tag", True)),
         lighting_weight=float(lighting_w) if lighting_w not in (None, "") else 1.1,
+        lighting_words=body.get("lighting_words") or [], lighting_format=body.get("lighting_format", "separate"),
         short_skin=bool(body.get("short_skin", True)), extra_camera=body.get("extra_camera", ""))
     return {"seed": seed, "weighted": weighted, "plain": r["combined"], "sections": r["sections"],
             "problems": r["problems"], "words": len(weighted.split())}

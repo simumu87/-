@@ -151,3 +151,9 @@
 - 시계(orvael) 문장을 로라4 캡션 원문으로 교체: `Her orvael set, a cobalt-navy watch with thin thread bracelets, sits on her image-right wrist at her hip.` 손목이 보이는 프레이밍(허벅지 위·무릎 위·3/4 전신·전신)에서만 넣고, 허리 위·가슴 위·클로즈업에서는 문장 자체를 안 넣는다. 손을 얼굴·머리 쪽으로 올린 포즈와 같이 켜면 점검 알림(`the watch sentence puts the wrist at the hip …`). `status: confirmed`.
 - 얼굴 컷용 순간 확대: 37곳 모두에 순간 2개씩(74개) 추가 — 고개 기울여 웃기 · 머리 쓸어 넘기며 웃기 · 눈 감고 미소 짓기 · 입가 가리고 웃기 중 장소마다 두 가지(장소 위치 문장 포함, 앉는 장소는 무릎 위까지만). 이제 클로즈업·가슴 위에서 고를 수 있는 순간이 장소마다 3~6개. 손이 얼굴에 닿는 순간은 손목 곧게 문장이 자동.
 - 검수: validate_packs 37 ok · validate_outfits 41 files 0 problems · scene_consistency 0 contradictions · regression_bulk 60 120 prompts 0 problems · 한결·여름 옷 × 연결 장소 × 시간대 × 순간 × 프레이밍 × 보통/상세 54072조합 점검 알림 0건.
+
+## 라이팅 로라(V67 Lighting) 트리거 단어 (2026-10-28)
+- 오빠가 모델 페이지 글을 붙여줌(이 환경은 comfy.icu를 못 열어서). 트리거: 가중 태그 `(Lighting:1.1)` + 단어 20개(cinematic lighting · dramatic shadows · volumetric light · neon glow · golden hour · chiaroscuro · softbox · rim light · backlight · god rays · spotlight · caustics · moonlight · firelight · LED strips · noir · lens flare · dust motes · wet reflections · high contrast). 새 설정 `lighting_triggers.json`(단어별 한글 설명·묶음, 페이지 권장 LoRA 강도 0.65~0.85 · 우리 0.75 기록).
+- 화면 「라이팅 트리거 단어」: 체크박스 20개 + 전체 선택/모두 해제 + 붙이는 형식(태그 따로 `(Lighting:1.1). Golden hour, rim light.` — 기본 / 모델 페이지 원문 `(Lighting:1.1), golden hour, rim light.`). 단어를 안 고르면 예전 그대로 `(Lighting:1.1).`만. 「맨 앞에 붙이기」를 끄면 단어도 안 붙음. `weighted_prompt(lighting_words=…, lighting_format=…)`.
+- 페이지 권장은 「전체 문자열을 맨 앞에」지만 moonlight와 golden hour처럼 한 장면에서 안 맞는 단어가 같이 들어가면 장면이 흔들릴 수 있어 기본은 안 붙임, 고르거나 전체로 선택. 소수점은 마침표(`1.1`), 가중 태그는 맨 앞(옮기면 효과 줄어듦).
+- 회귀: 20개 중복 없음 · 태그만 · 단어 붙임(두 형식) · 태그 끄면 단어도 없음 확인.

@@ -38,7 +38,7 @@ def wrap(text: str, weight) -> str:
 
 def weighted_prompt(sections: Dict[str, str], weights: Optional[Dict[str, Optional[float]]] = None,
                     lighting_tag: bool = True, lighting_weight: float = 1.1, short_skin: bool = True,
-                    extra_camera: str = "") -> str:
+                    extra_camera: str = "", lighting_words=None, lighting_format: str = "separate") -> str:
     w = dict(DEFAULT_WEIGHTS)
     w.update({k: v for k, v in (weights or {}).items() if k in ORDER})
     sec = dict(sections)
@@ -48,7 +48,15 @@ def weighted_prompt(sections: Dict[str, str], weights: Optional[Dict[str, Option
         rest = sec.get("camera", "").rstrip(".")
         rest = rest[:1].lower() + rest[1:] if rest else rest
         sec["camera"] = (extra_camera.strip().rstrip(".") + (", " + rest if rest else ""))
-    head = f"(Lighting:{_num(lighting_weight)}). " if lighting_tag else ""
+    words = [x.strip() for x in (lighting_words or []) if x and x.strip()]
+    if not lighting_tag:
+        head = ""
+    elif not words:
+        head = f"(Lighting:{_num(lighting_weight)}). "
+    elif lighting_format == "inline":        # the model page's own form: (Lighting:1.1), word, word, ...
+        head = f"(Lighting:{_num(lighting_weight)}), " + ", ".join(words) + ". "
+    else:                                    # default: the weighted tag stays its own phrase, the words follow as one plain sentence
+        head = f"(Lighting:{_num(lighting_weight)}). " + (lambda t: t[:1].upper() + t[1:])(", ".join(words)) + ". "
     paragraphs = []
     ident = wrap(sec.get("identity", ""), w["identity"])
     paragraphs.append(head + ident)

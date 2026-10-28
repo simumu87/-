@@ -154,6 +154,17 @@
       <h2>가중치 (비우면 괄호 없이 그대로)</h2>
       <div class="weights" id="weights"></div>
       <label class="check"><input type="checkbox" id="lightingTag" checked> 맨 앞에 (Lighting:<input type="number" id="lightingWeight" step="0.1" value="1.1" style="width:70px">) 붙이기 — 라이팅 로라를 부르는 말</label>
+      <details id="lightWords">
+        <summary>라이팅 트리거 단어 (V67 Lighting) — 고른 단어를 (Lighting:1.1) 뒤에 붙임 <span id="lightCount"></span></summary>
+        <div class="row" style="margin-top:8px"><button type="button" id="lightAll">전체 선택</button><button type="button" id="lightNone">모두 해제</button></div>
+        <div id="lightList" class="weights"></div>
+        <label for="lightFormat">붙이는 형식</label>
+        <select id="lightFormat">
+          <option value="separate">(Lighting:1.1). cinematic lighting, … (가중 태그는 따로, 단어는 한 문장으로) — 기본</option>
+          <option value="inline">(Lighting:1.1), cinematic lighting, … (모델 페이지 원문 형식)</option>
+        </select>
+        <div class="hint">모델 페이지는 「전체 문자열을 맨 앞에」 권장이지만, 한 장면에 서로 안 맞는 단어(moonlight + golden hour)를 다 넣으면 장면이 흔들릴 수 있어요. 장면에 맞는 것만 골라 쓰고, 기본은 단어 없이 (Lighting:1.1)만입니다. LoRA 강도 권장 0.65~0.85 (체인은 0.75). 「맨 앞에 붙이기」가 꺼져 있으면 단어도 안 붙어요.</div>
+      </details>
       <label class="check"><input type="checkbox" id="shortSkin" checked> 피부 문장을 짧은 매트 문장으로 (Natural matte skin texture)</label>
       <label for="extraCamera">구도 고정 문장 (카메라 칸 앞에 붙음)</label>
       <textarea id="extraCamera" rows="3" spellcheck="false" placeholder="전신이면 「몸이 프레임 높이의 약 4분의 3」 문장이 자동으로 채워집니다. 필요 없으면 비워 두세요."></textarea>
@@ -201,6 +212,17 @@ async function init() {
   fill($("outfitColor"), oc, c => [c[0], c[1]]);
   const mk = [["", "LoRA 기본 화장 유지"], ...OPT.makeups.map(m => [m.key, m.key, m.desc]), ["__custom__", "직접 입력"]];
   fill($("makeup"), mk, m => [m[0], m[1], m[2]]);
+  const lt = $("lightList");
+  OPT.lighting_triggers.items.forEach((it, i) => {
+    const d = document.createElement("label");
+    d.className = "chk"; d.title = it.desc_ko;
+    d.innerHTML = `<input type="checkbox" class="lightWord" value="${it.en}"> <span>${it.en} <small>${it.label_ko}</small></span>`;
+    lt.appendChild(d);
+  });
+  const lightSync = () => { const n = document.querySelectorAll(".lightWord:checked").length; $("lightCount").textContent = n ? `(${n}개 선택)` : ""; };
+  document.querySelectorAll(".lightWord").forEach(c => c.onchange = lightSync);
+  $("lightAll").onclick = () => { document.querySelectorAll(".lightWord").forEach(c => c.checked = true); lightSync(); };
+  $("lightNone").onclick = () => { document.querySelectorAll(".lightWord").forEach(c => c.checked = false); lightSync(); };
   const wbox = $("weights");
   OPT.weight_order.forEach(k => {
     const d = document.createElement("div");
@@ -294,7 +316,8 @@ async function go() {
     hair: pick("hair", "hairCustom"), hair_color: pick("hairColor", "hairColorCustom"), outfit_text: $("outfitCustom").value.trim(), pose_text: $("poseCustom").value.trim(),
     accessories: (OPT.accessory_options || {})[$("trigger").value] ? {necklace: $("accNecklace").checked, engraving: $("accEngraving").value, watch: $("accWatch").checked} : null, outfit_color: pick("outfitColor", "outfitColorCustom"), makeup: pick("makeup", "makeupCustom"), mode: $("mode").value,
     reinforce: $("reinforce").value, seed: $("seed").value, reference: $("reference").checked,
-    weights, lighting_tag: $("lightingTag").checked, lighting_weight: $("lightingWeight").value,
+    weights, lighting_tag: $("lightingTag").checked,
+    lighting_words: [...document.querySelectorAll(".lightWord:checked")].map(c => c.value), lighting_format: $("lightFormat").value, lighting_weight: $("lightingWeight").value,
     short_skin: $("shortSkin").checked, extra_camera: $("extraCamera").value,
   };
   try {

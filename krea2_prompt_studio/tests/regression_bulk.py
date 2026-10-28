@@ -6,6 +6,7 @@ Generates 1-person and 2-person prompts for many seeds and asserts that none of
 the known v10.0.2 defects come back. Run from the package folder (needs Python 3.8+).
 """
 import importlib
+import json
 import re
 import sys
 from pathlib import Path
@@ -535,6 +536,24 @@ def gui_checks():
                 problems.append((10, 1, f"Hangul in weighted prompt: {trig} {loc}"))
             if re.search(r":\d(?:\.\d+)?\)[^.\n]", text):
                 problems.append((10, 1, f"weighted group not closed with a period: {trig} {loc}"))
+    # V67 lighting trigger words: none = the tag alone; picked words follow it in the chosen form; the tag off = no words either
+    sec = {"identity": "hangyeol, a young woman.", "outfit": "She wears a dress.", "action": "She stands.", "setting": "A street.",
+           "camera": "Medium shot.", "light": "Light from the left.", "skin": "x", "style": "natural."}
+    first = lambda **kw: w.weighted_prompt(sec, **kw).split("\n")[0]
+    cfg = json.loads((c.k.CONFIG_DIR / "lighting_triggers.json").read_text(encoding="utf-8"))
+    if len(cfg["items"]) != 20 or len({x["en"] for x in cfg["items"]}) != 20:
+        problems.append((10, 1, "lighting_triggers.json must hold the 20 distinct trigger words"))
+    if not first().startswith("(Lighting:1.1). hangyeol"):
+        problems.append((10, 1, "lighting tag alone changed"))
+    allw = [x["en"] for x in cfg["items"]]
+    t = first(lighting_words=allw)
+    if not t.startswith("(Lighting:1.1). Cinematic lighting, dramatic shadows") or "LED strips" not in t or not t.split(". ")[1].endswith("high contrast"):
+        problems.append((10, 1, f"lighting words (separate) wrong: {t[:120]}"))
+    t = first(lighting_words=["golden hour", "rim light"], lighting_format="inline")
+    if not t.startswith("(Lighting:1.1), golden hour, rim light. hangyeol"):
+        problems.append((10, 1, f"lighting words (inline) wrong: {t[:100]}"))
+    if first(lighting_words=["rim light"], lighting_tag=False).startswith("("):
+        problems.append((10, 1, "lighting words appeared although the tag is off"))
     # the weights really change the output, and an empty weight removes the brackets
     r = c.compose_split("hangyeol", "", location="해변", time_key="해질녘", moment="파도 발목", framing="전신", expression="환한 미소", seed=1, common_outfit=True)
     a = w.weighted_prompt(r["sections"], {"outfit": 1.6})
