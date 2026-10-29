@@ -71,6 +71,15 @@ def check(path: Path):
         for key in ("pose_en", "moment_en", "desc_ko"):
             if not mo.get(key):
                 errs.append(f"순간 '{mk}': {key} 없음")
+        import krea2_composer as comp
+        gz = mo.get("gaze", "camera")
+        if gz not in ("camera", "closed", "up", "away"):
+            errs.append(f"순간 '{mk}': gaze는 camera/closed/up/away 중 하나 ({gz})")
+        blob = mo.get("pose_en", "") + " " + mo.get("moment_en", "")
+        if gz == "camera" and comp.GAZE_AWAY.search(blob):
+            errs.append(f"순간 '{mk}': 시선이 카메라인데 다른 곳을 보는 말이 있음 ({comp.GAZE_AWAY.search(blob).group(0)}) → gaze를 closed/up/away로 하거나 문장을 고침")
+        if gz != "camera" and comp.CAMERA_GAZE.search(blob):
+            errs.append(f"순간 '{mk}': gaze가 {gz}인데 카메라를 보라는 말이 있음 ({comp.CAMERA_GAZE.search(blob).group(0)})")
         frames = mo.get("frames", list(d["camera"]))
         if any(f not in d["camera"] for f in frames):
             errs.append(f"순간 '{mk}': frames에 camera에 없는 이름")

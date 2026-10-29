@@ -72,8 +72,8 @@
   },
   "잎 사이로 올려다보기": {
    "pose_en": "stands under a tall palm with {p} face tilted up toward the glass roof",
-   "moment_en": "{s} lowers {p} eyes to the camera with a faint smile",
-   "desc_ko": "키 큰 야자 아래서 유리 지붕을 올려다보다 시선을 카메라로 내림",
+   "moment_en": "{s} looks up at the glass roof and the leaves with a faint smile",
+   "desc_ko": "키 큰 야자 아래서 유리 지붕과 잎을 올려다보며 미소",
    "frames": [
     "클로즈업",
     "가슴 위",
@@ -82,7 +82,8 @@
     "무릎 위",
     "3/4 전신",
     "전신"
-   ]
+   ],
+   "gaze": "up"
   },
   "턱 괴고 케이크 보기": {
    "pose_en": "sits at the table with one elbow on the marble and {p} chin resting on {p} hand beside a slice of cake",
@@ -131,7 +132,8 @@
     "무릎 위",
     "3/4 전신",
     "전신"
-   ]
+   ],
+   "gaze": "closed"
   }
  },
  "camera": {

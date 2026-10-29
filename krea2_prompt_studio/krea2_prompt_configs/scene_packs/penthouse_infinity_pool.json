@@ -58,7 +58,7 @@
    ]
   },
   "도시 내려다보다 돌아보기": {
-   "pose_en": "stands at the glass edge looking down at the city",
+   "pose_en": "stands at the glass edge with {p} body angled toward the city",
    "moment_en": "{s} turns {p} head over {p} shoulder toward the camera with a soft smile",
    "desc_ko": "도시를 내려다보다 어깨 너머로 카메라를 돌아봄",
    "frames": [
@@ -115,7 +115,8 @@
     "무릎 위",
     "3/4 전신",
     "전신"
-   ]
+   ],
+   "gaze": "closed"
   },
   "입가 가리고 웃기": {
    "pose_en": "stands beside the glass edge above the city with the back of one hand held lightly against {p} mouth",

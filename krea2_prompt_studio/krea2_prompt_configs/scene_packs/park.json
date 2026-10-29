@@ -64,15 +64,16 @@
   },
   "나무 아래서 올려다보기": {
    "pose_en": "stands under a tree with {p} face tilted up toward the leaves",
-   "moment_en": "{s} lowers {p} eyes to the camera with a gentle smile",
-   "desc_ko": "나무 아래에서 잎을 올려다보다 시선을 카메라로 내림",
+   "moment_en": "{s} looks up at the leaves with a gentle smile",
+   "desc_ko": "나무 아래에서 잎을 올려다보며 웃음",
    "frames": [
     "클로즈업",
     "가슴 위",
     "허리 위",
     "허벅지 위",
     "무릎 위"
-   ]
+   ],
+   "gaze": "up"
   },
   "잔디에 앉아 무릎 안기": {
    "pose_en": "sits on the grass with both arms around {p} knees",

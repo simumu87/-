@@ -344,6 +344,31 @@ def frame_visibility_checks():
     return problems
 
 
+def gaze_checks():
+    """Every moment x every expression: the person text never looks at the camera and somewhere else at once;
+    a closed-eye moment only conflicts with the open-eye expressions (놀람, 윙크), which must raise the notice."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    exps = list(c.load_expressions())
+    for loc in c.PACK_FILES:
+        pk = c.load_pack(loc)
+        for mname, mo in pk["moments"].items():
+            fr = mo.get("frames", list(pk["camera"]))[0]
+            for e in exps:
+                r = c.compose_split("hangyeol", "", location=loc, time_key=list(pk["times"])[0], moment=mname, framing=fr,
+                                    expression=e, mode="보통", seed=1, common_outfit=True)
+                gz = mo.get("gaze", "camera")
+                bad = [x for x in r["problems"] if x.startswith("gaze conflict")]
+                if bad:
+                    problems.append((9, 1, f"{loc}/{mname}/{e}: {bad}"))
+                closed_conflict = any("eyes closed" in x for x in r["problems"])
+                if gz == "closed" and e in ("놀람", "윙크") and not closed_conflict:
+                    problems.append((9, 1, f"{loc}/{mname}/{e}: closed eyes + open-eye expression not flagged"))
+                if closed_conflict and not (gz == "closed" and e in ("놀람", "윙크")):
+                    problems.append((9, 1, f"{loc}/{mname}/{e}: eyes-closed notice without reason"))
+    return problems
+
+
 def accessory_pose_checks():
     """Accessory switches (yeoreum): kelpin 0/1 times, engraving only with the necklace, watch only in full-body, one-necklace sentence;
     duplicate necklace is flagged; a typed pose replaces the moment; hand on the chin gets the straight-wrist sentence."""
@@ -607,7 +632,7 @@ def hangyeol_checks():
 
 def main() -> int:
     seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + hair_color_checks() + outfit_custom_checks() + accessory_pose_checks() + frame_visibility_checks() + gui_checks()
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + hair_color_checks() + outfit_custom_checks() + accessory_pose_checks() + frame_visibility_checks() + gaze_checks() + gui_checks()
     for seed in range(1, seeds + 1):
         for people in (1, 2):
             c = k.defaults()

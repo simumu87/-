@@ -111,7 +111,8 @@
     "무릎 위",
     "3/4 전신",
     "전신"
-   ]
+   ],
+   "gaze": "closed"
   },
   "입가 가리고 웃기": {
    "pose_en": "stands on the riverside promenade with the back of one hand held lightly against {p} mouth",

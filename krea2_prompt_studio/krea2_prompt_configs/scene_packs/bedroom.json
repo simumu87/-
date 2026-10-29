@@ -97,7 +97,8 @@
     "허리 위",
     "허벅지 위",
     "무릎 위"
-   ]
+   ],
+   "gaze": "closed"
   },
   "입가 가리고 웃기": {
    "pose_en": "sits on the edge of the bed with the back of one hand held lightly against {p} mouth",

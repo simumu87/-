@@ -55,8 +55,8 @@
   },
   "샹들리에 올려다보기": {
    "pose_en": "stands in the middle of the lobby with {p} chin lifted toward the chandelier",
-   "moment_en": "{s} lowers {p} eyes to the camera with a faint smile",
-   "desc_ko": "로비 한가운데서 샹들리에를 올려다보다 시선을 카메라로 내림",
+   "moment_en": "{s} looks up at the chandelier with a faint smile",
+   "desc_ko": "로비 한가운데서 샹들리에를 올려다보며 미소",
    "frames": [
     "클로즈업",
     "가슴 위",
@@ -66,7 +66,8 @@
     "3/4 전신",
     "전신"
    ],
-   "wrist_straight": true
+   "wrist_straight": true,
+   "gaze": "up"
   },
   "대리석 기둥에 기대기": {
    "pose_en": "leans one shoulder against a marble column with {p} arms loosely crossed",

@@ -78,8 +78,8 @@
   },
   "네온 올려다보기": {
    "pose_en": "stands in the lane with {p} chin lifted toward a neon sign above",
-   "moment_en": "{s} turns {p} eyes toward the camera with a faint smile",
-   "desc_ko": "골목에서 위의 네온 간판을 올려다보다 카메라 쪽으로 눈을 돌림",
+   "moment_en": "{s} looks up at the neon sign with a faint smile",
+   "desc_ko": "골목에서 위의 네온 간판을 올려다보며 미소",
    "frames": [
     "클로즈업",
     "가슴 위",
@@ -88,7 +88,8 @@
     "무릎 위",
     "3/4 전신",
     "전신"
-   ]
+   ],
+   "gaze": "up"
   },
   "눈 감고 미소 짓기": {
    "pose_en": "stands in the neon-lit lane with {p} eyes closed and {p} face turned slightly upward",
@@ -102,7 +103,8 @@
     "무릎 위",
     "3/4 전신",
     "전신"
-   ]
+   ],
+   "gaze": "closed"
   },
   "입가 가리고 웃기": {
    "pose_en": "stands in the neon-lit lane with the back of one hand held lightly against {p} mouth",

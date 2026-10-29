@@ -57,15 +57,16 @@
   },
   "우산 아래서 올려다보기": {
    "pose_en": "stands under a clear umbrella with {p} chin lifted slightly",
-   "moment_en": "{s} looks up at the rain and then toward the camera with a gentle smile",
-   "desc_ko": "우산 아래서 비를 올려다보다 카메라를 봄",
+   "moment_en": "{s} looks up at the raindrops on the umbrella with a gentle smile",
+   "desc_ko": "투명 우산 아래서 빗방울을 올려다보며 웃음",
    "frames": [
     "전신",
     "무릎 위",
     "허리 위",
     "허벅지 위",
     "3/4 전신"
-   ]
+   ],
+   "gaze": "up"
   },
   "비 맞으며 걷기": {
    "pose_en": "walks toward the camera along the lane with the clear umbrella tilted over one shoulder",

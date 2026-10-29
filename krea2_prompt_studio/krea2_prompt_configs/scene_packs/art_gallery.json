@@ -45,8 +45,8 @@
  "moments": {
   "그림 앞에서 올려다보기": {
    "pose_en": "stands in front of a large painting with {p} head tilted slightly upward",
-   "moment_en": "{s} turns {p} head toward the camera with a soft smile",
-   "desc_ko": "큰 그림 앞에서 고개를 살짝 들어 보다 카메라 쪽으로 고개를 돌림",
+   "moment_en": "{s} looks up at the painting with a soft smile",
+   "desc_ko": "큰 그림 앞에서 고개를 살짝 들어 그림을 올려다보며 웃음",
    "frames": [
     "클로즈업",
     "가슴 위",
@@ -55,7 +55,8 @@
     "무릎 위",
     "3/4 전신",
     "전신"
-   ]
+   ],
+   "gaze": "up"
   },
   "벤치에 앉기": {
    "pose_en": "sits on the low black leather bench with {p} hands resting in {p} lap",
@@ -68,7 +69,7 @@
    ]
   },
   "턱에 손 대고 그림 보기": {
-   "pose_en": "stands with one hand lightly touching {p} chin while looking at a painting",
+   "pose_en": "stands in front of a painting with one hand lightly touching {p} chin",
    "moment_en": "{s} turns {p} eyes toward the camera with a small smile",
    "desc_ko": "한 손을 턱에 가볍게 대고 그림을 보다 카메라 쪽으로 눈을 돌림",
    "frames": [
@@ -110,7 +111,8 @@
     "무릎 위",
     "3/4 전신",
     "전신"
-   ]
+   ],
+   "gaze": "closed"
   },
   "입가 가리고 웃기": {
    "pose_en": "stands in the white gallery with the back of one hand held lightly against {p} mouth",

@@ -45,15 +45,16 @@
  "moments": {
   "눈 맞으며 올려다보기": {
    "pose_en": "stands on the sidewalk with {p} face tilted up toward the falling snow",
-   "moment_en": "snowflakes land on {p} hair as {s} lowers {p} gaze to the camera with a soft smile",
-   "desc_ko": "내리는 눈을 올려다보다 카메라를 봄",
+   "moment_en": "snowflakes land on {p} hair as {s} looks up at the falling snow with a soft smile",
+   "desc_ko": "내리는 눈을 올려다보며 머리에 눈송이가 앉고 웃음",
    "frames": [
     "전신",
     "무릎 위",
     "허리 위",
     "허벅지 위",
     "3/4 전신"
-   ]
+   ],
+   "gaze": "up"
   },
   "손바닥에 눈 받기": {
    "pose_en": "stands on the sidewalk with one hand held out palm up to catch the snow",
@@ -99,7 +100,8 @@
     "무릎 위",
     "3/4 전신",
     "전신"
-   ]
+   ],
+   "gaze": "closed"
   },
   "입가 가리고 웃기": {
    "pose_en": "stands on the snowy sidewalk under the street lamps with the back of one hand held lightly against {p} mouth",

@@ -77,6 +77,12 @@ def sentence(text: str) -> str:
     return text[:1].upper() + text[1:] if text else text
 
 
+# one person text must not say "looks at the camera" and "eyes closed / looks up at X" together
+CAMERA_GAZE = re.compile(r"\b(?:at|toward|into) the (?:camera|lens)\b", re.I)
+GAZE_AWAY = re.compile(r"\beyes (?:are )?closed\b|\bface (?:is )?(?:tilted|turned) (?:slightly )?(?:up|upward)\b|\bchin (?:lifted|raised)\b|"
+                       r"\blooks? up at (?!the camera)|\blooking (?:up|down|away)\b(?! from under)|\blooks? (?:down|away)\b|\bhead tilted (?:slightly )?upward\b", re.I)
+
+
 def hair_sentence(subj: str, hair: str) -> str:
     """A stored hair value is either a noun phrase ("dark hair swept back ...") or already a full sentence
     ("Her hair is ...", "Her korvi hairstyle, ..."). A full sentence is used as it is; a noun phrase gets "She has"."""
@@ -457,6 +463,15 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     if not custom_pose and framing not in mo.get("frames", list(pack["camera"])):
         raise SystemExit(f"'{moment}' 순간은 이 프레이밍에서 보이지 않는 부분을 써요: {framing}")
     exp = load_expressions()[expression]
+    # gaze: a moment that looks elsewhere (eyes closed, looking up) must not be told to look at the camera too
+    gaze = mo.get("gaze", "camera")
+    if custom_pose:
+        if re.search(r"\beyes (?:are )?closed\b|\bcloses? (?:her|his|their) eyes\b", custom_pose, re.I):
+            gaze = "closed"
+        elif GAZE_AWAY.search(custom_pose):
+            gaze = "away"
+    free_gaze = gaze != "camera"
+    pick = lambda key: (exp.get(key.replace("_en", "_free_en")) if free_gaze else None) or exp[key]
     lit = (outfit or {}).get("lit_en", "")
     f = lambda t: _fill(t, subj, poss, color=color, lit=lit)
     # a color written as a clause ("cobalt navy at the roots, fading through ...") cannot sit before the word "hair":
@@ -534,11 +549,11 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
     if (mo.get("wrist_straight") or re.search(r"\bhands?\b.*\b(?:chin|cheeks?)\b|\b(?:chin|cheeks?)\b.*\bhands?\b",
                                               custom_pose or mo.get("pose_en", ""), re.I)):
         person.append(sentence(f"{poss.capitalize()} wrist stays straight, in line with {poss} forearm"))
-    person.append(sentence(f"{subj.capitalize()} is {f(exp['main_en'])}"))      # expression gets its own sentence
+    person.append(sentence(f"{subj.capitalize()} is {f(pick('main_en'))}"))      # expression gets its own sentence
     if mo.get("moment_en"):
         person.append(sentence(cap(f(mo["moment_en"]))))
     if expr_level >= 1:
-        person.append(sentence(f(exp["echo_en"])))
+        person.append(sentence(f(pick("echo_en"))))
     if level >= 1:
         if hair_echo:
             person.append(sentence(hair_echo))
@@ -546,7 +561,7 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
             person.append(sentence(f(outfit["echo_en"][0])))
     if expr_level >= 2:
         if exp.get("echo2_en"):
-            person.append(sentence(f(exp["echo2_en"])))
+            person.append(sentence(f(pick("echo2_en"))))
     if level >= 2:
         if hair_echo2:
             person.append(sentence(hair_echo2))
@@ -594,7 +609,12 @@ def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", t
         pose_blob = custom_pose or (mo.get("pose_en", "") + " " + mo.get("moment_en", ""))
         if re.search(r"\b(?:hand|hands)\b[^.]*\b(?:chin|cheeks?|ears?|hair|face|mouth|forehead|head|lips)\b|\b(?:chin|cheeks?|ears?|hair|face|mouth|forehead|head|lips)\b[^.]*\b(?:hand|hands)\b", pose_blob, re.I):
             pose_problems.append("the watch sentence puts the wrist at the hip but this pose raises a hand toward the face or hair")
-    problems = lint(combined) + outfit_problems + pose_problems
+    gaze_problems: List[str] = []
+    if gaze == "closed" and expression in ("놀람", "윙크"):
+        gaze_problems.append(f"eyes closed in this moment but the expression '{expression}' needs open eyes")
+    if CAMERA_GAZE.search(person_text) and GAZE_AWAY.search(person_text):
+        gaze_problems.append("gaze conflict: the prompt looks at the camera and somewhere else in the same person text")
+    problems = lint(combined) + outfit_problems + pose_problems + gaze_problems
     neck_sig = [a for a in sigs if re.search(r"\b(necklace|pendant|choker|neckband)\b", a, re.I)]
     if neck_sig:       # a necklace in the outfit text plus the signature necklace draws two necklaces
         probe = " ".join(person[cut_identity:cut_pre_acc])
