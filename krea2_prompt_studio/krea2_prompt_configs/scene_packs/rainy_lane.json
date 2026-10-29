@@ -3,7 +3,7 @@
  "location_ko": "비 오는 골목",
  "outdoor": true,
  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
- "setting_en": "a narrow neighborhood lane on a rainy day lined with low houses and small shops",
+ "setting_en": "a narrow neighborhood lane in the rain lined with low houses and small shops",
  "feature_en": [
   "low tiled-roof houses with wooden gates along the lane",
   "a row of potted green plants beside the walls"

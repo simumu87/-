@@ -3,7 +3,7 @@
  "location_ko": "네온 골목",
  "outdoor": true,
  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
- "setting_en": "a narrow alley at night lined with small shops and lit neon signs",
+ "setting_en": "a narrow alley lined with small shops and lit neon signs",
  "feature_en": [
   "pink and teal neon tube signs mounted on the shop walls",
   "closed metal shop shutters in dark gray and brick red"

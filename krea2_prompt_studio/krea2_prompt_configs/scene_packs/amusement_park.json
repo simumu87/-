@@ -3,7 +3,7 @@
  "location_ko": "놀이공원",
  "outdoor": true,
  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
- "setting_en": "an amusement park walkway on a bright day with a carousel and colorful stalls",
+ "setting_en": "an amusement park walkway with a carousel and colorful stalls",
  "feature_en": [
   "a carousel with painted horses under a striped canopy",
   "a cart selling bunches of colorful balloons"

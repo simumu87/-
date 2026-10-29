@@ -3,7 +3,7 @@
  "location_ko": "루프탑 야경",
  "outdoor": true,
  "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
- "setting_en": "a rooftop terrace at night with a low glass railing and a city skyline beyond",
+ "setting_en": "a rooftop terrace with a low glass railing and a city skyline beyond",
  "feature_en": [
   "a low concrete parapet topped with a clear glass railing",
   "a wooden lounge bench with a folded gray blanket"
