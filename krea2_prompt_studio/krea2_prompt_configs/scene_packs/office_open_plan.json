@@ -1,0 +1,164 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "사무실",
+ "outdoor": false,
+ "note_ko": "구체적인 장소 팩(오빠 1026: 분위기·재질을 구체적으로 적어야 공간이 달라진다). 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "an ordinary open-plan office with gray desks, black chairs and white ceiling lights",
+ "feature_en": [
+  "rows of gray desks with monitors and keyboards",
+  "black mesh office chairs tucked under the desks"
+ ],
+ "ground_en": [
+  "a flat gray carpet tile floor",
+  "a white painted wall with a glass partition"
+ ],
+ "far_en": [
+  "a copy machine and a water dispenser along the far wall",
+  "tall windows with pale vertical blinds"
+ ],
+ "times": {
+  "낮": {
+   "time_en": "a busy weekday afternoon",
+   "time_prep": "on",
+   "sky_en": "even white light from the ceiling panels mixed with daylight from the tall windows",
+   "light_en": "daylight comes through the tall windows on the camera's left of {o}, falling across {p} face and shoulders, with white light from the ceiling panels above",
+   "shadow_en": "soft shadows gather under the desks toward the camera's right",
+   "desc_ko": "바쁜 평일 오후, 카메라 왼쪽 큰 창의 자연광과 천장 패널 조명"
+  },
+  "해질녘": {
+   "time_en": "the last orange hour of the workday",
+   "time_prep": "in",
+   "sky_en": "warm orange light entering through the pale blinds",
+   "light_en": "orange evening light comes through the blinds on the camera's right of {o}, laying thin stripes across {p} cheek and shoulder",
+   "shadow_en": "long soft stripes of shade lie across the carpet toward the camera's left",
+   "desc_ko": "퇴근 무렵, 카메라 오른쪽 블라인드 사이로 들어오는 주황빛 줄무늬"
+  },
+  "야근": {
+   "time_en": "late at night",
+   "time_prep": "at",
+   "sky_en": "a few desk lamps under dark windows",
+   "light_en": "a small white desk lamp stands to the camera's left of {o}, falling across {p} face and shoulders, with a single row of ceiling panels lit far behind",
+   "shadow_en": "deep shadows gather between the empty desks behind {o}",
+   "desc_ko": "야근하는 밤, 카메라 왼쪽 책상 스탠드와 멀리 켜진 천장 한 줄"
+  }
+ },
+ "moments": {
+  "책상에 기대 서기": {
+   "pose_en": "leans one hip against a gray desk with {p} arms loosely crossed",
+   "moment_en": "{s} looks toward the camera with a relaxed smile",
+   "desc_ko": "회색 책상에 기대 팔짱을 끼고 카메라를 봄",
+   "frames": [
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "모니터 보다 돌아보기": {
+   "pose_en": "sits at a desk with one hand on the keyboard",
+   "moment_en": "{s} turns {p} head toward the camera with a tired smile",
+   "desc_ko": "책상에서 키보드에 손을 얹은 채 카메라 쪽으로 고개를 돌리며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "서류 안고 걷기": {
+   "pose_en": "walks along the aisle between the desks holding a stack of papers against {p} chest",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "책상 사이 통로를 서류를 안고 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  },
+  "턱 괴고 화면 보기": {
+   "pose_en": "sits at a desk with one elbow on the desk and {p} chin resting on {p} hand",
+   "moment_en": "{s} glances toward the camera with a small smile",
+   "desc_ko": "책상에서 턱을 괴고 있다가 카메라를 슬쩍 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ],
+   "wrist_straight": true
+  },
+  "창가에 서기": {
+   "pose_en": "stands beside a tall window with one hand holding the edge of the blinds",
+   "moment_en": "{s} looks toward the camera with a calm smile",
+   "desc_ko": "큰 창 옆에서 블라인드 끝을 한 손으로 잡고 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "머리 쓸어 넘기며 웃기": {
+   "pose_en": "stands beside a gray desk with one hand sweeping a strand of hair away from {p} face",
+   "moment_en": "{s} laughs softly toward the camera",
+   "desc_ko": "회색 책상 옆에서 한 손으로 머리카락을 얼굴에서 쓸어 넘기며 카메라를 보고 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
+  },
+  "입가 가리고 웃기": {
+   "pose_en": "stands beside a gray desk with the back of one hand held lightly against {p} mouth",
+   "moment_en": "{s} laughs with {p} eyes crinkled toward the camera",
+   "desc_ko": "회색 책상 옆에서 손등으로 입가를 가볍게 가리고 눈웃음으로 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the desks softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the desks softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the desks softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the desks softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the desks softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the desks softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the desks softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the gray carpet tiles",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮": [
+   "the desks are flat gray laminate with thin metal legs",
+   "the ceiling lights are long white panels set in a grid",
+   "the monitors are black with plain white screens"
+  ],
+  "해질녘": [
+   "the desks are flat gray laminate with thin metal legs",
+   "the ceiling lights are long white panels set in a grid",
+   "the blinds are pale gray vertical slats half open"
+  ],
+  "야근": [
+   "the desks are flat gray laminate with thin metal legs",
+   "the ceiling lights are long white panels set in a grid",
+   "the rest of the office is dark gray with the glow of a few monitors"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the desks and the monitors spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

@@ -1,0 +1,426 @@
+[
+  {
+    "prompt_id": "523c11c75de2",
+    "created_at": "2026-10-03T20:26:18+09:00",
+    "seed": 4284970622,
+    "mode": "natural",
+    "prompt": "35mm film still photography, cinematic still photography. A single adult subject, a Korean woman in her mid-20s, with a slim oval face, a defined jawline, a straight nose, and expressive eyebrows. Her eyes are warm brown, sharp and almond-shaped with slightly downturned outer corners, and a small mole sits just beneath one eye. Her long wavy hair has dark navy-black roots fading into deep wine-red ends, worn half-up with loose flyaway strands framing her face., a soft thoughtful expression, natural realistic skin texture with fine pores and subtle microtexture, appears in the frame. The moment takes place during the early evening with light drizzle outside, in a dreamlike and atmospheric visual atmosphere. The subject wears deep brown skirt, relaxed fit, gently structured silhouette, small evenly spaced dots, made from natural cotton with visible fine fiber character; moderately dense fiber structure, ultra-fine fibers, opaque, ultra-lightweight thickness, very light fabric weight, natural cotton microtexture, matte surface response, minimal stretch, very fluid hand, soft flowing drape; fine tonal stitching; clean zipper finish; soft gravity-driven folds around the lower garment; lightly rumpled; polished flats; simple watch. The subject wears gold, soft contrast accent button-up shirt, oversized fit, soft relaxed silhouette, fine herringbone pattern, made from smooth fine silk with elegant fluid movement; very tightly packed fine fiber structure, very fine fibers, semi-opaque, substantial medium-heavy thickness, light fabric weight, smooth fine-grained surface, gentle satin-like sheen, low stretch, very fluid hand, highly fluid cascading drape; minimal topstitching; pearl-toned buttons; soft gravity-driven folds around the lower garment; lightly rumpled; polished flats; minimal necklace. The subject is caught during a natural walking step; moving diagonally through the frame. upright torso with subtle forward momentum. Left arm: left arm swinging naturally backward; left hand: left hand relaxed during the swing. Right arm: right arm swinging naturally forward; right hand: right hand relaxed during the swing. Left leg: left leg trailing naturally behind; left foot: left foot lifting naturally behind the body. Right leg: right leg stepping forward; right foot: right foot contacting the ground and accepting weight. Head: head aligned with the direction of travel; gaze: gaze directed toward the destination. Weight is supported by right foot. Set in a stylish neighborhood cafe, with warm modern cafe interior with exposed material accents. The walls are warm plaster with subtle texture, the floor is matte concrete flooring, and the ceiling is simple ceiling with track lighting. large street-facing windows; glass entrance door. Furniture includes wooden cafe tables, upholstered chairs, bar counter. Foreground details: ceramic cup, table edge. Midground details: seated tables, counter details, pendant lights. Background details: espresso bar, street windows, small shelves. Decor: framed prints, potted plants, coffee equipment. Practical objects: ceramic cup, menu board, small plate. The space is noticeably cluttered but still coherent, with rich layered visual density, soft muted pastel palette, and clear foreground, middle ground, and receding background depth. Lighting uses low warm sunlight through the window from camera-right, with gentle warm fill, small practical lamps, and warm ambient room light. Color temperature is approximately 4300K. long soft shadows; warm highlights on reflective surfaces; moderate contrast. Shot as a full-body portrait with a 40mm lens from slightly above eye level, clean side angle, moderate camera distance, with a natural third-person camera viewpoint. environment-led composition; the subject is slightly left of center. Use moderate depth of field, with focus on the primary subject. Visible practical props include ceramic cup, menu board. The image should feel physically grounded, naturally scaled, coherent in depth, and visually consistent from foreground to background.",
+    "metadata": {
+      "model": "pornmasterKrea2_v2TurboInt8.safetensors",
+      "app_version": "9.1.0",
+      "seed": 4284970622,
+      "mode": "natural",
+      "consistency": "standard",
+      "novelty": "varied",
+      "detail_level": "very_detailed",
+      "scene": {
+        "subject": {
+          "trigger": "yeoreum",
+          "identity": "a Korean woman in her mid-20s, with a slim oval face, a defined jawline, a straight nose, and expressive eyebrows. Her eyes are warm brown, sharp and almond-shaped with slightly downturned outer corners, and a small mole sits just beneath one eye. Her long wavy hair has dark navy-black roots fading into deep wine-red ends, worn half-up with loose flyaway strands framing her face.",
+          "hair": "",
+          "face": "",
+          "body": "",
+          "expression": "a soft thoughtful expression",
+          "skin": "natural realistic skin texture with fine pores and subtle microtexture",
+          "visible_features": "",
+          "gender": "female"
+        },
+        "people": 1,
+        "relationship": "",
+        "activity": "moving through the scene",
+        "location_name": "카페",
+        "time_of_day": "early evening",
+        "weather": "light drizzle outside",
+        "mood": "dreamlike and atmospheric",
+        "style": "cinematic still photography",
+        "medium": "35mm film still photography",
+        "palette": "soft muted pastel palette",
+        "detail_level": "very_detailed",
+        "environment_density": "풍부",
+        "pose": {
+          "template": "걷는 순간",
+          "description": "caught during a natural walking step",
+          "body": {
+            "orientation": "moving diagonally through the frame",
+            "torso": "upright torso with subtle forward momentum",
+            "left_arm": "left arm swinging naturally backward",
+            "right_arm": "right arm swinging naturally forward",
+            "left_hand": "left hand relaxed during the swing",
+            "right_hand": "right hand relaxed during the swing",
+            "left_leg": "left leg trailing naturally behind",
+            "right_leg": "right leg stepping forward",
+            "left_foot": "left foot lifting naturally behind the body",
+            "right_foot": "right foot contacting the ground and accepting weight",
+            "head": "head aligned with the direction of travel",
+            "gaze_target": "gaze directed toward the destination",
+            "weight_support": [
+              "right foot"
+            ]
+          },
+          "contact_points": [
+            "right foot"
+          ],
+          "support_points": [
+            "right foot"
+          ],
+          "complexity": 2
+        },
+        "clothing": [
+          {
+            "garment": "skirt",
+            "category": "bottom",
+            "color": "deep brown",
+            "secondary_color": "",
+            "fit": "relaxed fit",
+            "silhouette": "gently structured silhouette",
+            "pattern": "small evenly spaced dots",
+            "fabric": {
+              "fiber_family": "natural staple fiber",
+              "material": "cotton",
+              "construction": "woven or knitted cotton",
+              "density": "moderately dense fiber structure",
+              "fiber_fineness": "ultra-fine fibers",
+              "opacity": "opaque",
+              "thickness": "ultra-lightweight thickness",
+              "weight": "very light fabric weight",
+              "texture": "natural cotton microtexture",
+              "sheen": "matte surface response",
+              "stretch": "minimal stretch",
+              "stiffness": "very fluid hand",
+              "drape": "soft flowing drape",
+              "prompt": "natural cotton with visible fine fiber character; moderately dense fiber structure, ultra-fine fibers, opaque, ultra-lightweight thickness, very light fabric weight, natural cotton microtexture, matte surface response, minimal stretch, very fluid hand, soft flowing drape"
+            },
+            "construction_details": "fine tonal stitching; clean zipper finish; soft gravity-driven folds around the lower garment; lightly rumpled",
+            "hardware": "clean zipper finish",
+            "folds": "soft gravity-driven folds around the lower garment",
+            "condition": "lightly rumpled",
+            "footwear": "polished flats",
+            "accessories": "simple watch"
+          },
+          {
+            "garment": "button-up shirt",
+            "category": "top",
+            "color": "gold",
+            "secondary_color": "soft contrast accent",
+            "fit": "oversized fit",
+            "silhouette": "soft relaxed silhouette",
+            "pattern": "fine herringbone pattern",
+            "fabric": {
+              "fiber_family": "natural filament fiber",
+              "material": "silk",
+              "construction": "fine woven fabric",
+              "density": "very tightly packed fine fiber structure",
+              "fiber_fineness": "very fine fibers",
+              "opacity": "semi-opaque",
+              "thickness": "substantial medium-heavy thickness",
+              "weight": "light fabric weight",
+              "texture": "smooth fine-grained surface",
+              "sheen": "gentle satin-like sheen",
+              "stretch": "low stretch",
+              "stiffness": "very fluid hand",
+              "drape": "highly fluid cascading drape",
+              "prompt": "smooth fine silk with elegant fluid movement; very tightly packed fine fiber structure, very fine fibers, semi-opaque, substantial medium-heavy thickness, light fabric weight, smooth fine-grained surface, gentle satin-like sheen, low stretch, very fluid hand, highly fluid cascading drape"
+            },
+            "construction_details": "minimal topstitching; pearl-toned buttons; soft gravity-driven folds around the lower garment; lightly rumpled",
+            "hardware": "pearl-toned buttons",
+            "folds": "soft gravity-driven folds around the lower garment",
+            "condition": "lightly rumpled",
+            "footwear": "polished flats",
+            "accessories": "minimal necklace"
+          }
+        ],
+        "environment": {
+          "location": "a stylish neighborhood cafe",
+          "architecture": "warm modern cafe interior with exposed material accents",
+          "wall": "warm plaster with subtle texture",
+          "floor": "matte concrete flooring",
+          "ceiling": "simple ceiling with track lighting",
+          "windows": "large street-facing windows",
+          "doors": "glass entrance door",
+          "furniture": [
+            "wooden cafe tables",
+            "upholstered chairs",
+            "bar counter"
+          ],
+          "foreground": [
+            "ceramic cup",
+            "table edge"
+          ],
+          "midground": [
+            "seated tables",
+            "counter details",
+            "pendant lights"
+          ],
+          "background": [
+            "espresso bar",
+            "street windows",
+            "small shelves"
+          ],
+          "decor": [
+            "framed prints",
+            "potted plants",
+            "coffee equipment"
+          ],
+          "practical_objects": [
+            "ceramic cup",
+            "menu board",
+            "small plate"
+          ],
+          "condition": "noticeably cluttered but still coherent",
+          "density": "rich layered visual density",
+          "palette": "soft muted pastel palette",
+          "spatial_depth": "clear foreground, middle ground, and receding background depth"
+        },
+        "lighting": {
+          "key_source": "low warm sunlight through the window",
+          "direction": "from camera-right",
+          "fill": "gentle warm fill",
+          "practical": "small practical lamps",
+          "ambient": "warm ambient room light",
+          "color_temperature": "4300K",
+          "shadow": "long soft shadows",
+          "reflection": "warm highlights on reflective surfaces",
+          "contrast": "moderate contrast"
+        },
+        "camera": {
+          "shot": "full-body portrait",
+          "lens": 40,
+          "height": "slightly above eye level",
+          "horizontal_angle": "clean side angle",
+          "vertical_angle": "level vertical axis",
+          "distance": "moderate camera distance",
+          "viewpoint": "natural third-person camera viewpoint",
+          "composition": "environment-led composition",
+          "subject_placement": "slightly left of center",
+          "depth_of_field": "moderate depth of field",
+          "focus_target": "the primary subject"
+        },
+        "props": [
+          "ceramic cup",
+          "menu board"
+        ],
+        "second_subject": null,
+        "second_clothing": [],
+        "exact_text": [],
+        "notes": ""
+      }
+    },
+    "tags": [
+      "카페",
+      "very_detailed",
+      "풍부",
+      "varied"
+    ]
+  },
+  {
+    "prompt_id": "3b1f189ebc69",
+    "created_at": "2026-10-03T20:24:34+09:00",
+    "seed": 607869707,
+    "mode": "smart_random",
+    "prompt": "high-end digital photography, refined magazine photography. A single adult subject, an adult person, a relaxed subtle smile, natural realistic skin texture with fine pores and subtle microtexture, appears in the frame. The moment takes place during the early morning with light snowfall outside, in a warm and inviting visual atmosphere. The subject wears terracotta, subtle tonal trim skirt, slim close fit, gently structured silhouette, fine pinstripes, made from fine organza with a crisp translucent structure; dense fine fiber structure, ultra-fine fibers, highly translucent, lightweight thickness, light fabric weight, crisp smooth surface, clear refined luster, minimal stretch, balanced structure, controlled structured drape; minimal topstitching; minimal metal hardware; clean controlled folds along the seams; naturally worn; clean ankle boots; simple watch. The subject wears gold blouse, structured fit, minimal tailored silhouette, fine herringbone pattern, made from natural cotton with visible fine fiber character; very tightly packed fine fiber structure, ultra-fine fibers, opaque, ultra-lightweight thickness, heavy fabric weight, natural cotton microtexture, subtle soft sheen, moderate stretch, soft flexible hand, soft flowing drape; subtle seam definition; minimal metal hardware; soft gravity-driven folds around the lower garment; neatly arranged; low-profile heels; minimal necklace. The subject is caught during a natural walking step; moving diagonally through the frame. upright torso with subtle forward momentum. Left arm: left arm swinging naturally backward; left hand: left hand relaxed during the swing. Right arm: right arm swinging naturally forward; right hand: right hand relaxed during the swing. Left leg: left leg trailing naturally behind; left foot: left foot lifting naturally behind the body. Right leg: right leg stepping forward; right foot: right foot contacting the ground and accepting weight. Head: head aligned with the direction of travel; gaze: gaze directed toward the destination. Weight is supported by right foot. Set in a contemporary rooftop terrace, with clean urban rooftop architecture with concrete and metal details. The walls are low concrete parapet walls, the floor is large-format concrete pavers, and the ceiling is open sky. glass building walls nearby; metal-framed rooftop access door. Furniture includes outdoor lounge chair, low metal table, bench. Foreground details: concrete pavers, planter edge. Midground details: lounge furniture, planters, low railing. Background details: city skyline, neighboring buildings, open sky. Decor: architectural planters, small lanterns. Practical objects: outdoor lamp, metal side table. The space is noticeably cluttered but still coherent, with balanced visual density, soft muted pastel palette, and clear foreground, middle ground, and receding background depth. Lighting uses low warm sunlight through the window from camera-right, with gentle warm fill, small practical lamps, and warm ambient room light. Color temperature is approximately 4300K. long soft shadows; warm highlights on reflective surfaces; moderate contrast. Shot as a wide environmental shot with a 70mm lens from eye level, straight-on, environmental distance, with a natural third-person camera viewpoint. asymmetrical editorial composition; the subject is slightly right of center. Use deep focus for environmental detail, with focus on the primary subject. Visible practical props include outdoor lamp, metal side table. The image should feel physically grounded, naturally scaled, coherent in depth, and visually consistent from foreground to background.",
+    "metadata": {
+      "model": "pornmasterKrea2_v2TurboInt8.safetensors",
+      "app_version": "9.1.0",
+      "seed": 607869707,
+      "mode": "smart_random",
+      "consistency": "standard",
+      "novelty": "balanced",
+      "detail_level": "very_detailed",
+      "scene": {
+        "subject": {
+          "trigger": "yeoreum",
+          "identity": "an adult person",
+          "hair": "",
+          "face": "",
+          "body": "",
+          "expression": "a relaxed subtle smile",
+          "skin": "natural realistic skin texture with fine pores and subtle microtexture",
+          "visible_features": "",
+          "gender": ""
+        },
+        "people": 1,
+        "relationship": "",
+        "activity": "moving through the scene",
+        "location_name": "루프탑",
+        "time_of_day": "early morning",
+        "weather": "light snowfall outside",
+        "mood": "warm and inviting",
+        "style": "refined magazine photography",
+        "medium": "high-end digital photography",
+        "palette": "soft muted pastel palette",
+        "detail_level": "very_detailed",
+        "environment_density": "보통",
+        "pose": {
+          "template": "걷는 순간",
+          "description": "caught during a natural walking step",
+          "body": {
+            "orientation": "moving diagonally through the frame",
+            "torso": "upright torso with subtle forward momentum",
+            "left_arm": "left arm swinging naturally backward",
+            "right_arm": "right arm swinging naturally forward",
+            "left_hand": "left hand relaxed during the swing",
+            "right_hand": "right hand relaxed during the swing",
+            "left_leg": "left leg trailing naturally behind",
+            "right_leg": "right leg stepping forward",
+            "left_foot": "left foot lifting naturally behind the body",
+            "right_foot": "right foot contacting the ground and accepting weight",
+            "head": "head aligned with the direction of travel",
+            "gaze_target": "gaze directed toward the destination",
+            "weight_support": [
+              "right foot"
+            ]
+          },
+          "contact_points": [
+            "right foot"
+          ],
+          "support_points": [
+            "right foot"
+          ],
+          "complexity": 2
+        },
+        "clothing": [
+          {
+            "garment": "skirt",
+            "category": "bottom",
+            "color": "terracotta",
+            "secondary_color": "subtle tonal trim",
+            "fit": "slim close fit",
+            "silhouette": "gently structured silhouette",
+            "pattern": "fine pinstripes",
+            "fabric": {
+              "fiber_family": "filament fiber",
+              "material": "organza",
+              "construction": "fine plain weave",
+              "density": "dense fine fiber structure",
+              "fiber_fineness": "ultra-fine fibers",
+              "opacity": "highly translucent",
+              "thickness": "lightweight thickness",
+              "weight": "light fabric weight",
+              "texture": "crisp smooth surface",
+              "sheen": "clear refined luster",
+              "stretch": "minimal stretch",
+              "stiffness": "balanced structure",
+              "drape": "controlled structured drape",
+              "prompt": "fine organza with a crisp translucent structure; dense fine fiber structure, ultra-fine fibers, highly translucent, lightweight thickness, light fabric weight, crisp smooth surface, clear refined luster, minimal stretch, balanced structure, controlled structured drape"
+            },
+            "construction_details": "minimal topstitching; minimal metal hardware; clean controlled folds along the seams; naturally worn",
+            "hardware": "minimal metal hardware",
+            "folds": "clean controlled folds along the seams",
+            "condition": "naturally worn",
+            "footwear": "clean ankle boots",
+            "accessories": "simple watch"
+          },
+          {
+            "garment": "blouse",
+            "category": "top",
+            "color": "gold",
+            "secondary_color": "none",
+            "fit": "structured fit",
+            "silhouette": "minimal tailored silhouette",
+            "pattern": "fine herringbone pattern",
+            "fabric": {
+              "fiber_family": "natural staple fiber",
+              "material": "cotton",
+              "construction": "woven or knitted cotton",
+              "density": "very tightly packed fine fiber structure",
+              "fiber_fineness": "ultra-fine fibers",
+              "opacity": "opaque",
+              "thickness": "ultra-lightweight thickness",
+              "weight": "heavy fabric weight",
+              "texture": "natural cotton microtexture",
+              "sheen": "subtle soft sheen",
+              "stretch": "moderate stretch",
+              "stiffness": "soft flexible hand",
+              "drape": "soft flowing drape",
+              "prompt": "natural cotton with visible fine fiber character; very tightly packed fine fiber structure, ultra-fine fibers, opaque, ultra-lightweight thickness, heavy fabric weight, natural cotton microtexture, subtle soft sheen, moderate stretch, soft flexible hand, soft flowing drape"
+            },
+            "construction_details": "subtle seam definition; minimal metal hardware; soft gravity-driven folds around the lower garment; neatly arranged",
+            "hardware": "minimal metal hardware",
+            "folds": "soft gravity-driven folds around the lower garment",
+            "condition": "neatly arranged",
+            "footwear": "low-profile heels",
+            "accessories": "minimal necklace"
+          }
+        ],
+        "environment": {
+          "location": "a contemporary rooftop terrace",
+          "architecture": "clean urban rooftop architecture with concrete and metal details",
+          "wall": "low concrete parapet walls",
+          "floor": "large-format concrete pavers",
+          "ceiling": "open sky",
+          "windows": "glass building walls nearby",
+          "doors": "metal-framed rooftop access door",
+          "furniture": [
+            "outdoor lounge chair",
+            "low metal table",
+            "bench"
+          ],
+          "foreground": [
+            "concrete pavers",
+            "planter edge"
+          ],
+          "midground": [
+            "lounge furniture",
+            "planters",
+            "low railing"
+          ],
+          "background": [
+            "city skyline",
+            "neighboring buildings",
+            "open sky"
+          ],
+          "decor": [
+            "architectural planters",
+            "small lanterns"
+          ],
+          "practical_objects": [
+            "outdoor lamp",
+            "metal side table"
+          ],
+          "condition": "noticeably cluttered but still coherent",
+          "density": "balanced visual density",
+          "palette": "soft muted pastel palette",
+          "spatial_depth": "clear foreground, middle ground, and receding background depth"
+        },
+        "lighting": {
+          "key_source": "low warm sunlight through the window",
+          "direction": "from camera-right",
+          "fill": "gentle warm fill",
+          "practical": "small practical lamps",
+          "ambient": "warm ambient room light",
+          "color_temperature": "4300K",
+          "shadow": "long soft shadows",
+          "reflection": "warm highlights on reflective surfaces",
+          "contrast": "moderate contrast"
+        },
+        "camera": {
+          "shot": "wide environmental shot",
+          "lens": 70,
+          "height": "eye level",
+          "horizontal_angle": "straight-on",
+          "vertical_angle": "level vertical axis",
+          "distance": "environmental distance",
+          "viewpoint": "natural third-person camera viewpoint",
+          "composition": "asymmetrical editorial composition",
+          "subject_placement": "slightly right of center",
+          "depth_of_field": "deep focus for environmental detail",
+          "focus_target": "the primary subject"
+        },
+        "props": [
+          "outdoor lamp",
+          "metal side table"
+        ],
+        "second_subject": null,
+        "second_clothing": [],
+        "exact_text": [],
+        "notes": ""
+      }
+    },
+    "tags": [
+      "루프탑",
+      "very_detailed",
+      "보통",
+      "balanced"
+    ]
+  }
+]

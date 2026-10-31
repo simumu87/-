@@ -1,0 +1,169 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "온실 카페",
+ "outdoor": false,
+ "note_ko": "구체적인 장소 팩(오빠 1026: 분위기·재질을 구체적으로 적어야 공간이 달라진다). 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a glasshouse café full of green plants with white iron-framed glass walls and small round tables",
+ "feature_en": [
+  "tall palms and hanging ferns under a curved glass roof with thin white iron ribs",
+  "small round marble tables with slim bentwood chairs"
+ ],
+ "ground_en": [
+  "a floor of black and white square tiles",
+  "clay pots of green plants along the aisle"
+ ],
+ "far_en": [
+  "a long wooden counter at the far end with a row of glass cake stands",
+  "a wall of climbing green vines on a white trellis"
+ ],
+ "times": {
+  "낮": {
+   "time_en": "a bright afternoon",
+   "time_prep": "on",
+   "sky_en": "soft daylight pouring through the curved glass roof",
+   "light_en": "soft daylight comes through the glass roof from above and from the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "soft dappled shadows of the leaves gather on the tiles toward the camera's right",
+   "desc_ko": "밝은 오후, 위와 카메라 왼쪽 유리 지붕을 지나는 부드러운 자연광"
+  },
+  "해질녘": {
+   "time_en": "the last orange hour of the afternoon",
+   "time_prep": "in",
+   "sky_en": "warm orange light entering through the glass walls",
+   "light_en": "orange evening light comes through the glass wall on the camera's right of {o}, falling across {p} cheek and shoulder",
+   "shadow_en": "long soft shadows of the plants lie across the tiles toward the camera's left",
+   "desc_ko": "해질녘, 카메라 오른쪽 유리벽에서 들어오는 주황빛"
+  },
+  "밤": {
+   "time_en": "the evening",
+   "time_prep": "in",
+   "sky_en": "warm string lights under a dark glass roof",
+   "light_en": "warm yellow light from a string of small bulbs hangs above and in front of {o}, falling on {p} face and shoulders",
+   "shadow_en": "deep shadows gather among the plants behind {o}",
+   "desc_ko": "저녁, 머리 위 앞쪽 전구 줄의 따뜻한 노란빛"
+  }
+ },
+ "moments": {
+  "화분 사이에 서기": {
+   "pose_en": "stands in the aisle between the clay pots with one hand touching a hanging fern",
+   "moment_en": "{s} looks toward the camera with a gentle smile",
+   "desc_ko": "화분 사이 통로에서 한 손으로 늘어진 고사리 잎을 만지며 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
+  },
+  "대리석 테이블에 앉기": {
+   "pose_en": "sits at a small marble table with both hands around a ceramic cup",
+   "moment_en": "{s} looks toward the camera over the cup with a soft smile",
+   "desc_ko": "작은 대리석 테이블에 앉아 도자기 컵을 두 손으로 감싸고 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "잎 사이로 올려다보기": {
+   "pose_en": "stands under a tall palm with {p} face tilted up toward the glass roof",
+   "moment_en": "{s} looks up at the glass roof and the leaves with a faint smile",
+   "desc_ko": "키 큰 야자 아래서 유리 지붕과 잎을 올려다보며 미소",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "gaze": "up"
+  },
+  "턱 괴고 케이크 보기": {
+   "pose_en": "sits at the table with one elbow on the marble and {p} chin resting on {p} hand beside a slice of cake",
+   "moment_en": "{s} looks up toward the camera with a playful smile",
+   "desc_ko": "테이블에서 케이크 옆에 턱을 괴고 카메라를 올려다보며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ],
+   "wrist_straight": true
+  },
+  "천천히 걷기": {
+   "pose_en": "walks slowly along the tiled aisle with one foot stepping forward",
+   "moment_en": "{s} looks toward the camera with a soft smile",
+   "desc_ko": "타일 통로를 천천히 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  },
+  "고개 기울여 웃기": {
+   "pose_en": "stands among the green plants with {p} head tilted slightly to one side",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "초록 식물 사이에서 고개를 살짝 기울이고 카메라를 보며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "눈 감고 미소 짓기": {
+   "pose_en": "stands among the green plants with {p} eyes closed and {p} face turned slightly upward",
+   "moment_en": "{s} smiles faintly with {p} lips closed",
+   "desc_ko": "초록 식물 사이에서 눈을 감고 얼굴을 살짝 들어 입을 다문 채 미소",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "gaze": "closed"
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the plants softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the plants softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the plants softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the plants softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the plants softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the plants softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the plants softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the black and white tiles",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮": [
+   "the glass panes are clear in thin white iron frames",
+   "the marble table tops are white with soft gray veins",
+   "the palm leaves are broad and glossy green with a few pale yellow edges"
+  ],
+  "해질녘": [
+   "the glass panes are clear in thin white iron frames",
+   "the marble table tops are white with soft gray veins",
+   "the iron ribs of the roof cast thin lines of shade on the tiles"
+  ],
+  "밤": [
+   "the glass panes are clear in thin white iron frames",
+   "the marble table tops are white with soft gray veins",
+   "the glass roof is a dark dome with the reflected string lights"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the plants and the glass roof spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

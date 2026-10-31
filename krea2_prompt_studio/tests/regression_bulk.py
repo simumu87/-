@@ -1,0 +1,657 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Bulk regression check: python tests/regression_bulk.py [seeds]
+
+Generates 1-person and 2-person prompts for many seeds and asserts that none of
+the known v10.0.2 defects come back. Run from the package folder (needs Python 3.8+).
+"""
+import importlib
+import json
+import re
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import krea2_prompt_studio as k  # noqa: E402
+
+CHECKS = [
+    ("char-split join", re.compile(r"\b\w; \w; \w")),
+    ("ungrammatical placement", re.compile(r"\bat (in|near|along|far|slightly)\b")),
+    ("unset trigger leaked", re.compile(r"(^|, )auto, ")),
+    ("korean leaked", re.compile(r"[가-힣]")),
+]
+SOLO_BAD = re.compile(r"other person|another person|each other|two people")
+
+
+def hair_checks():
+    """LoRA hair: kept when no override, fully replaced when overridden."""
+    problems = []
+    for override in ("", "straight blunt bangs over the forehead, hair worn loose past the shoulders"):
+        o = k.GenerationOptions(seed=5)
+        o.person_a = k.PersonSlot(slot="PERSON_A", lora_trigger="nayoon")
+        c = k.defaults()
+        if override:
+            k.set_constraint_value(c, "hair_A", override)
+        text = k.generate_one(o, c, seed=5).combined_prompt
+        has_knot = "half-up style" in text
+        if override and (has_knot or "blunt bangs" not in text):
+            problems.append((0, 1, "hair override did not replace the LoRA hair"))
+        if not override and not has_knot:
+            problems.append((0, 1, "LoRA hair missing when no override"))
+    return problems
+
+
+def pool_checks():
+    """Pool files must reload to the exact in-code defaults and cover every pool."""
+    import json
+    problems = []
+    for name in k.POOL_LABELS_KO:
+        path = k.POOLS_DIR / f"{name.lower()}.json"
+        if not path.exists():
+            problems.append((0, 0, f"pool file missing: {path.name}"))
+            continue
+        items = json.loads(path.read_text(encoding="utf-8"))["items"]
+        if {ko: v["en"] for ko, v in items.items()} != getattr(k, name):
+            problems.append((0, 0, f"pool file differs from loaded pool: {name}"))
+        if any(re.search(r"[가-힣]", v["en"]) for v in items.values()):
+            problems.append((0, 0, f"Hangul inside an English value: {name}"))
+    return problems
+
+
+def composer_checks():
+    """v11 composer: both modes, every hair preset, every expression, both times - no problems, trigger first."""
+    import krea2_composer as c
+    problems = []
+    for mode in c.MODES:
+        for hair in [""] + list(c.load_hair_presets()) + ["free text hair: a tidy side braid over her left shoulder"]:
+            for expression in c.load_expressions():
+                for time_key in ("해질녘", "오후", "밤", "밤(달빛만)", "밤(달빛 역광)", "밤(달빛 측광)", "밤(달빛 측광·위치만)"):
+                    counts = []
+                    for lv in (0, 1, 2):
+                        rr = c.compose_split("nayoon", "gold_amber_triangle_string_bikini", time_key=time_key,
+                                             expression=expression, hair=hair, mode=mode, reinforce=lv)
+                        counts.append(rr["words"])
+                        for pr in rr["problems"]:
+                            problems.append((0, 0, f"composer {(mode, hair[:12], expression, time_key, lv)}: {pr}"))
+                        if "{" in rr["combined"] or "}" in rr["combined"]:
+                            problems.append((0, 0, f"composer {(mode, hair[:12], expression, time_key, lv)}: unfilled placeholder"))
+                    if not (counts[0] < counts[1] < counts[2]):
+                        problems.append((0, 0, f"composer {(mode, hair[:12], expression, time_key)}: reinforcement does not add text {counts}"))
+                    r = c.compose_split("nayoon", "gold_amber_triangle_string_bikini", time_key=time_key,
+                                        expression=expression, hair=hair, mode=mode)
+                    tag = (mode, hair[:12], expression, time_key)
+                    for pr in r["problems"]:
+                        problems.append((0, 0, f"composer {tag}: {pr}"))
+                    if not r["combined"].startswith("nayoon, "):
+                        problems.append((0, 0, f"composer {tag}: trigger is not first"))
+                    if "the woman" in r["combined"]:
+                        problems.append((0, 0, f"composer {tag}: 'the woman' leaked into the combined prompt"))
+                    if "{" in r["combined"] or "}" in r["combined"]:
+                        problems.append((0, 0, f"composer {tag}: unfilled placeholder"))
+                    if hair in c.load_hair_presets() and "Hairstyle" in r["combined"]:
+                        problems.append((0, 0, f"composer {tag}: label in prompt"))
+                    if "the woman" not in r["scene"]:
+                        problems.append((0, 0, f"composer {tag}: regional scene prompt should say 'the woman'"))
+    return problems
+
+
+def pack_checks():
+    """Every scene pack x time x valid moment x frame x mode: clean prose, only what the frame can show."""
+    import krea2_composer as c
+    problems = []
+    feet = re.compile(r"\b(feet|foot|ankles?|barefoot|toes)\b", re.I)
+    for loc in c.PACK_FILES:
+        pack = c.load_pack(loc)
+        for tk in pack["times"]:
+            for mk, mo in pack["moments"].items():
+                for fr in pack["camera"]:
+                    if fr not in mo.get("frames", list(pack["camera"])):
+                        continue
+                    for mode in c.MODES:
+                        for outfit, common in (("", True), ("", False)) + ((("gold_amber_triangle_string_bikini", False),) if loc == "해변" else ()):
+                            tag = (loc, tk, mk, fr, mode, bool(outfit), common)
+                            r = c.compose_split("nayoon", outfit, location=loc, time_key=tk, moment=mk, framing=fr,
+                                                mode=mode, seed=3, common_outfit=common)
+                            for pr in r["problems"]:
+                                problems.append((0, 0, f"pack {tag}: {pr}"))
+                            text = r["combined"]
+                            if "{" in text or "}" in text:
+                                problems.append((0, 0, f"pack {tag}: unfilled placeholder"))
+                            if re.search(r"\b(at|on|in) (at|on|in)\b|\bthe the\b|\ba [aeiou]\w|\ban [bcdfghjklmnpqrstvwxyz]\w", text):
+                                problems.append((0, 0, f"pack {tag}: grammar slip"))
+                            if loc != "해변" and re.search(r"bikini|swimsuit", text, re.I):
+                                problems.append((0, 0, f"pack {tag}: swimwear outside the beach"))
+                            if fr != "전신" and feet.search(r["scene"]):
+                                problems.append((0, 0, f"pack {tag}: feet written but the frame cannot show them"))
+    return problems
+
+
+def pose2p_checks():
+    """2-person pose library: both bodies agree on the contact, nothing the frame cannot show, no grammar slips."""
+    import krea2_pose2p as lib
+    problems = [(0, 2, f"pose library: {x}") for x in lib.validate()]
+    feet = re.compile(r"\b(feet|foot|knees?)\b", re.I)
+    for inter, pose in lib.load_poses().items():
+        for framing in ("전신", "무릎 위", "허리 위", "가슴 위", "클로즈업"):
+            for seed in range(1, 25):
+                c = k.defaults()
+                k.set_constraint_value(c, "people", "2")
+                k.set_constraint_value(c, "interaction", inter)
+                k.set_constraint_value(c, "framing", framing)
+                try:
+                    r = k.generate_one(k.GenerationOptions(seed=seed), c, seed=seed)
+                except Exception as exc:  # noqa: BLE001
+                    problems.append((seed, 2, f"pose2p {inter}/{framing}: generation failed {exc!r}"))
+                    continue
+                if k.build_scene(seed, c, None, None, "", False).interaction_key != inter:
+                    continue                                   # the rules replaced the interaction for this activity
+                a, b = r.person_a_prompt, r.person_b_prompt
+                if re.search(r"\bis (stands|sits)\b", a + b):
+                    problems.append((seed, 2, f"pose2p {inter}/{framing}: 'is stands/sits'"))
+                if re.search(r"\b(left|right) (hand|arm|foot|leg|shoulder)\b", a + b):
+                    problems.append((seed, 2, f"pose2p {inter}/{framing}: left/right limb wording"))
+                if framing in pose["frames_ok"]:
+                    for word in pose["contacts"]:
+                        if word not in a or word not in b:
+                            problems.append((seed, 2, f"pose2p {inter}/{framing}: contact '{word}' missing on one side"))
+                    if framing != "전신" and feet.search(a + b) and "feet" in (a + b).lower():
+                        problems.append((seed, 2, f"pose2p {inter}/{framing}: feet written but not visible"))
+                    if a.count("looking") + a.count("gaze") > 1 or b.count("looking") + b.count("gaze") > 1:
+                        problems.append((seed, 2, f"pose2p {inter}/{framing}: two gaze statements"))
+    return problems
+
+
+def pose1p_checks():
+    """1-person pose library x every framing: only what the frame shows, one gaze, extent sentence present."""
+    import krea2_pose1p as lib
+    problems = [(0, 1, f"pose1p library: {x}") for x in lib.validate()]
+    legs = re.compile(r"\b(knees?|legs?|shins?|feet|foot|heel|toes)\b", re.I)
+    rules = k.scene_rules()
+    for pose_key in lib.load_poses():
+        for framing in k.CAMERA_FRAMING:
+            depth = rules.depth_of(framing)
+            c = k.defaults()
+            k.set_constraint_value(c, "people", "1")
+            k.set_constraint_value(c, "pose", pose_key)
+            k.set_constraint_value(c, "framing", framing)
+            for seed in (1, 2, 3):
+                try:
+                    r = k.generate_one(k.GenerationOptions(seed=seed), c, seed=seed)
+                except Exception as exc:  # noqa: BLE001
+                    problems.append((seed, 1, f"pose1p {pose_key}/{framing}: generation failed {exc!r}"))
+                    continue
+                if k.build_scene(seed, c, None, None, "", False).pose_a.get("pose_key") != pose_key:
+                    continue                                    # the rules swapped the pose for this activity
+                text = r.combined_prompt
+                m = re.search(r"[^.]*\b(?:is|are) (?:standing|sitting|walking|kneeling|running|riding|holding|performing)\b[^.]*\.", text)
+                body = m.group(0) if m else ""
+                if depth < 5 and legs.search(body):
+                    problems.append((seed, 1, f"pose1p {pose_key}/{framing}: leg/foot words but the frame ends above the knees"))
+                if depth < 6 and re.search(r"\b(feet|foot|heel|toes)\b", body, re.I):
+                    problems.append((seed, 1, f"pose1p {pose_key}/{framing}: feet written but not visible"))
+                if "frame" not in text or ("taking up" not in text and "filling" not in text and "fills the frame" not in text and "frame ends" not in text):
+                    problems.append((seed, 1, f"pose1p {pose_key}/{framing}: no extent sentence"))
+                if re.search(r"\b(left|right) (hand|arm|foot|leg|shoulder|knee)\b", text):
+                    problems.append((seed, 1, f"pose1p {pose_key}/{framing}: left/right limb wording"))
+    return problems
+
+
+def desc_checks():
+    """Every option shown in a menu must carry a Korean description."""
+    problems = []
+    live = {"THEMES": k.THEMES, "RELATIONSHIPS": k.RELATIONSHIPS, "INTERACTIONS": k.INTERACTIONS,
+            "ACTIVITIES": k.ACTIVITIES, "TIME_OF_DAY": k.TIME_OF_DAY, "WEATHER": k.WEATHER, "MOODS": k.MOODS,
+            "REALISM": k.REALISM, "SKIN_FINISH": k.SKIN_FINISH, "CAMERA_FRAMING": k.CAMERA_FRAMING,
+            "VIEWPOINTS": k.VIEWPOINTS, "COMPOSITIONS": k.COMPOSITIONS, "LIGHT_SOURCES": k.LIGHT_SOURCES,
+            "STYLE_LIBRARY": k.STYLE_LIBRARY, "PALETTES": k.PALETTES, "COLORS": k.COLORS,
+            "CLOTHING_STATES": k.CLOTHING_STATES, "LOCATIONS": k.LOCATIONS, "BASE_POSES": k.BASE_POSES,
+            "GARMENTS": k.GARMENTS, "FABRICS": k.FABRICS, "ENV_DENSITY": k.ENV_DENSITY,
+            "RANDOM_MODES": k.RANDOM_MODES}
+    for group, data in live.items():
+        descs = k.option_descriptions(group)
+        for key in data:
+            if not descs.get(key):
+                problems.append((0, 0, f"no Korean description: {group}/{key}"))
+        for key, text in descs.items():
+            if not re.search(r"[가-힣]", text):
+                problems.append((0, 0, f"description is not Korean: {group}/{key}"))
+    import krea2_composer as c
+    for key, v in c.load_expressions().items():
+        if not v.get("desc_ko"):
+            problems.append((0, 0, f"no Korean description: expression/{key}"))
+    for key, v in c.load_hair_presets().items():
+        if not v.get("desc_ko"):
+            problems.append((0, 0, f"no Korean description: hair preset/{key}"))
+    # each expression must name the emotion AND describe it anatomically ("a wide, genuine smile: cheeks rise ...")
+    labels = {"환한 미소": "smile", "은은한 미소": "smile", "수줍은 미소": "smile", "장난스러운 미소": "smirk",
+              "메롱": "tongue", "놀람": "surprised", "윙크": "wink", "무표정": "neutral"}
+    for key, v in c.load_expressions().items():
+        main = v.get("main_en", "")
+        want = labels.get(key)
+        if want and want not in main.lower():
+            problems.append((0, 0, f"expression {key}: emotion label '{want}' missing in main_en"))
+        if ":" not in main and key in labels:
+            problems.append((0, 0, f"expression {key}: no 'label: anatomy' structure in main_en"))
+        if re.search(r"narrow|squint|half-clos", " ".join(str(x) for x in v.values()), re.I):
+            problems.append((0, 0, f"expression {key}: eye-narrowing wording"))
+        if key in labels and len(main.split()) < 18:
+            problems.append((0, 0, f"expression {key}: anatomy description too short"))
+    pack = c.load_pack("해변")
+    for sect in ("times", "moments"):
+        for key, v in pack[sect].items():
+            if not v.get("desc_ko"):
+                problems.append((0, 0, f"no Korean description: beach {sect}/{key}"))
+    return problems
+
+
+def engine_prose_checks():
+    """Menu modes 1-4 (generate_one) must use the v11 prose style."""
+    import krea2_prose  # noqa: F401
+    problems = []
+    for seed in range(1, 41):
+        for people in (1, 2):
+            for detail in ("보통", "상세"):
+                c = k.defaults()
+                k.set_constraint_value(c, "people", str(people))
+                o = k.GenerationOptions(seed=seed, detail=detail)
+                try:
+                    r = k.generate_one(o, c, seed=seed)
+                except Exception as exc:  # noqa: BLE001
+                    problems.append((seed, people, f"engine path failed ({detail}): {exc!r}"))
+                    continue
+                text = r.combined_prompt
+                tag = (seed, people, detail)
+                if re.search(r"\b[A-Z][a-z]+:\s", text):
+                    problems.append((*tag[:2], f"label in engine prompt ({detail})"))
+                if re.search(r"scale lock|Keep all|believable|proportionally sized|human-scale|front-left|front-right", text):
+                    problems.append((*tag[:2], f"legacy wording in engine prompt ({detail})"))
+                if re.search(r"\bThey (is|has|wears)\b|\ba [aeiou]\w|\ban [bcdfghjklmnpqrstvwxyz]\w", text):
+                    problems.append((*tag[:2], f"grammar slip in engine prompt ({detail})"))
+                if people == 2 and not (r.person_a_prompt and r.person_b_prompt and r.global_prompt):
+                    problems.append((*tag[:2], "regional parts missing"))
+    # a LoRA person: trigger first, LoRA hair kept, hair override replaces it
+    o = k.GenerationOptions(seed=3)
+    o.person_a = k.PersonSlot(slot="PERSON_A", lora_trigger="nayoon")
+    text = k.generate_one(o, k.defaults(), seed=3).combined_prompt
+    if not text.startswith("nayoon, ") or "half-up style" not in text:
+        problems.append((3, 1, "LoRA person: trigger/hair missing in engine prompt"))
+    return problems
+
+
+def consistency_checks():
+    """Automatically resolved scenes must not contradict themselves (pose/interaction/light/clothing)."""
+    import scene_consistency
+    return [] if scene_consistency.main(120, quiet=True) == 0 else [(0, 0, "scene contradictions found (run tests/scene_consistency.py)")]
+
+
+def visibility_checks():
+    """Write only what the frame can show; a top always comes with a bottom (or a dress)."""
+    problems = []
+    import krea2_prose as pr
+    rules = k.scene_rules()
+    for seed in range(1, 61):
+        for framing in ("전신", "허리 위", "클로즈업"):
+            c = k.defaults()
+            k.set_constraint_value(c, "people", "1")
+            k.set_constraint_value(c, "framing", framing)
+            try:
+                sc = k.build_scene(seed, c, None, None, "", False)
+                text = k.generate_one(k.GenerationOptions(seed=seed), c, seed=seed).combined_prompt.lower()
+            except Exception as exc:  # noqa: BLE001
+                problems.append((seed, 1, f"visibility run failed ({framing}): {exc!r}"))
+                continue
+            main_g = sc.clothing_a
+            slot = rules.garment_slot(main_g.garment_key)
+            if slot in ("top", "bottom") and sc.clothing_extra_a is None:
+                problems.append((seed, 1, "top/bottom outfit without its companion garment"))
+            foot = k.pr_plain(main_g.footwear).lower() if hasattr(k, "pr_plain") else main_g.footwear.lower()
+            if framing != "전신" and foot and foot in text:
+                problems.append((seed, 1, f"footwear written although the frame ({framing}) cannot show it"))
+            sheer = [g for g in (main_g, sc.clothing_extra_a) if g is not None
+                     and g.fabric.key in rules.data["layers"]["sheer_materials"]
+                     and rules.slot_visible(rules.garment_slot(g.garment_key), rules.depth_of(framing))]
+            if sheer and rules.data["layers"].get("enabled", False) and "opaque" not in text:
+                problems.append((seed, 1, f"sheer garment without an opaque under-layer ({framing})"))
+            if framing == "전신" and sc.clothing_extra_a is not None:
+                for g in (main_g, sc.clothing_extra_a):
+                    if pr.plain(g.color).lower() not in text:
+                        problems.append((seed, 1, "full-body prompt misses one of the two garments"))
+                        break
+    return problems
+
+
+def frame_visibility_checks():
+    """New frames (클로즈업·가슴 위·허리 위·허벅지 위) never write feet, shoes or ankles, for every LoRA outfit in every place it is listed."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    feet = re.compile(r"\b(feet|foot|ankles?|barefoot|toes|shoes|sneakers|loafers|boots|sandals|heels|socks|slingbacks)\b", re.I)
+    for trig in ("hangyeol", "yeoreum"):
+        for oid in c.outfits_for_trigger(trig):
+            o = c.load_outfit(oid)
+            for loc in o["applies_to"]["locations"]:
+                pk = c.load_pack(loc)
+                for fr in ("클로즈업", "가슴 위", "허리 위", "허벅지 위"):
+                    if fr not in pk["camera"]:
+                        continue
+                    ms = [m for m, v in pk["moments"].items() if fr in v.get("frames", list(pk["camera"]))]
+                    if not ms:
+                        problems.append((9, 1, f"{loc}: no moment can be shown in {fr}"))
+                        continue
+                    r = c.compose_split(trig, oid, location=loc, time_key=list(pk["times"])[0], moment=ms[0], framing=fr,
+                                        expression="은은한 미소", mode="상세", seed=3)
+                    if r["problems"] or feet.search(r["person"]):
+                        problems.append((9, 1, f"{oid} @ {loc} / {fr}: {r['problems']} {feet.search(r['person']).group(0) if feet.search(r['person']) else ''}"))
+    return problems
+
+
+def gaze_checks():
+    """Every moment x every expression: the person text never looks at the camera and somewhere else at once;
+    a closed-eye moment only conflicts with the open-eye expressions (놀람, 윙크), which must raise the notice."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    exps = list(c.load_expressions())
+    for loc in c.PACK_FILES:
+        pk = c.load_pack(loc)
+        for mname, mo in pk["moments"].items():
+            fr = mo.get("frames", list(pk["camera"]))[0]
+            for e in exps:
+                r = c.compose_split("hangyeol", "", location=loc, time_key=list(pk["times"])[0], moment=mname, framing=fr,
+                                    expression=e, mode="보통", seed=1, common_outfit=True)
+                gz = mo.get("gaze", "camera")
+                bad = [x for x in r["problems"] if x.startswith("gaze conflict")]
+                if bad:
+                    problems.append((9, 1, f"{loc}/{mname}/{e}: {bad}"))
+                closed_conflict = any("eyes closed" in x for x in r["problems"])
+                if gz == "closed" and e in ("놀람", "윙크") and not closed_conflict:
+                    problems.append((9, 1, f"{loc}/{mname}/{e}: closed eyes + open-eye expression not flagged"))
+                if closed_conflict and not (gz == "closed" and e in ("놀람", "윙크")):
+                    problems.append((9, 1, f"{loc}/{mname}/{e}: eyes-closed notice without reason"))
+    return problems
+
+
+def accessory_pose_checks():
+    """Accessory switches (yeoreum): kelpin 0/1 times, engraving only with the necklace, watch only in full-body, one-necklace sentence;
+    duplicate necklace is flagged; a typed pose replaces the moment; hand on the chin gets the straight-wrist sentence."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    pk = c.load_pack("도시 거리")
+    base = dict(location="도시 거리", time_key=list(pk["times"])[0], moment=list(pk["moments"])[0], framing="전신",
+                expression="은은한 미소", mode="보통", seed=4)
+    oid = "yeoreum_black_rib_bodycon_midi_loafers"
+
+    def n(**kw):
+        r = c.compose_split("yeoreum", oid, **{**base, **kw})
+        return r["combined"], r["problems"], r["sections"]
+    t, pr, _ = n()
+    if t.count("kelpin") != 1 or "only one necklace" not in t or pr:
+        problems.append((9, 1, f"default accessories wrong: kelpin {t.count('kelpin')} {pr}"))
+    t, pr, _ = n(accessories={"necklace": False, "engraving": "금색", "watch": False})
+    if "kelpin" in t or "only one necklace" in t or "capital letter Y" in t:
+        problems.append((9, 1, "necklace off still leaves kelpin / one-necklace / Y"))
+    for pick, word in (("금색", "gold"), ("은색", "silver"), ("검정", "black")):
+        t, pr, sec = n(accessories={"engraving": pick})
+        if f"engraved in {word}" not in t or "engraving" not in sec or t.count("kelpin") != 1:
+            problems.append((9, 1, f"engraving {pick} wrong"))
+    t, _, _ = n(accessories={"watch": True})
+    if "orvael" not in t:
+        problems.append((9, 1, "watch on in full-body did not appear"))
+    t, _, _ = n(accessories={"watch": True}, framing="무릎 위")
+    if "Her orvael set, a cobalt-navy watch with thin thread bracelets, sits on her image-right wrist at her hip." not in t:
+        problems.append((9, 1, "watch sentence is not the caption original in a framing that shows the wrist"))
+    for hidden in ("허리 위", "가슴 위", "클로즈업"):
+        if hidden in c.load_pack("도시 거리")["camera"]:
+            t, _, _ = n(accessories={"watch": True}, framing=hidden, moment=[m for m, v in pk["moments"].items() if hidden in v["frames"]][0])
+            if "orvael" in t:
+                problems.append((9, 1, f"watch appeared in {hidden}, which hides the wrist"))
+    r = c.compose_split("yeoreum", oid, accessories={"watch": True}, **{**base, "moment": "머리카락 귀 뒤로 넘기며 웃기"})
+    if not any("raises a hand" in x for x in r["problems"]):
+        problems.append((9, 1, "watch + hand-to-hair pose not flagged")) 
+    r = c.compose_split("yeoreum", outfit_text="a white blouse with a gold necklace", **base)
+    if not any("two necklaces" in x for x in r["problems"]):
+        problems.append((9, 1, "duplicate necklace not flagged"))
+    r = c.compose_split("yeoreum", outfit_text="a white blouse with a gold necklace", accessories={"necklace": False}, **base)
+    if any("two necklaces" in x for x in r["problems"]):
+        problems.append((9, 1, "duplicate necklace flagged although the signature necklace is off"))
+    r = c.compose_split("hangyeol", pose_text="sits at the table with her chin resting on one hand", **{**base, "framing": "무릎 위"})
+    if "sits at the table" not in r["person"] or "wrist stays straight" not in r["person"] or r["problems"]:
+        problems.append((9, 1, f"typed pose or wrist sentence missing: {r['problems']}"))
+    r = c.compose_split("hangyeol", pose_text="stands with her shoes on the floor", **{**base, "framing": "무릎 위"})
+    if not any("feet or shoes" in x for x in r["problems"]):
+        problems.append((9, 1, "feet in a typed pose not flagged for a framing that hides them"))
+    return problems
+
+
+def outfit_custom_checks():
+    """Outfit lists are per LoRA; a typed outfit goes into the prompt as it is; a color pick swaps only the main color words."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    pk = c.load_pack("도시 거리")
+    base = dict(location="도시 거리", time_key=list(pk["times"])[0], moment=list(pk["moments"])[0], framing="무릎 위",
+                expression="은은한 미소", mode="상세", seed=4)
+    if any(o.startswith("hangyeol") for o in c.outfits_for_trigger("yeoreum")):
+        problems.append((9, 1, "a hangyeol outfit is listed for yeoreum"))
+    if not c.outfits_for_trigger("yeoreum"):
+        problems.append((9, 1, "yeoreum has no outfit list"))
+    text = "a lavender knit cardigan and a white pleated skirt"
+    out = c.compose_split("yeoreum", outfit_text=text, **base)
+    if text not in out["person"] or out["problems"]:
+        problems.append((9, 1, f"typed outfit missing or flagged: {out['problems']}"))
+    for oid in c.outfits_for_trigger("yeoreum") + c.outfits_for_trigger("hangyeol"):
+        o = c.load_outfit(oid)
+        old = (o.get("color", {}).get("primary", {}).get("en") or "").split(" and ")[0]
+        for name, en in c.load_outfit_colors().items():
+            r = c.compose_split("yeoreum" if oid.startswith("yeoreum") or oid.startswith("gold") else "hangyeol", oid,
+                                outfit_color=name, **{**base, "location": o["applies_to"]["locations"][0],
+                                                       "time_key": list(c.load_pack(o["applies_to"]["locations"][0])["times"])[0],
+                                                       "moment": [m for m, v in c.load_pack(o["applies_to"]["locations"][0])["moments"].items()
+                                                                  if "무릎 위" in v.get("frames", list(c.load_pack(o["applies_to"]["locations"][0])["camera"]))][0]}) \
+                if "무릎 위" in c.load_pack(o["applies_to"]["locations"][0])["camera"] else None
+            if r is None:
+                continue
+            if r["problems"]:
+                problems.append((9, 1, f"{oid} x {name}: {r['problems']}"))
+            if "{" in r["person"]:
+                problems.append((9, 1, f"{oid} x {name}: unfilled slot"))
+    return problems
+
+
+def hair_color_checks():
+    """Every hair preset x every hair color composes cleanly; the color reaches the prompt and its own section; the default color is replaced."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    base = dict(location="해변", time_key="해질녘", moment="파도 발목", framing="전신", expression="환한 미소", mode="보통", seed=2)
+    presets, colors = c.load_hair_presets(), c.load_hair_colors()
+    for name, v in colors.items():
+        if re.search(r"[가-힣]", v["en"] + v["emphasis_en"]):
+            problems.append((9, 1, f"hair color {name}: Hangul in English field"))
+        r = c.compose_split("hangyeol", hair_color=name, **base)
+        if r["problems"]:
+            problems.append((9, 1, f"hair color {name}: {r['problems']}"))
+        if v["en"].lower() not in r["person"].lower() or "hair" not in r["sections"]:
+            problems.append((9, 1, f"hair color {name}: not in the prompt or the hair section is missing"))
+        if "dark brown-black" in r["person"]:
+            problems.append((9, 1, f"hair color {name}: the LoRA default color word survived"))
+        for hp, pv in presets.items():
+            r = c.compose_split("hangyeol", hair=hp, hair_color=name, **{**base, "mode": "상세"})
+            if r["problems"]:
+                problems.append((9, 1, f"hair {hp} x {name}: {r['problems']}"))
+            if "{" in r["person"] or "dark brown-black" in r["person"]:
+                problems.append((9, 1, f"hair {hp} x {name}: unfilled slot or the default color survived"))
+    r = c.compose_split("hangyeol", **base)
+    if "hair" in r["sections"]:
+        problems.append((9, 1, "hair section present although no hair color was picked"))
+    # a LoRA hair color written as a clause ("... at the roots, fading ..."): a preset or free hair text drops the color word
+    # and states the color once, in its own sentence; the LoRA's own hair stays untouched when no hair is picked
+    for trig in ("yeoreum", "nayoon", "danhee"):
+        color = c.k.lora_profile_for_trigger(trig)["hair_color"]
+        for hp in list(presets) + ["straight blunt bangs over the forehead, hair worn loose past the shoulders"]:
+            r = c.compose_split(trig, hair=hp, **base)
+            n = r["person"].count(color)
+            if r["problems"] or n != 1 or "{" in r["person"] or "  " in r["person"] or "hair" not in r["sections"]:
+                problems.append((9, 1, f"{trig} x {hp[:30]}: clause hair color written {n} times / {r['problems']}"))
+        own = c.k.clean_text(c.k.lora_profile_for_trigger(trig)["hair"]).rstrip(".")
+        if own not in c.compose_split(trig, **base)["person"]:
+            problems.append((9, 1, f"{trig}: the LoRA's own hair text is missing when no hair is picked"))
+    return problems
+
+
+def makeup_checks():
+    """Makeup is selectable: every makeup in makeup.json composes cleanly, a pick replaces the LoRA default, reference mode leaves it out."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    base = dict(location="해변", time_key="해질녘", moment="파도 발목", framing="전신", expression="환한 미소", mode="보통", seed=2)
+    items = c.load_makeup()
+    for name, v in items.items():
+        if re.search(r"[가-힣]", v["prose_en"]):
+            problems.append((9, 1, f"makeup {name}: Hangul in prose_en"))
+        r = c.compose_split("hangyeol", makeup=name, **base)
+        if r["problems"]:
+            problems.append((9, 1, f"makeup {name}: {r['problems']}"))
+        if v["prose_en"].lower() not in r["person"].lower():
+            problems.append((9, 1, f"makeup {name}: not in the person prompt"))
+        ref = c.compose_split("hangyeol", makeup=name, reference=True, **base)
+        if v["prose_en"].lower() in ref["person"].lower():
+            problems.append((9, 1, f"makeup {name}: present in reference mode"))
+    # a LoRA default (loras.json `makeup`) is used when nothing is picked and replaced when something is picked
+    k = importlib.import_module("krea2_prompt_studio")
+    lora = dict(k.lora_profile_for_trigger("hangyeol"))
+    lora["makeup"] = "faint peach blush and sheer rose lips"
+    orig = k.lora_profile_for_trigger
+    k.lora_profile_for_trigger = lambda t: lora if t == "hangyeol" else orig(t)
+    try:
+        keep = c.compose_split("hangyeol", **base)["person"]
+        pick = c.compose_split("hangyeol", makeup="Dewy", **base)["person"]
+    finally:
+        k.lora_profile_for_trigger = orig
+    if "faint peach blush and sheer rose lips" not in keep:
+        problems.append((9, 1, "LoRA default makeup missing when nothing is picked"))
+    if "faint peach blush" in pick or "dewy makeup" not in pick.lower():
+        problems.append((9, 1, "a makeup pick did not replace the LoRA default"))
+    return problems
+
+
+def gui_checks():
+    """The sections returned by compose_split rebuild a clean weighted prompt, and the GUI server functions answer."""
+    problems = []
+    c = importlib.import_module("krea2_composer")
+    w = importlib.import_module("krea2_weighted")
+    g = importlib.import_module("gui_server")
+    opt = g.options()
+    if not opt["loras"] or not opt["locations"]:
+        problems.append((10, 1, "gui options empty"))
+    for trig in ("hangyeol", "nayoon", "ara"):
+        for loc in list(c.PACK_FILES)[:4]:
+            place = g.place_options(trig, loc)
+            if not (place["times"] and place["framings"] and place["moments"]):
+                problems.append((10, 1, f"gui place options empty: {trig} {loc}"))
+                continue
+            body = {"trigger": trig, "outfit": "__common__", "location": loc, "time": place["times"][0]["key"],
+                    "framing": place["framings"][0], "moment": [m for m in place["moments"] if place["framings"][0] in m["frames"]][0]["key"],
+                    "expression": opt["expressions"][0]["key"], "seed": 5}
+            out = g.compose(body)
+            need = {"identity", "action", "skin", "setting", "light", "camera", "style"}
+            if not need <= set(out["sections"]):
+                problems.append((10, 1, f"sections missing: {trig} {loc} {need - set(out['sections'])}"))
+            text = out["weighted"]
+            if text.count("(") != text.count(")"):
+                problems.append((10, 1, f"unbalanced brackets: {trig} {loc}"))
+            if not text.startswith("(Lighting:1.1)."):
+                problems.append((10, 1, f"lighting tag missing: {trig} {loc}"))
+            if re.search(r"[가-힣]", text):
+                problems.append((10, 1, f"Hangul in weighted prompt: {trig} {loc}"))
+            if re.search(r":\d(?:\.\d+)?\)[^.\n]", text):
+                problems.append((10, 1, f"weighted group not closed with a period: {trig} {loc}"))
+    # V67 lighting trigger words: none = the tag alone; picked words follow it in the chosen form; the tag off = no words either
+    sec = {"identity": "hangyeol, a young woman.", "outfit": "She wears a dress.", "action": "She stands.", "setting": "A street.",
+           "camera": "Medium shot.", "light": "Light from the left.", "skin": "x", "style": "natural."}
+    first = lambda **kw: w.weighted_prompt(sec, **kw).split("\n")[0]
+    cfg = json.loads((c.k.CONFIG_DIR / "lighting_triggers.json").read_text(encoding="utf-8"))
+    if len(cfg["items"]) != 20 or len({x["en"] for x in cfg["items"]}) != 20:
+        problems.append((10, 1, "lighting_triggers.json must hold the 20 distinct trigger words"))
+    if not first().startswith("(Lighting:1.1). hangyeol"):
+        problems.append((10, 1, "lighting tag alone changed"))
+    allw = [x["en"] for x in cfg["items"]]
+    t = first(lighting_words=allw)
+    if not t.startswith("(Lighting:1.1). Cinematic lighting, dramatic shadows") or "LED strips" not in t or not t.split(". ")[1].endswith("high contrast"):
+        problems.append((10, 1, f"lighting words (separate) wrong: {t[:120]}"))
+    t = first(lighting_words=["golden hour", "rim light"], lighting_format="inline")
+    if not t.startswith("(Lighting:1.1), golden hour, rim light. hangyeol"):
+        problems.append((10, 1, f"lighting words (inline) wrong: {t[:100]}"))
+    if first(lighting_words=["rim light"], lighting_tag=False).startswith("("):
+        problems.append((10, 1, "lighting words appeared although the tag is off"))
+    # the weights really change the output, and an empty weight removes the brackets
+    r = c.compose_split("hangyeol", "", location="해변", time_key="해질녘", moment="파도 발목", framing="전신", expression="환한 미소", seed=1, common_outfit=True)
+    a = w.weighted_prompt(r["sections"], {"outfit": 1.6})
+    b = w.weighted_prompt(r["sections"], {"outfit": None})
+    if ":1.6)" not in a or ":1.6)" in b:
+        problems.append((10, 1, "outfit weight does not switch the brackets"))
+    return problems
+
+
+def hangyeol_checks():
+    """Hangyeol outfits: every listed outfit x its locations x times x frames x modes composes cleanly,
+    and each outfit only names what the frame can show (shoes only on full-length, belt/skirt only from the waist down)."""
+    out = []
+    c = importlib.import_module("krea2_composer")
+    shoe = re.compile(r"\b(?:shoes?|sandals?|sneakers?)\b", re.I)
+    lower = re.compile(r"\b(?:skirt|belt|pleat\w*|tiered)\b", re.I)
+    rules = k.scene_rules()
+    for oid in c.outfits_for_trigger("hangyeol"):
+        data = c.load_outfit(oid)
+        for loc in data["applies_to"]["locations"]:
+            pack = c.load_pack(loc)
+            for tk in pack["times"]:
+                for mk, mv in pack["moments"].items():
+                    for fr in mv.get("frames", list(pack["camera"])):
+                        if fr not in pack["camera"]:
+                            continue
+                        depth = rules.depth_of(fr)
+                        for mode in ("보통", "상세"):
+                            r = c.compose_split("hangyeol", oid, location=loc, time_key=tk, moment=mk, framing=fr, mode=mode, seed=3, common_outfit=False)
+                            person = r["person"]
+                            tag = (oid, loc, tk, mk, fr, mode)
+                            if r["problems"]:
+                                out.append((0, 1, f"hangyeol compose problems {tag}: {r['problems'][:2]}"))
+                            wear = person.split("She wears", 1)[-1].split(".", 1)[0] if "She wears" in person else ""
+                            if depth < 6 and shoe.search(wear):
+                                out.append((0, 1, f"hangyeol footwear in a frame without feet {tag}"))
+                            if depth <= 1 and lower.search(wear) and "swimsuit" not in oid:
+                                out.append((0, 1, f"hangyeol lower garment in a chest-up frame {tag}"))
+    # reference mode: no identity / skin sentence, and clearly shorter than the normal prompt
+    base = dict(location="은행나무 길", time_key="오후", moment="천천히 걷기", framing="전신", mode="보통", seed=3, common_outfit=False)
+    full = c.compose_split("hangyeol", "hangyeol_autumn_cream_knit_sage_pleated", **base)
+    ref = c.compose_split("hangyeol", "hangyeol_autumn_cream_knit_sage_pleated", reference=True, **base)
+    if re.search(r"hangyeol|oval face|vellus|gold wire-frame", ref["combined"]):
+        out.append((0, 1, "reference mode still writes identity/skin text"))
+    if ref["words"] >= full["words"] - 40:
+        out.append((0, 1, f"reference mode is not shorter ({ref['words']} vs {full['words']})"))
+    if ref["problems"]:
+        out.append((0, 1, f"reference mode problems: {ref['problems'][:2]}"))
+    return out
+
+
+def main() -> int:
+    seeds = int(sys.argv[1]) if len(sys.argv) > 1 else 300
+    problems = hair_checks() + pool_checks() + composer_checks() + pack_checks() + pose2p_checks() + pose1p_checks() + desc_checks() + engine_prose_checks() + consistency_checks() + visibility_checks() + hangyeol_checks() + makeup_checks() + hair_color_checks() + outfit_custom_checks() + accessory_pose_checks() + frame_visibility_checks() + gaze_checks() + gui_checks()
+    for seed in range(1, seeds + 1):
+        for people in (1, 2):
+            c = k.defaults()
+            k.set_constraint_value(c, "people", str(people))
+            try:
+                text = k.generate_one(k.GenerationOptions(seed=seed), c, seed=seed).combined_prompt
+            except Exception as exc:  # generation must never fail
+                problems.append((seed, people, f"generation failed: {exc!r}"))
+                continue
+            for name, rx in CHECKS:
+                if rx.search(text):
+                    problems.append((seed, people, name))
+            if people == 1 and SOLO_BAD.search(text):
+                problems.append((seed, people, "two-person wording in single scene"))
+    for item in problems[:20]:
+        print("FAIL", item)
+    print(f"{seeds * 2} prompts checked, {len(problems)} problems")
+    return 1 if problems else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

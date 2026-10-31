@@ -1,0 +1,162 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "호텔 로비",
+ "outdoor": false,
+ "note_ko": "구체적인 장소 팩(오빠 1026: 분위기·재질을 구체적으로 적어야 공간이 달라진다). 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a grand hotel lobby with a polished marble floor, a tall coffered ceiling and a reception desk of dark wood",
+ "feature_en": [
+  "a large crystal chandelier hanging from the high coffered ceiling",
+  "a seating area of deep green velvet armchairs around a low brass table"
+ ],
+ "ground_en": [
+  "a polished cream marble floor with thin gold inlay lines",
+  "a patterned wool rug in deep green and gold"
+ ],
+ "far_en": [
+  "a long reception desk of dark walnut with a brass lamp",
+  "tall arched windows with heavy curtains"
+ ],
+ "times": {
+  "낮": {
+   "time_en": "a quiet weekday afternoon",
+   "time_prep": "on",
+   "sky_en": "soft daylight from the tall arched windows mixing with the chandelier",
+   "light_en": "daylight comes from the tall arched window on the camera's left, falling across {p} face and shoulders, with warm chandelier light above",
+   "shadow_en": "soft shadows of the armchairs gather on the marble toward the camera's right",
+   "desc_ko": "조용한 평일 오후, 카메라 왼쪽 아치 창의 자연광과 위의 샹들리에"
+  },
+  "해질녘": {
+   "time_en": "the last orange hour of the afternoon",
+   "time_prep": "in",
+   "sky_en": "warm orange light entering through the tall arched windows",
+   "light_en": "orange evening light comes through the tall arched window on the camera's right of {o}, falling across {p} cheek and shoulder, with warm chandelier light above",
+   "shadow_en": "long soft shadows of the columns lie across the marble toward the camera's left",
+   "desc_ko": "해질녘, 카메라 오른쪽 아치 창에서 들어오는 주황빛과 샹들리에"
+  },
+  "밤": {
+   "time_en": "late at night",
+   "time_prep": "in",
+   "sky_en": "warm chandelier light under dark arched windows",
+   "light_en": "warm gold light from the crystal chandelier hangs above and slightly in front of {o}, and a brass lamp on the desk stands to the camera's left",
+   "shadow_en": "deep shadows gather in the corners of the lobby behind {o}",
+   "desc_ko": "한밤, 머리 위 앞쪽 샹들리에와 카메라 왼쪽 데스크 램프"
+  }
+ },
+ "moments": {
+  "벨벳 의자에 앉기": {
+   "pose_en": "sits in a deep green velvet armchair with {p} hands resting on the armrests",
+   "moment_en": "{s} looks toward the camera with a calm smile",
+   "desc_ko": "초록 벨벳 의자에 앉아 팔걸이에 손을 두고 카메라를 봄",
+   "frames": [
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "샹들리에 올려다보기": {
+   "pose_en": "stands in the middle of the lobby with {p} chin lifted toward the chandelier",
+   "moment_en": "{s} looks up at the chandelier with a faint smile",
+   "desc_ko": "로비 한가운데서 샹들리에를 올려다보며 미소",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true,
+   "gaze": "up"
+  },
+  "대리석 기둥에 기대기": {
+   "pose_en": "leans one shoulder against a marble column with {p} arms loosely crossed",
+   "moment_en": "{s} looks toward the camera with a relaxed smile",
+   "desc_ko": "대리석 기둥에 어깨를 기대고 팔짱을 낀 채 카메라를 봄",
+   "frames": [
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "리셉션 데스크에 한 손 올리기": {
+   "pose_en": "stands beside the reception desk with one hand resting on the dark wood",
+   "moment_en": "{s} turns {p} head toward the camera with a polite smile",
+   "desc_ko": "리셉션 데스크 옆에서 한 손을 얹고 카메라 쪽으로 고개를 돌림",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "로비 걷기": {
+   "pose_en": "walks slowly across the marble floor with one foot stepping forward",
+   "moment_en": "{s} looks toward the camera with a soft smile",
+   "desc_ko": "대리석 바닥을 천천히 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  },
+  "고개 기울여 웃기": {
+   "pose_en": "stands in the marble lobby with {p} head tilted slightly to one side",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "대리석 로비에서 고개를 살짝 기울이고 카메라를 보며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "머리 쓸어 넘기며 웃기": {
+   "pose_en": "stands in the marble lobby with one hand sweeping a strand of hair away from {p} face",
+   "moment_en": "{s} laughs softly toward the camera",
+   "desc_ko": "대리석 로비에서 한 손으로 머리카락을 얼굴에서 쓸어 넘기며 카메라를 보고 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the lobby softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the lobby softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the lobby softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the lobby softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the lobby softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the lobby softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the lobby softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the polished cream marble",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮": [
+   "the marble columns are cream with fine gray veins",
+   "the brass fittings on the desk and the table are warm gold",
+   "the curtains are heavy deep green velvet tied back with gold cords"
+  ],
+  "해질녘": [
+   "the marble columns are cream with fine gray veins",
+   "the brass fittings on the desk and the table are warm gold",
+   "the cream marble floor holds long stripes of orange light and shade"
+  ],
+  "밤": [
+   "the marble columns are cream with fine gray veins",
+   "the brass fittings on the desk and the table are warm gold",
+   "the arched windows are dark panes with the reflected lights of the room"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the chandelier and the seating area spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

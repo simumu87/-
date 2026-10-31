@@ -1,0 +1,151 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "야시장",
+ "outdoor": true,
+ "note_ko": "장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성(2026-10-25 추가). {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a lively night market street lined with food stalls under strings of warm lights",
+ "feature_en": [
+  "wooden food stalls with red awnings and steaming metal pots",
+  "strings of round yellow bulbs hanging across the street"
+ ],
+ "ground_en": [
+  "a paved street lit in patches of warm yellow",
+  "gray paving stones worn smooth by many footsteps"
+ ],
+ "far_en": [
+  "the street running away between two rows of lit stalls",
+  "a crowd of small figures far down the street"
+ ],
+ "times": {
+  "밤": {
+   "time_en": "a clear night",
+   "time_prep": "on",
+   "sky_en": "a black night sky above the string lights",
+   "light_en": "warm yellow light from the hanging bulbs comes from above and in front of {o}, falling on {p} face and shoulders",
+   "shadow_en": "soft shadows gather behind {o} between the stalls",
+   "desc_ko": "맑은 밤, 머리 위 앞쪽 노란 전구들이 비춤"
+  },
+  "초저녁": {
+   "time_en": "the early evening",
+   "time_prep": "in",
+   "sky_en": "a deep blue sky above the first lit bulbs",
+   "light_en": "warm bulb light comes from the stall on the camera's left, lighting {p} face and shoulders, with cool blue evening light on the right",
+   "shadow_en": "soft shadows stretch toward the camera's right across the paving stones",
+   "desc_ko": "초저녁, 왼쪽 가판의 따뜻한 전구빛과 오른쪽의 푸른 저녁빛"
+  },
+  "한밤 파장": {
+   "time_en": "late at night",
+   "time_prep": "in",
+   "sky_en": "a black night sky above the thinning string lights",
+   "light_en": "warm yellow light from the few remaining bulbs comes from above and in front of {o}, falling on {p} face and shoulders",
+   "shadow_en": "deep shadows gather behind {o} around the closed stalls",
+   "desc_ko": "한밤 파장 무렵, 남은 전구 몇 개의 따뜻한 노란빛이 위 앞쪽에서 비춤"
+  }
+ },
+ "moments": {
+  "간식 들고 걷기": {
+   "pose_en": "walks slowly along the street holding a paper cup of tteokbokki in one hand",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "종이컵 떡볶이를 들고 길을 걸으며 카메라를 보고 웃음",
+   "frames": [
+    "전신",
+    "3/4 전신"
+   ]
+  },
+  "가판 앞에 서기": {
+   "pose_en": "stands in front of a food stall with one hand resting on the wooden counter",
+   "moment_en": "{s} looks toward the camera with a playful smile",
+   "desc_ko": "가판 앞에서 한 손을 나무 카운터에 얹고 카메라를 봄",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
+  },
+  "돌아보며 웃기": {
+   "pose_en": "stands in the middle of the street with {p} body turned slightly to one side",
+   "moment_en": "{s} turns {p} head toward the camera and laughs",
+   "desc_ko": "몸을 살짝 틀고 고개를 돌려 웃음",
+   "frames": [
+    "전신",
+    "무릎 위",
+    "허리 위",
+    "허벅지 위",
+    "3/4 전신"
+   ]
+  },
+  "꼬치 한 입": {
+   "pose_en": "holds a skewer of rice cake near {p} mouth with one hand",
+   "moment_en": "{s} looks toward the camera with {p} cheeks lifted in a smile",
+   "desc_ko": "꼬치를 입 가까이 들고 볼을 올려 웃으며 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "고개 기울여 웃기": {
+   "pose_en": "stands between the lit stalls with {p} head tilted slightly to one side",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "불 켜진 가판 사이에서 고개를 살짝 기울이고 카메라를 보며 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "눈 감고 미소 짓기": {
+   "pose_en": "stands between the lit stalls with {p} eyes closed and {p} face turned slightly upward",
+   "moment_en": "{s} smiles faintly with {p} lips closed",
+   "desc_ko": "불 켜진 가판 사이에서 눈을 감고 얼굴을 살짝 들어 입을 다문 채 미소",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "gaze": "closed"
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the stalls softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the stalls softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the stalls softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the stalls softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the stalls softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the stalls softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the stalls softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the gray paving stones",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "밤": [
+   "the bulbs are round and warm yellow, strung on black wires",
+   "the stall awnings are red and cream striped canvas",
+   "steam rises from the metal pots on the counters"
+  ],
+  "초저녁": [
+   "the first bulbs are round and warm yellow, strung on black wires",
+   "the stall awnings are red and cream striped canvas",
+   "steam rises from the metal pots on the counters"
+  ],
+  "한밤 파장": [
+   "the last bulbs hang round and warm yellow on black wires",
+   "the stall awnings are folded or pulled down in red and cream canvas",
+   "the paving stones are gray and worn smooth"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the lit stalls and the string lights spreading out on both sides of {o}",
+ "more_prefix_en": "Beyond that"
+}

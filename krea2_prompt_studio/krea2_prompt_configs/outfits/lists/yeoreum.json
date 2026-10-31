@@ -1,0 +1,23 @@
+{
+  "schema": "krea2-outfit-list/1",
+  "character": "여름",
+  "trigger": "yeoreum",
+  "lora_outfits": [
+    "yeoreum_black_cropped_jacket_white_tank_denim_skirt",
+    "yeoreum_black_rib_bodycon_midi_loafers",
+    "yeoreum_cobalt_satin_slip_mini",
+    "yeoreum_cream_satin_slip_black_cropped_cardigan",
+    "yeoreum_dusty_rose_cardigan_black_mini_boots",
+    "yeoreum_ivory_off_shoulder_knit_plaid_pleated",
+    "yeoreum_navy_halter_mini_dress_sandals",
+    "yeoreum_white_rib_tank_black_wide_pants",
+    "yeoreum_white_shirt_tied_denim_shorts",
+    "yeoreum_wine_satin_cami_black_jeans",
+    "gold_amber_triangle_string_bikini",
+    "yeoreum_black_fitted_top_black_leggings",
+    "yeoreum_wine_tank_black_leggings"
+  ],
+  "use_common_pool": true,
+  "default_source": "all",
+  "note_ko": "여름 의상(1027 의뢰서 1번): 검정 리브 바디콘 미디 원피스(여름 의상표 1009의 줄) + 의상백과 표에서 짠 9벌 + 수영복 골드 앰버 스트링 비키니. 여름 의상표의 속옷 줄은 옮기지 않았고, 올리브 코듀로이는 오빠 판정(1009 「절대 입지마」)으로 넣지 않았다. 여름 LoRA 사용 시 의상 후보 = 로라의상 + 공용의상."
+}

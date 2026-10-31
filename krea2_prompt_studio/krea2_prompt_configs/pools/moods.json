@@ -1,0 +1,51 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "MOODS",
+  "label_ko": "분위기",
+  "items": {
+    "편안함": {
+      "en": "calm and comfortable",
+      "desc_ko": "차분하고 편안한 분위기"
+    },
+    "따뜻함": {
+      "en": "warm and welcoming",
+      "desc_ko": "따뜻하고 반겨주는 분위기"
+    },
+    "낭만적": {
+      "en": "quietly romantic",
+      "desc_ko": "은은하게 낭만적인 분위기"
+    },
+    "발랄함": {
+      "en": "playful and cheerful",
+      "desc_ko": "장난스럽고 밝은 분위기"
+    },
+    "집중": {
+      "en": "focused and attentive",
+      "desc_ko": "집중하고 몰입한 분위기"
+    },
+    "차분함": {
+      "en": "peaceful and composed",
+      "desc_ko": "평화롭고 안정된 분위기"
+    },
+    "활기참": {
+      "en": "lively and energetic",
+      "desc_ko": "생기가 넘치는 분위기"
+    },
+    "향수어림": {
+      "en": "slightly nostalgic",
+      "desc_ko": "약간 그리운 느낌"
+    },
+    "아늑함": {
+      "en": "cozy and intimate in an everyday sense",
+      "desc_ko": "일상 속의 아늑하고 친밀한 분위기"
+    },
+    "세련됨": {
+      "en": "refined and contemporary",
+      "desc_ko": "정제되고 현대적인 분위기"
+    },
+    "여유로움": {
+      "en": "unhurried and relaxed",
+      "desc_ko": "서두르지 않는 느긋한 분위기"
+    }
+  }
+}

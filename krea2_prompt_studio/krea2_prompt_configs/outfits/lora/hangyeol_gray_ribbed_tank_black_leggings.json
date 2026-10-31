@@ -1,0 +1,82 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_gray_ribbed_tank_black_leggings",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "회색 리브 탱크 + 검정 레깅스",
+  "name_en": "gray ribbed tank with black leggings",
+  "desc_ko": "몸에 붙는 회색 리브 니트 탱크, 검정 하이웨이스트 레깅스, 회색 그립 양말",
+  "category": "sportswear",
+  "source_doc": "오빠 「장소는 분위기와 재질에 따라 바리에이션」(1026) · 필라테스 스튜디오에 맞는 운동복. 한결이 새로 정함",
+  "applies_to": {
+    "locations": [
+      "필라테스 스튜디오",
+      "한강 공원",
+      "공원"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "회색 + 검정",
+      "en": "gray and black"
+    }
+  },
+  "material": {
+    "ko": "리브 니트와 스트레치 직물",
+    "en": "ribbed knit and stretch fabric",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a fitted gray ribbed tank top with a scooped neckline, black high-waisted leggings and gray grip socks",
+  "normal_waist_en": "a fitted gray ribbed tank top with a scooped neckline and black high-waisted leggings",
+  "normal_noshoe_en": "a fitted gray ribbed tank top with a scooped neckline and black high-waisted leggings",
+  "normal_top_en": "a fitted gray ribbed tank top with a scooped neckline",
+  "detail_prose_en": [
+    "The gray tank top fits close with a scooped neckline and wide straps in a fine rib",
+    {
+      "depth": 2,
+      "en": "The black leggings sit high on the waist and fit close along the legs"
+    },
+    {
+      "depth": 5,
+      "en": "{P} gray grip socks have small white dots on the soles"
+    }
+  ],
+  "echo_en": [
+    "The tank top is a soft gray rib",
+    "The black leggings sit high on the waist"
+  ],
+  "lit_en": "the gray rib knit of the tank top",
+  "parts": {
+    "top": {
+      "ko": "회색 리브 탱크",
+      "en": "a fitted gray ribbed tank top with a scooped neckline",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "검정 레깅스",
+      "en": "black high-waisted leggings",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}

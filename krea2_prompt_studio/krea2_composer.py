@@ -1,0 +1,731 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Krea2 prompt composer (v11 prototype) - single-paragraph prose, no labels, no meta instructions.
+
+Layers (each owns one thing, nothing is described twice):
+    LoRA identity   -> face / body / hair only          (loras.json: identity)
+    signature       -> accessories that always stay      (loras.json: signature_accessories)
+    outfit          -> clothing                          (outfits/lora/*.json or the common pool)
+    scene           -> pose, place, light, camera        (krea2_prompt_studio scene engine)
+
+Usage:
+    python krea2_composer.py --demo
+    python krea2_composer.py --trigger nayoon --outfit gold_amber_triangle_string_bikini --seed 11
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
+import importlib
+
+_main = sys.modules.get("__main__")
+# started from the studio menu? reuse that module instead of loading a second copy
+k = _main if hasattr(_main, "lora_profile_for_trigger") else importlib.import_module("krea2_prompt_studio")
+
+OUTFIT_DIR = k.CONFIG_DIR / "outfits" / "lora"
+LIST_DIR = k.CONFIG_DIR / "outfits" / "lists"
+PRONOUNS = {"female": ("she", "her"), "male": ("he", "his")}
+
+
+# ---------------------------------------------------------------------------
+# loading
+# ---------------------------------------------------------------------------
+def load_outfit(outfit_id: str) -> Dict[str, Any]:
+    path = OUTFIT_DIR / f"{outfit_id}.json"
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def outfits_for_trigger(trigger: str) -> List[str]:
+    """Outfit ids listed for a LoRA trigger (lora outfits only; the common pool lives in the main program)."""
+    for path in sorted(LIST_DIR.glob("*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if data.get("trigger") == trigger:
+            return list(data.get("lora_outfits", []))
+    return []
+
+
+# ---------------------------------------------------------------------------
+# text helpers
+# ---------------------------------------------------------------------------
+LABEL = re.compile(r"(?:(?<=[.!?])|^)\s*(?:Hairstyle|Hair|Face|Eyes|Body|Build|Skin|Appearance)\s*:\s*", re.I)
+
+
+HAIR_LABEL = re.compile(r"[.!?]\s*(?:Hairstyle|Hair)\s*:\s*", re.I)
+
+
+def identity_to_prose(text: str, trigger: str = "", subj: str = "she") -> str:
+    """Turn a stored identity into plain prose: no 'She is', no 'Hairstyle:' labels, sentences spaced."""
+    value = re.sub(r"([.!?])(?=[A-Za-z])", r"\1 ", k.clean_text(text))   # "waist.Hairstyle" -> "waist. Hairstyle"
+    value = HAIR_LABEL.sub(f", and {subj} has ", value)                  # "... waist. Hairstyle: X" -> "... waist, and she has X"
+    value = LABEL.sub(" ", value)
+    value = re.sub(r"([.!?])\s+([a-z])", lambda m: m.group(1) + " " + m.group(2).upper(), value)
+    if trigger:
+        value = re.sub(r"^(?:she|he|they)\s+is\s+", "", value, flags=re.I)
+    value = re.sub(r"\s{2,}", " ", value).strip()
+    return value[0].lower() + value[1:] if value else value
+
+
+def sentence(text: str) -> str:
+    text = k.clean_text(text)
+    if text and text[-1] not in ".!?":
+        text += "."
+    return text[:1].upper() + text[1:] if text else text
+
+
+# one person text must not say "looks at the camera" and "eyes closed / looks up at X" together
+CAMERA_GAZE = re.compile(r"\b(?:at|toward|into) the (?:camera|lens)\b", re.I)
+GAZE_AWAY = re.compile(r"\beyes (?:are )?closed\b|\bface (?:is )?(?:tilted|turned) (?:slightly )?(?:up|upward)\b|\bchin (?:lifted|raised)\b|"
+                       r"\blooks? up at (?!the camera)|\blooking (?:up|down|away)\b(?! from under)|\blooks? (?:down|away)\b|\bhead tilted (?:slightly )?upward\b", re.I)
+
+
+def hair_sentence(subj: str, hair: str) -> str:
+    """A stored hair value is either a noun phrase ("dark hair swept back ...") or already a full sentence
+    ("Her hair is ...", "Her korvi hairstyle, ..."). A full sentence is used as it is; a noun phrase gets "She has"."""
+    text = k.clean_text(hair)
+    if re.match(r"^(?:her|his|their)\s", text, flags=re.I):
+        return sentence(text)
+    return sentence(f"{subj.capitalize()} has {text}")
+
+
+def lock_en(outfit: Dict[str, Any], lock_id: str, variant: int = 0) -> str:
+    for lock in outfit.get("locks", []):
+        if lock["id"] == lock_id:
+            variants = lock["en"]
+            return variants[variant % len(variants)]
+    return ""
+
+
+# ---------------------------------------------------------------------------
+# outfit -> prose (normal mode)
+# ---------------------------------------------------------------------------
+def _frame_depth(framing: str) -> int:
+    return int(k.scene_rules().depth_of(framing))
+
+
+def outfit_normal_for(outfit: Dict[str, Any], framing: str) -> str:
+    """Outfit sentence that only names what the frame can show.
+    Optional outfit keys: normal_top_en (depth 0-1), normal_waist_en (2-3), normal_noshoe_en (4-5, no footwear); falls back to normal_en."""
+    depth = _frame_depth(framing)
+    if depth <= 1 and outfit.get("normal_top_en"):
+        return outfit["normal_top_en"]
+    if depth <= 3 and outfit.get("normal_waist_en"):
+        return outfit["normal_waist_en"]
+    if depth < 6 and outfit.get("normal_noshoe_en"):     # feet are not in the frame yet
+        return outfit["normal_noshoe_en"]
+    return outfit["normal_en"]
+
+
+def outfit_detail_for(outfit: Dict[str, Any], framing: str) -> List[str]:
+    """detail_prose_en entries are strings (always shown) or {"depth": N, "en": text} (shown only when the frame depth >= N)."""
+    depth = _frame_depth(framing)
+    out: List[str] = []
+    for item in outfit.get("detail_prose_en", []):
+        if isinstance(item, dict):
+            if depth >= int(item.get("depth", 0)):
+                out.append(item["en"])
+        else:
+            out.append(item)
+    return out
+
+
+def outfit_normal(outfit: Dict[str, Any], subj: str) -> str:
+    parts, color, mat = outfit["parts"], outfit["color"], outfit["material"]
+    ring = lock_en(outfit, "center_ring")
+    straps = lock_en(outfit, "thin_straps")
+    top = parts["top"]["en"]
+    if ring:
+        top += f" with {ring}"
+    if straps:
+        top += f" and {straps}"
+    return (f"{subj.capitalize()} wears {top}, and {parts['bottom']['en']}, all in {color['primary']['en']} "
+            f"{mat['en']} with {mat['finish_en']}")
+
+
+# ---------------------------------------------------------------------------
+# scene -> prose (normal mode)
+# ---------------------------------------------------------------------------
+def scene_normal(scene: "k.SceneProfile", person: "k.PersonSlot", subj: str, poss: str) -> List[str]:
+    env, light, cam = scene.environment, scene.lighting, scene.camera
+    out: List[str] = []
+    out.append(sentence(f"{subj.capitalize()} is {person.pose_en} {env.sublocation}, with a {person.expression} "
+                        f"and {person.gaze}"))
+    deco = [x for x in env.decor if x][:2]
+    place = f"{env.location_en}, {env.floor}"
+    if deco:
+        place += ", with " + " and ".join(deco)
+    if env.walls:
+        place += f", and {env.walls}"
+    out.append(sentence(f"The setting is {place}"))
+    out.append(sentence(f"It is {scene.time_en} with {scene.weather_en}, lit by {light.source} {light.direction}, "
+                        f"{light.quality}, with {light.shadow}"))
+    out.append(sentence(f"{cam.framing}, {cam.lens}mm, {cam.viewpoint}, {cam.composition}, {cam.depth_of_field}"))
+    out.append(sentence(k._style_line(scene)))
+    return out
+
+
+# ---------------------------------------------------------------------------
+# compose
+# ---------------------------------------------------------------------------
+def compose_normal(scene: "k.SceneProfile", person: "k.PersonSlot", lora: Dict[str, Any],
+                   outfit: Optional[Dict[str, Any]], hair_override: str = "") -> str:
+    subj, poss = PRONOUNS.get(lora.get("gender", "female"), ("they", "their"))
+    identity = identity_to_prose(lora.get("identity", ""), lora.get("trigger", ""), subj)
+    chunks = [f"{lora['trigger']}, {identity}".rstrip(".") + "."]      # trigger stays exactly as registered
+    hair = k.clean_text(hair_override) or k.clean_text(lora.get("hair", ""))   # override replaces the LoRA hair entirely
+    if hair:
+        chunks.append(hair_sentence(subj, hair))
+    mk = resolve_makeup(lora)
+    if mk:
+        chunks.append(makeup_sentence(subj, mk))
+    for acc in lora.get("signature_accessories", []):
+        chunks.append(sentence(f"{acc} rests around {poss} neck" if "choker" in acc else f"{acc}"))
+    if outfit:
+        chunks.append(sentence(outfit_normal(outfit, subj)))
+    chunks.extend(scene_normal(scene, person, subj, poss))
+    text = " ".join(chunks)
+    text = re.sub(r"\s+([,.])", r"\1", text)
+    return re.sub(r"\s{2,}", " ", text).strip()
+
+
+# ---------------------------------------------------------------------------
+# v11 split composer: person prompt + scene prompt (the user's own structure)
+# ---------------------------------------------------------------------------
+PACK_DIR = k.CONFIG_DIR / "scene_packs"
+
+
+def _discover_packs() -> Dict[str, str]:
+    """Every scene_packs/*.json is a location; the file's own location_ko is its menu name."""
+    found = {}
+    for path in sorted(PACK_DIR.glob("*.json")):
+        try:
+            found[json.loads(path.read_text(encoding="utf-8"))["location_ko"]] = path.name
+        except (ValueError, KeyError, OSError):
+            continue
+    return found
+
+
+PACK_FILES = _discover_packs()
+MODES = ("보통", "상세")
+
+
+def _load(path: Path) -> Dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_expressions() -> Dict[str, Any]:
+    return _load(k.CONFIG_DIR / "expressions.json")["items"]
+
+
+def load_hair_presets() -> Dict[str, Any]:
+    return _load(k.CONFIG_DIR / "hair_presets.json")["items"]
+
+
+def load_makeup() -> Dict[str, Any]:
+    return _load(k.CONFIG_DIR / "makeup.json")["items"]
+
+
+def load_accessory_options() -> Dict[str, Any]:
+    return _load(k.CONFIG_DIR / "accessory_options.json")
+
+
+def resolve_accessories(lora: Dict[str, Any], trigger: str, choice: Optional[Dict[str, Any]], framing: str,
+                        subj: str, poss: str) -> Tuple[List[str], List[str], str]:
+    """(signature accessories to wear, extra accessory sentences, engraving sentence).
+    A LoRA without an entry in accessory_options.json keeps every signature accessory, as before."""
+    sigs = list(lora.get("signature_accessories", []))
+    cfg = load_accessory_options().get(trigger)
+    if not cfg:
+        return sigs, [], ""
+    choice = choice or {}
+    extra: List[str] = []
+    engraving = ""
+    neck = cfg.get("necklace")
+    neck_on = True
+    if neck:
+        neck_on = bool(choice.get("necklace", neck.get("default", True)))
+        if neck_on:
+            if neck.get("only_one_en"):
+                extra.append(sentence(_fill(neck["only_one_en"], subj, poss)))
+        else:
+            sigs = [a for a in sigs if neck["match_en"].lower() not in a.lower()]
+    eng = cfg.get("engraving")
+    if eng and neck_on:
+        pick = choice.get("engraving", eng.get("default", "끔"))
+        color_en = eng["choices"].get(pick, pick if pick and pick not in eng["choices"] else "")
+        if color_en:
+            engraving = sentence(_fill(eng["sentence_en"], subj, poss, color=color_en))
+    watch = cfg.get("watch")
+    if watch and choice.get("watch", watch.get("default", False)) and framing in watch.get("frames", ["전신"]):
+        extra.append(sentence(_fill(watch["sentence_en"], subj, poss)))
+    return sigs, extra, engraving
+
+
+def load_outfit_colors() -> Dict[str, str]:
+    return _load(k.CONFIG_DIR / "outfit_colors.json")["items"]
+
+
+def to_english(text: str) -> str:
+    """Free input: English stays as it is; Korean goes through the built-in translator (words it does not know stay Korean,
+    which the Hangul check then reports)."""
+    text = k.clean_text(text)
+    if re.search(r"[가-힣]", text):
+        from krea2_translator.translator import translate_text
+        text = k.clean_text(translate_text(text))
+    return text
+
+
+def recolor_outfit(outfit: Dict[str, Any], new_color_en: str) -> Tuple[Dict[str, Any], bool]:
+    """A copy of the outfit with its main color words replaced in every English field (only color words are touched).
+    Returns (outfit, whether any color word was found). The old color is color.primary.en; the first spelling that
+    occurs in the outfit text wins, tried in this order: the whole phrase, the first color of a list ("cream, gray and
+    brown plaid" -> "cream"), then that color without its leading adjectives ("warm deep gold-amber" -> "gold-amber").
+    A hyphenated spelling in the text ("light-blue") keeps its hyphen."""
+    old = (outfit.get("color", {}).get("primary", {}).get("en") or "").strip()
+    first = re.split(r",\s*|\s+(?:and|with)\s+", old)[0].strip()
+    first = re.sub(r"\s+(?:stripes|striped|plaid|check|checked|floral)$", "", first, flags=re.I).strip()
+    words = first.split()
+    groups = [[old], [first], [" ".join(words[i:]) for i in range(1, len(words))]]
+    english = []
+
+    def collect(node, key=""):
+        if isinstance(node, dict):
+            for kk, v in node.items():
+                if kk in ("color", "name_en", "applies_to", "source_doc"):
+                    continue
+                collect(v, kk)
+        elif isinstance(node, list):
+            for v in node:
+                collect(v, key)
+        elif isinstance(node, str) and (key == "en" or key.endswith("_en")) and not key.startswith("name") and key != "finish_en":
+            english.append(node)
+
+    collect(outfit)
+    blob = " ".join(english)
+    pats = []
+    for group in groups:
+        cands = []
+        for g in group:
+            if g:
+                cands += [g, g.replace(" ", "-")]
+        cands = sorted(set(cands), key=len, reverse=True)
+        pats = [re.compile(r"(?<![\w-])" + re.escape(cd) + r"(?![\w])", re.I) for cd in cands]
+        if any(pt.search(blob) for pt in pats):
+            break
+    else:
+        return outfit, False
+
+    hyphenated = new_color_en.replace(" ", "-")
+
+    def swap(text: str) -> str:
+        for pt in pats:
+            text = pt.sub(lambda m: hyphenated if "-" in m.group(0) else new_color_en, text)
+        # keep "a"/"an" in step with the new first sound
+        art = "an" if new_color_en[:1].lower() in "aeiou" else "a"
+        return re.sub(r"\b([Aa])n?(\s+)(?=" + re.escape(new_color_en[:1]) + r")(?=" + re.escape(new_color_en.split()[0]) + r")",
+                      lambda m: (art.capitalize() if m.group(1) == "A" else art) + m.group(2), text)
+
+    def walk(node, key=""):
+        if isinstance(node, dict):
+            return {kk: (v if kk in ("color", "name_en", "applies_to", "source_doc") else walk(v, kk)) for kk, v in node.items()}
+        if isinstance(node, list):
+            return [walk(v, key) for v in node]
+        if isinstance(node, str) and (key == "en" or key.endswith("_en")) and not key.startswith("name") and key != "finish_en":
+            return swap(node)
+        return node
+
+    return walk(outfit), True
+
+
+def load_hair_colors() -> Dict[str, Any]:
+    return _load(k.CONFIG_DIR / "hair_colors.json")["items"]
+
+
+def resolve_hair_color(pick: str) -> Tuple[str, str]:
+    """(color words, a sentence that states only the hair color). pick = a name from hair_colors.json, or free English
+    color words (the sentence is then the generic one). Empty = no override."""
+    pick = (pick or "").strip()
+    if not pick:
+        return "", ""
+    items = load_hair_colors()
+    if pick in items:
+        return items[pick]["en"], items[pick]["emphasis_en"]
+    words = k.clean_text(pick)
+    return words, "{P} hair color is a distinct " + words + " from the roots to the ends"
+
+
+def resolve_makeup(lora: Dict[str, Any], pick: str = "") -> str:
+    """The makeup text for one person. pick = a name from makeup.json, or free English text; empty keeps the
+    LoRA's own default (the `makeup` field in loras.json, empty if the LoRA has none). A pick replaces the default."""
+    pick = k.clean_text(pick)
+    if pick:
+        items = load_makeup()
+        return k.clean_text(items[pick]["prose_en"]) if pick in items else pick
+    return k.clean_text(lora.get("makeup", ""))
+
+
+def makeup_sentence(subj: str, text: str) -> str:
+    """Same rule as hair_sentence: a full sentence ("Her makeup is ...") is used as it is, a phrase gets "She has"."""
+    text = k.clean_text(text)
+    if re.match(r"^(?:her|his|their|she|he|they)\s", text, flags=re.I):
+        return sentence(text)
+    return sentence(f"{subj.capitalize()} has {text}")
+
+
+def load_pack(location_ko: str) -> Dict[str, Any]:
+    name = PACK_FILES.get(location_ko)
+    if not name:
+        raise SystemExit(f"장면 팩이 없는 장소예요: {location_ko} (있는 장소: {', '.join(PACK_FILES)})")
+    return _load(PACK_DIR / name)
+
+
+def _fill(text: str, subj: str, poss: str, obj: str = "", color: str = "", lit: str = "") -> str:
+    """{s}/{S} subject, {p}/{P} possessive, {o} object (her / the woman), {color} hair color,
+    {lit} the outfit part the light lands on (outfit "lit_en", or "her outfit")."""
+    obj = obj or ("her" if poss == "her" else "him" if poss == "his" else "them")
+    return text.format_map({"s": subj, "S": subj.capitalize(), "p": poss, "P": poss.capitalize(), "o": obj,
+                            "color": color, "lit": lit or f"{poss} outfit"})
+
+
+def _join(parts: List[str]) -> str:
+    return parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + ", and " + parts[-1]
+
+
+def compose_split(trigger: str, outfit_id: str = "", location: str = "해변", time_key: str = "해질녘",
+                  moment: str = "파도 발목", framing: str = "전신", expression: str = "환한 미소",
+                  hair: str = "", mode: str = "보통", reinforce: Optional[int] = None, seed: int = 0,
+                  common_outfit: bool = False, reference: bool = False, makeup: str = "", hair_color: str = "",
+                  outfit_text: str = "", outfit_color: str = "", accessories: Optional[Dict[str, Any]] = None,
+                  pose_text: str = "") -> Dict[str, Any]:
+    """Build the person prompt, the scene prompt and the combined single prompt.
+
+    hair: "" keeps the LoRA hair; a preset name or free text replaces it entirely.
+    makeup: "" keeps the LoRA's default makeup (loras.json `makeup`, none if absent); a name from makeup.json or free
+        English text replaces it. Left out in reference mode (the photo carries the face).
+    hair_color: "" keeps the LoRA's hair color; a name from hair_colors.json or free English color words replaces the color
+        word inside the LoRA hair (or fills {color} of a hair preset) and adds one sentence that states only the color,
+        which the weighted view can emphasize as its own section.
+    outfit_text: free outfit sentence (English; Korean goes through the translator). Replaces the chosen outfit.
+    outfit_color: a name from outfit_colors.json or free color words; only the chosen outfit's main color words are swapped.
+    pose_text: a free pose sentence (English; Korean goes through the translator). It replaces the chosen moment's pose and
+        situation sentences; `moment` is then not looked up. Hands on the chin or cheek get the straight-wrist sentence.
+    accessories: {"necklace": bool, "engraving": "끔|금색|은색|검정", "watch": bool} for LoRAs listed in accessory_options.json;
+        left out = that file's defaults (necklace on, no engraving, no watch).
+    mode: how much the scene and outfit are described. 보통 (concise) / 상세 (outfit parts, more place detail).
+    reference: True when an attached reference photo carries the face and body. The identity sentence, the skin
+        sentence and every restatement are left out, because a longer prompt makes the model drift from the photo.
+    reinforce: how many times key facts (expression, hair override, outfit essentials) are restated in
+        different words: 0 none / 1 once more / 2 twice more. None = automatic (보통 -> 0, 상세 -> 1).
+    """
+    import random
+    if mode not in MODES:
+        raise SystemExit(f"모드는 {' / '.join(MODES)} 중에서 골라주세요.")
+    detailed = mode == "상세"
+    level = (1 if detailed else 0) if reinforce is None else int(reinforce)
+    if level not in (0, 1, 2):
+        raise SystemExit("강화 횟수는 0, 1, 2 중에서 골라주세요.")
+    # a LoRA person's expression is easily overridden by the LoRA's own habit: on automatic, always restate it once
+    expr_level = max(level, 1) if reinforce is None else level
+    if reference:
+        level = expr_level = 0
+    rng = random.Random(seed)
+    lora = k.lora_profile_for_trigger(trigger)
+    if not lora:
+        raise SystemExit(f"등록되지 않은 LoRA 트리거예요: {trigger}")
+    subj, poss = PRONOUNS.get(lora.get("gender", "female"), ("they", "their"))
+    color = lora.get("hair_color", "")
+    base_color = color
+    color_words, color_sentence = resolve_hair_color(hair_color)
+    if color_words:
+        color = color_words
+    outfit = load_outfit(outfit_id) if outfit_id else None
+    custom_outfit = ""
+    outfit_problems: List[str] = []
+    pose_problems: List[str] = []
+    if (outfit_text or "").strip():
+        outfit, custom_outfit = None, to_english(outfit_text).rstrip(".")
+    elif outfit and (outfit_color or "").strip():
+        pick = outfit_color.strip()
+        new_en = load_outfit_colors().get(pick) or to_english(pick)
+        outfit, hit = recolor_outfit(outfit, new_en)
+        if not hit:
+            outfit_problems.append("outfit color words not found: the color was not changed")
+    pack = load_pack(location)
+    custom_pose = to_english(pose_text).rstrip(".") if (pose_text or "").strip() else ""
+    tm = pack["times"][time_key]
+    mo = {"pose_en": "", "moment_en": ""} if custom_pose else pack["moments"][moment]
+    if framing not in pack["camera"]:
+        raise SystemExit(f"이 장소에 없는 프레이밍이에요: {framing} (있는 것: {', '.join(pack['camera'])})")
+    if not custom_pose and framing not in mo.get("frames", list(pack["camera"])):
+        raise SystemExit(f"'{moment}' 순간은 이 프레이밍에서 보이지 않는 부분을 써요: {framing}")
+    exp = load_expressions()[expression]
+    # gaze: a moment that looks elsewhere (eyes closed, looking up) must not be told to look at the camera too
+    gaze = mo.get("gaze", "camera")
+    if custom_pose:
+        if re.search(r"\beyes (?:are )?closed\b|\bcloses? (?:her|his|their) eyes\b", custom_pose, re.I):
+            gaze = "closed"
+        elif GAZE_AWAY.search(custom_pose):
+            gaze = "away"
+    free_gaze = gaze != "camera"
+    pick = lambda key: (exp.get(key.replace("_en", "_free_en")) if free_gaze else None) or exp[key]
+    lit = (outfit or {}).get("lit_en", "")
+    f = lambda t: _fill(t, subj, poss, color=color, lit=lit)
+    # a color written as a clause ("cobalt navy at the roots, fading through ...") cannot sit before the word "hair":
+    # a hair preset or a free hair text then drops the color word and states the color in its own sentence instead
+    clause_color = bool(color) and not color_words and bool(re.search(r",|\bfading\b|\bat the roots\b|\bnot\b", color))
+    fp = (lambda t: re.sub(r"\s+", " ", _fill(t, subj, poss, color="", lit=lit)).strip()) if clause_color else f
+    fs = lambda t: _fill(t, "the woman", "the woman's", "the woman", color, lit)   # scene prompt that stands alone (regional use)
+    cap = lambda t: t[:1].upper() + t[1:]
+
+    # ---------------- person prompt: identity(face/body) -> hair -> outfit -> action/expression -> skin
+    if reference:
+        person = ["The same woman as in the attached reference photo."]
+    else:
+        person = [f"{lora['trigger']}, {identity_to_prose(lora.get('identity', ''), lora['trigger'], subj)}".rstrip(".") + "."]
+    hair_echo = hair_echo2 = ""
+    if hair:
+        presets = load_hair_presets()
+        person.append(f"Only {poss} face and body follow the {lora['trigger']} reference; {poss} hairstyle is set separately here.")
+        if hair in presets:
+            h = presets[hair]
+            person.append(sentence(fp(h["main_en"]) + "; " + fp(h["closing_en"])))
+            hair_echo = fp(h["echo_en"])
+            hair_echo2 = fp(h.get("echo2_en", ""))
+        else:
+            person.append(sentence(k.clean_text(hair)))
+        if clause_color and not color_sentence:
+            color_sentence = "{P} hair color is " + color
+    elif lora.get("hair") and not reference:
+        base_hair = lora["hair"]
+        if color_words and base_color and re.search(re.escape(base_color), base_hair, re.I):
+            base_hair = re.sub(re.escape(base_color), color_words, base_hair, count=1, flags=re.I)
+        person.append(hair_sentence(subj, base_hair))
+    hair_color_idx = -1
+    if color_sentence:
+        person.append(sentence(f(color_sentence)))
+        hair_color_idx = len(person) - 1
+
+    sigs, acc_extra, acc_engraving = resolve_accessories(lora, trigger, accessories, framing, subj, poss)
+    mk_text = "" if reference else resolve_makeup(lora, makeup)
+    if mk_text:
+        person.append(makeup_sentence(subj, mk_text))
+    cut_identity = len(person)                        # sections: identity | outfit | action | skin (for the weighted view)
+
+    if not outfit and not custom_outfit and common_outfit:
+        person.append(common_outfit_sentence(location, framing, subj, poss, detailed, seed))
+        for acc in sigs:
+            person.append(sentence(f"{subj.capitalize()} also wears " + (acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")))
+    if outfit:
+        wear = [outfit_normal_for(outfit, framing)]
+        for acc in sigs:
+            wear.append(acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")
+        person.append(sentence(f"{subj.capitalize()} wears {_join(wear)}"))
+        if detailed:
+            person.extend(sentence(f(t)) for t in outfit_detail_for(outfit, framing))
+    if custom_outfit:
+        wear = [custom_outfit]
+        for acc in sigs:
+            wear.append(acc if "neck" in acc or "choker" not in acc else f"{acc} around {poss} neck")
+        person.append(sentence(f"{subj.capitalize()} wears {_join(wear)}"))
+    cut_pre_acc = len(person)
+    if outfit or custom_outfit or common_outfit:      # accessory sentences only make sense when something is worn
+        person.extend(acc_extra)
+    cut_acc = len(person)
+    if (outfit or custom_outfit or common_outfit) and acc_engraving:
+        person.append(acc_engraving)
+    cut_outfit = len(person)
+    if pack.get("person_extra_en"):
+        person.append(sentence(f(pack["person_extra_en"])))
+    if custom_pose:
+        person.append(sentence(custom_pose if re.match(r"(?:she|her|the woman)\b", custom_pose, re.I) else f"{subj.capitalize()} {custom_pose}"))
+        if re.search(r"\b(?:feet|foot|ankles?|barefoot|toes|shoes|sneakers|heels)\b", custom_pose, re.I) and framing != "전신":
+            pose_problems.append("the typed pose names feet or shoes but this framing does not show them")
+    else:
+        person.append(sentence(f"{subj.capitalize()} {f(mo['pose_en'])}"))
+    if (mo.get("wrist_straight") or re.search(r"\bhands?\b.*\b(?:chin|cheeks?)\b|\b(?:chin|cheeks?)\b.*\bhands?\b",
+                                              custom_pose or mo.get("pose_en", ""), re.I)):
+        person.append(sentence(f"{poss.capitalize()} wrist stays straight, in line with {poss} forearm"))
+    person.append(sentence(f"{subj.capitalize()} is {f(pick('main_en'))}"))      # expression gets its own sentence
+    if mo.get("moment_en"):
+        person.append(sentence(cap(f(mo["moment_en"]))))
+    if expr_level >= 1:
+        person.append(sentence(f(pick("echo_en"))))
+    if level >= 1:
+        if hair_echo:
+            person.append(sentence(hair_echo))
+        if outfit and outfit.get("echo_en"):
+            person.append(sentence(f(outfit["echo_en"][0])))
+    if expr_level >= 2:
+        if exp.get("echo2_en"):
+            person.append(sentence(f(pick("echo2_en"))))
+    if level >= 2:
+        if hair_echo2:
+            person.append(sentence(hair_echo2))
+        if outfit and len(outfit.get("echo_en", [])) > 1:
+            person.append(sentence(f(outfit["echo_en"][1])))
+    cut_action = len(person)
+    if not reference:
+        person.append(sentence(f"{poss.capitalize()} skin shows fine pores and soft vellus hair, matte, with no smoothing and no retouching"))
+    person_text = " ".join(person)
+
+    # ---------------- scene prompt
+    # a time of day may bring its own water / ground / far-view / style lines (e.g. night)
+    waters = list(tm.get("feature_en", pack["feature_en"]))
+    grounds = list(tm.get("ground_en", pack["ground_en"]))
+    fars = list(tm.get("far_en", pack["far_en"]))
+    style_line = tm.get("style_en", pack["style_en"])
+    if lora.get("style_extra_en"):                      # per-character tone (e.g. exposure), kept in loras.json
+        style_line = f"{style_line}, {lora['style_extra_en']}"
+    rng.shuffle(waters), rng.shuffle(grounds), rng.shuffle(fars)
+
+    def build_scene_parts(fx) -> List[Tuple[str, str]]:
+        """(section, sentence) in the original order: setting | light | camera | style."""
+        out = [("setting", sentence(f"{pack['setting_en']} {tm.get('time_prep', 'at')} {tm['time_en']}".replace("  ", " ") + f", {tm['sky_en']}, with {waters[0]} and {grounds[0]}"))]
+        if detailed and len(waters) > 1 and len(grounds) > 1:
+            out.append(("setting", sentence(f"{pack.get('more_prefix_en', 'Farther along')}, {waters[1]}, with {grounds[1]}")))
+        light = cap(fx(tm["light_en"])) + (f", and {tm['accent_en']}" if tm.get("accent_en") else "")
+        out.append(("light", sentence(light)))
+        if detailed:
+            out.append(("setting", sentence(cap(_join(pack["detail_en"][time_key])))))
+        out.append(("light", sentence(f"{cap(fx(tm['shadow_en']))}, with {_join(fars[:2] if detailed else fars[:1])}")))
+        if detailed:
+            out.append(("setting", sentence(fx(pack["position_en"]))))
+            if framing == "전신" and pack.get("ground_contact_en"):      # only what the frame can show
+                out.append(("setting", sentence(fx(pack["ground_contact_en"]))))
+        out.append(("camera", sentence(fx(tm.get("camera", pack["camera"])[framing]))))
+        out.append(("style", sentence(style_line)))
+        return out
+
+    def build_scene_text(fx) -> str:
+        return " ".join(text for _, text in build_scene_parts(fx))
+
+    scene_text = build_scene_text(fs)                          # regional use: "the woman"
+    combined = f"{person_text} {build_scene_text(f)}"          # one person, one prompt: "her" keeps the thread
+    if accessories and accessories.get("watch") and any(re.search(r"orvael", t) for t in acc_extra):
+        pose_blob = custom_pose or (mo.get("pose_en", "") + " " + mo.get("moment_en", ""))
+        if re.search(r"\b(?:hand|hands)\b[^.]*\b(?:chin|cheeks?|ears?|hair|face|mouth|forehead|head|lips)\b|\b(?:chin|cheeks?|ears?|hair|face|mouth|forehead|head|lips)\b[^.]*\b(?:hand|hands)\b", pose_blob, re.I):
+            pose_problems.append("the watch sentence puts the wrist at the hip but this pose raises a hand toward the face or hair")
+    gaze_problems: List[str] = []
+    if gaze == "closed" and expression in ("놀람", "윙크"):
+        gaze_problems.append(f"eyes closed in this moment but the expression '{expression}' needs open eyes")
+    if CAMERA_GAZE.search(person_text) and GAZE_AWAY.search(person_text):
+        gaze_problems.append("gaze conflict: the prompt looks at the camera and somewhere else in the same person text")
+    problems = lint(combined) + outfit_problems + pose_problems + gaze_problems
+    neck_sig = [a for a in sigs if re.search(r"\b(necklace|pendant|choker|neckband)\b", a, re.I)]
+    if neck_sig:       # a necklace in the outfit text plus the signature necklace draws two necklaces
+        probe = " ".join(person[cut_identity:cut_pre_acc])
+        for a in neck_sig:
+            probe = probe.replace(a, "")
+        if re.search(r"\b(necklace|pendant|choker|neckband)\b", probe, re.I):
+            problems.append("outfit text has a necklace while the signature necklace is on (two necklaces)")
+    if hair and lora.get("hair"):                               # the replaced LoRA hair must be gone entirely
+        old = k.clean_text(lora["hair"]).lower()
+        if old[:40] in combined.lower() or "knot high on the crown" in combined.lower() and "knot" not in hair.lower():
+            problems.append("LoRA hair text survived a hair override")
+    if makeup and not reference and re.search(r"make-?up|eyeshadow|eyeliner|lipstick|lip colou?r|tinted lips|blush",
+                                              k.clean_text(lora.get("identity", "")), re.I):
+        problems.append("identity still has makeup text: move it to the loras.json makeup field")
+    scene_by = {}
+    for tag, text in build_scene_parts(f):
+        scene_by.setdefault(tag, []).append(text)
+    sections = {
+        "identity": " ".join(t for i, t in enumerate(person[:cut_identity]) if i != hair_color_idx),
+        **({"hair": person[hair_color_idx]} if hair_color_idx >= 0 else {}),
+        "outfit": " ".join(person[cut_identity:cut_pre_acc]),
+        **({"accessory": " ".join(person[cut_pre_acc:cut_acc])} if cut_acc > cut_pre_acc else {}),
+        **({"engraving": " ".join(person[cut_acc:cut_outfit])} if cut_outfit > cut_acc else {}),
+        "action": " ".join(person[cut_outfit:cut_action]),
+        "skin": " ".join(person[cut_action:]),
+        **{tag: " ".join(texts) for tag, texts in scene_by.items()},
+    }
+    return {"person": person_text, "scene": scene_text, "combined": combined, "problems": problems,
+            "words": len(combined.split()), "reinforce": level, "sections": sections}
+
+
+def common_outfit_sentence(location: str, framing: str, subj: str, poss: str, detailed: bool, seed: int) -> str:
+    """An outfit from the common pool (the main program's garment tables), fitted to the place and the frame.
+    Only what the frame can show is written (companion garment, footwear and accessory follow the engine rules)."""
+    import random
+    import krea2_prose as kp
+    c = k.defaults()
+    for key, value in {"people": "1", "location": location, "framing": framing}.items():
+        k.set_constraint_value(c, key, value)
+    scene = k.build_scene(seed, c, None, None, "", False)
+    person = k.resolve_person(random.Random(seed + 17), scene, "A", k.PersonSlot(slot="PERSON_A"))
+    ref = {"s": subj, "S": subj.capitalize(), "p": poss, "P": poss.capitalize(), "o": "her", "wear": "wears"}
+    return kp.render_clothing(person, ref, detailed, scene)
+
+
+def lint(text: str) -> List[str]:
+    problems = []
+    if re.search(r"[가-힣]", text):
+        problems.append("Hangul in prompt")
+    if re.search(r"\b(?:Hairstyle|Expression|Gaze|Walls|Floor|Lighting|Camera|Appearance)\s*:", text):
+        problems.append("field label in prompt")
+    if re.search(r"scale lock|Keep all|Maintain coherent", text, re.I):
+        problems.append("meta instruction in prompt")
+    if re.search(r"[,.;:]{2,}", text):
+        problems.append("repeated punctuation")
+    return problems
+
+
+def build_sample(trigger: str, outfit_id: str, seed: int, location: str = "해변", activity: str = "해변 산책",
+                 time_key: str = "해질녘", weather: str = "맑음", pose: str = "천천히 걷기",
+                 expression: str = "gentle natural smile", light: str = "골든아워",
+                 framing: str = "전신", style: str = "여행 화보") -> Dict[str, Any]:
+    lora = k.lora_profile_for_trigger(trigger)
+    if not lora:
+        raise SystemExit(f"LoRA trigger not registered: {trigger}")
+    outfit = load_outfit(outfit_id) if outfit_id else None
+    c = k.defaults()
+    for key, value in {"people": "1", "location": location, "activity": activity, "time": time_key,
+                       "weather": weather, "pose": pose, "expression_A": expression, "light_source": light,
+                       "framing": framing, "style": style}.items():
+        k.set_constraint_value(c, key, value)
+    scene = k.build_scene(seed, c, None, None, "", False)
+    import random
+    person = k.resolve_person(random.Random(seed + 17), scene, "A", k.PersonSlot(slot="PERSON_A", lora_trigger=trigger))
+    text = compose_normal(scene, person, lora, outfit)
+    return {"prompt": text, "problems": lint(text), "words": len(text.split()), "seed": seed}
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--demo", action="store_true")
+    ap.add_argument("--trigger", default="nayoon")
+    ap.add_argument("--outfit", default="gold_amber_triangle_string_bikini")
+    ap.add_argument("--seed", type=int, default=11)
+    ap.add_argument("--parts", action="store_true", help="show person and scene prompts separately (for regional use)")
+    ap.add_argument("--expression", default="환한 미소")
+    ap.add_argument("--framing", default="전신")
+    ap.add_argument("--time", default="해질녘")
+    ap.add_argument("--hair", default="", help="override the LoRA hair: a preset name or free text (replaces it entirely)")
+    ap.add_argument("--hair-color", default="", help="a name from hair_colors.json or free English color words")
+    ap.add_argument("--makeup", default="", help="a name from makeup.json or free English text (replaces the LoRA default makeup)")
+    ap.add_argument("--mode", default="보통", choices=MODES, help="description volume: 보통 / 상세")
+    ap.add_argument("--reinforce", type=int, default=None, choices=(0, 1, 2),
+                    help="how many extra restatements of expression/hair/outfit (default: 보통=0, 상세=1)")
+    ap.add_argument("--old", action="store_true", help="the first engine-based prototype (sample A)")
+    args = ap.parse_args()
+    if args.old:
+        result = build_sample(args.trigger, args.outfit, args.seed)
+        print(result["prompt"])
+        print(f"\n[{result['words']} words, seed {result['seed']}, problems: {result['problems'] or 'none'}]")
+        return 1 if result["problems"] else 0
+    r = compose_split(args.trigger, args.outfit, time_key=args.time, framing=args.framing,
+                      expression=args.expression, hair=args.hair, mode=args.mode, reinforce=args.reinforce, seed=args.seed,
+                      makeup=args.makeup, hair_color=args.hair_color)
+    if args.parts:
+        print("[인물 프롬프트]\n" + r["person"] + "\n\n[장면 프롬프트]\n" + r["scene"])
+    else:
+        print(r["combined"])           # one person: a single prompt, person first so the LoRA trigger leads
+    print(f"\n[{r['words']} words, problems: {r['problems'] or 'none'}]")
+    return 1 if r["problems"] else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

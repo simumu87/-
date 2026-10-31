@@ -1,0 +1,83 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_sky_stripe_pajama_set",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "하늘색 줄무늬 파자마 세트",
+  "name_en": "sky-blue striped pajama set",
+  "desc_ko": "하늘색 흰 줄무늬 단추 파자마 상의(긴소매), 같은 무늬의 반바지, 맨발",
+  "category": "home",
+  "source_doc": "오빠 「공간이랑 의상 이런게 좀 적으니까 이런거좀 더 추가」(1025) · 한결이 새로 정함. 노바 코디 4벌처럼 일자로 떨어지는 긴 단색·긴소매·발목 길이는 피하고 몸의 선이 보이는 실루엣으로 골랐다",
+  "applies_to": {
+    "locations": [
+      "침실",
+      "아파트 거실",
+      "기본 욕실",
+      "호화 욕실"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "하늘색 + 흰색",
+      "en": "sky blue and white"
+    }
+  },
+  "material": {
+    "ko": "부드러운 면",
+    "en": "soft cotton",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a sky-blue and white striped cotton pajama shirt with long sleeves and a row of small buttons, matching striped pajama shorts ending at the mid-thigh, with bare feet",
+  "normal_waist_en": "a sky-blue and white striped cotton pajama shirt with long sleeves and a row of small buttons and matching striped pajama shorts ending at the mid-thigh",
+  "normal_noshoe_en": "a sky-blue and white striped cotton pajama shirt with long sleeves and a row of small buttons and matching striped pajama shorts ending at the mid-thigh",
+  "normal_top_en": "a sky-blue and white striped cotton pajama shirt with long sleeves and a row of small buttons",
+  "detail_prose_en": [
+    "The pajama shirt has thin sky-blue and white stripes, a flat collar and rolled-up sleeves",
+    {
+      "depth": 2,
+      "en": "The matching shorts have an elastic waist and thin stripes"
+    },
+    {
+      "depth": 5,
+      "en": "{P} bare feet rest flat"
+    }
+  ],
+  "echo_en": [
+    "The pajama stripes are thin and sky blue",
+    "The shirt buttons are small and white"
+  ],
+  "lit_en": "the striped cotton of the pajama shirt",
+  "parts": {
+    "top": {
+      "ko": "줄무늬 파자마 상의",
+      "en": "a sky-blue and white striped cotton pajama shirt with long sleeves and a row of small buttons",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "줄무늬 반바지",
+      "en": "matching striped pajama shorts ending at the mid-thigh",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}

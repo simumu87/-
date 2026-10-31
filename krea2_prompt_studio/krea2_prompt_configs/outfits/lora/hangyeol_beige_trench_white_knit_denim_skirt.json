@@ -1,0 +1,98 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_beige_trench_white_knit_denim_skirt",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "베이지 트렌치 + 흰 니트 + 데님 미니 스커트",
+  "name_en": "beige trench coat with white knit and denim mini skirt",
+  "desc_ko": "엉덩이 길이의 짧은 베이지 트렌치코트, 흰 얇은 니트, 중청 데님 미니 스커트, 갈색 로퍼",
+  "category": "casual",
+  "source_doc": "오빠 「공간이랑 의상 이런게 좀 적으니까 이런거좀 더 추가」(1025) · 한결이 새로 정함. 노바 코디 4벌처럼 일자로 떨어지는 긴 단색·긴소매·발목 길이는 피하고 몸의 선이 보이는 실루엣으로 골랐다",
+  "applies_to": {
+    "locations": [
+      "은행나무 길",
+      "억새밭",
+      "도시 거리",
+      "공원",
+      "카페",
+      "서점",
+      "도서관 열람실",
+      "지하철 승강장",
+      "빈티지 옷가게",
+      "한옥 마당",
+      "벚꽃 길",
+      "한강 공원",
+      "미술관",
+      "온실 카페",
+      "호텔 로비"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "베이지 + 흰색 + 청색",
+      "en": "beige, white and blue"
+    }
+  },
+  "material": {
+    "ko": "면 개버딘과 니트",
+    "en": "cotton gabardine and knit",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a hip-length beige cotton trench coat worn open over a thin white knit top with a round neckline, a medium-blue denim mini skirt and brown leather loafers",
+  "normal_waist_en": "a hip-length beige cotton trench coat worn open over a thin white knit top with a round neckline and a medium-blue denim mini skirt",
+  "normal_noshoe_en": "a hip-length beige cotton trench coat worn open over a thin white knit top with a round neckline and a medium-blue denim mini skirt",
+  "normal_top_en": "a hip-length beige cotton trench coat worn open over a thin white knit top with a round neckline",
+  "detail_prose_en": [
+    "The beige trench coat has wide lapels, a belt tied loosely at the waist and rolled-up sleeves",
+    {
+      "depth": 2,
+      "en": "The thin white knit top has a round neckline"
+    },
+    {
+      "depth": 3,
+      "en": "The medium-blue denim mini skirt ends well above the knees"
+    },
+    {
+      "depth": 5,
+      "en": "{P} brown leather loafers have a low heel"
+    }
+  ],
+  "echo_en": [
+    "The trench coat is a warm beige",
+    "The white knit top shows under the open coat"
+  ],
+  "lit_en": "the beige cotton of the trench coat",
+  "parts": {
+    "top": {
+      "ko": "베이지 트렌치와 흰 니트",
+      "en": "a hip-length beige cotton trench coat worn open over a thin white knit top with a round neckline",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "데님 미니 스커트",
+      "en": "a medium-blue denim mini skirt",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}

@@ -1,0 +1,163 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "한강 공원",
+ "outdoor": true,
+ "note_ko": "구체적인 장소 팩(오빠 1026: 분위기·재질을 구체적으로 적어야 공간이 달라진다). 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a riverside park promenade along a wide river with a long steel bridge crossing it",
+ "feature_en": [
+  "a wide slow river with a long steel bridge crossing it",
+  "a wooden bench and a bicycle path along the embankment"
+ ],
+ "ground_en": [
+  "a paved riverside promenade with a thin yellow line",
+  "short green grass sloping down to the water"
+ ],
+ "far_en": [
+  "the opposite bank with a row of tall apartment buildings",
+  "small boats drifting on the river"
+ ],
+ "times": {
+  "낮": {
+   "time_en": "a clear afternoon",
+   "time_prep": "on",
+   "sky_en": "a wide pale blue sky with a few thin clouds",
+   "light_en": "warm sunlight comes from the camera's left at a high angle, falling across {p} face and shoulders",
+   "shadow_en": "short soft shadows stretch across the promenade toward the camera's right",
+   "desc_ko": "맑은 오후, 카메라 왼쪽 높은 곳에서 오는 햇빛"
+  },
+  "해질녘": {
+   "time_en": "the last hour before sunset",
+   "time_prep": "at",
+   "sky_en": "a wide orange and pink sky above the opposite bank",
+   "light_en": "low orange sunlight comes from behind {o} on the camera's right, lighting the edges of {p} hair and shoulders",
+   "shadow_en": "long soft shadows stretch across the promenade toward the camera's left",
+   "desc_ko": "해 지기 직전, 낮은 주황 해가 카메라 오른쪽 뒤에서 비춤"
+  },
+  "밤": {
+   "time_en": "a clear night",
+   "time_prep": "on",
+   "sky_en": "a black night sky above a bridge outlined in small lights",
+   "light_en": "warm white light from a lamp post stands in front of {o} and to the camera's left, lighting {p} face and shoulders",
+   "shadow_en": "deep soft shadows lie on the grass behind {o}, toward the right",
+   "desc_ko": "맑은 밤, 카메라 왼쪽 앞 가로등의 따뜻한 흰 불빛"
+  }
+ },
+ "moments": {
+  "강 보며 서기": {
+   "pose_en": "stands at the edge of the promenade with the river in front of {o}",
+   "moment_en": "{s} turns {p} head toward the camera with a gentle smile",
+   "desc_ko": "산책로 끝에서 강을 보다 카메라 쪽으로 고개를 돌림",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "벤치에 앉기": {
+   "pose_en": "sits on the bench with {p} hands resting in {p} lap",
+   "moment_en": "{s} looks toward the camera with a relaxed smile",
+   "desc_ko": "벤치에 앉아 무릎에 손을 두고 카메라를 봄",
+   "frames": [
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "바람에 머리 날리며 웃기": {
+   "pose_en": "stands on the promenade with the river wind lifting {p} hair",
+   "moment_en": "{s} brushes a strand away with one hand and laughs toward the camera",
+   "desc_ko": "강바람에 머리가 날려 한 손으로 쓸며 카메라를 보고 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "자전거 옆에 서기": {
+   "pose_en": "stands beside a parked bicycle with one hand on the handlebar",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "세워둔 자전거 옆에서 한 손을 핸들에 얹고 카메라를 봄",
+   "frames": [
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "천천히 걷기": {
+   "pose_en": "walks slowly along the promenade with one foot stepping forward",
+   "moment_en": "{s} looks toward the camera with a soft smile",
+   "desc_ko": "강변 산책로를 천천히 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  },
+  "눈 감고 미소 짓기": {
+   "pose_en": "stands on the riverside promenade with {p} eyes closed and {p} face turned slightly upward",
+   "moment_en": "{s} smiles faintly with {p} lips closed",
+   "desc_ko": "강변 산책로에서 눈을 감고 얼굴을 살짝 들어 입을 다문 채 미소",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "gaze": "closed"
+  },
+  "입가 가리고 웃기": {
+   "pose_en": "stands on the riverside promenade with the back of one hand held lightly against {p} mouth",
+   "moment_en": "{s} laughs with {p} eyes crinkled toward the camera",
+   "desc_ko": "강변 산책로에서 손등으로 입가를 가볍게 가리고 눈웃음으로 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the river softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the river softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the river softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the river softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the river softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the river softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the river softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the paved promenade",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮": [
+   "the bridge is gray steel with long curved arches",
+   "the bench has a dark green iron frame and wooden slats",
+   "the river is wide and calm with soft glittering ripples"
+  ],
+  "해질녘": [
+   "the bridge is gray steel with long curved arches",
+   "the bench has a dark green iron frame and wooden slats",
+   "the apartment buildings across the river are dark silhouettes with a few lit windows"
+  ],
+  "밤": [
+   "the bridge is gray steel with long curved arches",
+   "the bench has a dark green iron frame and wooden slats",
+   "the bridge is outlined in long lines of white and amber lights reflected on the water"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the river and the bridge spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

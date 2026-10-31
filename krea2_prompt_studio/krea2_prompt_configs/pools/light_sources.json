@@ -1,0 +1,59 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "LIGHT_SOURCES",
+  "label_ko": "광원",
+  "items": {
+    "창문 자연광": {
+      "en": "large window light",
+      "desc_ko": "큰 창으로 들어오는 빛"
+    },
+    "부드러운 북향광": {
+      "en": "soft diffuse north-facing daylight",
+      "desc_ko": "부드럽게 퍼지는 북향 낮빛"
+    },
+    "오후 햇빛": {
+      "en": "warm late-afternoon sunlight",
+      "desc_ko": "따뜻한 늦은 오후 햇빛"
+    },
+    "골든아워": {
+      "en": "low-angle golden-hour sunlight",
+      "desc_ko": "낮게 비스듬한 황금빛 햇빛"
+    },
+    "맑은 정오": {
+      "en": "clean midday daylight",
+      "desc_ko": "깨끗한 한낮의 빛"
+    },
+    "카페 펜던트": {
+      "en": "warm cafe pendant lighting",
+      "desc_ko": "카페의 따뜻한 펜던트 조명"
+    },
+    "천장 확산광": {
+      "en": "diffuse overhead ambient lighting",
+      "desc_ko": "천장에서 퍼지는 은은한 실내광"
+    },
+    "스탠드 램프": {
+      "en": "a warm practical floor lamp",
+      "desc_ko": "따뜻한 플로어 램프 빛"
+    },
+    "벽 스콘스": {
+      "en": "soft wall-sconce lighting",
+      "desc_ko": "벽등의 부드러운 빛"
+    },
+    "도시 야간광": {
+      "en": "mixed city street light filtering through the windows",
+      "desc_ko": "거리의 섞인 야간 불빛"
+    },
+    "비 오는 날 확산광": {
+      "en": "soft overcast daylight filtered through a rainy sky",
+      "desc_ko": "흐린 날 구름을 거친 부드러운 빛"
+    },
+    "갤러리 조명": {
+      "en": "controlled museum track lighting",
+      "desc_ko": "전시장의 트랙 조명"
+    },
+    "달빛": {
+      "en": "soft blue moonlight from a clear night sky",
+      "desc_ko": "맑은 밤하늘의 은은한 푸른 달빛"
+    }
+  }
+}

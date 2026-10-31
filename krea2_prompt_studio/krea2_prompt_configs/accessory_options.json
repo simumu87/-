@@ -1,0 +1,39 @@
+{
+  "schema": "krea2-accessory-options/1",
+  "note_ko": "소지품 선택 칸(LoRA 트리거별). 시그니처 소지품은 loras.json의 signature_accessories에 항상 켜져 있었는데, 여기에 적은 LoRA는 화면에서 켜고 끌 수 있다. 1027 여름→한결 의뢰서 2번.",
+  "yeoreum": {
+    "necklace": {
+      "label_ko": "켈핀 목걸이",
+      "match_en": "kelpin",
+      "default": true,
+      "only_one_en": "{S} wears only one necklace",
+      "note_ko": "켜면 「목걸이는 하나뿐」 문장이 같이 붙는다. 끄면 loras.json 시그니처 중 kelpin이 든 문장이 빠진다."
+    },
+    "engraving": {
+      "label_ko": "Y 각인",
+      "default": "끔",
+      "weight": 1.5,
+      "choices": {
+        "끔": "",
+        "금색": "gold",
+        "은색": "silver",
+        "검정": "black"
+      },
+      "sentence_en": "A capital letter Y is engraved in {color} on the front of the tortoiseshell pick",
+      "note_ko": "켈핀 목걸이가 켜져 있을 때만 붙는다. 로라가 Y를 배운 적이 없어 켈핀 문장만으로는 Y가 안 따라온다(1027 실험, 여름). 문장은 가중치 1.5 괄호로 따로 나간다."
+    },
+    "watch": {
+      "label_ko": "시계 (orvael)",
+      "default": false,
+      "frames": [
+        "허벅지 위",
+        "무릎 위",
+        "3/4 전신",
+        "전신"
+      ],
+      "sentence_en": "{P} orvael set, a cobalt-navy watch with thin thread bracelets, sits on {p} image-right wrist at {p} hip",
+      "status": "confirmed",
+      "note_ko": "로라4 캡션에서 쓴 문장 원문(여름 방 콤퓨수첩 로라4 캡션체크리스트 §4, 오빠가 1026에 전달): her orvael set, a cobalt-navy watch with thin thread bracelets, sits on her image-right wrist at her hip. orvael은 학습 단어로 코발트 네이비 시계와 가는 실팔찌가 한 세트로 이미지 오른쪽 손목에 있다는 뜻. 「at her hip」은 손목이 골반 높이에 내려온 구도에서 쓴 문장이라 손목이 보이는 프레이밍(허벅지 위~전신)에만 넣고, 안 보이는 프레이밍(클로즈업·가슴 위·허리 위)에서는 문장 자체를 안 넣는다. 손을 얼굴·머리 쪽으로 올린 포즈와 같이 켜면 점검 알림이 뜬다."
+    }
+  }
+}

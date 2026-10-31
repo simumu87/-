@@ -1,0 +1,79 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "INTERACTIONS",
+  "label_ko": "상호작용",
+  "items": {
+    "없음": {
+      "en": "no direct interaction, with natural personal space between the subjects",
+      "desc_ko": "서로 닿지 않고 자연스러운 거리를 유지"
+    },
+    "손잡기": {
+      "en": "holding hands naturally with relaxed fingers",
+      "desc_ko": "힘을 뺀 손으로 자연스럽게 손을 잡음"
+    },
+    "팔짱": {
+      "en": "walking or standing arm in arm",
+      "desc_ko": "팔짱을 끼고 걷거나 서 있음"
+    },
+    "가벼운 포옹": {
+      "en": "sharing a warm natural hug",
+      "desc_ko": "따뜻하고 자연스러운 포옹"
+    },
+    "어깨에 기대기": {
+      "en": "one person resting their head lightly on the other's shoulder",
+      "desc_ko": "한 사람이 상대 어깨에 머리를 살짝 기댐"
+    },
+    "나란히 걷기": {
+      "en": "walking side by side at a natural pace",
+      "desc_ko": "같은 속도로 나란히 걸음"
+    },
+    "마주 앉아 대화": {
+      "en": "sitting across from each other and talking casually",
+      "desc_ko": "마주 보고 앉아 편하게 이야기함"
+    },
+    "나란히 앉아 대화": {
+      "en": "sitting side by side and talking comfortably",
+      "desc_ko": "나란히 앉아 편하게 이야기함"
+    },
+    "함께 사진 보기": {
+      "en": "looking together at a phone or printed photograph",
+      "desc_ko": "휴대폰이나 인화된 사진을 같이 봄"
+    },
+    "함께 책 보기": {
+      "en": "looking together at an open book",
+      "desc_ko": "펼친 책을 같이 봄"
+    },
+    "커피 건네기": {
+      "en": "one person handing a coffee cup to the other",
+      "desc_ko": "한 사람이 상대에게 커피잔을 건넴"
+    },
+    "선물 건네기": {
+      "en": "one person handing a small wrapped gift to the other",
+      "desc_ko": "작은 포장 선물을 건넴"
+    },
+    "하이파이브": {
+      "en": "sharing a casual high-five",
+      "desc_ko": "가볍게 하이파이브를 함"
+    },
+    "장난스럽게 웃기": {
+      "en": "sharing a playful laugh",
+      "desc_ko": "장난스럽게 함께 웃음"
+    },
+    "함께 요리하기": {
+      "en": "preparing food together at a kitchen counter",
+      "desc_ko": "주방 조리대에서 같이 음식을 만듦"
+    },
+    "함께 쇼핑하기": {
+      "en": "browsing items together while shopping",
+      "desc_ko": "같이 물건을 구경함"
+    },
+    "함께 전시 관람": {
+      "en": "standing together while viewing an artwork",
+      "desc_ko": "나란히 서서 작품을 봄"
+    },
+    "함께 음악 듣기": {
+      "en": "listening to music together with relaxed posture",
+      "desc_ko": "편한 자세로 같이 음악을 들음"
+    }
+  }
+}

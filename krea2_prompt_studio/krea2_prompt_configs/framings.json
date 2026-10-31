@@ -1,0 +1,42 @@
+{
+  "schema": "krea2-framing/1",
+  "note_ko": "프레이밍을 글로 정확히 말하는 방법: ①어디서 프레임이 몸을 자르는지(자르는 선) ②머리 위 여백 ③인물이 프레임 높이에서 차지하는 비율, 이 셋을 같이 적는다. {who}는 1인이면 the subject, 2인이면 the two subjects. 기준 문서: docs/프레이밍_작성기준.md",
+  "items": {
+    "클로즈업": {
+      "desc_ko": "얼굴과 어깨 윗부분이 프레임 대부분을 채움 (자르는 선: 쇄골)",
+      "extent_en": "{who} fills the frame, the top of the head close to the top edge and the frame ending at the collarbones, the face taking up about two thirds of the frame height"
+    },
+    "가슴 위": {
+      "desc_ko": "프레임이 가슴 중간에서 끝남, 인물이 프레임 높이를 거의 채움",
+      "extent_en": "the frame ends at mid-chest with a small margin above the head, {who} filling the full frame height"
+    },
+    "허리 위": {
+      "desc_ko": "프레임이 허리에서 끝남, 머리 위 여백 약간",
+      "extent_en": "the frame ends at the waist with a small margin above the head, {who} filling the full frame height"
+    },
+    "허벅지 위": {
+      "desc_ko": "프레임이 허벅지 중간에서 끝남",
+      "extent_en": "the frame ends at mid-thigh with a small margin above the head, {who} filling the full frame height"
+    },
+    "무릎 위": {
+      "desc_ko": "프레임이 무릎 바로 위에서 끝남, 인물이 프레임 높이를 채움",
+      "extent_en": "the frame ends just above the knees with a small margin above the head, {who} filling the full frame height"
+    },
+    "3/4 전신": {
+      "desc_ko": "프레임이 무릎 바로 아래에서 끝남 (발은 안 보임)",
+      "extent_en": "the frame ends just below the knees with a small margin above the head, {who} filling the full frame height"
+    },
+    "전신": {
+      "desc_ko": "머리부터 발까지 다 들어오고 발 아래에 바닥이 조금 보임, 인물이 프레임 높이의 약 3/4",
+      "extent_en": "the whole body from head to feet fits inside the frame with a little floor below the feet and a small margin above the head, {who} taking up about three quarters of the frame height"
+    },
+    "환경 중심": {
+      "desc_ko": "인물이 프레임 높이의 약 절반, 주변 공간이 반을 차지",
+      "extent_en": "{who} takes up about half of the frame height, with the surroundings filling the rest of the frame"
+    },
+    "와이드 씬": {
+      "desc_ko": "인물이 프레임 높이의 약 1/4, 공간이 주인공",
+      "extent_en": "{who} appears small, taking up about a quarter of the frame height, with the space around filling most of the frame"
+    }
+  }
+}

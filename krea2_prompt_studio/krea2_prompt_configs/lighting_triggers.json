@@ -1,0 +1,136 @@
+{
+  "schema": "krea2-lighting-triggers/1",
+  "source": "V67 Lighting — Krea 2 용 LoRA 조명 (comfy.icu / Civitai 모델 페이지, 오빠가 1028에 페이지 글을 붙여줌). 이 LoRA의 트리거 20개.",
+  "note_ko": "맨 앞의 가중 태그 `(Lighting:1.1)`이 기본 트리거이고, 아래 20개는 그 뒤에 붙이는 트리거 단어다. 페이지 권장은 「전체 문자열을 프롬프트 맨 앞에」, 가중 태그는 맨 앞이어야 효과가 크다(다른 위치로 옮기면 줄어듦). 소수점은 마침표 `1.1`(쉼표 `1,1`이면 안 먹음). LoRA 가중치 권장 0.65~0.85(미묘 0.65 · 균형 0.75 · 깊은 몰입 0.85), 오빠 체인은 0.75. 한 장면에 서로 안 맞는 단어(moonlight와 golden hour)를 다 넣으면 장면이 흔들릴 수 있어 화면에서는 골라서 쓰게 한다. 페이지 부정 프롬프트(flat lighting 등)는 Turbo cfg 1.0 체인에서 쓰지 않는다. 페이지 주의: 표정이 무표정·엄격해질 수 있어 구체적 표정 문장을 쓴다(생성기는 이미 표정을 해부학적으로 적음).",
+  "tag": "Lighting",
+  "default_weight": 1.1,
+  "lora_strength": {
+    "range": [
+      0.65,
+      0.85
+    ],
+    "ours": 0.75
+  },
+  "items": [
+    {
+      "en": "cinematic lighting",
+      "label_ko": "시네마틱 조명",
+      "desc_ko": "넓은 필름 같은 조명, 극적이고 분위기 있는 조명",
+      "group": "분위기"
+    },
+    {
+      "en": "dramatic shadows",
+      "label_ko": "극적인 그림자",
+      "desc_ko": "높은 대비, 깊은 검은색, 강한 방향성 조명",
+      "group": "색·대비"
+    },
+    {
+      "en": "volumetric light",
+      "label_ko": "볼류메트릭 조명",
+      "desc_ko": "가시광선, 햇살, 분위기 있는 깊이감",
+      "group": "대기"
+    },
+    {
+      "en": "neon glow",
+      "label_ko": "네온 글로우",
+      "desc_ko": "사이버펑크, 도시의 밤, 생동감 넘치는 색상의 광원",
+      "group": "광원"
+    },
+    {
+      "en": "golden hour",
+      "label_ko": "골든아워",
+      "desc_ko": "따뜻하고 부드러운, 낮은 각도의 햇빛, 낭만적이고 향수를 부르는",
+      "group": "광원"
+    },
+    {
+      "en": "chiaroscuro",
+      "label_ko": "키아로스쿠로",
+      "desc_ko": "극도의 명암 대비, 카라바조 스타일, 회화적인",
+      "group": "색·대비"
+    },
+    {
+      "en": "softbox",
+      "label_ko": "소프트박스",
+      "desc_ko": "스튜디오의 부드러운 조명, 인물 사진에 적합, 균일한 확산",
+      "group": "광원"
+    },
+    {
+      "en": "rim light",
+      "label_ko": "림 라이트",
+      "desc_ko": "가장자리 조명, 배경과의 분리, 후광 효과",
+      "group": "광원"
+    },
+    {
+      "en": "backlight",
+      "label_ko": "백라이트",
+      "desc_ko": "실루엣, 빛나는 가장자리, 극적인 깊이감",
+      "group": "광원"
+    },
+    {
+      "en": "god rays",
+      "label_ko": "갓 레이(빛줄기)",
+      "desc_ko": "창문·나무·안개를 통해 들어오는 햇살",
+      "group": "대기"
+    },
+    {
+      "en": "spotlight",
+      "label_ko": "스포트라이트",
+      "desc_ko": "집중된 빔, 연극적인 분위기, 강조",
+      "group": "광원"
+    },
+    {
+      "en": "caustics",
+      "label_ko": "코스틱스",
+      "desc_ko": "유리·물을 통해 비치는 빛 무늬, 반짝이는 반사",
+      "group": "표면"
+    },
+    {
+      "en": "moonlight",
+      "label_ko": "달빛",
+      "desc_ko": "차갑고 푸른, 야간의 고요하거나 으스스한 조명",
+      "group": "광원"
+    },
+    {
+      "en": "firelight",
+      "label_ko": "불빛",
+      "desc_ko": "따뜻하고 깜빡이는 오렌지빛, 친밀하고 원초적인 느낌",
+      "group": "광원"
+    },
+    {
+      "en": "LED strips",
+      "label_ko": "LED 스트립",
+      "desc_ko": "모던하고 SF적인 시원한 청백색 선형 조명",
+      "group": "광원"
+    },
+    {
+      "en": "noir",
+      "label_ko": "누아르",
+      "desc_ko": "높은 명암 대비, 그림자, 신비로움",
+      "group": "분위기"
+    },
+    {
+      "en": "lens flare",
+      "label_ko": "렌즈 플레어",
+      "desc_ko": "아나모픽 효과로 인한 줄무늬, 햇살 번짐, 영화적 불완전함",
+      "group": "대기"
+    },
+    {
+      "en": "dust motes",
+      "label_ko": "먼지 입자",
+      "desc_ko": "빛줄기 속에 떠다니는 입자, 대기 질감",
+      "group": "대기"
+    },
+    {
+      "en": "wet reflections",
+      "label_ko": "젖은 반사",
+      "desc_ko": "비에 젖은 거리, 물웅덩이, 윤기 나는 표면",
+      "group": "표면"
+    },
+    {
+      "en": "high contrast",
+      "label_ko": "높은 대비",
+      "desc_ko": "밝고 어두운 부분의 강렬한 대비",
+      "group": "색·대비"
+    }
+  ]
+}

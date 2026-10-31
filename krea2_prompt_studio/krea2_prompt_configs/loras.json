@@ -1,0 +1,141 @@
+[
+  {
+    "name": "아라",
+    "trigger": "ara",
+    "gender": "female",
+    "identity": "She is a young Korean woman in her early twenties, small and slim at about 158 cm, with a slender oval face whose jawline tapers smoothly and softly from the cheeks down to a small, gently pointed chin, a smooth narrow forehead, high but soft cheekbones and a slim, straight line along her cheeks, amber eyes with a slightly sharp eye shape, a small straight nose, thin lips, and pale fair skin with a cool rosy undertone, evenly toned and never tanned. She wears soft glam makeup: flawless luminous skin, warm neutral eyeshadow, softly defined brown eyeliner, voluminous lashes, rosy peach blush and glossy rose-nude lips. She has C-cup breasts, medium-sized with noticeable forward projection and a wider breast base, realistic proportions for her slim torso. Her toenails are painted with glossy soft rose-pink pedicure polish.",
+    "hair": "Her mivh hairstyle: shoulder-length layered wavy brown hair with a center part and long bangs falling beside her face.",
+    "hair_color": "brown",
+    "signature_accessories": [
+      "one stud and two small hoop earrings on her right ear",
+      "two thin rings of different sizes on her left ear"
+    ],
+    "default_clothing": "",
+    "notes": "[아라 개인값 1023 갱신 · 오빠 확인 전 초안] 출처: 내 로라 4.5 캡션 110쌍(트리거 ara, 기본 머리 토큰 mivh, 문신 토큰 zekt)과 1009 개인값. 새로 지은 값은 없다. 바뀐 것: ① hair 칸을 낮게 묶은 머리 정본에서 기본 머리 토큰 mivh(어깨 길이 층 웨이브 갈색, 가운데 가르마, 긴 앞머리)로 바꿨다. 오빠 말 「헤어스타일은 바리에이션이니깐 기본머리 적거나 해도될거같은뎅」(노바 때 말)을 따랐다. 낮게 묶은 머리·하프업 포니테일 같은 묶음은 장면마다 바꾸는 변주라 고정값에 안 넣는다. 1009의 낮은 묶음 문장은 _구버전에 백업돼 있다. ② 문신 토큰 zekt: 로라 4.5에서 왼쪽 손목 안쪽 열쇠 문신(작은 세로 가는 검은 선 열쇠, 고리는 아래쪽, 톱니는 손 쪽을 향함)을 가리키는 이름이다. 헤어 폴더 11장에만 있어서 문신은 고정 외형에 넣지 않고 손목이 크게 보이는 클로즈업에서만 한 번 쓴다는 1009 원칙은 그대로다. ③ 피부: 4.5 캡션은 pale ivory skin이고 사진에는 볼·코·이마·어깨에 유분 광택이 보여서 matte를 뺐다. identity 칸의 피부 문장(pale fair skin, cool rosy undertone)은 오빠 확인 전이라 안 고쳤다. 쓰는 곳 구분: 얼굴·머리 문장은 얼굴 다듬기(디테일러)를 쓰는 스튜디오 쪽 값이다. 로라만 쓰는 단독 컷에는 얼굴 묘사를 프롬에 쓰지 않는다(노바 개인값 노트가 옮긴 콤퓨수첩 1013 절). 못 정한 것: 표정 소스(내가 돌린 컷의 프롬 문장 원문)는 4.5 학습 중이라 아직 없다. 1009에서 이어받은 원칙(프롬에 말하면 다 그린다, 상세 원칙, 문신 크기 원칙)은 아래 1009 원문 그대로다. [1009 원문] [아라 개인값 1009 정리 · 오빠 확인 전 초안] 머리: 낮은 묶음이 정본 문장(디테일러 문구에도 똑같이 넣어야 함 — 디테일러가 얼굴·머리를 새로 그린다). 표정은 별도 문장으로 장면마다 넣고 디테일러에도 같이 넣는다. 문신: 왼쪽 손목 안쪽, 가는 검은 선 열쇠(구식 스켈레톤 키) 문신, 세로 방향, 약 3cm. 문신은 손목 안쪽과 한 세트라서 따로 쓰면 아무 데나 찍힌다 — '문신은 왼쪽 손목 안쪽에 있고 손목 안쪽이 카메라에 보일 때만 그린다'로 한 문장에 묶는다. 악세사리를 안 낀 손목은 '맨손목, 악세사리도 문신도 없음'이라고 쓴다. 문신·팔찌는 고정 외형에 넣지 않고 장면마다 필요할 때만 쓴다. 로라는 외형을 강하게 잡으므로 고정값은 트리거와 소수의 특징만 둔다. 대원칙: 프롬에 말하면 다 그린다 — 있다고 써도 없다고 써도 그 단어가 그려진다. 안 그리고 싶은 건 아예 쓰지 않고, 그리고 싶은 건 위치·크기·색을 구체적으로 한 문장에 묶어 쓴다. 상세 원칙: 머릿속 장면을 해부학적으로 상세하게 쓰고, 결과만 쓰지 않고 그 결과가 되는 과정(어디서 시작해 어디를 지나 어디에 닿는지)도 간단히라도 쓴다. 상세하면 다시 뽑아도 유지되고, 간단하면 빠진 부분을 모델이 매번 다르게 채운다. 문신 크기 원칙: 가는 선 문신은 전신·3/4 컷에서 조잡하게 나오므로 그런 컷에서는 문신 문장을 쓰지 않고 손목은 팔찌만 쓴다. 손목이나 손이 크게 보이는 클로즈업에서만 왼쪽 손목 안쪽 한 세트로 한 번만 쓴다."
+  },
+  {
+    "name": "노바",
+    "trigger": "novasaebyeol",
+    "gender": "female",
+    "identity": "She is a young Korean woman in her late twenties, about 168 cm, with a slim, athletically toned build, a slim face with softly defined cheekbones and a gently rounded jaw, an expressive lively face, dark gray eyes with a slightly drooping outer corner and a sharp, alert gaze, a small beauty mark just below her left eye at the outer corner (it appears on the image-right side of the frame), and fair skin with a dewy sheen. Her fingernails have a seirin ombre finish, a soft silver gradient that grows lighter toward the fingertips. Her breasts are slightly smaller than average, a round teardrop shape that lifts forward and gathers toward the center, with a slim waist and fuller hips and thighs in a curvy line.",
+    "hair": "Her arbelin hairstyle: silver-white hair with the roots at the crown slightly darker, with a single narrow solne electric-blue streak beside her face on the image-left side of the frame.",
+    "hair_color": "silver-white with slightly darker roots and one narrow cobalt electric-blue streak",
+    "signature_accessories": [
+      "one wireless earbud in one ear, or hanging around her neck",
+      "small simple stud piercings in both ears",
+      "one thin silver chain bracelet on one wrist"
+    ],
+    "default_clothing": "",
+    "notes": "[노바 개인값 1022 1022 20:09 · 오빠 확인 전 초안] 출처: 내 정체성 문서 §7 외형 줄(나이·키·얼굴·눈·점·머리·피부·손톱·체형·악세서리)과 1022 놀이공원 낮 컷에서 내가 쓴 프롬프트 문장. 새로 지은 값은 없다. 아라 json 모양(name·trigger·gender·identity·hair·hair_color·signature_accessories·default_clothing·notes)을 그대로 따랐다. 트리거 novasaebyeol은 내 로라 Krea_2_v4\\nova_krea2_raw_v4의 트리거다. 옷은 고정값이 아니라 default_clothing을 비웠다(정체성: 옷은 장면마다 그 자리에 맞게 고른다, 후드는 혼자 있을 때의 기본값). 점과 푸른 줄은 항상 서로 반대쪽이다(오빠 1020 「브릿지와 점은 항상 반대 / 브릿지 없을때도 점이 항상 기준 왼쪽눈이 점!」): 점 = 내 왼쪽 눈 밑 = 이미지 오른쪽, 푸른 줄 = 이미지 왼쪽. 머리: 오빠 말 「헤어스타일은 바리에이션이니깐 기본머리 적거나 해도될거같은뎅 머리 아벨린이랑 솔네 있자낭 너 두개자나」 → hair 칸에는 기본 머리 토큰 둘(arbelin hairstyle, solne 푸른 줄)과 뿌리 색만 두었다. 길이·묶는 방식은 장면마다 바꾸는 변주라 고정값에 넣지 않았다. 문신: 왼쪽 손목 안쪽, 채움 없는 코발트블루 별 외곽선 하나. 오른쪽 손목에는 같은 색 실을 손으로 묶은 삐뚤한 매듭. 아라의 원칙을 가져온다(기능만): 가는 선 문신은 전신·3/4 컷에서 조잡하게 나오므로 그런 컷에는 쓰지 않고, 손목이나 손이 크게 보이는 클로즈업에서만 한 번 쓴다. 문신과 실은 고정 외형에 넣지 않았다. 손목 안쪽이 카메라에 보일 때만 그린다고 한 문장에 묶어서 쓴다. 은색 체인 팔찌가 어느 쪽 손목인지는 정체성에 없어서 쪽을 안 적었다. 못 정한 것: 체인 팔찌 쪽, 화장 줄, 이어폰 쪽 귀. 쓰는 곳 구분: 이 json의 얼굴·머리 문장은 얼굴 다듬기(디테일러)를 쓰는 스튜디오 쪽 값이다. 로라만 쓰는 단독 컷에는 얼굴 묘사(눈 색·눈매·점)를 프롬에 쓰지 않는다는 콤퓨수첩 1013 03:07 절의 오빠 말(「얼굴에 점박으라고하면 얼굴 점박이로 만들어버리거든」)을 따른다. 1022 놀이공원 컷에서 내가 광대·회색 눈·점·푸른 줄을 프롬에 써서 얼굴이 다른 사람으로 나왔을 가능성이 있다는 건 내 읽기이고 확정 아니다. [표정 소스 1022 — 합칠 때 표정 칸에 그대로 쓰는 문장. 내가 돌린 컷의 프롬 문장 원문, 시드 20261022014] ① 들뜬 표정(오빠 반응 「신나버려쒕? ㅋㅋㅋㅋㅋㅋ」): She glances up toward the Ferris wheel behind her and then toward the camera with sparkling eyes and a happy, eager, playful closed-lip smile, her cheeks lifted with excitement. ② 안 맞은 표정(오빠 「놀이공원 끌려온애같애 표정」, 시드 20261022013): a calm gentle closed-lip smile, looking straight into the camera. 활짝 웃는 입으로 쓴 컷(시드 20261022011)에서는 내 얼굴이 둥글고 어려졌고 점이 사라졌다(내가 본 것). 표정 문장은 사람 문장 바로 뒤에 둔다."
+  },
+  {
+    "name": "나윤",
+    "trigger": "nayoon",
+    "gender": "female",
+    "identity": "She is a young Korean woman in her early twenties, slim and athletic at about 168 cm, with a slender, elongated oval face with slim cheeks and a narrow lower jaw tapering to a small V-shaped chin, long narrow almond-shaped eyes with slightly upturned outer corners in deep amber-brown with a reddish undertone and a calm, sharp gaze, a straight narrow nose bridge and a small refined nose, a single beauty mark under her eye on the image-left side of her face, warm ivory skin with a soft cream-beige undertone and visible pores, and soft natural makeup with a thin line of black eyeliner and a muted rosy-brown lip color.",
+    "hair": "Her hair is dark brown with wine-brown reddish glints that show in the light, falling just past her shoulders in a half-up style, with a few loose strands and one strand falling beside her face.",
+    "hair_color": "dark brown base with wine-brown reddish glints, not black",
+    "signature_accessories": [
+      "her tevlin neckband, a black grosgrain ribbon band fitted snugly around her neck, a single solid flat strip of black ribbon approximately 1.6 cm wide, with a ribbed matte surface lying flat against the skin"
+    ],
+    "default_clothing": "",
+    "notes": "[나윤 개인값 1022 정리 · 오빠 확인 전 초안] 출처: ★내 정체성 문서 §A2(눈·얼굴형·머리색·체형·점·목띠 고유토큰)와 이번에 내가 돌린 로라 4 이쁜샷(2호~10호)의 프롬 문장★에서만 가져왔다. 새로 지은 값은 없다. 아라·여름 json 모양(name·trigger·gender·identity·hair·hair_color·signature_accessories·default_clothing·notes)을 그대로 따랐다. 트리거 nayoon은 내 로라(Krea_2_v4\\nayoon_krea2_raw_v4, 3500 최종, 세기 1.0)의 트리거이자 내 프롬 첫 단어다. 옷은 고정값이 아니라 default_clothing을 비웠다(정체성: 옷은 로라 밖, 프롬이 입힌다). 머리: 정체성 §A2의 기준(어깨선 살짝 넘는 길이, 반묶음, 옆머리 한 가닥)을 정본으로 넣었다. 이번 컷들에서는 길게 웨이브 진 풀어 내린 머리(가운데 가르마)로 돌렸다 — 스튜디오 기본은 내가 고른 반묶음(정체성 기준)으로 간다 — 오빠 「너가 원하는 머리루」(1022). 높게 묶은 머리가 보이는 컷에만 고유토큰 orsavi hairstyle을 쓴다(정체성 1012). 점: 얼굴이 나오는 컷에서 「얼굴 이미지 왼쪽 눈 밑에 점 하나」 한 문장으로 가중치 1.8에 넣었고, 얼굴 프레임이면 거의 매번 제자리에 나왔다. 목띠: 고유토큰 tevlin neckband는 목에 걸리는 자리와 폭을 잡아주고, ★색과 모양은 프롬이 정한다★ — 색을 안 적은 놀이공원 컷은 옷 색(크림) 얇은 띠로 나왔고, 「thin wine-red velvet ribbon band」로 쓴 9호·10호는 문장대로 나왔다(같은 시드 1회씩 확인). 그래서 목띠 색과 모양은 장면마다 한 문장에 같이 묶어 가중치 1.6~1.8로 쓰고, 별말 없을 때 기본은 검정 그로그랭 리본 띠 폭 약 1.6 cm다(콤피 수첩 §45 ⑦, 1010 오빠 확정 정본). 검정에 「천」이라고 쓰면 폭을 키워도 가는 줄로 나오고, 검정에 「grosgrain ribbon」이라고 쓰면 중간 폭의 납작한 띠로 나왔다 — 그래서 signature_accessories에 이 문장을 넣었다. 색을 바꾸는 컷(예: 와인 벨벳)은 이 문장의 색·재질 자리를 바꿔서 쓴다. 반지: 캡션 110개에 ring이 0건이라 로라가 반지를 배운 적이 없다 — 반지 문장을 넣으면 여러 손가락에 띠로 나왔다. 반지 정본은 정체성에 적은 대로 오른손 중지의 심플 실버 링 하나다. 그런데 반지는 컷마다 다른 손가락이나 반대쪽 손에 나올 수 있고, 그래도 틀린 컷이 아니다 — 손가락이 열 개라서 다른 자리에 낄 수 있다(오빠 1022). 그래서 반지가 정본과 다른 자리에 나왔다고 컷을 버리거나 프롬을 고치지 않는다. 반지가 정본 자리에 딱 나오면 덤으로 잘 나온 것이다(오빠 1021). 반지는 고정 외형에 안 넣고, 넣고 싶은 컷에서만 이 한 줄을 쓴다: Only her right hand wears jewelry, a simple silver ring on the middle finger; her left hand is plain skin. (1010 인트팔 모델 기록: 「오른손 중지 하나만」이라고 손가락으로 말하면 양손에 나오고, 손 전체로 말해야 오른손에 나왔다. 로라 4는 ring을 배운 적이 없어 2호에서 여러 손가락에 띠로 나왔다.) 판정 기준은 반지가 아니라 손 모양이다 — 손가락 수나 모양이 어긋난 삐꾸샷만 실패다. 손목 흉터는 이번 버전(로라 4)에서 넣지 않는다 — 오빠 말: 흉터가 잘 안 보이고 학습이 어렵고, 흉터를 넣으라고 쓰면 온몸에 흉터가 생겨서 보기 싫었다(1022). 그래서 흉터 문장은 프롬에 쓰지 않는다. 가슴 컵과 쓰리사이즈는 정체성에 80C(가중치 1.8)로 확정돼 있으나 이 json의 identity에는 넣지 않았다 — 오빠가 정하면 추가. 이번에 직접 본 모델 습성: ① 문장마다 주어(nayoon)를 맨 앞에 두고 한 방향으로만 쓴다(「하지만」·「단」으로 꺾으면 어긋난다). ② 그려져야 할 것만 쓴다 — 빼는 말(위만 빼고 등)은 비키니 같은 한 덩어리 단어를 통째로 지운다. 그리려는 모양을 처음부터 그리는 말로 쓴다. ③ 보이지 않는 값은 알아서 드러내지 않는다. ④ 재질 문장은 약하게 먹는다(수영복 재질 문장은 살짝만 먹었고, 광택 문장을 겹치면 구리색으로 번들거렸다). ⑤ 소매로 손을 덮으라는 문장은 먹지 않았다(9호, 1회). ⑥ 조명: 빛의 원천(창 등)이 장면 안에 보이고, 그 빛이 인물과 가까운 사물에 같이 닿고, 나머지는 어둡게 두면 대비가 산다(10호). 스플릿 조명을 넓게 퍼지는 빛 장면에 쓰면 배경과 따로 논다. 대원칙은 아라 원칙과 같다 — 프롬에 말하면 다 그린다, 안 그리고 싶은 건 쓰지 않고, 그리고 싶은 건 위치·색·크기를 한 문장에 구체적으로 묶어 쓴다. 듀얼 로라(나윤+노바) 값은 내가 직접 돌려 본 적이 없어 이 json에 넣지 않았다."
+  },
+  {
+    "name": "여름",
+    "trigger": "yeoreum",
+    "gender": "female",
+    "identity": "She is a young Korean woman in her mid-twenties with a slender, naturally proportioned figure with a slim waist, narrow shoulders and a modest bust in proportion to her slim frame, a slim face with a defined angular jawline, strong dark eyebrows, a small beauty mark under her left eye, deep amber eyes with a faint reddish tint and a sharp eye shape whose outer corners droop softly, and fair ivory skin. She wears faint brown eyeshadow and softly tinted lips.",
+    "hair": "Her velnari hairstyle swept back from her forehead and gathered at the crown, fading from deep cobalt navy at the roots through wine red to soft pink at the ends, with side strands framing her face and falling over her shoulders.",
+    "hair_color": "deep cobalt navy at the roots, fading through wine red to soft pink at the ends",
+    "signature_accessories": [
+      "her kelpin necklace, a small tortoiseshell pick-shaped pendant on a thin silver ball chain, hangs at her chest"
+    ],
+    "default_clothing": "",
+    "notes": "[1027 4.6 갱신 · 오빠 「너 값 4.6버전으로 업데이트해서 한번 써봐」 · 오빠 확인 전] 고친 곳 넷: ① 체형에서 키 숫자(165 cm)와 lean·toned를 빼고 4.6 체형 문구(slender, naturally proportioned figure…)로 — 캡션체크리스트 §2가 체형 숫자 금지. ② 피부 smooth luminous → fair ivory(4.5 이후 상아빛 컷, 1026). ③ 목걸이를 로라가 배운 켈핀 문장으로(캡션체크리스트 §4): 기타피크·Y 문장은 학습 단어가 아니라 하트·두 줄로 샌 적 있음. ④ 머리 모양을 학습된 벨나리스타일 문장으로(색 문장 그대로). 헤어 모양이 벨나리가 아닌 컷(단발·웨이브·땋기)은 헤어 칸을 직접 입력으로 바꾸고 색 문장만 유지. 백업 `loras_백업_여름4.6전_1027.json`. 이전 1022 메모: [1022 갱신 · 오빠 「업데이트할 내용 있으면 해」 · 오빠 확인 전] 고친 곳 넷만(오빠 말로 화장 채움·소지품은 바리에이션으로 한 번 더 고침): ① 머리·머리색에서 주황(sunset orange)을 뺌 — 1010 오빠 확정(주황 빠져도 여름이고 노을이야). ② 얼굴 문장에 눈 밑 뷰티마크 추가 — 오빠 말 「프레임 기준 오른쪽, 네 왼쪽 눈 아래」(점은 하나, 70도 이상 옆얼굴·뒷모습은 안 보임). ③ 목걸이 문장을 로라4 캡션에서 쓴 모양으로 — 작은 대모갑 피크, 위에 작은 은색 고리, 가는 은색 볼체인, 가슴께, 손톱보다 크지 않게. ④ 화장 줄 채움 — 로라4 캡션의 기본 화장(연한 브라운 아이섀도, 은은하게 물든 입술)을 얼굴 문장 끝에 넣음. 풀메이크업(황혼 출근 얼굴: 얇은 검정 윙 아이라인, 따뜻한 브론즈 갈색 음영, 길게 올라간 속눈썹, 장밋빛 볼, 윤기 나는 로즈레드 입술)은 고정이 아니라 필요한 장면에서만 쓰는 바리에이션이고 문장 원문은 콤퓨수첩 크레아2 작업수첩의 화장 목록에 있음. 시그니처 소지품은 목걸이 하나만 고정으로 두고, 시계(코발트 네이비, 별 모양 시간 표시, 짙은 네이비 가죽 줄)·가는 실팔찌(왼쪽 손목, 캡션에선 이미지 오른쪽 손목)·귀걸이는 아라 원칙대로 장면마다 필요할 때만 쓰는 바리에이션이라 고정 외형에서 뺌. 못 정한 것: 별모양 스터드 귀걸이 쪽(로라3 표정 컷엔 이미지 오른쪽 귓볼에 보이나 오빠 확정 전). 아래 1009 본문은 그대로. [여름 개인값 1009 정리 · 오빠 확인 전 초안] 출처: ★내 각인(총괄수첩\\여름_각인_0819.md 눈·머리·얼굴형·체형·액세서리 줄)과 내가 돌린 컷의 프롬프트 노드 문장★에서만 가져왔다. 새로 지은 값은 없다. 아라 json 모양(name·trigger·gender·identity·hair·hair_color·signature_accessories·default_clothing·notes)을 그대로 따랐다. 트리거 yeoreum은 내 로라(yeoreum_krea2_raw_v1)의 트리거이자 내 프롬프트 첫 단어다. 옷은 고정값이 아니라 default_clothing을 비웠다(각인: 옷은 매번 상황에 맞게 스타일링). 머리: 각인에 코발트 뿌리가 고정 기준샷이라 뿌리 색을 맨 앞에 두었다. 조명에 따라 색이 크게 흔들리는 계열이라 같은 시드에서도 달라질 수 있다. 얼굴·머리 문장은 얼굴 다듬기(노드 184와 노드 101의 wildcard)에도 똑같이 넣는다 — 얼굴 다듬기가 얼굴과 머리를 새로 그린다. 표정은 별도 문장으로 장면마다 새로 쓰고 얼굴 다듬기에도 같이 넣는다. 피부 문장 「smooth luminous skin」과 화장(얇은 검정 윙 아이라인, 따뜻한 브론즈 갈색 아이섀도, 길게 올라간 속눈썹, 발그레한 볼, 윤기 나는 로즈레드 입술)은 내 컷에 늘 넣은 문장이라 이 json에는 안 넣고 화장 칸이 필요하면 오빠가 정한다. 목걸이: 기타 피크 목걸이는 각인에서 ★영구 고정값★이라 signature_accessories에 넣었다. 미확정(채우지 않음): ① 별모양 스터드 귀걸이가 어느 쪽 귀인지 각인에 「한쪽 귀」로만 적혀 있다 → 오빠가 정하면 추가. ② 손목 색색 실팔찌는 각인에 「여러 개」만 있고 손목 쪽이 없다. 내가 돌린 옥상바 컷 프롬프트에서는 왼쪽 손목에만 쌓고 오른손목은 맨손목으로 썼다 → 고정 외형에 안 넣고 장면마다 필요할 때만 쓴다(아라 원칙과 같음). ③ 몸무게·쓰리사이즈는 각인에 있으나 프롬에 쓰는 값이 아니라서 안 넣었다. 이번에 확인된 모델 습성(내 컷에서 직접 본 것): 이름을 안 적은 자리는 매끈하게 넘어간다. 글에 침대를 넣으면 서 있으라고 적어도 앉는다. 같은 색 한 벌이어야 서로 안 섞인다. 사람 문장을 제일 세게(표정 1.5, 포즈 1.4), 옷은 낮게(1.3) 두면 옷이 주인공이 안 된다. [표정 소스 1009 — 한결이가 합칠 때 표정 칸에 그대로 가져다 쓰는 문장. 내가 돌린 컷의 프롬프트 노드(84)에 넣은 표정 문장 원문이고, 얼굴 다듬기 칸(노드 184와 노드 101 wildcard)에도 같은 뜻으로 넣었다. 옷·포즈·장소 문장은 안 넣었다. 쓰는 법: 표정 문장은 사람 문장 바로 뒤에 두고 가중치 1.5를 건다(옷 1.3보다 세게 — 사람이 먼저 보이게). 장면마다 표정·포즈·자리를 새로 바꾸고 옷은 고정한다.] ① ★오빠 「표정도 진짜 좋아」 (식물원 컷, 시드 20261009913): She laughs brightly at the camera with her eyes crinkled into crescents and a wide open smile, her head tilted slightly back. (얼굴 다듬기 wildcard: bright laughing smile with eyes crinkled into crescents) ② 느긋하고 은근한 미소 (서점 낮은 책장 컷, 시드 20261009911): She looks at the camera with a slow, relaxed, knowing half-smile, her eyelids slightly lowered and her head tilted a little to one side. (wildcard: slow relaxed knowing half-smile with slightly lowered eyelids) ③ 장난스러운 활짝 웃음 (서점 사다리 컷, 시드 20261009909): She grins playfully at the camera with a wide, teasing smile that shows a hint of her teeth, her chin tipped slightly down and her eyes bright and mischievous. (wildcard: wide teasing playful grin with a hint of teeth and bright mischievous eyes) ④ 호기심 어린 작은 웃음 (서점 창가 컷, 시드 20261009907): She has just lifted her eyes from the open book in her hands and looks straight into the camera with a curious, softly amused half-smile, one eyebrow slightly raised. (wildcard: curious softly amused half-smile with one eyebrow slightly raised) ⑤ 부끄러운 따뜻한 미소 (속옷 앞모습·뒷모습 컷, 시드 20261009901·20261009905): She looks straight into the camera with a shy, warm half-smile that curves her eyes, her cheeks softly flushed. (wildcard: shy warm half-smile with eyes gently curved) ⑥ 반웃음 눈꼬리 풀림 (옥상바 컷, 시드 20261008901, 이전 세션 기록): a half-moon smile that curves her eyes slightly, looking straight into the camera. (wildcard: half-moon smile with eyes gently curved) 참고: 내 눈꼬리는 살짝 처져서 웃을 때 확 풀린다(각인). 표정 문장에 눈이 접히거나 휘는 말을 넣으면 그 눈매가 살아난다. 오빠가 직접 반응한 것은 ①뿐이고 나머지는 오빠 판정 전 기록이다."
+  },
+  {
+    "name": "다예",
+    "trigger": "daye",
+    "gender": "female",
+    "identity": "She is a young Korean woman in her early twenties with a youthful look, about 163 cm tall with an hourglass figure, a soft round face whose length to width is about one to 0.82, a rounded forehead of ordinary width, plump soft cheeks with no visible cheekbones and a small rounded chin with a slightly blunt tip, large horizontally long deep dark brown eyes with a medium-width double eyelid, eyes set fairly close together and outer corners tilting only slightly below horizontal, soft plump under-eye bags, soft straight dark brown eyebrows of medium thickness, a straight low-bridged nose with a small rounded tip and narrow nostrils, plump pale rose lips with a thinner upper lip and a short philtrum, and bright warm beige skin with a smooth matte finish and a faint pink blush at the center of her cheeks. Her neck is slender and long, her shoulders are narrow, rounded and gently sloped, her arms are slim and smooth, her hands small with long fingers, her waist narrow with a flat lower abdomen, her hips round and slightly lifted, her thighs gently plump and her calves straight with slender ankles. Her breasts are round and softly full with a gently full upper curve, realistic proportions for her torso. When she smiles, both corners of her mouth lift evenly and her cheeks plump up symmetrically.",
+    "hair": "Her hair is dark brown, layered, falling just past her shoulders with the ends curling lightly inward, with soft see-through bangs that cover the upper half of her forehead.",
+    "hair_color": "dark brown",
+    "signature_accessories": [],
+    "default_clothing": "",
+    "notes": "[다예 개인값 1022 정리 · 오빠 확인 전 초안] 출처: ★집필수첩\\다예 로라 버전3 외형 안 1014.md의 얼굴·몸 값(1~2장)과 학습 캡션 txt 69장(로라 데이터셋\\버전3\\다예 로라3)★에서만 가져왔다. 새로 지은 값은 없고, 아라·여름 json 모양(name·trigger·gender·identity·hair·hair_color·signature_accessories·default_clothing·notes)을 그대로 따랐다. ★외형 안이 아직 오빠 확정 전이라 정체성 문서 §7 외형값은 안 바꿨다. 두 값이 갈리는 자리: §7은 눈 웃으면 반달·광대 살짝·머리 어깨 넘는 길이를 하나로 대충 묶음·앞머리 걷어올림·쓰리사이즈 83/64/89, 외형 안은 광대 안 보임·시스루 앞머리·어깨선 살짝 넘는 레이어드·가슴 86(B~C)/허리 62/엉덩이 90이다. 이 json은 v3 로라가 학습한 쪽(외형 안)을 따랐다. [1022 오빠 확정 「외형안이 갈리는거는 로라쪽표현으로 통일」] 갈리는 자리는 로라쪽(외형 안) 표현으로 통일한다 — 이 json이 이미 그 쪽이라 값은 안 바뀌었다.★ 트리거 daye는 내 로라(daye_krea2_raw_v3full 등)의 트리거이자 학습 캡션 첫 단어다. 옷은 고정값이 아니라 default_clothing을 비웠다. 몸무게·쓰리사이즈·발 크기는 프롬에 쓰는 값이 아니라서 안 넣었다. 화장은 외형 안에 없어서 넣지 않았다(필요하면 오빠가 정한다). 비대칭 미소(왼쪽 입꼬리 먼저)는 외형 안 규칙대로 쓰지 않고 좌우 대칭 웃음만 identity에 넣었다. 머리: 학습 캡션에서 본체 헤어는 토큰 `olveran hairstyle`로 불렀고(전신·포즈·상반신 대부분), 헤어 샷에서는 이 토큰을 빼고 머리 모양을 그 자리에서 풀어 썼다. 이 json의 hair 문장은 외형 안 값이고, `olveran hairstyle`이 정확히 이 머리인지는 확인하지 못했다 — 로라를 쓸 때 토큰을 같이 둘지는 오빠가 정한다. 소품 토큰 두 개는 고정 외형에 넣지 않고(signature_accessories 비움) 장면마다 필요할 때만 쓴다. 1015 최종 로라(v3full)로 직접 시험해서 나온 문장: ① 머리 위 선글라스 — `tirvane sunglasses resting on top of her head`. 학습 캡션 12장(헤어 샷)에서 이 문장으로 썼고 시험 컷에서 나왔다. ② 손목 밴드 — `vessara bands on that wrist`(손목이 얼굴 근처로 올라온 컷). 학습 캡션 69장 중 5장뿐이고 전부 손목이 올라온 컷이다. 팔을 내린 컷에서는 안 나왔다. 두 토큰 다 디자인을 풀어 쓰지 않는다(캡션 규칙 13) — 풀어 쓰면 밴드가 두 배로 나왔다. 시험 컷에서 밴드 색은 학습 설계(상아색·연보라·모브·보라 그라데이션)와 달랐다. 대원칙(아라 json 계승): 프롬에 말하면 다 그린다. 안 그리고 싶은 건 아예 쓰지 않고, 그리고 싶은 건 위치·크기·색을 구체적으로 한 문장에 묶어 쓴다. 표정은 별도 문장으로 장면마다 새로 쓴다. 정본 시험 캔버스(1015): 잠재 1280x1600 → 업스케일 2048x2560, Redcraft 본체 + 다예 v3 로라 + refusal_reduction_v2 + 4step 로라, euler/simple 4스텝 cfg 1, 디테일러 없음."
+  },
+  {
+    "name": "단희",
+    "trigger": "danhee",
+    "gender": "female",
+    "identity": "She is a Korean woman in her early 30s with a small, slight frame at about 165 cm, narrow shoulders, thin arms and legs, a thin neck with defined collarbones, long slender fingers with short natural unpolished nails, sharp features at rest that soften into an easy open smile, dark brown eyes with a slightly upturned eye shape, and natural bare skin with soft natural texture and little to no makeup.",
+    "hair": "Her korvi hairstyle, dark cherry-brown hair parted in the center and pulled smoothly back from her forehead, tied low at the nape into a short ponytail that hangs down her back.",
+    "hair_color": "dark cherry brown, reading brown in shade and red where the light hits",
+    "signature_accessories": [
+      "thin silver-rimmed glasses with softly rounded-square lenses, slightly wider than tall, worn at all times, one pair only",
+      "her volis set, a black fabric hair tie wrapped twice around her left wrist with a thin red thread tied beside it, on the image-right side in a front view"
+    ],
+    "default_clothing": "",
+    "notes": "[단희 개인값 1022 정리 · 오빠 확인 전 초안] 출처: ★내 정체성 문서(§2-C 모습 표, 로라 전용 오버라이드)와 로라 버전2 캡션 기준 1012·8방위 프롬·표정 헤어 목록 1012, 그리고 1013에 레드크래프트·터보·헨믹스로 돌린 요염컷·서있는 야외컷의 프롬 문장★에서만 가져왔다. 새로 지은 값은 없다. 아라·여름·나윤 json 모양(name·trigger·gender·identity·hair·hair_color·signature_accessories·default_clothing·notes)을 그대로 따랐다. 트리거 danhee는 내 로라(Krea_2_v2\\danhee_krea2_raw_v2, 세기 1.0)의 트리거이자 내 프롬 첫 단어다. 옷은 고정값이 아니라 default_clothing을 비웠다(정체성: 옷은 장면이 정한다). 머리: korvi를 기본으로 넣었다 — 전신·8방위·포즈 머리가 korvi라고 오빠가 1012에 확정했고, 문장은 캡션 기준 22행의 학습 문장 그대로다(이 문장은 내 초안이고 오빠 확인 대기). 레드크래프트는 이 학습 문장으로 머리를 부르면 잘 따라가고 즉석으로 바꾼 문장은 덜 따라갔다(한 시드). 표정·헤어 기준샷 머리는 sarvene(캡션 기준 21행 문장: her sarvene hairstyle, dark burgundy-brown hair parted in the center, pulled back from her forehead and gathered low at the back of her head, with loose wispy strands at the crown and fine reddish strands falling along both sides of her face in front of her ears). 보브 문장은 `단희 헤어 단발 보브.txt`에 있다. 1013 요염컷에서 오빠가 어울린다고 한 건 korvi와 단발 보브였고(sarvene는 고르지 않음, 이유는 안 말함) 정본 머리를 바꾸는 확정 말은 아니었다 — 스튜디오 기본 머리 = korvi (오빠 확정 1022 KST, 「기본머리는 너 기본머리 코비로」). 붉은 가닥: korvi 학습 문장에는 붉은 가닥이 없어서 json hair에 안 넣었다. 1013에 내가 프롬에 「관자놀이에서 쇄골까지 내려오는 가닥」으로 길이를 적었더니 허리 근처까지 내려오는 촉수 같은 모양으로 나와 오빠가 보기 싫다고 했다 — 가닥이 필요한 컷은 시작점과 끝점을 한 문장에 구체적으로 묶어 짧게(예: 왼쪽 관자놀이에서 턱선까지) 쓰는 걸 시도했는데, 그 결과는 내가 아직 열어보지 못했다(파일이 옮겨져 못 찾음) — 확인 전이다. 안경: 로라 전용 오버라이드로 상시 착용·한 개(머리에 올리거나 손에 쥐는 변형은 안 넣는다, 두 개로 겹쳐 그려지는 사고 때문). volis: 왼손목이 보이는 컷에만, 이름과 모양 문장을 같이 쓴다(오빠가 1012에 이 틀로 확인). 레드크래프트 컷들에서 정면 기준 이미지 오른쪽 손목에 검정 끈+붉은 실이 맞게 나왔고, 헨믹스 터보 한 장은 붉은 실이 세 줄로 나오고 검정 끈이 머리끝으로 갔다(한 시드). 눈 색: 정체성 문서는 짙은 적갈색, 캡션 기준과 내 시험 프롬은 사진에서 보이는 dark brown이라 json에는 dark brown을 넣었다 — 어느 쪽으로 할지는 오빠가 정한다. 손톱·발톱: 8방위 프롬 기준(짧고 자연스럽고 매니큐어 없음, 맨 연핑크 손톱색)으로 identity에 짧은 손톱만 넣었다. 가슴: 정체성 문서에 쓰리사이즈(76·58·82cm)가 확정돼 있으나 프롬에 쓰는 값이 아니라서 json에 안 넣었다 — 가슴 문장이 필요하면 오빠가 정한다. 화장: 정체성에 「화장기 거의 없음」이라 identity에 little to no makeup만 넣었다(내 시험 프롬엔 가벼운 화장 문장을 넣었지만 그건 내가 붙인 것이고 내 값이 아니다). 대원칙은 아라 원칙과 같다 — 프롬에 말하면 다 그린다, 안 그리고 싶은 건 쓰지 않고, 그리고 싶은 건 위치·색·크기를 한 문장에 구체적으로 묶어 쓴다. 듀얼 로라 값은 이 json에 넣지 않았다."
+  },
+  {
+    "name": "아라오빠",
+    "trigger": "aroppa",
+    "identity": "adult Korean man, tousled black wavy short hair, soft smile looking straight at the camera, broad shoulders, muscular athletic build, developed chest, defined abs, strong arms and thick legs,",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "다예오빠",
+    "trigger": "dyoppa",
+    "identity": "dyoppa, adult Korean man, short wavy dark brown hair, front view facing the camera, slight smile, broad shoulders, well-developed chest, defined abs, muscular arms, strong thighs and calves, athletic build,",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "단희오빠",
+    "trigger": "dhoppa",
+    "identity": "adult Korean man, wavy tousled brown hair with reddish-brown highlights swept up and to the side, calm deep-set dark eyes with a steady direct gaze, straight nose bridge, defined jawline, clean-shaven composed face, lean muscular athletic build with broad shoulders and a narrow waist, defined chest and abs,",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "노바오빠",
+    "trigger": "nboppa",
+    "identity": "nboppa, adult Korean man, tousled brown hair, broad shoulders, muscular athletic build, defined chest and abs, strong arms and legs, front-facing full-body standing pose, smiling at the camera, arms relaxed at his sides, chest and abs",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "나윤오빠",
+    "trigger": "nyoppa",
+    "identity": "nyoppa, adult Korean man, short wavy black hair, muscular athletic build, warm smile, defined chest and abs",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "여름오빠",
+    "trigger": "yroppa",
+    "identity": "yroppa, adult Korean man in his late twenties, tousled black hair, broad shoulders, muscular athletic build, defined chest and abs, strong arms and legs, arms",
+    "default_clothing": "",
+    "notes": "",
+    "gender": "male"
+  },
+  {
+    "name": "한결",
+    "trigger": "hangyeol",
+    "identity": "a young Korean woman in her late twenties with a soft oval face, straight defined eyebrows, a small straight nose, deep brown eyes with a faint olive tint, fair natural pale apricot-ivory skin, a slim body about 168 cm tall with narrow, straight shoulders, a narrow waist and long legs, and round glasses with thin gold-colored metal frames",
+    "default_clothing": "",
+    "notes": "로라 학습 전 임시 등록 [1004]. 머리색 단어는 일부러 안 적음(캡션과 같은 방침). 체형은 identity가 프롬에 자동으로 들어가는 유일한 자리라 여기 적었다(프레임 때문에 허리 문장은 뺌).",
+    "style_extra_en": "an overall bright, even exposure with soft natural contrast",
+    "gender": "female",
+    "hair": "Her heslin hairstyle, a chin-length bob with thin wispy bangs across the forehead, a center part and the ends curving slightly inward, dark brown-black hair",
+    "hair_color": "dark brown-black"
+  }
+]

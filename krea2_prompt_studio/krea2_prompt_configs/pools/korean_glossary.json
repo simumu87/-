@@ -1,0 +1,83 @@
+{
+  "schema": "krea2-pool/1",
+  "pool": "KOREAN_GLOSSARY",
+  "label_ko": "기본 용어집",
+  "items": {
+    "한국인 여성": {
+      "en": "adult Korean woman",
+      "desc_ko": ""
+    },
+    "한국인 남성": {
+      "en": "adult Korean man",
+      "desc_ko": ""
+    },
+    "한국인 성인": {
+      "en": "adult Korean person",
+      "desc_ko": ""
+    },
+    "성인 여성": {
+      "en": "adult woman",
+      "desc_ko": ""
+    },
+    "성인 남성": {
+      "en": "adult man",
+      "desc_ko": ""
+    },
+    "여성": {
+      "en": "woman",
+      "desc_ko": ""
+    },
+    "남성": {
+      "en": "man",
+      "desc_ko": ""
+    },
+    "한국인": {
+      "en": "Korean",
+      "desc_ko": ""
+    },
+    "자연스러운": {
+      "en": "natural",
+      "desc_ko": ""
+    },
+    "현실적인": {
+      "en": "realistic",
+      "desc_ko": ""
+    },
+    "아늑한": {
+      "en": "cozy",
+      "desc_ko": ""
+    },
+    "로맨틱한": {
+      "en": "romantic",
+      "desc_ko": ""
+    },
+    "따뜻한": {
+      "en": "warm",
+      "desc_ko": ""
+    },
+    "차분한": {
+      "en": "calm",
+      "desc_ko": ""
+    },
+    "세련된": {
+      "en": "refined",
+      "desc_ko": ""
+    },
+    "일상적인": {
+      "en": "everyday",
+      "desc_ko": ""
+    },
+    "실제 크기": {
+      "en": "real-world scale",
+      "desc_ko": ""
+    },
+    "자연광": {
+      "en": "natural light",
+      "desc_ko": ""
+    },
+    "피부결": {
+      "en": "natural skin texture",
+      "desc_ko": ""
+    }
+  }
+}

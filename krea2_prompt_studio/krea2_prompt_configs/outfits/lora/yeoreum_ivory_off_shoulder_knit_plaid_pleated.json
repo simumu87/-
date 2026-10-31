@@ -1,0 +1,96 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "yeoreum_ivory_off_shoulder_knit_plaid_pleated",
+  "scope": "lora_outfit",
+  "character": "여름",
+  "name_ko": "아이보리 오프숄더 니트 + 체크 플리츠 스커트",
+  "name_en": "ivory off-shoulder knit with plaid pleated skirt",
+  "desc_ko": "아이보리 오프숄더 니트 탑, 네이비·와인 체크 플리츠 미니 스커트, 검정 첼시부츠",
+  "category": "casual",
+  "source_doc": "의뢰서 「프롬프트 스튜디오 추가 의뢰서 — 여름 → 한결」(1027) 1) · 의상백과 표(원피스·상의·하의·신발)에서 한결이 짠 조합. 여름 의상표(1009)의 검정 리브 바디콘 미디 원피스 줄만 옮김(속옷 줄은 옮기지 않음, 올리브 코듀로이는 오빠 판정 「절대 입지마」로 제외)",
+  "applies_to": {
+    "locations": [
+      "은행나무 길",
+      "억새밭",
+      "도시 거리",
+      "공원",
+      "카페",
+      "서점",
+      "도서관 열람실",
+      "지하철 승강장",
+      "빈티지 옷가게",
+      "한옥 마당",
+      "벚꽃 길",
+      "사진 스튜디오",
+      "한강 공원",
+      "해변 카페 테라스",
+      "온실 카페",
+      "미술관",
+      "호텔 로비"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "아이보리",
+      "en": "ivory"
+    }
+  },
+  "material": {
+    "ko": "니트와 울 혼방",
+    "en": "knit and wool blend",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "an ivory fine-knit off-shoulder top with long fitted sleeves, a navy and wine-red plaid pleated mini skirt and black leather Chelsea ankle boots",
+  "normal_waist_en": "an ivory fine-knit off-shoulder top with long fitted sleeves and a navy and wine-red plaid pleated mini skirt",
+  "normal_noshoe_en": "an ivory fine-knit off-shoulder top with long fitted sleeves and a navy and wine-red plaid pleated mini skirt",
+  "normal_top_en": "an ivory fine-knit off-shoulder top with long fitted sleeves",
+  "detail_prose_en": [
+    "The ivory knit top has a straight off-shoulder neckline and fitted sleeves",
+    {
+      "depth": 2,
+      "en": "The plaid pleated skirt crosses navy with wine red and ends above the knees"
+    },
+    {
+      "depth": 5,
+      "en": "{P} black Chelsea boots have elastic side panels"
+    }
+  ],
+  "echo_en": [
+    "The knit top is a soft ivory",
+    "The plaid skirt crosses navy with wine red"
+  ],
+  "lit_en": "the ivory knit of the top",
+  "parts": {
+    "top": {
+      "ko": "아이보리 오프숄더 니트",
+      "en": "an ivory fine-knit off-shoulder top with long fitted sleeves",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "체크 플리츠 미니 스커트",
+      "en": "a navy and wine-red plaid pleated mini skirt",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}

@@ -1,0 +1,168 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "해변 카페 테라스",
+ "outdoor": true,
+ "note_ko": "구체적인 장소 팩(오빠 1026: 분위기·재질을 구체적으로 적어야 공간이 달라진다). 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "a seaside café terrace with white wooden tables, blue umbrellas and the sea beyond a low railing",
+ "feature_en": [
+  "white wooden tables and chairs under blue canvas umbrellas",
+  "a low white railing at the edge of the terrace above the sea"
+ ],
+ "ground_en": [
+  "a whitewashed wooden deck with narrow gaps between the boards",
+  "a few terracotta pots with green plants along the railing"
+ ],
+ "far_en": [
+  "the sea running out to a clear line of the horizon",
+  "a white lighthouse on a rocky point far down the coast"
+ ],
+ "times": {
+  "낮": {
+   "time_en": "a bright midday",
+   "time_prep": "on",
+   "sky_en": "a clear blue sky above the sea",
+   "light_en": "bright sunlight comes from above and from the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "short soft shadows of the umbrellas lie on the deck toward the camera's right",
+   "desc_ko": "맑은 한낮, 위와 카메라 왼쪽에서 오는 밝은 햇빛"
+  },
+  "해질녘": {
+   "time_en": "the last hour before sunset",
+   "time_prep": "at",
+   "sky_en": "a wide orange and pink sky above the sea",
+   "light_en": "low orange sunlight comes from the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "long soft shadows of the tables stretch across the deck toward the camera's right",
+   "desc_ko": "해 지기 직전, 낮은 주황 해가 카메라 왼쪽에서 비춤"
+  },
+  "밤": {
+   "time_en": "a clear night",
+   "time_prep": "on",
+   "sky_en": "a deep blue night sky above the dark sea",
+   "light_en": "warm yellow light from a string of small round bulbs hangs above and in front of {o}, falling on {p} face and shoulders",
+   "shadow_en": "deep soft shadows gather on the deck behind {o}",
+   "desc_ko": "맑은 밤, 머리 위 앞쪽 전구 줄의 따뜻한 노란빛"
+  }
+ },
+ "moments": {
+  "테이블에 앉아 바다 보기": {
+   "pose_en": "sits at a white table with {p} hands folded on the tabletop beside a glass of lemonade",
+   "moment_en": "{s} turns {p} head toward the camera with a bright smile",
+   "desc_ko": "흰 테이블에 앉아 레모네이드 옆에 손을 모으고 카메라 쪽으로 고개를 돌림",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "난간에 기대 서기": {
+   "pose_en": "leans against the low white railing with both forearms resting on it",
+   "moment_en": "{s} looks toward the camera with a relaxed smile",
+   "desc_ko": "낮은 흰 난간에 두 팔을 얹고 기대 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "바닷바람에 머리 날리기": {
+   "pose_en": "stands on the deck with the sea wind lifting {p} hair across {p} face",
+   "moment_en": "{s} brushes a strand away with one hand and laughs toward the camera",
+   "desc_ko": "바닷바람에 머리가 날려 한 손으로 쓸며 카메라를 보고 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "레모네이드 마시기": {
+   "pose_en": "holds a tall glass of lemonade in one hand near {p} chin",
+   "moment_en": "{s} looks toward the camera over the glass with a playful smile",
+   "desc_ko": "한 손에 든 긴 레모네이드 잔을 턱 가까이 대고 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ],
+   "wrist_straight": true
+  },
+  "천천히 걷기": {
+   "pose_en": "walks slowly along the deck with one foot stepping forward",
+   "moment_en": "{s} looks toward the camera with a gentle smile",
+   "desc_ko": "나무 데크를 천천히 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  },
+  "머리 쓸어 넘기며 웃기": {
+   "pose_en": "stands on the whitewashed deck by the railing with one hand sweeping a strand of hair away from {p} face",
+   "moment_en": "{s} laughs softly toward the camera",
+   "desc_ko": "난간 옆 흰 데크에서 한 손으로 머리카락을 얼굴에서 쓸어 넘기며 카메라를 보고 웃음",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
+  },
+  "입가 가리고 웃기": {
+   "pose_en": "stands on the whitewashed deck by the railing with the back of one hand held lightly against {p} mouth",
+   "moment_en": "{s} laughs with {p} eyes crinkled toward the camera",
+   "desc_ko": "난간 옆 흰 데크에서 손등으로 입가를 가볍게 가리고 눈웃음으로 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the sea softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the sea softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the sea softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the sea softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the sea softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the sea softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the sea softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the whitewashed wooden deck",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮": [
+   "the umbrellas are deep blue canvas on white poles",
+   "the tables hold small glass cups and a bowl of lemons",
+   "the sea is bright blue with small white wave crests"
+  ],
+  "해질녘": [
+   "the umbrellas are deep blue canvas on white poles",
+   "the tables hold small glass cups and a bowl of lemons",
+   "the lighthouse far down the coast is a thin white shape against the orange sky"
+  ],
+  "밤": [
+   "the umbrellas are deep blue canvas on white poles",
+   "the tables hold small glass cups and a bowl of lemons",
+   "the dark sea carries a thin line of light from the lighthouse"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the tables and the sea spreading out behind {o}",
+ "more_prefix_en": "Beyond that"
+}

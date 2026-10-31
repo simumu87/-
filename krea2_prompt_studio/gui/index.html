@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프롬프트 생성기</title>
+<style>
+  :root {
+    --bg: #f6f4f1; --panel: #ffffff; --ink: #2a2622; --muted: #7b736b; --line: #e3ded8;
+    --accent: #7a5c3e; --accent-ink: #ffffff; --warn: #b3412c; --ok: #3d7a4f; --code: #f1ece6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1c1a18; --panel: #262320; --ink: #eee8e1; --muted: #a39a90; --line: #3a3530;
+      --accent: #d6b48a; --accent-ink: #1c1a18; --warn: #ef8a74; --ok: #8cc79b; --code: #1f1d1b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1c1a18; --panel: #262320; --ink: #eee8e1; --muted: #a39a90; --line: #3a3530;
+    --accent: #d6b48a; --accent-ink: #1c1a18; --warn: #ef8a74; --ok: #8cc79b; --code: #1f1d1b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  header h1 { font-size: 17px; margin: 0; font-weight: 650; }
+  header small { color: var(--muted); }
+  main { display: grid; grid-template-columns: minmax(300px, 380px) 1fr; gap: 16px; padding: 16px 20px 40px; max-width: 1300px; margin: 0 auto; }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; padding: 12px 16px 40px; } }
+  section.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  section.card + section.card { margin-top: 14px; }
+  label.chk { display: flex; gap: 8px; align-items: center; margin: 8px 0 4px; color: var(--ink, inherit); }
+  label.chk input { width: auto; margin: 0; }
+  h2 { font-size: 13px; letter-spacing: .04em; color: var(--muted); margin: 0 0 10px; font-weight: 650; }
+  label { display: block; font-size: 13px; color: var(--muted); margin: 10px 0 3px; }
+  select, input[type=text], input[type=number], textarea {
+    width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--bg); color: var(--ink); font: inherit;
+  }
+  textarea { resize: vertical; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; line-height: 1.55; }
+  .row { display: flex; gap: 8px; align-items: end; }
+  .row > * { flex: 1; }
+  .row .fixed { flex: 0 0 auto; }
+  .check { display: flex; align-items: center; gap: 8px; margin: 10px 0 0; color: var(--ink); font-size: 14px; }
+  .check input { width: auto; }
+  .hint { color: var(--muted); font-size: 12px; margin-top: 3px; min-height: 16px; }
+  button { font: inherit; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 650; padding: 11px 16px; width: 100%; margin-top: 14px; }
+  button:hover { filter: brightness(0.96); }
+  .weights { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+  .weights label { margin: 4px 0 2px; }
+  .out-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .out-head .meta { color: var(--muted); font-size: 12px; }
+  .problems { margin-top: 8px; font-size: 13px; color: var(--warn); }
+  .problems.ok { color: var(--ok); }
+  details { margin-top: 10px; }
+  summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+  .sec { background: var(--code); border-radius: 8px; padding: 8px 10px; margin: 6px 0; font-size: 13px; }
+  .sec b { display: block; color: var(--accent); font-size: 12px; margin-bottom: 2px; }
+  .toast { position: fixed; right: 18px; bottom: 18px; background: var(--ink); color: var(--bg); padding: 9px 14px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .toast.show { opacity: .94; }
+</style>
+</head>
+<body>
+<header>
+  <h1>프롬프트 생성기</h1>
+  <small id="status">불러오는 중…</small>
+</header>
+
+<main>
+  <div>
+    <section class="card">
+      <h2>인물 · 의상</h2>
+      <label for="trigger">인물 (LoRA)</label>
+      <select id="trigger"></select>
+      <label for="outfit">의상</label>
+      <select id="outfit"></select>
+      <div class="hint" id="outfitHint"></div>
+      <textarea id="outfitCustom" rows="3" placeholder="입을 옷을 영어 문장으로 (예: a lavender knit cardigan and a white pleated skirt). 한국어는 일부만 번역돼요" hidden></textarea>
+      <div id="accBox" hidden>
+        <label>소지품</label>
+        <label class="chk"><input type="checkbox" id="accNecklace"> <span id="accNecklaceLabel">목걸이</span></label>
+        <label for="accEngraving" id="accEngravingLabel">Y 각인</label>
+        <select id="accEngraving"></select>
+        <label class="chk"><input type="checkbox" id="accWatch"> <span id="accWatchLabel">시계</span></label>
+        <div class="hint" id="accHint"></div>
+      </div>
+      <label for="outfitColor">옷 색만 바꾸기</label>
+      <select id="outfitColor"></select>
+      <input type="text" id="outfitColorCustom" placeholder="영어 색 이름으로 직접 입력 (예: pale peach)" hidden>
+      <div class="hint" id="outfitColorHint">고른 옷의 문장 안에서 주된 색 단어만 바뀝니다. 「공용의상」·「직접 입력」에는 적용되지 않아요.</div>
+      <label for="hair">헤어</label>
+      <select id="hair"></select>
+      <input type="text" id="hairCustom" placeholder="영어 문장으로 직접 입력" hidden>
+      <label for="hairColor">헤어 색</label>
+      <select id="hairColor"></select>
+      <input type="text" id="hairColorCustom" placeholder="영어 색 이름으로 직접 입력 (예: pastel lavender)" hidden>
+      <div class="hint" id="hairColorHint"></div>
+      <label for="makeup">화장</label>
+      <select id="makeup"></select>
+      <input type="text" id="makeupCustom" placeholder="영어 문장으로 직접 입력" hidden>
+      <div class="hint" id="makeupHint"></div>
+    </section>
+
+    <section class="card">
+      <h2>장소 · 장면</h2>
+      <label for="location">장소</label>
+      <select id="location"></select>
+      <div class="row">
+        <div><label for="time">시간대</label><select id="time"></select></div>
+        <div><label for="framing">프레이밍</label><select id="framing"></select></div>
+      </div>
+      <div class="hint" id="canvasHint"></div>
+      <label for="moment">장면 속 순간 (포즈)</label>
+      <select id="moment"></select>
+      <textarea id="poseCustom" rows="3" placeholder="포즈를 영어 문장으로 (예: sits on the railing and looks back over her shoulder). 한국어는 일부만 번역돼요" hidden></textarea>
+      <div class="hint" id="momentHint"></div>
+      <label for="expression">표정</label>
+      <select id="expression"></select>
+      <div class="hint" id="expressionHint"></div>
+    </section>
+
+    <section class="card">
+      <h2>옵션</h2>
+      <div class="row">
+        <div><label for="mode">묘사 분량</label><select id="mode"></select></div>
+        <div><label for="reinforce">강화 횟수</label>
+          <select id="reinforce"><option value="auto">자동</option><option value="0">없음</option><option value="1">1회</option><option value="2">2회</option></select></div>
+      </div>
+      <div class="row">
+        <div><label for="seed">시드 (비우면 매번 새로)</label><input type="number" id="seed" placeholder="랜덤"></div>
+        <div class="fixed"><label>&nbsp;</label><button type="button" id="reseed">시드 고정 해제</button></div>
+      </div>
+      <label class="check"><input type="checkbox" id="reference"> 레퍼런스 사진 모드 (얼굴·체형 문장을 빼고 짧게)</label>
+      <button class="primary" id="go">프롬프트 만들기</button>
+    </section>
+  </div>
+
+  <div>
+    <section class="card">
+      <div class="out-head">
+        <h2 style="margin:0">가중치 프롬프트</h2>
+        <span class="meta" id="meta"></span>
+      </div>
+      <textarea id="weighted" rows="18" spellcheck="false" placeholder="왼쪽에서 고르고 「프롬프트 만들기」를 누르세요."></textarea>
+      <div class="row" style="margin-top:8px">
+        <button type="button" id="copy" class="fixed">복사</button>
+        <button type="button" id="save" class="fixed">txt로 저장</button>
+        <span class="hint" id="copyHint"></span>
+      </div>
+      <div class="problems" id="problems"></div>
+    </section>
+
+    <section class="card">
+      <h2>가중치 (비우면 괄호 없이 그대로)</h2>
+      <div class="weights" id="weights"></div>
+      <label class="check"><input type="checkbox" id="lightingTag" checked> 맨 앞에 (Lighting:<input type="number" id="lightingWeight" step="0.1" value="1.1" style="width:70px">) 붙이기 — 라이팅 로라를 부르는 말</label>
+      <details id="lightWords">
+        <summary>라이팅 트리거 단어 (V67 Lighting) — 고른 단어를 (Lighting:1.1) 뒤에 붙임 <span id="lightCount"></span></summary>
+        <div class="row" style="margin-top:8px"><button type="button" id="lightAll">전체 선택</button><button type="button" id="lightNone">모두 해제</button></div>
+        <div id="lightList" class="weights"></div>
+        <label for="lightFormat">붙이는 형식</label>
+        <select id="lightFormat">
+          <option value="separate">(Lighting:1.1). cinematic lighting, … (가중 태그는 따로, 단어는 한 문장으로) — 기본</option>
+          <option value="inline">(Lighting:1.1), cinematic lighting, … (모델 페이지 원문 형식)</option>
+        </select>
+        <div class="hint">모델 페이지는 「전체 문자열을 맨 앞에」 권장이지만, 한 장면에 서로 안 맞는 단어(moonlight + golden hour)를 다 넣으면 장면이 흔들릴 수 있어요. 장면에 맞는 것만 골라 쓰고, 기본은 단어 없이 (Lighting:1.1)만입니다. LoRA 강도 권장 0.65~0.85 (체인은 0.75). 「맨 앞에 붙이기」가 꺼져 있으면 단어도 안 붙어요.</div>
+      </details>
+      <label class="check"><input type="checkbox" id="shortSkin" checked> 피부 문장을 짧은 매트 문장으로 (Natural matte skin texture)</label>
+      <label for="extraCamera">구도 고정 문장 (카메라 칸 앞에 붙음)</label>
+      <textarea id="extraCamera" rows="3" spellcheck="false" placeholder="전신이면 「몸이 프레임 높이의 약 4분의 3」 문장이 자동으로 채워집니다. 필요 없으면 비워 두세요."></textarea>
+      <div class="hint">가중치 칸을 바꾸면 「프롬프트 만들기」를 다시 눌러야 반영됩니다. 같은 시드로 두면 문장은 그대로고 가중치만 바뀝니다.</div>
+    </section>
+
+    <section class="card">
+      <h2>다른 형식</h2>
+      <details open>
+        <summary>산문 한 덩어리 (가중치 없음)</summary>
+        <textarea id="plain" rows="8" spellcheck="false"></textarea>
+        <div class="row" style="margin-top:6px"><button type="button" id="copyPlain" class="fixed">산문 복사</button></div>
+      </details>
+      <details>
+        <summary>칸별로 나눈 문장 보기</summary>
+        <div id="sections"></div>
+      </details>
+    </section>
+  </div>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const LABELS = {identity: "인물", hair: "헤어 색", accessory: "소지품", engraving: "Y 각인", outfit: "옷", action: "동작·표정", setting: "장소", camera: "카메라·구도", light: "빛", skin: "피부", style: "화면 느낌"};
+let OPT = null, PLACE = null;
+
+const toast = msg => { const t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1500); };
+const fill = (sel, items, mk) => { sel.innerHTML = ""; items.forEach(x => { const o = document.createElement("option"); const [v, l, d] = mk(x); o.value = v; o.textContent = l; if (d) o.dataset.desc = d; sel.appendChild(o); }); };
+const hint = (selId, hintId) => { const s = $(selId); $(hintId).textContent = (s.selectedOptions[0] && s.selectedOptions[0].dataset.desc) || ""; };
+
+async function getJSON(url) { const r = await fetch(url); const j = await r.json(); if (!r.ok) throw new Error(j.error || r.status); return j; }
+
+async function init() {
+  OPT = await getJSON("/api/options");
+  fill($("trigger"), OPT.loras, l => [l.trigger, `${l.name} (${l.trigger})`]);
+  fill($("location"), OPT.locations, l => [l, l]);
+  fill($("expression"), OPT.expressions, e => [e.key, e.key, e.desc]);
+  fill($("mode"), OPT.modes, m => [m, m]);
+  const hair = [["", "LoRA 기본 헤어 유지"], ...OPT.hair_presets.map(h => [h.key, h.key, h.desc]), ["__custom__", "직접 입력"]];
+  fill($("hair"), hair, h => [h[0], h[1], h[2]]);
+  const hc = [["", "LoRA 기본 색 유지"], ...OPT.hair_colors.map(h => [h.key, h.key, h.desc]), ["__custom__", "직접 입력"]];
+  fill($("hairColor"), hc, h => [h[0], h[1], h[2]]);
+  const oc = [["", "옷 색 그대로"], ...OPT.outfit_colors.map(c => [c.key, c.key + " (" + c.en + ")"]), ["__custom__", "직접 입력"]];
+  fill($("outfitColor"), oc, c => [c[0], c[1]]);
+  const mk = [["", "LoRA 기본 화장 유지"], ...OPT.makeups.map(m => [m.key, m.key, m.desc]), ["__custom__", "직접 입력"]];
+  fill($("makeup"), mk, m => [m[0], m[1], m[2]]);
+  const lt = $("lightList");
+  OPT.lighting_triggers.items.forEach((it, i) => {
+    const d = document.createElement("label");
+    d.className = "chk"; d.title = it.desc_ko;
+    d.innerHTML = `<input type="checkbox" class="lightWord" value="${it.en}"> <span>${it.en} <small>${it.label_ko}</small></span>`;
+    lt.appendChild(d);
+  });
+  const lightSync = () => { const n = document.querySelectorAll(".lightWord:checked").length; $("lightCount").textContent = n ? `(${n}개 선택)` : ""; };
+  document.querySelectorAll(".lightWord").forEach(c => c.onchange = lightSync);
+  $("lightAll").onclick = () => { document.querySelectorAll(".lightWord").forEach(c => c.checked = true); lightSync(); };
+  $("lightNone").onclick = () => { document.querySelectorAll(".lightWord").forEach(c => c.checked = false); lightSync(); };
+  const wbox = $("weights");
+  OPT.weight_order.forEach(k => {
+    const d = document.createElement("div");
+    const v = OPT.weights[k] === null ? "" : OPT.weights[k];
+    d.innerHTML = `<label for="w_${k}">${LABELS[k]}</label><input type="number" step="0.1" min="0" id="w_${k}" value="${v}" placeholder="없음">`;
+    wbox.appendChild(d);
+  });
+  $("status").textContent = "준비됨";
+  await loadPlace();
+}
+
+async function loadPlace() {
+  const q = `trigger=${encodeURIComponent($("trigger").value)}&location=${encodeURIComponent($("location").value)}`;
+  PLACE = await getJSON("/api/place?" + q);
+  buildAcc();
+  const outs = [...PLACE.outfits.map(o => [o.id, o.name, o.desc]), ["__common__", "공용의상 (자동)", "본체 공용 의상 풀에서 장소·프레임에 맞게 고름"], ["__custom__", "직접 입력", "아래 칸에 입은 옷을 문장으로 적음"], ["__none__", "의상 없음", "의상 문장을 넣지 않음"]];
+  fill($("outfit"), outs, o => [o[0], o[1], o[2]]);
+  fill($("time"), PLACE.times, t => [t.key, t.key, t.desc]);
+  fill($("framing"), PLACE.framings, f => [f, f]);
+  refreshMoments();
+  syncOutfit();
+}
+
+function canvasHint() {
+  const c = (OPT.canvas_sizes || {})[$("framing").value];
+  const one = (x) => `${x.width}×${x.height} (${x.ratio}) — ${x.status === "확인" ? "확인: 여름이 실제로 돌려 본 크기" : "후보: 아직 안 돌려 본 값"}`;
+  $("canvasHint").textContent = c ? "캔버스 추천 " + one(c) + (c.alt ? " · " + c.alt.label_ko + " " + one(c.alt) : "") + " · 크기는 콤피에서 직접 맞추세요" : "";
+}
+
+function refreshMoments() {
+  const fr = $("framing").value;
+  canvasHint();
+  const list = PLACE.moments.filter(m => m.frames.includes(fr)).concat([{key: "__custom__", desc: "직접 입력: 아래 칸에 포즈를 영어 문장으로 적음 (고른 순간의 포즈·상황 문장을 통째로 대신함)"}]);
+  fill($("moment"), list, m => [m.key, m.key === "__custom__" ? "직접 입력" : m.key, m.desc]);
+  $("poseCustom").hidden = $("moment").value !== "__custom__";
+  hint("moment", "momentHint");
+  syncAcc();
+  if (OPT && !$("extraCamera").dataset.touched) $("extraCamera").value = (fr === "전신") ? OPT.full_body_frame : "";
+}
+
+$("trigger").onchange = loadPlace;
+$("location").onchange = loadPlace;
+$("framing").onchange = refreshMoments;
+function syncOutfit() {
+  const v = $("outfit").value;
+  $("outfitCustom").hidden = v !== "__custom__";
+  const noColor = v === "__custom__" || v === "__common__" || v === "__none__";
+  $("outfitColor").disabled = noColor; $("outfitColorCustom").disabled = noColor;
+  hint("outfit", "outfitHint");
+}
+$("outfit").onchange = syncOutfit;
+$("outfitColor").onchange = () => { $("outfitColorCustom").hidden = $("outfitColor").value !== "__custom__"; };
+$("moment").onchange = () => { $("poseCustom").hidden = $("moment").value !== "__custom__"; hint("moment", "momentHint"); };
+function buildAcc() {
+  const cfg = (OPT.accessory_options || {})[$("trigger").value];
+  $("accBox").hidden = !cfg;
+  if (!cfg) return;
+  $("accNecklaceLabel").textContent = cfg.necklace.label_ko + " (켜면 「목걸이는 하나뿐」 문장이 같이 붙음)";
+  $("accNecklace").checked = cfg.necklace.default;
+  $("accEngravingLabel").textContent = cfg.engraving.label_ko + " (켈핀 목걸이가 켜져 있을 때만, 괄호 가중치 " + cfg.engraving.weight + ")";
+  fill($("accEngraving"), Object.keys(cfg.engraving.choices), k => [k, k]);
+  $("accEngraving").value = cfg.engraving.default;
+  $("accWatchLabel").textContent = cfg.watch.label_ko + " — 손목이 골반 높이로 보이는 프레이밍(" + cfg.watch.frames.join("·") + ")에서만" + (cfg.watch.status === "draft" ? " (★임시 문장, 원문 대기)" : "");
+  $("accWatch").checked = cfg.watch.default;
+  syncAcc();
+}
+function syncAcc() {
+  const cfg = (OPT.accessory_options || {})[$("trigger").value];
+  if (!cfg) return;
+  const ok = cfg.watch.frames.includes($("framing").value);
+  $("accWatch").disabled = !ok; if (!ok) $("accWatch").checked = false;
+  $("accEngraving").disabled = !$("accNecklace").checked;
+  $("accHint").textContent = ok ? "시계 문장은 손이 몸 옆(골반 높이)에 내려온 포즈일 때 쓰는 문장이에요. 손을 얼굴 쪽으로 올린 포즈와 같이 켜면 점검 알림이 떠요." : "시계는 손목이 보이는 프레이밍(" + cfg.watch.frames.join("·") + ")에서만 켤 수 있어요.";
+}
+$("accNecklace").onchange = syncAcc;
+$("expression").onchange = () => hint("expression", "expressionHint");
+$("hair").onchange = () => { $("hairCustom").hidden = $("hair").value !== "__custom__"; };
+$("hairColor").onchange = () => { $("hairColorCustom").hidden = $("hairColor").value !== "__custom__"; hint("hairColor", "hairColorHint"); };
+$("makeup").onchange = () => { $("makeupCustom").hidden = $("makeup").value !== "__custom__"; hint("makeup", "makeupHint"); };
+$("extraCamera").oninput = () => { $("extraCamera").dataset.touched = "1"; };
+$("reseed").onclick = () => { $("seed").value = ""; toast("다음부터 매번 새 시드"); };
+
+function pick(sel, custom) { const v = $(sel).value; return v === "__custom__" ? $(custom).value.trim() : v; }
+
+async function go() {
+  $("go").disabled = true; $("status").textContent = "만드는 중…";
+  const weights = {}; OPT.weight_order.forEach(k => { weights[k] = $("w_" + k).value; });
+  const body = {
+    trigger: $("trigger").value, outfit: $("outfit").value, location: $("location").value, time: $("time").value,
+    framing: $("framing").value, moment: $("moment").value, expression: $("expression").value,
+    hair: pick("hair", "hairCustom"), hair_color: pick("hairColor", "hairColorCustom"), outfit_text: $("outfitCustom").value.trim(), pose_text: $("poseCustom").value.trim(),
+    accessories: (OPT.accessory_options || {})[$("trigger").value] ? {necklace: $("accNecklace").checked, engraving: $("accEngraving").value, watch: $("accWatch").checked} : null, outfit_color: pick("outfitColor", "outfitColorCustom"), makeup: pick("makeup", "makeupCustom"), mode: $("mode").value,
+    reinforce: $("reinforce").value, seed: $("seed").value, reference: $("reference").checked,
+    weights, lighting_tag: $("lightingTag").checked,
+    lighting_words: [...document.querySelectorAll(".lightWord:checked")].map(c => c.value), lighting_format: $("lightFormat").value, lighting_weight: $("lightingWeight").value,
+    short_skin: $("shortSkin").checked, extra_camera: $("extraCamera").value,
+  };
+  try {
+    const r = await fetch("/api/compose", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error);
+    $("weighted").value = j.weighted; $("plain").value = j.plain;
+    $("meta").textContent = `${j.words}단어 · 시드 ${j.seed}`;
+    if (!$("seed").value) $("seed").placeholder = "방금: " + j.seed;
+    const p = $("problems");
+    if (j.problems.length) { p.textContent = "점검 알림: " + j.problems.join(" / "); p.className = "problems"; }
+    else { p.textContent = "점검 통과: 한글 누출, 라벨, 지시문 없음"; p.className = "problems ok"; }
+    const secs = $("sections"); secs.innerHTML = "";
+    Object.entries(j.sections).forEach(([k, v]) => { const d = document.createElement("div"); d.className = "sec"; d.innerHTML = `<b>${LABELS[k] || k}</b>`; d.appendChild(document.createTextNode(v)); secs.appendChild(d); });
+    $("status").textContent = "준비됨";
+  } catch (e) {
+    $("problems").textContent = "만들지 못했어요: " + e.message; $("problems").className = "problems"; $("status").textContent = "오류";
+  } finally { $("go").disabled = false; }
+}
+$("go").onclick = go;
+
+async function copyText(text, label) {
+  try { await navigator.clipboard.writeText(text); toast(label + " 복사했어요"); }
+  catch (e) { const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); toast(label + " 복사했어요"); }
+}
+$("copy").onclick = () => copyText($("weighted").value, "가중치 프롬프트");
+$("copyPlain").onclick = () => copyText($("plain").value, "산문 프롬프트");
+$("save").onclick = () => {
+  const blob = new Blob([$("weighted").value], {type: "text/plain;charset=utf-8"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `프롬_${$("trigger").value}_${Date.now()}.txt`; a.click(); URL.revokeObjectURL(a.href);
+};
+
+init().catch(e => { $("status").textContent = "서버에 연결하지 못했어요: " + e.message; });
+</script>
+</body>
+</html>

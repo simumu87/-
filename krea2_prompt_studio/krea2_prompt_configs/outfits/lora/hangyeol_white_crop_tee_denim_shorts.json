@@ -1,0 +1,98 @@
+{
+  "schema": "krea2-outfit/1",
+  "id": "hangyeol_white_crop_tee_denim_shorts",
+  "scope": "lora_outfit",
+  "character": "한결",
+  "name_ko": "흰 크롭 티 + 연청 데님 쇼츠",
+  "name_en": "white cropped tee with light denim shorts",
+  "desc_ko": "흰 면 크롭 반팔 티, 연한 청색 하이웨이스트 데님 쇼츠, 흰 스니커즈",
+  "category": "casual",
+  "source_doc": "오빠 「공간이랑 의상 이런게 좀 적으니까 이런거좀 더 추가」(1025) · 한결이 새로 정함. 노바 코디 4벌처럼 일자로 떨어지는 긴 단색·긴소매·발목 길이는 피하고 몸의 선이 보이는 실루엣으로 골랐다",
+  "applies_to": {
+    "locations": [
+      "벚꽃 길",
+      "공원",
+      "식물원 정원길",
+      "수국 정원",
+      "도시 거리",
+      "놀이공원",
+      "카페",
+      "서점",
+      "사진 스튜디오",
+      "도서관 열람실",
+      "빈티지 옷가게",
+      "억새밭",
+      "야시장",
+      "편의점",
+      "한강 공원",
+      "해변 카페 테라스",
+      "온실 카페",
+      "기본 욕실",
+      "호화 욕실"
+    ],
+    "note_ko": "프레임별 문장: normal_top_en(가슴 위 이하) · normal_waist_en(허리·허벅지 위) · normal_noshoe_en(무릎 위·3/4 전신) · normal_en(전신)."
+  },
+  "color": {
+    "primary": {
+      "ko": "흰색 + 연청",
+      "en": "white and light blue"
+    }
+  },
+  "material": {
+    "ko": "면과 데님",
+    "en": "cotton and denim",
+    "finish_ko": "",
+    "finish_en": "a plain finish",
+    "behavior_en": "the fabric falls in natural folds"
+  },
+  "normal_en": "a white cotton cropped short-sleeve tee with a round neckline, high-waisted light-blue denim shorts with a frayed hem and white canvas sneakers",
+  "normal_waist_en": "a white cotton cropped short-sleeve tee with a round neckline and high-waisted light-blue denim shorts with a frayed hem",
+  "normal_noshoe_en": "a white cotton cropped short-sleeve tee with a round neckline and high-waisted light-blue denim shorts with a frayed hem",
+  "normal_top_en": "a white cotton cropped short-sleeve tee with a round neckline",
+  "detail_prose_en": [
+    "The white tee is cropped at the waist with a round neckline and short sleeves",
+    {
+      "depth": 2,
+      "en": "The light-blue denim shorts sit high on the waist with a frayed hem at the upper thigh"
+    },
+    {
+      "depth": 5,
+      "en": "{P} white canvas sneakers have white laces and a thin white sole"
+    }
+  ],
+  "echo_en": [
+    "The tee is plain white cotton",
+    "The denim shorts are a light washed blue"
+  ],
+  "lit_en": "the white cotton of the tee",
+  "parts": {
+    "top": {
+      "ko": "흰 크롭 티",
+      "en": "a white cotton cropped short-sleeve tee with a round neckline",
+      "detail_en": []
+    },
+    "bottom": {
+      "ko": "연청 데님 쇼츠",
+      "en": "high-waisted light-blue denim shorts with a frayed hem",
+      "detail_en": []
+    }
+  },
+  "accessories": {
+    "default_include_ko": [],
+    "default_exclude_ko": [
+      "귀걸이",
+      "팔찌",
+      "발찌",
+      "목걸이"
+    ],
+    "note_ko": "안경은 한결 identity에서 관리한다."
+  },
+  "locks": [],
+  "forbidden_ko": [
+    "비치는 소재로 변경(전부 불투명)"
+  ],
+  "render_notes_ko": [
+    "보이는 부분만 적는다",
+    "전부 불투명한 옷이다"
+  ]
+}

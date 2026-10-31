@@ -1,0 +1,167 @@
+{
+ "schema": "krea2-scene-pack/2",
+ "location_ko": "펜트하우스 인피니티 풀",
+ "outdoor": true,
+ "note_ko": "구체적인 장소 팩(오빠 1026: 분위기·재질을 구체적으로 적어야 공간이 달라진다). 장소 디테일 기준(docs/장소팩_작성기준.md)에 따라 작성. {s}/{S}=she/She, {p}/{P}=her/Her, {o}=her, {lit}=빛이 닿는 의상 부분.",
+ "setting_en": "an infinity pool on the terrace of a penthouse high above a city",
+ "feature_en": [
+  "a long rectangle of dark-tiled pool water whose far edge is a clear glass wall above the city",
+  "a built-in lounge platform with thick white cushions beside a low glass screen"
+ ],
+ "ground_en": [
+  "pale polished limestone paving across the terrace",
+  "a wet darker band of stone along the pool edge"
+ ],
+ "far_en": [
+  "a skyline of towers spreading out far below the terrace",
+  "a wide river with a bridge of small lights in the distance"
+ ],
+ "times": {
+  "낮": {
+   "time_en": "a clear midday",
+   "time_prep": "on",
+   "sky_en": "a clear pale blue sky above the towers",
+   "light_en": "bright sunlight comes from above and from the camera's left, falling across {p} face and shoulders",
+   "shadow_en": "short soft shadows lie on the limestone toward the camera's right",
+   "desc_ko": "맑은 한낮, 위와 카메라 왼쪽에서 오는 밝은 햇빛"
+  },
+  "해질녘": {
+   "time_en": "the last hour before sunset",
+   "time_prep": "at",
+   "sky_en": "a wide sky running from deep blue overhead into orange and pink behind the towers",
+   "light_en": "low orange sunlight comes from behind {o} on the camera's right, lighting the edges of {p} hair and shoulders",
+   "shadow_en": "long soft shadows stretch across the limestone toward the camera's left",
+   "desc_ko": "해 지기 직전, 낮은 주황 해가 카메라 오른쪽 뒤에서 비춤"
+  },
+  "밤": {
+   "time_en": "a clear night",
+   "time_prep": "on",
+   "sky_en": "a black night sky above a sea of city lights",
+   "light_en": "soft turquoise light from the lit pool stands in front of {o} and below, and warm white terrace lamps stand to the camera's left, falling on {p} face and shoulders",
+   "shadow_en": "deep shadows gather on the terrace behind {o}",
+   "desc_ko": "맑은 밤, 앞쪽 아래 풀 조명의 청록빛과 카메라 왼쪽 테라스등"
+  }
+ },
+ "moments": {
+  "유리 난간에 손 올리기": {
+   "pose_en": "stands beside the clear glass edge with one hand resting on its steel top rail",
+   "moment_en": "{s} looks toward the camera with a quiet smile",
+   "desc_ko": "유리 가장자리의 난간에 한 손을 얹고 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "도시 내려다보다 돌아보기": {
+   "pose_en": "stands at the glass edge with {p} body angled toward the city",
+   "moment_en": "{s} turns {p} head over {p} shoulder toward the camera with a soft smile",
+   "desc_ko": "도시를 내려다보다 어깨 너머로 카메라를 돌아봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "선베드에 기대 앉기": {
+   "pose_en": "sits back on the lounge platform with one arm resting on the cushions behind {o}",
+   "moment_en": "{s} looks toward the camera with a relaxed smile",
+   "desc_ko": "라운지 플랫폼에 기대앉아 한 팔을 쿠션에 두고 카메라를 봄",
+   "frames": [
+    "허리 위",
+    "허벅지 위",
+    "무릎 위"
+   ]
+  },
+  "머리 쓸어 올리기": {
+   "pose_en": "stands on the terrace with one hand sweeping {p} hair back from {p} forehead",
+   "moment_en": "{s} looks toward the camera with a bright smile",
+   "desc_ko": "한 손으로 머리를 이마 뒤로 쓸어 올리며 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ]
+  },
+  "천천히 걷기": {
+   "pose_en": "walks slowly along the pool edge with one foot stepping forward",
+   "moment_en": "{s} looks toward the camera with a gentle smile",
+   "desc_ko": "풀 가장자리를 천천히 걸으며 카메라를 봄",
+   "frames": [
+    "전신"
+   ]
+  },
+  "눈 감고 미소 짓기": {
+   "pose_en": "stands beside the glass edge above the city with {p} eyes closed and {p} face turned slightly upward",
+   "moment_en": "{s} smiles faintly with {p} lips closed",
+   "desc_ko": "도시 위 유리 가장자리 옆에서 눈을 감고 얼굴을 살짝 들어 입을 다문 채 미소",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "gaze": "closed"
+  },
+  "입가 가리고 웃기": {
+   "pose_en": "stands beside the glass edge above the city with the back of one hand held lightly against {p} mouth",
+   "moment_en": "{s} laughs with {p} eyes crinkled toward the camera",
+   "desc_ko": "도시 위 유리 가장자리 옆에서 손등으로 입가를 가볍게 가리고 눈웃음으로 카메라를 봄",
+   "frames": [
+    "클로즈업",
+    "가슴 위",
+    "허리 위",
+    "허벅지 위",
+    "무릎 위",
+    "3/4 전신",
+    "전신"
+   ],
+   "wrist_straight": true
+  }
+ },
+ "camera": {
+  "전신": "Full-length shot from eye level with a 50mm lens, the frame running from above {p} head to below {p} feet, vertical frame, shallow depth of field with the skyline softly out of focus",
+  "무릎 위": "Medium-long shot from eye level with a 50mm lens, the frame running from the top of {p} head to just above the knees, vertical frame, shallow depth of field with the skyline softly out of focus",
+  "허리 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to {p} waist, vertical frame, shallow depth of field with the skyline softly out of focus",
+  "허벅지 위": "Medium shot from eye level with a 50mm lens, the frame running from the top of {p} head to mid-thigh, vertical frame, shallow depth of field with the skyline softly out of focus",
+  "3/4 전신": "Three-quarter shot from eye level with a 40mm lens, the frame running from the top of {p} head to just below the knees, vertical frame, shallow depth of field with the skyline softly out of focus",
+  "가슴 위": "Close portrait from eye level with a 70mm lens, the frame running from the top of {p} head to mid-chest, vertical frame, shallow depth of field with the skyline softly out of focus",
+  "클로즈업": "Close-up portrait from eye level with an 85mm lens, the frame running from the top of {p} head to {p} collarbones with {p} face filling about two thirds of the frame height, square frame, shallow depth of field with the skyline softly out of focus"
+ },
+ "ground_contact_en": "{P} feet rest on the pale limestone beside the pool edge",
+ "style_en": "natural lifestyle photography with fine film grain and realistic skin texture",
+ "detail_en": {
+  "낮": [
+   "the pool tiles are deep blue-black mosaic under clear water",
+   "the glass wall along the far edge is clear with thin steel posts",
+   "the lounge cushions are thick white canvas on a pale wooden base"
+  ],
+  "해질녘": [
+   "the pool tiles are deep blue-black mosaic under clear water",
+   "the glass wall along the far edge is clear with thin steel posts",
+   "the towers far below are dark blue silhouettes with the first lit windows"
+  ],
+  "밤": [
+   "the pool tiles are deep blue-black mosaic under clear water",
+   "the glass wall along the far edge is clear with thin steel posts",
+   "the city below is a field of small white and amber lights"
+  ]
+ },
+ "position_en": "{S} is centered in the frame, with the pool and the glass edge spreading out behind {o} above the city",
+ "more_prefix_en": "Beyond that"
+}
